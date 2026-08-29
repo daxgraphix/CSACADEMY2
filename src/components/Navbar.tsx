@@ -27,19 +27,31 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
+  const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (programsDropdownOpen && !target.closest('#programs-dropdown-wrapper')) {
+        setProgramsDropdownOpen(false);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [programsDropdownOpen]);
 
   const navigateTo = (route: PageRoute) => {
     setCurrentRoute(route);
     setMobileMenuOpen(false);
     setProgramsDropdownOpen(false);
+    setMobileProgramsOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -114,11 +126,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {/* Programs Dropdown */}
-            <div className="relative group">
+            <div
+              id="programs-dropdown-wrapper"
+              className="relative"
+              onMouseEnter={() => setProgramsDropdownOpen(true)}
+              onMouseLeave={() => setProgramsDropdownOpen(false)}
+            >
               <button
                 id="nav-link-programs-dropdown"
-                onClick={() => navigateTo('programs')}
-                onMouseEnter={() => setProgramsDropdownOpen(true)}
+                onClick={() => {
+                  setProgramsDropdownOpen(false);
+                  navigateTo('programs');
+                }}
                 className={`flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                   currentRoute.startsWith('programs')
                     ? theme === 'dark' ? 'text-white bg-neutral-900 border border-neutral-800' : 'text-neutral-900 bg-neutral-100 border border-neutral-200'
@@ -126,14 +145,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <span>Programs</span>
-                <ChevronDown className="w-3.5 h-3.5 opacity-70 group-hover:rotate-180 transition-transform duration-200" />
+                <ChevronDown className={`w-3.5 h-3.5 opacity-70 transition-transform duration-200 ${
+                  programsDropdownOpen ? 'rotate-180' : ''
+                }`} />
               </button>
 
               {/* Dropdown Menu */}
-              <div 
-                onMouseLeave={() => setProgramsDropdownOpen(false)}
-                className={`absolute left-0 top-full pt-2 w-80 transition-all duration-200 ${
-                  programsDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:pointer-events-auto'
+              <div
+                className={`absolute left-0 top-full pt-2 w-80 transition-all duration-200 z-50 ${
+                  programsDropdownOpen
+                    ? 'opacity-100 visible translate-y-0'
+                    : 'opacity-0 invisible -translate-y-1 pointer-events-none'
                 }`}
               >
                 <div className={`border rounded-2xl p-2 shadow-2xl space-y-1 ${
@@ -218,6 +240,28 @@ export const Navbar: React.FC<NavbarProps> = ({
                       }`}>Full-Stack & Digital Skills</div>
                       <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                         Web Dev, Figma UI/UX & Digital Marketing
+                      </div>
+                    </div>
+                  </button>
+
+                  <div className={`h-px my-1 ${theme === 'dark' ? 'bg-neutral-800' : 'bg-neutral-200'}`}></div>
+
+                  <button
+                    id="dropdown-devpad"
+                    onClick={() => navigateTo('devpad')}
+                    className={`w-full flex items-start gap-3 px-3 py-2.5 rounded-xl text-left transition-colors group/item ${
+                      theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-neutral-100 transition-colors duration-200'
+                    }`}
+                  >
+                    <div>
+                      <div className={`flex items-center gap-2 text-xs font-bold transition-colors group-hover/item:text-[var(--accent-red-strong)] ${
+                        theme === 'dark' ? 'text-white' : 'text-neutral-900'
+                      }`}>
+                        DevPad
+                        <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">Community</span>
+                      </div>
+                      <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                        Build, Test &amp; Launch With Developer Peers
                       </div>
                     </div>
                   </button>
@@ -423,6 +467,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
                 >
                   <span>Digital Skills & Web Development</span>
+                </button>
+                <button
+                  onClick={() => navigateTo('devpad')}
+                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                >
+                  <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">Community</span>
+                  <span>DevPad</span>
                 </button>
               </div>
             </div>

@@ -7,6 +7,7 @@ export type PageRoute =
   | 'programs/cybersecurity'
   | 'programs/digital-skills'
   | 'vibe-coding'
+  | 'devpad'
   | 'learning-formats'
   | 'for-organizations'
   | 'resources'

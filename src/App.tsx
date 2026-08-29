@@ -18,6 +18,7 @@ import { BlogPage } from './pages/BlogPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { VibeCodingPage } from './pages/VibeCodingPage';
+import { DevPadPage } from './pages/DevPadPage';
 import { NotFound } from './components/NotFound';
 
 // Modals
@@ -136,6 +137,13 @@ export default function App() {
       case 'vibe-coding':
         return (
           <VibeCodingPage
+            setCurrentRoute={setCurrentRoute}
+            openBookingModal={handleOpenBooking}
+          />
+        );
+      case 'devpad':
+        return (
+          <DevPadPage
             setCurrentRoute={setCurrentRoute}
             openBookingModal={handleOpenBooking}
           />
