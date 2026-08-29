@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
-// Pages
 import { HomePage } from './pages/HomePage';
 import { FeaturesPage } from './pages/FeaturesPage';
 import { PricingPage } from './pages/PricingPage';
@@ -32,7 +32,12 @@ import { useApp } from './context/AppContext';
 export default function App() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
   const { theme } = useApp();
-  
+
+  // Reset scroll on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [currentRoute]);
+
   // Modal states
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [bookingPrefill, setBookingPrefill] = useState<{
@@ -47,6 +52,29 @@ export default function App() {
   const [selectedResource, setSelectedResource] = useState<ResourceItem | null>(null);
   const [selectedBlogArticle, setSelectedBlogArticle] = useState<BlogPost | null>(null);
 
+  // Close any open modal with Esc key
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (isBookingModalOpen) setIsBookingModalOpen(false);
+      if (selectedProgram) setSelectedProgram(null);
+      if (selectedTraining) setSelectedTraining(null);
+      if (selectedResource) setSelectedResource(null);
+      if (selectedBlogArticle) setSelectedBlogArticle(null);
+    };
+    window.addEventListener('keydown', handleKey);
+    return () => window.removeEventListener('keydown', handleKey);
+  }, [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]);
+
+  // Lock body scroll when any modal is open
+  useEffect(() => {
+    const anyOpen = isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle;
+    document.body.style.overflow = anyOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]);
+
   // Modal Triggers
   const handleOpenBooking = (prefill?: {
     program?: string;
@@ -58,23 +86,11 @@ export default function App() {
     setIsBookingModalOpen(true);
   };
 
-  const handleOpenProgramModal = (program: ProgramPillar) => {
-    setSelectedProgram(program);
-  };
+  const handleOpenProgramModal = (program: ProgramPillar) => setSelectedProgram(program);
+  const handleOpenTrainingModal = (training: TrainingProgram) => setSelectedTraining(training);
+  const handleOpenResourceModal = (resource: ResourceItem) => setSelectedResource(resource);
+  const handleOpenBlogArticleModal = (post: BlogPost) => setSelectedBlogArticle(post);
 
-  const handleOpenTrainingModal = (training: TrainingProgram) => {
-    setSelectedTraining(training);
-  };
-
-  const handleOpenResourceModal = (resource: ResourceItem) => {
-    setSelectedResource(resource);
-  };
-
-  const handleOpenBlogArticleModal = (post: BlogPost) => {
-    setSelectedBlogArticle(post);
-  };
-
-  // Render active page based on route
   const renderCurrentPage = () => {
     switch (currentRoute) {
       case 'home':
@@ -178,7 +194,7 @@ export default function App() {
             openBookingModal={handleOpenBooking}
           />
         );
-       case 'contact':
+      case 'contact':
         return (
           <ContactPage
             openBookingModal={() => handleOpenBooking()}
@@ -201,63 +217,65 @@ export default function App() {
   };
 
   return (
-    <div
-      className={`min-h-screen flex flex-col font-sans antialiased transition-colors duration-300 scroll-smooth ${
-        theme === 'dark'
-          ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white'
-          : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
-      }`}
-    >
-      {/* Fixed Navigation Header */}
-      <Navbar
-        currentRoute={currentRoute}
-        setCurrentRoute={setCurrentRoute}
-        openBookingModal={() => handleOpenBooking()}
-      />
+    <ErrorBoundary>
+      <div
+        className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth ${
+          theme === 'dark'
+            ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white'
+            : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
+        }`}
+      >
+        {/* Fixed Navigation Header */}
+        <Navbar
+          currentRoute={currentRoute}
+          setCurrentRoute={setCurrentRoute}
+          openBookingModal={() => handleOpenBooking()}
+        />
 
-      {/* Main Content Area */}
-      <div className="flex-grow">
-        {renderCurrentPage()}
+        {/* Main Content Area */}
+        <div className="flex-grow">
+          {renderCurrentPage()}
+        </div>
+
+        {/* Site Footer */}
+        <Footer
+          setCurrentRoute={setCurrentRoute}
+          openBookingModal={() => handleOpenBooking()}
+        />
+
+        {/* Interactive Modals */}
+        <BookingModal
+          isOpen={isBookingModalOpen}
+          onClose={() => setIsBookingModalOpen(false)}
+          prefill={bookingPrefill}
+        />
+
+        <ProgramDetailModal
+          program={selectedProgram}
+          onClose={() => setSelectedProgram(null)}
+          openBookingModal={handleOpenBooking}
+        />
+
+        <TrainingDetailModal
+          training={selectedTraining}
+          onClose={() => setSelectedTraining(null)}
+          openBookingModal={handleOpenBooking}
+        />
+
+        <ResourceViewModal
+          resource={selectedResource}
+          onClose={() => setSelectedResource(null)}
+        />
+
+        <BlogArticleModal
+          post={selectedBlogArticle}
+          onClose={() => setSelectedBlogArticle(null)}
+          openBookingModal={handleOpenBooking}
+        />
+
+        <BackToTop />
+        <ScrollProgress />
       </div>
-
-      {/* Site Footer */}
-      <Footer
-        setCurrentRoute={setCurrentRoute}
-        openBookingModal={() => handleOpenBooking()}
-      />
-
-      {/* Interactive Modals */}
-      <BookingModal
-        isOpen={isBookingModalOpen}
-        onClose={() => setIsBookingModalOpen(false)}
-        prefill={bookingPrefill}
-      />
-
-      <ProgramDetailModal
-        program={selectedProgram}
-        onClose={() => setSelectedProgram(null)}
-        openBookingModal={handleOpenBooking}
-      />
-
-      <TrainingDetailModal
-        training={selectedTraining}
-        onClose={() => setSelectedTraining(null)}
-        openBookingModal={handleOpenBooking}
-      />
-
-      <ResourceViewModal
-        resource={selectedResource}
-        onClose={() => setSelectedResource(null)}
-      />
-
-      <BlogArticleModal
-        post={selectedBlogArticle}
-        onClose={() => setSelectedBlogArticle(null)}
-        openBookingModal={handleOpenBooking}
-      />
-
-      <BackToTop />
-      <ScrollProgress />
-    </div>
+    </ErrorBoundary>
   );
 }

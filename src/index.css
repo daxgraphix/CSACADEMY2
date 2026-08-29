@@ -11,18 +11,21 @@
 
     --border-color: #2a2a2a;
     --border-subtle: #1e1e1e;
+    --border-strong: #3a3a3a;
     --border-active: #ff3b30;
 
     --text-primary: #f8f8f8;
-    --text-secondary: #c4c4c4;
-    --text-muted: #888888;
+    --text-secondary: #d4d4d4;
+    --text-tertiary: #a3a3a3;
+    --text-muted: #9ca3af;
+    --text-faint: #6b7280;
     --text-inverted: #090909;
 
     --accent-red: #ff3b30;
     --accent-red-bright: #ff5240;
     --accent-red-hover: #ff564d;
     --accent-red-active: #e62e22;
-    --accent-red-strong: #ff3b30;
+    --accent-red-strong: #ff5240;
     --accent-red-subtle: rgba(255, 59, 48, 0.14);
     --accent-red-glow: rgba(255, 59, 48, 0.35);
     --accent-red-border: rgba(255, 59, 48, 0.35);
@@ -32,6 +35,12 @@
     --accent-green-subtle: rgba(34, 197, 94, 0.12);
     --accent-amber: #f59e0b;
     --accent-amber-subtle: rgba(245, 158, 11, 0.12);
+    --accent-blue: #3b82f6;
+    --accent-purple: #a855f7;
+
+    --icon-color: #e5e5e5;
+    --icon-color-muted: #a3a3a3;
+    --icon-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
     --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.35);
@@ -52,17 +61,20 @@
     --bg-elevated: #efe8df;
     --bg-overlay: rgba(247, 244, 238, 0.88);
 
-    --border-color: #ddd5c8;
-    --border-subtle: #ece7df;
+    --border-color: #d4ccbe;
+    --border-subtle: #e6dfd2;
+    --border-strong: #c2b8a4;
     --border-active: #dc2626;
 
-    --text-primary: #111111;
-    --text-secondary: #3b3b3b;
-    --text-muted: #6b7280;
+    --text-primary: #0a0a0a;
+    --text-secondary: #1f2937;
+    --text-tertiary: #374151;
+    --text-muted: #52525b;
+    --text-faint: #71717a;
     --text-inverted: #ffffff;
 
     --accent-red: #dc2626;
-    --accent-red-bright: #e8352b;
+    --accent-red-bright: #ef4444;
     --accent-red-hover: #b91c1c;
     --accent-red-active: #991b1b;
     --accent-red-strong: #dc2626;
@@ -75,6 +87,12 @@
     --accent-green-subtle: rgba(22, 163, 74, 0.1);
     --accent-amber: #d97706;
     --accent-amber-subtle: rgba(217, 119, 6, 0.1);
+    --accent-blue: #2563eb;
+    --accent-purple: #7e22ce;
+
+    --icon-color: #1f2937;
+    --icon-color-muted: #4b5563;
+    --icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
     --shadow-sm: 0 2px 8px rgba(17, 17, 17, 0.08);
     --shadow-md: 0 6px 24px rgba(17, 17, 17, 0.12);
@@ -364,36 +382,252 @@
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
-/* Icon visibility enhancements */
-.icon-visible {
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-}
+/* ─── Icon visibility enhancements */
+  .icon-visible {
+    color: var(--icon-color);
+    filter: drop-shadow(var(--icon-shadow));
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-fast),
+      filter var(--transition-fast);
+  }
 
-.icon-visible-light {
-  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3));
-}
+  .icon-visible:hover {
+    color: var(--accent-red);
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 6px var(--accent-red-glow));
+  }
+
+  .icon-visible-light {
+    color: var(--icon-color);
+    filter: drop-shadow(var(--icon-shadow));
+  }
+
+  /* ─── Semantic text colors (theme-aware) ─── */
+
+  .text-theme-primary { color: var(--text-primary); }
+  .text-theme-secondary { color: var(--text-secondary); }
+  .text-theme-tertiary { color: var(--text-tertiary); }
+  .text-theme-muted { color: var(--text-muted); }
+  .text-theme-faint { color: var(--text-faint); }
+
+  /* ─── Keyword highlighting (theme-aware) ─── */
+
+  .keyword-highlight {
+    background: linear-gradient(120deg, var(--accent-red-subtle) 0%, var(--accent-red) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    padding: 0 2px;
+    border-radius: 3px;
+  }
+
+  /* Solid highlight for keywords (better readability) */
+  .keyword-mark {
+    background: var(--accent-red-subtle);
+    color: var(--accent-red-strong);
+    font-weight: 700;
+    padding: 1px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--accent-red-border);
+  }
+
+  /* ─── Description text (theme-aware) ─── */
+
+  .description-text {
+    line-height: 1.65;
+    color: var(--text-tertiary);
+    font-size: 0.95rem;
+  }
+
+  /* ─── Animated icon hover (theme-aware) ─── */
+
+  .icon-animated {
+    transition:
+      color var(--transition-fast),
+      transform var(--transition-base),
+      filter var(--transition-fast);
+  }
+
+  .icon-animated:hover {
+    color: var(--accent-red);
+    transform: scale(1.15) rotate(-3deg);
+    filter: drop-shadow(0 0 8px var(--accent-red-glow));
+  }
+
+  /* ─── Subtle icon pulse for emphasis ─── */
+
+  .icon-pulse-subtle {
+    animation: icon-pulse-soft 3.5s ease-in-out infinite;
+  }
+
+  @keyframes icon-pulse-soft {
+    0%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    50% {
+      opacity: 0.85;
+      filter: drop-shadow(0 0 6px var(--accent-red-glow));
+    }
+  }
+
+  /* ─── Better text contrast utilities ─── */
+
+  .text-readable {
+    color: var(--text-secondary);
+  }
+
+  .text-readable-strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ─── Card with theme-aware hover ─── */
+
+  .theme-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base),
+      border-color var(--transition-base),
+      background var(--transition-base);
+  }
+
+  .theme-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-red-border);
+  }
+
+  /* ─── Animated underline for interactive text ─── */
+
+  .link-underline {
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: var(--accent-red);
+    transition: width var(--transition-base);
+  }
+
+  .link-underline:hover {
+    color: var(--accent-red);
+  }
+
+  .link-underline:hover::after {
+    width: 100%;
+  }
+
+  /* ─── Badge with theme visibility ─── */
+
+  .badge-theme {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: var(--accent-red-subtle);
+    color: var(--accent-red-strong);
+    border: 1px solid var(--accent-red-border);
+  }
+
+  /* ─── Gradient text variants ─── */
+
+  .gradient-text-warm {
+    background: linear-gradient(135deg, var(--accent-red) 0%, var(--accent-red-bright) 50%, var(--accent-amber) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  /* ─── Hover scale for cards/icons ─── */
+
+  .hover-lift {
+    transition:
+      transform var(--transition-base),
+      box-shadow var(--transition-base);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ─── Focus state for icons and interactive elements ─── */
+
+  .focus-glow:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-red-subtle), 0 0 0 4px var(--accent-red-border);
+  }
+
+  /* ─── Section heading underline accent ─── */
+
+  .heading-underline {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+  }
+
+  .heading-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-red-bright));
+    border-radius: 9999px;
+  }
+
+  /* ─── Theme-aware scroll progress ─── */
+
+  .scroll-progress-bar {
+    background: linear-gradient(90deg, var(--accent-red), var(--accent-red-bright), var(--accent-amber));
+    box-shadow: 0 0 8px var(--accent-red-glow);
+  }
+
+  /* ─── Tooltip-style accent (for icons) ─── */
+
+  .icon-accent-ring {
+    position: relative;
+  }
+
+  .icon-accent-ring::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: var(--accent-red-subtle);
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: -1;
+  }
+
+  .icon-accent-ring:hover::before {
+    opacity: 1;
+  }
 
 /* Reading experience improvements */
 .reading-text {
   line-height: 1.7;
   letter-spacing: -0.01em;
-}
-
-/* Keyword highlighting */
-.keyword-highlight {
-  background: linear-gradient(120deg, var(--accent-red-subtle) 0%, var(--accent-red) 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 600;
-  padding: 0 2px;
-  border-radius: 3px;
-}
-
-/* Description text styling */
-.description-text {
-  line-height: 1.6;
-  color: var(--text-secondary);
 }
 
 /* Content card enhancements */
@@ -597,4 +831,25 @@
       transform: none;
     }
   }
+}
+
+/* ─── Tailwind v4 theme bridge ─── */
+@theme inline {
+  --color-theme-primary: var(--text-primary);
+  --color-theme-secondary: var(--text-secondary);
+  --color-theme-tertiary: var(--text-tertiary);
+  --color-theme-muted: var(--text-muted);
+  --color-theme-faint: var(--text-faint);
+  --color-icon: var(--icon-color);
+  --color-icon-muted: var(--icon-color-muted);
+}
+
+/* ─── Smooth theme transition wrapper ─── */
+.theme-transition,
+.theme-transition * {
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base) !important;
 }
