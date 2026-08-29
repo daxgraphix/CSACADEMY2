@@ -1,6 +1,6 @@
 {
   "name": "CS Academy",
-  "description": "CS Academy - Empowering East Africa with Swahili-language digital skills, video courses in web development, graphic design, AI, cybersecurity, and mobile money accessibility.",
+  "description": "CS Academy - Empowering East Africa with English-language digital skills, video courses in web development, graphic design, AI, cybersecurity, and mobile money accessibility.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

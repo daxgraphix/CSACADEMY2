@@ -87,9 +87,9 @@ export const faqData: FAQItem[] = [
     category: 'General'
   },
   {
-    id: 'teach-in-kiswahili',
-    question: 'Do you teach in Kiswahili or English?',
-    answer: 'We teach in both Kiswahili and English! Our instructors explain foundational concepts in clear, natural Kiswahili while simultaneously teaching the standard English industry terminologies, ensuring you gain both conceptual mastery and global workplace fluency.',
+    id: 'teach-in-english',
+    question: 'Do you teach in English or local languages?',
+    answer: 'We primarily teach in English! Our instructors explain foundational concepts in clear, natural English while using culturally relevant local language references where helpful, ensuring you gain both conceptual mastery and global workplace fluency.',
     category: 'General'
   },
   {

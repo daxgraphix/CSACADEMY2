@@ -15,7 +15,7 @@ export const pricingPlansData: PricingPlan[] = [
     bandwidthRequirement: 'Ultra-Low Data (~5MB / day)',
     popular: false,
     features: [
-      'Daily 5-minute Swahili audio lessons & summaries',
+      'Daily 5-minute English audio lessons & summaries',
       'Downloadable PDF prompt cards & code cheat-sheets',
       'Private WhatsApp study cohort group discussions',
       'Weekly voice note Q&A with instructors',
@@ -36,7 +36,7 @@ export const pricingPlansData: PricingPlan[] = [
     deliveryChannel: 'On-Demand Web & Mobile App',
     deliveryType: 'self-paced',
     badge: 'FLEXIBLE SCHEDULE',
-    tagline: 'Learn at your own pace with full access to all Swahili video tracks.',
+    tagline: 'Learn at your own pace with full access to all English video tracks.',
     priceTsh: '15,000',
     priceKes: '800',
     priceUsd: '6',
@@ -172,7 +172,7 @@ export const pricingPlansData: PricingPlan[] = [
       'High-impact multimedia keynote by Alex Rweyemamu',
       'Context-rich insights on African technology landscape',
       'Engaging live on-stage technology and AI demonstrations',
-      'Available in fluent Swahili, English, or bilingual delivery',
+      'Available in fluent English, local languages, or bilingual delivery',
       'Panel moderation and executive Q&A facilitation'
     ],
     ctaText: 'Inquire Keynote Availability',

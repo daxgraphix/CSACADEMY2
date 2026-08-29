@@ -29,19 +29,19 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
   if (!post) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200">
       <div 
         className={`border rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl relative transition-colors ${
-          theme === 'dark' ? 'bg-[#171717] border-neutral-800 text-white' : 'bg-white border-neutral-200 text-neutral-900'
+          theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' : 'bg-white border-neutral-200 text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className={`sticky top-0 backdrop-blur-md px-6 sm:px-8 py-5 border-b flex items-center justify-between z-10 ${
-          theme === 'dark' ? 'bg-[#171717]/95 border-neutral-800' : 'bg-white/95 border-neutral-200'
+          theme === 'dark' ? 'bg-[var(--bg-secondary)]/95 border-[var(--border-color)]' : 'bg-white/95 border-neutral-200'
         }`}>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-red-950/80 border border-red-800/80 text-[#DC2626] uppercase">
+            <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)] uppercase">
               {post.category}
             </span>
             <div className={`flex items-center gap-1.5 text-xs font-mono ${
@@ -78,7 +78,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
               theme === 'dark' ? 'border-neutral-800 text-neutral-400' : 'border-neutral-200 text-neutral-800'
             }`}>
               <div className="flex items-center gap-2">
-                <User className="w-3.5 h-3.5 text-[#DC2626]" />
+                <User className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
                 <span className={`font-semibold ${theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'}`}>{post.author}</span>
                 <span> | </span>
                 <div>CS Academy Editorial</div>
@@ -94,8 +94,8 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
           </div>
 
           {/* Intro Excerpt */}
-          <div className={`p-5 rounded-2xl border-l-4 border-[#DC2626] border-y border-r text-sm sm:text-base leading-relaxed italic font-medium ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800 text-neutral-200' : 'bg-red-50/50 border-neutral-200 text-neutral-800'
+          <div className={`p-5 rounded-2xl border-l-4 border-[var(--accent-red-strong)] border-y border-r text-sm sm:text-base leading-relaxed italic font-medium ${
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-200' : 'bg-red-50/50 border-neutral-200 text-neutral-800'
           }`}>
             "{post.content.intro}"
           </div>
@@ -122,7 +122,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
                       ? 'bg-red-950/20 border-red-900/40 text-red-200' 
                       : 'bg-red-50 border-red-200 text-red-900'
                   }`}>
-                    <Lightbulb className="w-4 h-4 text-[#DC2626] shrink-0 mt-0.5" />
+                    <Lightbulb className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
                     <span><strong>Actionable Rule:</strong> {sec.keyTip}</span>
                   </div>
                 )}
@@ -132,9 +132,9 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
 
           {/* Conclusion */}
           <div className={`p-6 rounded-2xl border space-y-2 ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-200'
           }`}>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-[#DC2626]">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-[var(--accent-red-strong)]">
               Summary & Next Steps
             </h3>
             <p className={`text-sm leading-relaxed ${
@@ -150,7 +150,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
               <Tag className="w-3.5 h-3.5 text-neutral-500" />
               {post.tags.map((t, i) => (
                 <span key={i} className={`text-xs px-2.5 py-1 rounded-md border ${
-                  theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800 text-neutral-400' : 'bg-neutral-100 border-neutral-200 text-neutral-700'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-400' : 'bg-neutral-100 border-neutral-200 text-neutral-700'
                 }`}>
                   #{t}
                 </span>
@@ -158,7 +158,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
             </div>
 
             <div className={`p-4 rounded-2xl border ${
-              theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+              theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-200'
             }`}>
               <ShareButtons
                 title={post.title}
@@ -185,7 +185,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
                 onClose();
                 openBookingModal({ program: `Training on ${post.category}: ${post.title}` });
               }}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl font-extrabold text-xs text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] uppercase tracking-wider shadow-lg transition-all"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg transition-all"
             >
               Book Related Training
             </button>

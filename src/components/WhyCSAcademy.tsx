@@ -45,7 +45,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
       icon: Globe2 
     },
     { 
-      title: 'English & Kiswahili', 
+      title: 'English & Local Languages',
       desc: 'Bilingual accessibility ensuring language is never an obstacle to mastering high-impact technologies.', 
       icon: Languages 
     },
@@ -81,7 +81,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
     },
     { 
       title: 'Community-Driven Learning', 
-      desc: 'Continuous alumni support, daily resource drops, and ongoing mentorship via CyberSwahili communities.', 
+      desc: 'Continuous alumni support, daily resource drops, and ongoing mentorship via Cyber Academy communities.',
       icon: Users 
     },
     { 
@@ -95,14 +95,14 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
     <section 
       id="why-cs-academy-section" 
       className={`py-24 border-y transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#121212] text-white border-neutral-800' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>{t.whyUs.badge}</span>
           </div>
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
@@ -125,10 +125,10 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
             <div 
               key={i}
               className={`p-5 rounded-2xl border text-center ${
-                theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+                theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
               }`}
             >
-              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[#DC2626]">{stat.value}</div>
+              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[var(--accent-red-strong)]">{stat.value}</div>
               <div className={`mt-1 text-[11px] font-semibold uppercase tracking-wider ${
                 theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
               }`}>{stat.label}</div>
@@ -145,13 +145,13 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
                 key={idx}
                 className={`p-5 rounded-3xl border transition-all duration-200 hover:-translate-y-1 space-y-2.5 flex flex-col justify-between shadow-sm ${
                   theme === 'dark'
-                    ? 'bg-[#0B0B0B] border-neutral-800 hover:border-neutral-700'
+                    ? 'bg-[var(--bg-primary)] border-[var(--border-color)] hover:border-neutral-700'
                     : 'bg-white border-neutral-300 hover:border-red-400 hover:shadow-md'
                 }`}
               >
                 <div className="space-y-2">
-                  <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center text-[#DC2626] ${
-                    theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-red-50 border-red-100'
+                  <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center text-[var(--accent-red-strong)] ${
+                    theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-red-50 border-red-100'
                   }`}>
                     <Icon className="w-4 h-4" />
                   </div>
@@ -170,7 +170,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
         {/* Closing CTA */}
         {openBookingModal && (
           <div className={`mt-12 rounded-3xl border p-8 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
             <div className="space-y-1 text-center sm:text-left">
               <h3 className={`text-xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
@@ -182,7 +182,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
             </div>
             <button
               onClick={() => openBookingModal({ program: 'Next Practical Cohort' })}
-              className="inline-flex items-center gap-2 px-8 py-4 text-xs font-extrabold text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] rounded-2xl shadow-lg uppercase tracking-wider transition-all whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-8 py-4 text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-2xl shadow-lg uppercase tracking-wider transition-all whitespace-nowrap"
             >
               <span>JOIN NEXT COHORT</span>
               <ArrowRight className="w-4 h-4" />

@@ -30,7 +30,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
     <section 
       id="training-packages-section" 
       className={`py-24 border-y transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#121212] text-white border-neutral-800' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
               <span>{t.packages.badge}</span>
             </div>
             <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
@@ -55,7 +55,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
 
           {/* Category Tabs */}
           <div className={`flex items-center gap-1.5 p-1 border rounded-2xl self-start md:self-auto overflow-x-auto max-w-full ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
             {categories.map((cat) => (
               <button
@@ -63,7 +63,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
                   selectedCategory === cat 
-                    ? 'bg-[#B91C1C] text-white shadow-sm' 
+                    ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
                     : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
                 }`}
               >
@@ -90,11 +90,11 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                 {/* Badge & Title */}
                 <div>
                   <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
-                    theme === 'dark' ? 'text-[#DC2626] bg-red-950/60 border-red-900/40' : 'text-[#DC2626] bg-red-50 border-red-200'
+                    theme === 'dark' ? 'text-[var(--accent-red-strong)] bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)]' : 'text-[var(--accent-red-strong)] bg-red-50 border-red-200'
                   }`}>
                     {pkg.category} Track
                   </span>
-                  <h3 className={`text-xl font-extrabold tracking-tight mt-2 group-hover:text-[#DC2626] transition-colors ${
+                  <h3 className={`text-xl font-extrabold tracking-tight mt-2 group-hover:text-[var(--accent-red-strong)] transition-colors ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {pkg.title}
@@ -111,17 +111,17 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   theme === 'dark' ? 'border-neutral-800/80 text-neutral-300' : 'border-neutral-100 text-neutral-700'
                 }`}>
                   <div className="flex items-center gap-2">
-                    <Clock className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                    <Clock className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                     <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Duration:</span>
                     <span className="font-semibold">{pkg.durations.join('  |  ')}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <MapPin className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                    <MapPin className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                     <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Format:</span>
                     <span className="font-semibold">{pkg.formats.join(' / ')}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Users className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                    <Users className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                     <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Target:</span>
                     <span className="font-semibold truncate">{pkg.targetAudience}</span>
                   </div>
@@ -138,7 +138,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                     <div key={dIdx} className={`flex items-start gap-2 text-xs ${
                       theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                     }`}>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -153,8 +153,8 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   onClick={() => openBookingModal({ program: pkg.title, duration: pkg.durations[0] })}
                   className={`w-full py-3 px-4 rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all ${
                     theme === 'dark'
-                      ? 'bg-[#171717] hover:bg-[#B91C1C] text-neutral-200 hover:text-white border border-neutral-800'
-                      : 'bg-neutral-50 hover:bg-[#B91C1C] text-neutral-800 hover:text-white border border-neutral-300 shadow-sm'
+                      ? 'bg-[var(--bg-secondary)] hover:bg-[var(--accent-red-hover)] text-neutral-200 hover:text-white border-[var(--border-color)]'
+                      : 'bg-neutral-50 hover:bg-[var(--accent-red-hover)] text-neutral-800 hover:text-white border-neutral-300 shadow-sm'
                   }`}
                 >
                   <span>REQUEST PACKAGE DETAILS</span>

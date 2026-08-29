@@ -39,26 +39,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
   return (
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-900'
+      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         
         {/* Hero / Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>{t.about.badge}</span>
           </div>
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-950'
           }`}>
             {(
-              <>EMPOWERING EAST AFRICA WITH <span className="text-[#DC2626]">DIGITAL SKILLS</span></>
+              <>EMPOWERING EAST AFRICA WITH <span className="text-[var(--accent-red-strong)]">DIGITAL SKILLS</span></>
             )}
           </h1>
           <p className={`text-base sm:text-lg leading-relaxed ${
             theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
           }`}>
-            {siteConfig.academyName} is on a mission to democratize technology education for Swahili-speaking learners, professionals, and future innovators.
+            {siteConfig.academyName} is on a mission to democratize technology education for English-speaking learners with local language support, professionals, and future innovators.
           </p>
         </div>
 
@@ -66,14 +66,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         <div className="grid md:grid-cols-2 gap-8">
           {/* Mission Card */}
           <div className={`p-8 sm:p-10 rounded-3xl border space-y-4 shadow-xl relative overflow-hidden group transition-all ${
-            theme === 'dark' ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700' : 'bg-neutral-50 border-neutral-300 hover:border-red-400'
+            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' : 'bg-neutral-50 border-neutral-300 hover:border-red-400'
           }`}>
-            <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center text-[#DC2626] ${
+            <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center text-[var(--accent-red-strong)] ${
               theme === 'dark' ? 'bg-red-950/70 border-red-900/50' : 'bg-red-50 border-red-200'
             }`}>
               <GraduationCap className="w-6 h-6" />
             </div>
-            <span className="text-xs font-mono font-bold text-[#DC2626] uppercase tracking-wider">
+            <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase tracking-wider">
               Our Purpose
             </span>
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
@@ -83,21 +83,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               {siteConfig.tagline}
             </p>
             <div className={`pt-2 text-xs flex items-center gap-2 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              <CheckCircle2 className="w-4 h-4 text-[#DC2626]" />
+              <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)]" />
               <span>Language should never be a barrier to learning technology.</span>
             </div>
           </div>
 
           {/* Vision Card */}
           <div className={`p-8 sm:p-10 rounded-3xl border space-y-4 shadow-xl relative overflow-hidden group transition-all ${
-            theme === 'dark' ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700' : 'bg-neutral-50 border-neutral-300 hover:border-red-400'
+            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' : 'bg-neutral-50 border-neutral-300 hover:border-red-400'
           }`}>
-            <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center text-[#DC2626] ${
+            <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center text-[var(--accent-red-strong)] ${
               theme === 'dark' ? 'bg-red-950/70 border-red-900/50' : 'bg-red-50 border-red-200'
             }`}>
               <Globe2 className="w-6 h-6" />
             </div>
-            <span className="text-xs font-mono font-bold text-[#DC2626] uppercase tracking-wider">
+            <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase tracking-wider">
               The Future We Build
             </span>
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
@@ -107,7 +107,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               {siteConfig.vision}
             </p>
             <div className={`pt-2 text-xs flex items-center gap-2 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              <CheckCircle2 className="w-4 h-4 text-[#DC2626]" />
+              <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)]" />
               <span>Equipping millions to thrive in the global digital economy.</span>
             </div>
           </div>
@@ -115,11 +115,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
         {/* 3 Core Academies */}
         <div className={`p-8 sm:p-12 rounded-3xl border space-y-8 shadow-2xl ${
-          theme === 'dark' ? 'bg-[#121212] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+          theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
         }`}>
           <div className="max-w-3xl space-y-3">
-            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded border text-[11px] font-mono text-[#DC2626] font-bold uppercase ${
-              theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300'
+            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded border text-[11px] font-mono text-[var(--accent-red-strong)] font-bold uppercase ${
+              theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300'
             }`}>
               Our Core Curriculum Pillars
             </div>
@@ -131,9 +131,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           <div className="grid sm:grid-cols-3 gap-6">
             {siteConfig.pillars.map((pillar) => (
               <div key={pillar.id} className={`p-6 rounded-3xl border space-y-3 ${
-                theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+                theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
               }`}>
-                <span className="text-[10px] font-mono font-bold text-[#DC2626] uppercase px-2.5 py-0.5 rounded-full bg-red-950/40 border border-red-800/40">
+                <span className="text-[10px] font-mono font-bold text-[var(--accent-red-strong)] uppercase px-2.5 py-0.5 rounded-full bg-red-950/40 border border-red-800/40">
                   {pillar.badge}
                 </span>
                 <h3 className={`text-lg font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{pillar.name}</h3>
@@ -147,7 +147,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         <section id="our-instructors-section" className="space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
-              theme === 'dark' ? 'bg-red-950/40 border-red-800/40 text-[#DC2626]' : 'bg-red-50 border-red-200 text-[#DC2626]'
+              theme === 'dark' ? 'bg-red-950/40 border-red-800/40 text-[var(--accent-red-strong)]' : 'bg-red-50 border-red-200 text-[var(--accent-red-strong)]'
             }`}>
               <GraduationCap className="w-3.5 h-3.5" />
               <span>Our Expert Instructors</span>
@@ -170,20 +170,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 key={instructor.id}
                 id={`instructor-card-${instructor.id}`}
                 className={`border rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xl transition-all hover:scale-[1.01] ${
-                  theme === 'dark' ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700' : 'bg-white border-neutral-300 hover:border-red-400'
+                  theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' : 'bg-white border-neutral-300 hover:border-red-400'
                 }`}
               >
                 <div className="space-y-4">
                   {/* Avatar & Header */}
                   <div className="flex items-start gap-4">
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${instructor.avatarGradient || 'from-red-600 to-black'} p-0.5 shadow-md shrink-0`}>
-                      <div className="w-full h-full rounded-[14px] bg-[#0B0B0B] flex items-center justify-center text-white font-extrabold text-lg">
+                      <div className="w-full h-full rounded-[14px] bg-[var(--bg-primary)] flex items-center justify-center text-white font-extrabold text-lg">
                         {instructor.avatarInitials}
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] font-mono font-bold text-[#DC2626] uppercase px-2 py-0.5 rounded bg-red-950/40 border border-red-900/40 inline-block">
+                      <span className="text-[10px] font-mono font-bold text-[var(--accent-red-strong)] uppercase px-2 py-0.5 rounded bg-red-950/40 border border-red-900/40 inline-block">
                         {instructor.specialtyBadge}
                       </span>
                       <h3 className={`text-xl font-bold tracking-tight ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
@@ -213,7 +213,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                           key={eIdx}
                           className={`text-[11px] px-2.5 py-1 rounded-lg border font-medium ${
                             theme === 'dark'
-                              ? 'bg-[#0B0B0B] border-neutral-800 text-neutral-300'
+                              ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-300'
                               : 'bg-neutral-50 border-neutral-300 text-neutral-700'
                           }`}
                         >
@@ -233,7 +233,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                     <ul className="space-y-1 text-xs">
                       {instructor.featuredCourses.map((fc, fcIdx) => (
                         <li key={fcIdx} className="flex items-center gap-1.5 text-[11px]">
-                          <CheckCircle2 className="w-3 h-3 text-[#DC2626] shrink-0" />
+                          <CheckCircle2 className="w-3 h-3 text-[var(--accent-red-strong)] shrink-0" />
                           <span className={theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}>{fc}</span>
                         </li>
                       ))}
@@ -243,14 +243,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
                 {/* Card Action */}
                 <div className={`pt-4 border-t flex items-center justify-between gap-3 ${
-                  theme === 'dark' ? 'border-neutral-800' : 'border-neutral-100'
+                  theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-100'
                 }`}>
                   <span className={`text-[11px] font-mono ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                     {instructor.experience}
                   </span>
                   <button
                     onClick={() => openBookingModal({ program: `Training with ${instructor.name}` })}
-                    className="group relative px-4 py-2 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
+                    className="group relative px-4 py-2 rounded-xl bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
                   >
                     <span>Book Session</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -263,26 +263,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
         {/* Founder Keynote & Speaking Profile */}
         <div className={`p-8 sm:p-12 rounded-3xl border shadow-xl ${
-          theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-white border-neutral-300'
+          theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300'
         }`}>
           <div className="grid md:grid-cols-12 gap-8 items-center">
             <div className="md:col-span-4 text-center md:text-left space-y-4">
-              <div className="w-32 h-32 mx-auto md:mx-0 rounded-3xl bg-gradient-to-br from-[#B91C1C] to-neutral-900 p-1 shadow-lg">
+              <div className="w-32 h-32 mx-auto md:mx-0 rounded-3xl bg-gradient-to-br from-[var(--accent-red-hover)] to-neutral-900 p-1 shadow-lg">
                 <div className={`w-full h-full rounded-[22px] flex items-center justify-center text-4xl font-extrabold ${
-                  theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-neutral-900 text-white'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-neutral-900 text-white'
                 }`}>
                   AR
                 </div>
               </div>
               <div>
                 <h3 className={`text-2xl font-black ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{siteConfig.founder.name}</h3>
-                <p className="text-xs font-mono font-bold text-[#DC2626] mt-1">{siteConfig.founder.titles[0]}</p>
+                <p className="text-xs font-mono font-bold text-[var(--accent-red-strong)] mt-1">{siteConfig.founder.titles[0]}</p>
               </div>
             </div>
 
             <div className="md:col-span-8 space-y-4">
               <div className="space-y-2">
-                <Quote className="w-8 h-8 text-[#DC2626] opacity-60" />
+                <Quote className="w-8 h-8 text-[var(--accent-red-strong)] opacity-60" />
                 <p className={`text-sm sm:text-base leading-relaxed italic ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>
                   "{siteConfig.founder.quote}"
                 </p>
@@ -293,7 +293,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               <div className="pt-2 flex flex-wrap items-center gap-3">
                 <button
                   onClick={() => openBookingModal({ program: 'Speaking Engagement with Alex Rweyemamu' })}
-                  className="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] uppercase tracking-wider transition-colors shadow-md flex items-center gap-2"
+                  className="px-5 py-2.5 rounded-xl font-bold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider transition-colors shadow-md flex items-center gap-2"
                 >
                   <span>Book Keynote / Training</span>
                   <ArrowRight className="w-3.5 h-3.5" />

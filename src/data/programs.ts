@@ -25,7 +25,7 @@ export const programsData: ProgramPillar[] = [
       'AI Safety & Deepfake Detection',
       'Responsible AI & Ethical Governance',
       'AI Automation & Daily Workflow Optimization',
-      'AI in Kiswahili & Local Language Contexts',
+      'AI in Local Languages & African Language Contexts',
       'AI Research & Data Synthesis'
     ],
     modules: [
@@ -51,7 +51,7 @@ export const programsData: ProgramPillar[] = [
       },
       {
         title: 'Module 5: Localized AI & Multi-lingual Applications',
-        description: 'Utilize AI effectively in Kiswahili and regional African languages for community outreach, education, and translation.',
+         description: 'Utilize AI effectively in English and regional African languages for community outreach, education, and translation.',
         practicalSkill: 'Construct bilingual prompt workflows and cross-lingual educational materials.'
       },
       {
@@ -109,7 +109,7 @@ export const programsData: ProgramPillar[] = [
       'Master prompt engineering to produce precise, high-grade professional outputs',
       'Safely integrate AI into business, academic, or institutional workflows',
       'Critically verify AI outputs and detect misinformation or synthetic deepfakes',
-      'Apply AI in both English and Kiswahili contexts seamlessly'
+      'Apply AI in both English and local language contexts seamlessly'
     ],
     deliveryFormats: [
       'Zoom / Google Meet Live Online',

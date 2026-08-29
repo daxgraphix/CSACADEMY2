@@ -63,8 +63,8 @@ export const BackToTop: React.FC = () => {
           : 'opacity-0 pointer-events-none'
       } ${
         theme === 'dark'
-          ? 'bg-[#171717] hover:bg-[#1f1f1f] text-white border border-neutral-800 hover:border-[#ff3b30]'
-          : 'bg-white hover:bg-neutral-50 text-neutral-900 border border-neutral-200 hover:border-[#ff3b30] shadow-[0_18px_40px_rgba(0,0,0,0.18)] hover:shadow-[0_18px_40px_rgba(255,59,48,0.25)]'
+          ? 'bg-[var(--bg-secondary)] hover:bg-[#1f1f1f] text-white border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
+          : 'bg-white hover:bg-neutral-50 text-neutral-900 border-[var(--border-color)] hover:border-[var(--accent-red-border)] shadow-[0_18px_40px_rgba(0,0,0,0.18)] hover:shadow-[0_18px_40px_rgba(255,59,48,0.25)]'
       }`}
     >
       <svg
@@ -95,7 +95,7 @@ export const BackToTop: React.FC = () => {
       </svg>
 
       <ArrowUp
-        className="relative w-5 h-5 sm:w-6 sm:h-6 text-[#ff3b30] transition-transform duration-200 ease-out group-hover:-translate-y-0.5"
+        className="relative w-5 h-5 sm:w-6 sm:h-6 text-[var(--accent-red-strong)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5"
         strokeWidth={2.5}
         aria-hidden="true"
       />

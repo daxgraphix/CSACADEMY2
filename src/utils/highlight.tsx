@@ -21,7 +21,7 @@ export const Highlight: React.FC<HighlightProps> = ({ text, query, className }) 
     <>
       {parts.map((part, i) =>
         part.toLowerCase() === trimmed.toLowerCase() ? (
-          <mark key={i} className={className ?? 'bg-[#DC2626]/20 text-[#DC2626] rounded-[2px] px-0.5'}>
+          <mark key={i} className={className ?? 'bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)] rounded-[2px] px-0.5'}>
             {part}
           </mark>
         ) : (

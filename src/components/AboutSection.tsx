@@ -33,14 +33,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
     <section
       id="about-section"
       className={`py-24 border-y transition-colors duration-300 relative ${
-        theme === 'dark' ? 'bg-[#121212] text-white border-neutral-800' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-neutral-800' : 'bg-neutral-50 text-neutral-900 border-neutral-300'
       }`}
     >
       <div ref={contentRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" />
             <span>{t.about.badge}</span>
           </div>
@@ -78,11 +78,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 <div
                   key={idx}
                   className={`p-4 rounded-2xl border space-y-1 ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
                   }`}
                 >
-                  <div className="flex items-center gap-2 text-xs font-extrabold text-[#DC2626] uppercase">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626]" />
+                  <div className="flex items-center gap-2 text-xs font-extrabold text-[var(--accent-red-strong)] uppercase">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
                     <span>{val.title}</span>
                   </div>
                   <p className={`text-xs leading-relaxed ${
@@ -96,7 +96,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               <button
                 id="btn-work-with-academy"
                 onClick={() => openBookingModal({ program: 'Web Development & Digital Skills Cohort' })}
-                className="inline-flex items-center gap-2 px-8 py-4 text-xs font-extrabold text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] rounded-2xl shadow-lg uppercase tracking-wider transition-all"
+                className="inline-flex items-center gap-2 px-8 py-4 text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-2xl shadow-lg uppercase tracking-wider transition-all"
               >
                 <span>JOIN NEXT COHORT</span>
                 <ArrowRight className="w-4 h-4" />
@@ -105,15 +105,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           </div>
 
           {/* Right: Vision & Accessibility Card (5 cols) */}
-          <div className={`lg:col-span-5 border rounded-3xl p-8 shadow-2xl space-y-6 ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-neutral-200'
+          <div className={`lg:col-span-5 border rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl space-y-6 ${
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-neutral-200'
           }`}>
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#B91C1C] to-black p-0.5 shadow-md flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--accent-red-hover)] to-black p-0.5 shadow-md flex items-center justify-center">
                 <div className={`w-full h-full rounded-[14px] flex items-center justify-center font-black text-base ${
-                  theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-950'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-950'
                 }`}>
-                  <span className="text-[#DC2626]">C</span>S
+                  <span className="text-[var(--accent-red-strong)]">C</span>S
                 </div>
               </div>
               <div>
@@ -122,14 +122,14 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 }`}>CS ACADEMY</h3>
                 <p className={`text-xs font-mono ${
                   theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
-                }`}>CyberSwahili Tech Ecosystem</p>
+                }`}>Cyber Academy Tech Ecosystem</p>
               </div>
             </div>
 
             <div className={`p-4 rounded-2xl border space-y-2 ${
-              theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+              theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
             }`}>
-              <span className="text-[10px] font-mono uppercase font-bold text-[#DC2626]">
+              <span className="text-[10px] font-mono uppercase font-bold text-[var(--accent-red-strong)]">
                 Our Vision
               </span>
               <p className={`text-xs leading-relaxed font-medium ${
@@ -143,15 +143,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
             }`}>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
-                <span>Curricula taught in clear Swahili & English</span>
+                <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
+                <span>Curricula taught in clear English with local language support</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                 <span>Instant mobile money integration (M-Pesa & Airtel)</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                 <span>Active WhatsApp community of 1,200+ tech learners</span>
               </div>
             </div>
@@ -167,10 +167,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
             <div
               key={i}
               className={`p-5 rounded-2xl border text-center ${
-                theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+                theme === 'dark' ? 'bg-[var(--bg-primary)] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
               }`}
             >
-              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[#DC2626]">{stat.value}</div>
+              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[var(--accent-red-strong)]">{stat.value}</div>
               <div className={`mt-1 text-[11px] font-semibold uppercase tracking-wider ${
                 theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
               }`}>{stat.label}</div>
@@ -180,10 +180,10 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 
         {/* Founder Profile */}
         <div className={`rounded-3xl border p-8 sm:p-10 flex flex-col md:flex-row items-center gap-8 ${
-          theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+          theme === 'dark' ? 'bg-[var(--bg-primary)] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
         }`}>
           <div className="shrink-0">
-            <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-[#DC2626] to-[#7F1D1D] flex items-center justify-center text-white text-3xl font-black shadow-lg">
+            <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-[var(--accent-red)] to-[var(--accent-red-hover)] flex items-center justify-center text-white text-3xl font-black shadow-lg">
               AR
             </div>
           </div>
@@ -193,7 +193,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
                 {siteConfig.founder.name}
               </h3>
               <span className={`inline-flex items-center gap-1.5 self-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${
-                theme === 'dark' ? 'bg-red-950/40 border border-red-800/40 text-[#DC2626]' : 'bg-red-50 border border-red-200 text-[#DC2626]'
+                theme === 'dark' ? 'bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)]' : 'bg-red-50 border border-red-200 text-[var(--accent-red-strong)]'
               }`}>
                 <GraduationCap className="w-3 h-3" />
                 Founder
@@ -212,15 +212,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
               {siteConfig.founder.bio}
             </p>
             <div className={`flex items-start gap-2 p-3 rounded-xl border ${
-              theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+              theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
             }`}>
-              <Quote className="w-4 h-4 text-[#DC2626] shrink-0 mt-0.5" />
+              <Quote className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
               <p className={`text-xs italic ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                 "{siteConfig.founder.quote}"
               </p>
             </div>
             <div className={`flex items-center gap-1.5 text-xs font-semibold ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
-              <MapPin className="w-3.5 h-3.5 text-[#DC2626]" />
+              <MapPin className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
               {siteConfig.location}
             </div>
           </div>

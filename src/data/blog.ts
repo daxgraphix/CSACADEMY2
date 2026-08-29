@@ -145,7 +145,7 @@ export const blogPostsData: BlogPost[] = [
             '6. Code Literacy for Non-Programmers: Using AI to write basic automation scripts, SQL queries, and website tweaks.',
             '7. Visual Presentation Design: Creating clear, high-impact presentation decks with AI visual support.',
             '8. AI Ethics & Confidentiality: Knowing what data can and cannot be shared with public AI models.',
-            '9. Cross-Lingual Communication: Utilizing AI to produce accurate, culturally attuned translations in English and Kiswahili.',
+            '9. Cross-Lingual Communication: Utilizing AI to produce accurate, culturally attuned translations in English and local African languages.',
             '10. Continuous Workflow Adaptation: Staying agile as new AI models and capabilities launch every quarter.'
           ],
           keyTip: 'Add an "AI-Enabled Workflows" section to your CV highlighting specific productivity tools and methodologies you have mastered.'
@@ -223,42 +223,42 @@ export const blogPostsData: BlogPost[] = [
     tags: ['Cyber Hygiene', 'Online Safety', 'Passwords', 'Mobile Security']
   },
   {
-    id: 'ai-in-kiswahili',
-    slug: 'ai-in-kiswahili',
-    title: 'AI in Kiswahili: Why Local-Language AI Education Matters for Africa',
+    id: 'ai-in-local-languages',
+    slug: 'ai-in-local-languages',
+    title: 'AI in Local Languages: Why Local-Language AI Education Matters for Africa',
     category: 'Productivity',
     readingTime: '6 min read',
     publishedDate: '2026',
     author: 'Alex Rweyemamu',
-    excerpt: 'With over 200 million Swahili speakers across East and Central Africa, AI education cannot remain an English-only domain. Discover why cultural context and language inclusion are vital.',
+    excerpt: 'With over 200 million speakers of local African languages across East and Central Africa, AI education cannot remain an English-only domain. Discover why cultural context and language inclusion are vital.',
     content: {
       intro: 'Artificial intelligence is reshaping global economies, yet the vast majority of tutorials, documentation, and prompt guides are published exclusively in English. For millions of vibrant entrepreneurs, teachers, and students across Tanzania, Kenya, Uganda, Rwanda, Burundi, and the DRC, this language barrier slows down practical adoption.',
       sections: [
         {
-          heading: '1. Demystifying Tech Through Native Language',
+                     heading: '1. Demystifying Tech Through Native Language',
           body: [
-            'When complex technical concepts like "Prompt Engineering", "Large Language Models", and "Data Privacy" are explained using familiar cultural analogies in Kiswahili, comprehension increases exponentially.',
+            'When complex technical concepts like "Prompt Engineering", "Large Language Models", and "Data Privacy" are explained using familiar cultural analogies in local languages, comprehension increases exponentially.',
             'Learners transition from feeling intimidated by technology to realizing that AI is simply a tool that responds to clear human logic.'
           ]
         },
         {
-          heading: '2. Empowering Local Small Businesses & Grassroots Innovation',
+           heading: '2. Empowering Local Small Businesses & Grassroots Innovation',
           body: [
-            'A market vendor in Kariakoo or an agricultural cooperative in Morogoro does not need academic jargon; they need to know how to write a prompt in Kiswahili to draft a customer message, calculate livestock feed schedules, or understand weather forecasts.',
-            'Kiswahili-accessible AI training democratizes productivity across all socio-economic strata.'
+            'A market vendor in Kariakoo or an agricultural cooperative in Morogoro does not need academic jargon; they need to know how to write a prompt in their local language to draft a customer message, calculate livestock feed schedules, or understand weather forecasts.',
+            'Local-language AI training democratizes productivity across all socio-economic strata.'
           ],
-          keyTip: 'Did you know? Modern LLMs understand Kiswahili remarkably well when prompted with clear, context-rich sentences.'
+          keyTip: 'Did you know? Modern LLMs understand local languages remarkably well when prompted with clear, context-rich sentences.'
         },
         {
-          heading: '3. CS Academy\'s Bilingual Commitment',
+          heading: '3. CS Academy\'s Language-Inclusive Commitment',
           body: [
-            'CS Academy is proud to pioneer practical AI literacy delivered in both English and Kiswahili. We believe that true digital sovereignty begins when people can learn, innovate, and defend their digital rights in their own language.'
+            'CS Academy is proud to pioneer practical AI literacy delivered in English alongside local languages. We believe that true digital sovereignty begins when people can learn, innovate, and defend their digital rights in their own language.'
           ]
         }
       ],
       conclusion: 'The future of African technology is inclusive, accessible, and grounded in our community\'s languages. CS Academy is leading that charge every day.'
     },
-    tags: ['Kiswahili', 'Swahili AI', 'Digital Inclusion', 'African Tech']
+    tags: ['Local Languages', 'Digital Inclusion', 'African Tech']
   },
   {
     id: 'prompt-engineering-fundamentals',
@@ -557,7 +557,7 @@ export const blogPostsData: BlogPost[] = [
         {
           heading: '6. Language Translation Support',
           body: [
-            'For multilingual classrooms, AI translation between English, Kiswahili, and other regional languages helps teachers prepare bilingual handouts and communicate with parents in their preferred language.'
+            'For multilingual classrooms, AI translation between English and other regional languages helps teachers prepare bilingual handouts and communicate with parents in their preferred language.'
           ]
         },
         {
@@ -792,7 +792,7 @@ export const blogPostsData: BlogPost[] = [
           heading: '2. Side-by-Side on Common Tasks',
           body: [
             'Writing a friendly customer email: all three are strong; Claude and ChatGPT tend to feel slightly more natural in English.',
-            'Drafting in Kiswahili or code-switching with English: ChatGPT and Gemini are usually the most reliable.',
+            'Drafting in local languages or code-switching with English: ChatGPT and Gemini are usually the most reliable.',
             'Analyzing a 200-page PDF: Claude and Gemini both handle very long documents well; ChatGPT requires splitting or uploading in chunks.',
             'Generating and debugging code: ChatGPT is currently the strongest for everyday scripting and SQL.',
             'Live web research with citations: Gemini and ChatGPT (with browsing) lead here; Claude can search but is more cautious.'

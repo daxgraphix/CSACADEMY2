@@ -66,19 +66,46 @@ const buildHtml = (r: ResourceItem): string => `
       );
     }
     .header-inner { position: relative; padding: 0 20mm; }
+    .branding-row {
+      display: flex;
+      align-items: center;
+      gap: 8pt;
+      margin-bottom: 8pt;
+    }
+    .brand-dot {
+      width: 18pt;
+      height: 18pt;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffffff, #fca5a5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9pt;
+      font-weight: 900;
+      color: #b91c1c;
+      flex-shrink: 0;
+    }
+    .brand-text {
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 6pt;
+    }
+    .brand-text .parent-org {
+      font-size: 7.5pt;
+      opacity: 0.7;
+      font-weight: 600;
+    }
 
     .header-top {
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
       margin-bottom: 14pt;
-    }
-    .org-label {
-      font-size: 7.5pt;
-      font-weight: 800;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      opacity: 0.9;
     }
     .doc-meta {
       text-align: right;
@@ -308,8 +335,8 @@ const buildHtml = (r: ResourceItem): string => `
       color: #b91c1c;
     }
     .footer-tagline {
-      font-size: 6.5pt;
-      color: #9ca3af;
+      font-size: 6pt;
+      color: #6b7280;
       font-style: italic;
       margin-top: 1pt;
     }
@@ -343,8 +370,11 @@ const buildHtml = (r: ResourceItem): string => `
     <!-- HEADER -->
     <div class="header">
       <div class="header-inner">
+        <div class="branding-row">
+          <div class="brand-dot">${siteConfig.academyName.charAt(0)}</div>
+          <div class="brand-text">${siteConfig.academyName} <span class="parent-org">| ${siteConfig.parentOrg}</span></div>
+        </div>
         <div class="header-top">
-          <div class="org-label">CS Academy &bull; CyberSwahili</div>
           <div class="doc-meta">
             <div class="doc-meta-row"><span>${escapeHtml(r.format)}</span></div>
             <div class="doc-meta-row" style="margin-top:2pt"><span>${escapeHtml(r.category)}</span></div>
@@ -411,7 +441,7 @@ const buildHtml = (r: ResourceItem): string => `
       <div class="section-line"></div>
     </div>
     <div class="content-block">
-      <div class="content-block-header">Preview — Tap into CS Academy to access the full toolkit</div>
+      <div class="content-block-header">Preview - Tap into CS Academy to access the full toolkit</div>
       ${(r.previewContent || []).map((p, i) => `
         <div class="content-entry">
           <div class="content-entry-label">Section ${i + 1}</div>
@@ -423,12 +453,13 @@ const buildHtml = (r: ResourceItem): string => `
     <!-- FOOTER -->
     <div class="footer">
       <div>
-        <div class="footer-brand">CS Academy &bull; CyberSwahili</div>
-        <div class="footer-tagline">Learn AI. Build Digital Skills. Stay Cyber Safe.</div>
+        <div class="footer-brand">${siteConfig.academyName} | ${siteConfig.parentOrg}</div>
+        <div class="footer-tagline">${siteConfig.tagline}</div>
+        <div class="footer-tagline">Founded ${siteConfig.establishedYear} | ${siteConfig.location}</div>
       </div>
       <div class="footer-contact">
         <div><a href="mailto:${siteConfig.email}">${siteConfig.email}</a></div>
-        <div style="font-size:6.5pt;color:#6b7280;margin-top:1pt">https://cyberswahili.co.tz/academy</div>
+        <div><a href="https://cyberacademy.africa">${siteConfig.phoneDisplay}</a></div>
         <div class="footer-contact-divider"></div>
       </div>
     </div>
@@ -440,14 +471,14 @@ export const downloadResource = (resource: ResourceItem): void => {
   const html = buildHtml(resource);
   const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
   const url = URL.createObjectURL(blob);
-  const win = window.open(url, '_blank');
-  if (win) {
-    win.onload = () => {
+
+  const printWin = window.open(url, '_blank', 'width=1200,height=800');
+  if (printWin) {
+    printWin.onload = () => {
       setTimeout(() => {
-        win.focus();
-        win.print();
+        printWin.focus();
+        printWin.print();
       }, 250);
     };
   }
-  URL.revokeObjectURL(url);
 };

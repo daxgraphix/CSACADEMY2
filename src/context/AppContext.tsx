@@ -39,10 +39,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       root.lang = 'en';
       root.classList.add('notranslate');
       if (theme === 'dark') {
-        root.classList.add('dark');
         root.classList.remove('light');
       } else {
-        root.classList.remove('dark');
         root.classList.add('light');
       }
       localStorage.setItem('cs_academy_theme', theme);

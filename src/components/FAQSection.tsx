@@ -88,7 +88,7 @@ export const FAQSection: React.FC = () => {
     <section 
       id="faq-section" 
       className={`relative py-24 overflow-hidden transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-[#FAFAFA] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'
       }`}
     >
       <div className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.14),transparent_45%)]" />
@@ -97,7 +97,7 @@ export const FAQSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center space-y-4 mb-12">
           <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
-            theme === 'dark' ? 'bg-[#171717] border-neutral-800 text-neutral-300' : 'bg-white border-neutral-200 text-neutral-800 shadow-sm'
+            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-neutral-300' : 'bg-white border-neutral-200 text-neutral-800 shadow-sm'
           }`}>
             <span>{t.faq.badge}</span>
           </div>
@@ -124,9 +124,9 @@ export const FAQSection: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={'Search questions (e.g. M-Pesa, smartphone, WhatsApp, support)...'}
               aria-label={'Search questions'}
-              className={`w-full pl-10 pr-10 py-3 border rounded-2xl text-xs focus:outline-none focus:border-[#DC2626] transition-colors ${
+              className={`w-full pl-10 pr-10 py-3 border rounded-2xl text-xs focus:outline-none focus:border-[var(--accent-red)] transition-colors ${
                 theme === 'dark'
-                  ? 'bg-[#171717] border-neutral-800 text-white placeholder-neutral-500'
+                  ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white placeholder-neutral-500'
                   : 'bg-white border-neutral-200 text-neutral-900 placeholder-neutral-500 shadow-sm'
               }`}
             />
@@ -134,7 +134,7 @@ export const FAQSection: React.FC = () => {
               <button 
                 onClick={() => setSearchQuery('')}
                 aria-label={'Clear search'}
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 hover:text-[#DC2626]"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 hover:text-[var(--accent-red-strong)]"
               >
                 Clear
               </button>
@@ -156,9 +156,9 @@ export const FAQSection: React.FC = () => {
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 hover:-translate-y-0.5 ${
                     isSelected
-                      ? 'bg-[#B91C1C] text-white shadow-md'
+                      ? 'bg-[var(--accent-red-hover)] text-white shadow-md'
                       : theme === 'dark'
-                      ? 'bg-[#171717] text-neutral-400 hover:text-white border border-neutral-800 hover:border-neutral-700'
+                      ? 'bg-[var(--bg-secondary)] text-neutral-400 hover:text-white border border-[var(--border-color)] hover:border-neutral-700'
                       : 'bg-white text-neutral-800 hover:text-neutral-900 border border-neutral-200 shadow-sm hover:border-neutral-300'
                   }`}
                 >
@@ -182,7 +182,7 @@ export const FAQSection: React.FC = () => {
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')}
-                className="hover:text-[#DC2626] transition-colors font-medium"
+                className="hover:text-[var(--accent-red-strong)] transition-colors font-medium"
               >
                 Clear filters
               </button>
@@ -190,14 +190,14 @@ export const FAQSection: React.FC = () => {
             <div className="flex items-center gap-3">
               <button 
                 onClick={expandAll}
-                className="hover:text-[#DC2626] transition-colors font-medium"
+                className="hover:text-[var(--accent-red-strong)] transition-colors font-medium"
               >
                 Expand All
               </button>
               <span> | </span>
               <button 
                 onClick={collapseAll}
-                className="hover:text-[#DC2626] transition-colors font-medium"
+                className="hover:text-[var(--accent-red-strong)] transition-colors font-medium"
               >
                 Collapse All
               </button>
@@ -218,19 +218,19 @@ export const FAQSection: React.FC = () => {
                 id={`faq-item-${item.id}`}
                 className={`border rounded-2xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5 shadow-sm ${
                   theme === 'dark'
-                    ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700'
+                    ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700'
                     : 'bg-white border-neutral-200 hover:border-neutral-300'
                 }`}
               >
                 <button
                   data-faq-trigger
                   onClick={() => toggleAccordion(item.id)}
-                  className="w-full p-5 sm:p-6 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#DC2626] rounded-2xl"
+                  className="w-full p-5 sm:p-6 text-left flex items-start sm:items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-2xl"
                   aria-expanded={isOpen}
                   aria-controls={`faq-panel-${item.id}`}
                 >
                   <div className="flex items-start sm:items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-red-950/30 border border-red-900/40 flex items-center justify-center text-[#DC2626] shrink-0 mt-0.5 sm:mt-0 glow-accent">
+                    <div className="w-8 h-8 rounded-xl bg-red-950/30 border border-red-900/40 flex items-center justify-center text-[var(--accent-red-strong)] shrink-0 mt-0.5 sm:mt-0 glow-accent">
                       <HelpCircle className="w-4 h-4" />
                     </div>
                     <div>
@@ -239,13 +239,13 @@ export const FAQSection: React.FC = () => {
                       }`}>
                         <Highlight text={question} query={searchQuery} />
                       </span>
-                      <span className="inline-block mt-1 text-[10px] font-mono font-bold uppercase tracking-wider text-[#DC2626] px-2 py-0.5 rounded bg-red-950/20 border border-red-900/20">
+                      <span className="inline-block mt-1 text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--accent-red-strong)] px-2 py-0.5 rounded bg-red-950/20 border border-red-900/20">
                         {category}
                       </span>
                     </div>
                   </div>
                   <ChevronDown className={`w-4 h-4 shrink-0 transition-transform duration-200 mt-1 sm:mt-0 ${
-                    isOpen ? 'rotate-180 text-[#DC2626]' : theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
+                    isOpen ? 'rotate-180 text-[var(--accent-red-strong)]' : theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
                   }`} />
                 </button>
 
@@ -254,7 +254,7 @@ export const FAQSection: React.FC = () => {
                     id={`faq-panel-${item.id}`}
                     role="region"
                     className={`px-5 sm:px-6 pb-6 pt-3 text-xs sm:text-sm leading-relaxed border-t animate-[fadeIn_0.2s_ease-out] ${
-                      theme === 'dark' ? 'text-neutral-300 border-neutral-800/60' : 'text-neutral-800 border-neutral-100'
+                      theme === 'dark' ? 'text-neutral-300 border-[var(--border-color)]/60' : 'text-neutral-800 border-neutral-100'
                     }`}
                   >
                     <p className="mt-1 pl-11 leading-7 max-w-3xl">
@@ -268,12 +268,12 @@ export const FAQSection: React.FC = () => {
 
           {filteredFaq.length === 0 && (
             <div className={`text-center py-12 rounded-2xl border text-xs space-y-3 ${
-              theme === 'dark' ? 'bg-[#171717] border-neutral-800 text-neutral-400' : 'bg-white border-neutral-200 text-neutral-800'
+              theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-neutral-400' : 'bg-white border-neutral-200 text-neutral-800'
             }`}>
               <p>No matching questions found for your query.</p>
               <button 
                 onClick={() => { setSearchQuery(''); setSelectedCategory('ALL'); }}
-                className="px-4 py-2 rounded-xl bg-[#DC2626] text-white text-xs font-bold shadow hover:bg-red-700 transition-colors"
+                className="px-4 py-2 rounded-xl bg-[var(--accent-red)] text-white text-xs font-bold shadow hover:bg-red-700 transition-colors"
               >
                 Reset Search
               </button>
@@ -283,7 +283,7 @@ export const FAQSection: React.FC = () => {
 
         {/* Live Support Banner */}
         <div className={`mt-10 p-6 rounded-3xl border flex flex-col sm:flex-row items-center justify-between gap-4 ${
-          theme === 'dark' ? 'bg-[#121212] border-neutral-800' : 'bg-white border-neutral-200 shadow-sm'
+          theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-200 shadow-sm'
         }`}>
           <div className="flex items-center gap-3 text-left">
             <div className="w-10 h-10 rounded-xl bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 flex items-center justify-center shrink-0">
@@ -299,7 +299,7 @@ export const FAQSection: React.FC = () => {
             </div>
           </div>
           <a
-            href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('Habari CS Academy! Nina swali kuhusu kujiunga na mafunzo:')}`}
+            href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('Hello CS Academy! I have a question about joining the training program:')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5 shrink-0 shadow-lg shadow-emerald-700/20"

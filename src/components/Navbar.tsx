@@ -49,52 +49,50 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-50 transition-all transition-shadow duration-300 ${
         isScrolled 
           ? theme === 'dark' 
-            ? 'bg-[#0b0b0b]/90 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-3' 
-            : 'bg-[#f7f4ee]/90 backdrop-blur-xl border-b border-neutral-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-3'
+            ? 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-3' 
+            : 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-3'
           : theme === 'dark'
-            ? 'bg-[#090909]/70 backdrop-blur-md border-b border-white/5 py-4'
-            : 'bg-[#f7f4ee]/70 backdrop-blur-md border-b border-neutral-200 py-4'
+            ? 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-4'
+            : 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
           {/* Brand Logo */}
-          <button 
+          <button
             id="brand-logo-btn"
             onClick={() => navigateTo('home')}
-            className="flex min-w-0 items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff3b30] rounded-xl p-1"
+            className="flex min-w-0 items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#ff3b30] to-[#1a1a1a] p-[1.5px] shadow-[0_10px_25px_rgba(255,59,48,0.28)] group-hover:scale-105 transition-transform shrink-0">
-              <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-[-0.08em] text-base ${
-                theme === 'dark' ? 'bg-[#0d0d0d] text-white' : 'bg-[#1a1a1a] text-white'
-              }`}>
-                <span className="text-[#ff3b30]">C</span>S
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[var(--shadow-red)] group-hover:scale-105 transition-transform shrink-0 relative">
+              <div className="w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-[-0.08em] text-base bg-[var(--bg-card)] text-white">
+                <span className="text-[var(--accent-red)] drop-shadow-[0_0_8px_var(--accent-red-glow)]">C</span>S
               </div>
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className={`max-w-[10rem] truncate text-lg sm:max-w-none sm:text-xl font-black tracking-[-0.06em] transition-colors uppercase ${
-                  theme === 'dark' ? 'text-white group-hover:text-neutral-200' : 'text-neutral-900 group-hover:text-[#ff3b30]'
+                <span className={`max-w-[10rem] truncate text-lg sm:max-w-none sm:text-xl font-black tracking-[-0.06em] transition-colors duration-200 uppercase ${
+                  theme === 'dark' ? 'text-white group-hover:text-[var(--accent-red)]' : 'text-neutral-900 group-hover:text-[var(--accent-red-hover)]'
                 }`}>
                   {siteConfig.academyName}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#ff3b30]" />
+                <span className="w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_8px_var(--accent-red-glow)] animate-[pulse-glow_2.5s_ease-in-out_infinite]" />
               </div>
-              <p className={`hidden sm:block text-[9px] font-semibold tracking-[0.14em] uppercase ${
-                theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
+              <p className={`hidden sm:block text-[9px] font-bold tracking-[0.14em] uppercase ${
+                theme === 'dark' ? 'text-[var(--text-muted)]' : 'text-[var(--text-muted)]'
               }`}>
                 Tech Education
               </p>
             </div>
           </button>
 
-          {/* Desktop Navigation Links */}
+{/* Desktop Navigation Links */}
           <nav className="hidden xl:flex items-center gap-0.5">
             <button
               id="nav-link-home"
               onClick={() => navigateTo('home')}
-              className={`px-3 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] transition-all ${
+              className={`px-3 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.18em] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 currentRoute === 'home' 
                   ? theme === 'dark' ? 'text-white bg-white/5 border border-white/10' : 'text-neutral-900 bg-white border border-neutral-200'
                   : theme === 'dark' ? 'text-neutral-300 hover:text-white hover:bg-white/5' : 'text-neutral-800 hover:text-neutral-900 hover:bg-white'
@@ -106,13 +104,13 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-features"
               onClick={() => navigateTo('features')}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 currentRoute === 'features' 
                   ? theme === 'dark' ? 'text-white bg-neutral-900 border border-neutral-800' : 'text-neutral-900 bg-neutral-100 border border-neutral-200'
                   : theme === 'dark' ? 'text-neutral-300 hover:text-white hover:bg-neutral-900/50' : 'text-neutral-800 hover:text-neutral-900 hover:bg-neutral-100 transition-colors duration-200'
               }`}
             >
-                <span>Features</span>
+              <span>Features</span>
             </button>
 
             {/* Programs Dropdown */}
@@ -121,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 id="nav-link-programs-dropdown"
                 onClick={() => navigateTo('programs')}
                 onMouseEnter={() => setProgramsDropdownOpen(true)}
-                className={`flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                className={`flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                   currentRoute.startsWith('programs')
                     ? theme === 'dark' ? 'text-white bg-neutral-900 border border-neutral-800' : 'text-neutral-900 bg-neutral-100 border border-neutral-200'
                     : theme === 'dark' ? 'text-neutral-300 hover:text-white hover:bg-neutral-900/50' : 'text-neutral-800 hover:text-neutral-900 hover:bg-neutral-100 transition-colors duration-200'
@@ -139,7 +137,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }`}
               >
                 <div className={`border rounded-2xl p-2 shadow-2xl space-y-1 ${
-                  theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-white border-neutral-200'
+                  theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-[var(--border-subtle)]'
                 }`}>
                   <button
                     id="dropdown-all-programs"
@@ -149,7 +147,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }`}
                   >
                     <span>{t.nav.allPrograms}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#DC2626]" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
                   </button>
                   <div className={`h-px my-1 ${theme === 'dark' ? 'bg-neutral-800' : 'bg-neutral-200'}`}></div>
                   
@@ -161,14 +159,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }`}
                   >
                     <div>
-                      <div className={`flex items-center gap-2 text-xs font-bold transition-colors group-hover/item:text-[#DC2626] ${
+                      <div className={`flex items-center gap-2 text-xs font-bold transition-colors group-hover/item:text-[var(--accent-red-strong)] ${
                         theme === 'dark' ? 'text-white' : 'text-neutral-900'
                       }`}>
                         Vibe Coding
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626] opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DC2626]"></span>
-                        </span>
+                        <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">New</span>
                       </div>
                       <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                         AI-Powered Web Development with Cursor & Bolt
@@ -184,11 +179,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }`}
                   >
                     <div>
-                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[#DC2626] ${
+                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[var(--accent-red-strong)] ${
                         theme === 'dark' ? 'text-white' : 'text-neutral-900'
                       }`}>AI & Vibe Coding</div>
                       <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
-                        Prompting, LLMs, AI Safety & Swahili Prompts
+                         Prompting, LLMs, AI Safety & Local Language Prompts
                       </div>
                     </div>
                   </button>
@@ -201,7 +196,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }`}
                   >
                     <div>
-                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[#DC2626] ${
+                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[var(--accent-red-strong)] ${
                         theme === 'dark' ? 'text-white' : 'text-neutral-900'
                       }`}>Cybersecurity Academy</div>
                       <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
@@ -218,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }`}
                   >
                     <div>
-                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[#DC2626] ${
+                      <div className={`text-xs font-bold transition-colors group-hover/item:text-[var(--accent-red-strong)] ${
                         theme === 'dark' ? 'text-white' : 'text-neutral-900'
                       }`}>Full-Stack & Digital Skills</div>
                       <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
@@ -299,20 +294,20 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="header-theme-toggle-btn"
               onClick={toggleTheme}
               title={t.nav.switchTheme}
-              className={`p-2 rounded-xl transition-all border ${
+              className={`p-2 rounded-xl border transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 theme === 'dark'
-                  ? 'bg-[#171717] hover:bg-neutral-800 text-amber-400 border-neutral-800'
-                  : 'bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200 text-neutral-700 border-neutral-200'
+                  ? 'bg-[var(--bg-elevated)] text-amber-400 border-[var(--border-color)] hover:border-[var(--accent-red-border)] hover:text-[var(--accent-red)] hover:shadow-[var(--shadow-red)]'
+                  : 'bg-[var(--bg-tertiary)] text-[var(--accent-amber)] border-[var(--border-color)] hover:border-[var(--accent-red-border)] hover:text-[var(--accent-red)] hover:shadow-[var(--shadow-red)]'
               }`}
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 transition-transform duration-200 hover:rotate-45" /> : <Moon className="w-4 h-4 transition-transform duration-200 hover:-rotate-12" />}
             </button>
 
             {/* Book Training CTA */}
             <button
               id="header-book-training-btn"
               onClick={() => openBookingModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 text-[11px] font-black text-white bg-[#ff3b30] hover:bg-[#ff564d] active:scale-[0.98] rounded-full shadow-[0_14px_30px_rgba(255,59,48,0.35)] transition-all uppercase tracking-[0.18em]"
+              className="inline-flex items-center gap-2 px-4 py-2 text-[11px] font-black text-white bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] active:scale-[0.97] rounded-full shadow-[var(--shadow-red)] transition-all duration-200 uppercase tracking-[0.18em] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
             >
               <span>{t.nav.bookTraining}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -323,25 +318,28 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="flex items-center gap-2 xl:hidden">
             {/* Quick Theme Toggle */}
             <button
+              id="theme-toggle-mobile"
               onClick={toggleTheme}
-              className={`p-1.5 rounded-lg border ${
-                theme === 'dark' ? 'bg-[#171717] text-amber-400 border-neutral-800' : 'bg-neutral-100 text-neutral-700 border-neutral-200'
+              className={`p-2 rounded-xl border transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
+                theme === 'dark'
+                  ? 'bg-[var(--bg-elevated)] text-amber-400 border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
+                  : 'bg-[var(--bg-tertiary)] text-[var(--accent-amber)] border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
               }`}
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 transition-transform duration-200 hover:rotate-45" /> : <Moon className="w-4 h-4 transition-transform duration-200 hover:-rotate-12" />}
             </button>
 
             <button
               id="mobile-quick-book-btn"
               onClick={() => openBookingModal()}
-              className="hidden sm:block px-3 py-1.5 text-xs font-bold text-white bg-[#B91C1C] rounded-lg"
+              className="hidden sm:block px-3 py-1.5 text-xs font-bold text-white bg-[var(--accent-red-hover)] rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
             >
               {t.nav.bookTraining}
             </button>
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-lg border focus:outline-none ${
+              className={`p-2 rounded-lg border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 theme === 'dark' ? 'bg-neutral-900 text-neutral-300 border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-neutral-200'
               }`}
               aria-label={'Toggle navigation menu'}
@@ -356,7 +354,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className={`xl:hidden border-b px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto ${
-          theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800 text-white' : 'bg-white border-neutral-200 text-neutral-900'
+          theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
           <div className="space-y-1">
             <button
@@ -375,7 +373,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               }`}
             >
               <span>{t.nav.features}</span>
-              <span className="text-[10px] bg-red-950 text-[#DC2626] font-bold px-2 py-0.5 rounded border border-red-800/60">New</span>
+              <span className="text-[10px] bg-red-950 text-[var(--accent-red-strong)] font-bold px-2 py-0.5 rounded border border-red-800/60">New</span>
             </button>
 
             <button
@@ -390,11 +388,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Mobile Programs Section */}
             <div className={`rounded-2xl p-3 my-2 border ${
-              theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-neutral-50 border-neutral-200'
+              theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-[var(--border-subtle)]'
             }`}>
               <button
                 onClick={() => navigateTo('programs')}
-                className="w-full text-left text-xs font-extrabold uppercase tracking-wider text-[#DC2626] mb-2 flex items-center justify-between"
+                className="w-full text-left text-xs font-extrabold uppercase tracking-wider text-[var(--accent-red-strong)] mb-2 flex items-center justify-between"
               >
                 <span>{t.nav.programs}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -405,10 +403,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   onClick={() => navigateTo('vibe-coding')}
                   className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
                 >
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#DC2626] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#DC2626]"></span>
-                  </span>
+                  <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">New</span>
                   <span>Vibe Coding (New)</span>
                 </button>
                 <button
@@ -491,13 +486,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="mt-5 pt-4 border-t border-neutral-800 space-y-2">
             <button
               onClick={() => { setMobileMenuOpen(false); openBookingModal(); }}
-              className="w-full py-3.5 text-center text-xs font-bold text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] rounded-xl tracking-wider uppercase shadow-lg"
+              className="w-full py-3.5 text-center text-xs font-bold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-xl tracking-wider uppercase shadow-lg"
             >
               {t.nav.bookTraining}
             </button>
 
             <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Habari CS Academy, I would like to inquire about training programs.")}`}
+              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent("Hello CS Academy, I would like to inquire about training programs.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`w-full py-2.5 flex items-center justify-center gap-2 text-xs font-semibold rounded-xl border ${

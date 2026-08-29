@@ -30,7 +30,7 @@ export const corporateOfferingsData: CorporateOffering[] = [
     badge: 'Custom Institutional',
     title: 'Customized Organizational Syllabi',
     description: 'Bespoke multi-module training programs co-designed with your L&D leads for NGOs, government ministries, and banks.',
-    points: ['Tailored to your software stack', 'Bilingual English & Kiswahili', 'Pre/post impact evaluation reports']
+    points: ['Tailored to your software stack', 'Bilingual English & Local Languages', 'Pre/post impact evaluation reports']
   }
 ];
 

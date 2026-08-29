@@ -16,7 +16,7 @@ export const learningFormatsData: LearningFormat[] = [
     bandwidthLevel: 'Ultra-Low Data (Works on 2G/3G/4G)',
     features: [
       'Zero-barrier mobile access via WhatsApp',
-      'Daily 5-minute practical challenges in Swahili',
+      'Daily 5-minute practical challenges in English',
       'Voice note explanations & downloadable PDFs',
       'Active peer study group & instant instructor feedback'
     ],

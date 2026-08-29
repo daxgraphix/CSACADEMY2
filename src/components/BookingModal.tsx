@@ -101,12 +101,12 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
         className={`transition-colors duration-300 border rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
-          theme === 'dark' ? 'bg-[#171717] border-neutral-800 text-white' : 'bg-white border-neutral-200 text-neutral-900'
+          theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' : 'bg-white border-neutral-200 text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
@@ -114,9 +114,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         aria-label={'Book Training'}
       >
         {/* Modal Header */}
-        <div className={`sticky top-0 backdrop-blur-md px-6 sm:px-8 py-5 border-b flex items-center justify-between z-10 ${theme === 'dark' ? 'bg-[#171717]/95 border-neutral-800' : 'bg-white/95 border-neutral-200'}`}>
+        <div className={`sticky top-0 backdrop-blur-md px-6 sm:px-8 py-5 border-b flex items-center justify-between z-10 ${theme === 'dark' ? 'bg-[var(--bg-secondary)]/95 border-[var(--border-color)]' : 'bg-white/95 border-neutral-200'}`}>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-950/60 border border-red-900/60 flex items-center justify-center text-[#DC2626]">
+            <div className="w-10 h-10 rounded-xl bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] flex items-center justify-center text-[var(--accent-red-strong)]">
               <Calendar className="w-5 h-5" />
             </div>
             <div>
@@ -152,15 +152,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((p) => ({ ...p, name: undefined })); }}
                   placeholder="e.g. Maria Joseph"
                   aria-invalid={!!errors.name}
-                  className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
+                  className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                     theme === 'dark'
-                      ? 'bg-[#0B0B0B] text-white placeholder-neutral-500'
+                      ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500'
                       : 'bg-white text-neutral-900 placeholder-neutral-500'
                   } ${
                     errors.name
-                      ? 'border-red-500'
+                      ? 'border-red-500 focus:ring-red-500/30'
                       : theme === 'dark'
-                        ? 'border-neutral-800'
+                        ? 'border-[var(--border-color)]'
                         : 'border-neutral-300'
                   }`}
                 />
@@ -177,15 +177,15 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }}
                   placeholder="e.g. maria@company.com"
                   aria-invalid={!!errors.email}
-                  className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
+                  className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                     theme === 'dark'
-                      ? 'bg-[#0B0B0B] text-white placeholder-neutral-500'
+                      ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500'
                       : 'bg-white text-neutral-900 placeholder-neutral-500'
                   } ${
                     errors.email
-                      ? 'border-red-500'
+                      ? 'border-red-500 focus:ring-red-500/30'
                       : theme === 'dark'
-                        ? 'border-neutral-800'
+                        ? 'border-[var(--border-color)]'
                         : 'border-neutral-300'
                   }`}
                 />
@@ -203,9 +203,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 value={organization}
                 onChange={(e) => setOrganization(e.target.value)}
                 placeholder="e.g. University / Company / Self"
-                className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
+                className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                   theme === 'dark'
-                    ? 'bg-[#0B0B0B] text-white placeholder-neutral-500 border-neutral-800'
+                    ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500 border-[var(--border-color)]'
                     : 'bg-white text-neutral-900 placeholder-neutral-500 border-neutral-300'
                 }`}
               />
@@ -218,13 +218,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <select
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
-                className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
-                  theme === 'dark'
-                    ? 'bg-[#0B0B0B] text-white border-neutral-800'
-                    : 'bg-white text-neutral-900 border-neutral-300'
-                }`}
-              >
-                <option value="Tanzania">Tanzania</option>
+              className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
+                theme === 'dark'
+                  ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]'
+                  : 'bg-white text-neutral-900 border-neutral-300'
+              }`}
+            >
+              <option value="Tanzania">Tanzania</option>
                 <option value="Kenya">Kenya</option>
                 <option value="Uganda">Uganda</option>
                 <option value="Rwanda">Rwanda</option>
@@ -245,9 +245,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <select
               value={program}
               onChange={(e) => setProgram(e.target.value)}
-              className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
+              className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                 theme === 'dark'
-                  ? 'bg-[#0B0B0B] text-white border-neutral-800'
+                  ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]'
                   : 'bg-white text-neutral-900 border-neutral-300'
               }`}
             >
@@ -282,13 +282,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value)}
-                className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
-                  theme === 'dark'
-                    ? 'bg-[#0B0B0B] text-white border-neutral-800'
-                    : 'bg-white text-neutral-900 border-neutral-300'
-                }`}
-              >
-                <option value="Live Online (Zoom/Google Meet)">Live Online (Zoom/Google Meet)</option>
+              className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
+                theme === 'dark'
+                  ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]'
+                  : 'bg-white text-neutral-900 border-neutral-300'
+              }`}
+            >
+              <option value="Live Online (Zoom/Google Meet)">Live Online (Zoom/Google Meet)</option>
                 <option value="On-Site Physical Workshop">On-Site Physical Workshop</option>
                 <option value="WhatsApp Micro-Learning Cohort">WhatsApp Micro-Learning Cohort</option>
                 <option value="Hybrid (Online + Physical)">Hybrid (Online + Physical)</option>
@@ -304,13 +304,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <select
                 value={audienceType}
                 onChange={(e) => setAudienceType(e.target.value)}
-                className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
-                  theme === 'dark'
-                    ? 'bg-[#0B0B0B] text-white border-neutral-800'
-                    : 'bg-white text-neutral-900 border-neutral-300'
-                }`}
-              >
-                <option value="Individual Professional / Student">Individual Professional / Student</option>
+              className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
+                theme === 'dark'
+                  ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]'
+                  : 'bg-white text-neutral-900 border-neutral-300'
+              }`}
+            >
+              <option value="Individual Professional / Student">Individual Professional / Student</option>
                 <option value="Company / Enterprise Team">Company / Enterprise Team</option>
                 <option value="University / School Faculty">University / School Faculty</option>
                 <option value="NGO / Development Organization">NGO / Development Organization</option>
@@ -330,9 +330,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="e.g. Training 25 team members on prompt engineering..."
-              className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[#DC2626] ${
+              className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                 theme === 'dark'
-                  ? 'bg-[#0B0B0B] text-white placeholder-neutral-500 border-neutral-800'
+                  ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500 border-[var(--border-color)]'
                   : 'bg-white text-neutral-900 placeholder-neutral-500 border-neutral-300'
               }`}
             />
@@ -340,7 +340,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
 
           {/* Message Preview Box */}
           <div className={`p-3.5 rounded-xl border space-y-1 text-xs ${
-            theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
           }`}>
             <div className={`flex items-center justify-between text-[10px] font-mono uppercase ${
               theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
@@ -351,8 +351,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 onClick={handleCopyInquiry}
                 className={`font-bold transition-colors ${
                   theme === 'dark'
-                    ? 'text-[#DC2626] hover:text-white'
-                    : 'text-[#B91C1C] hover:text-[#DC2626]'
+                    ? 'text-[var(--accent-red-strong)] hover:text-white'
+                    : 'text-[var(--accent-red-hover)] hover:text-[var(--accent-red-strong)]'
                 }`}
               >
                 {copied ? 'Copied to Clipboard!' : 'Copy Text'}
@@ -370,7 +370,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <button
               id="modal-send-whatsapp"
               onClick={handleWhatsAppSend}
-              className="w-full py-3.5 px-4 rounded-xl font-extrabold text-xs text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all"
+              className="w-full py-3.5 px-4 rounded-xl font-extrabold text-xs text-white bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all duration-200 hover:-translate-y-0.5"
             >
               <MessageCircle className="w-4 h-4" />
               <span>Send via WhatsApp</span>
@@ -379,10 +379,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <button
               id="modal-send-email"
               onClick={handleEmailSend}
-              className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-colors ${
+              className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 ${
                 theme === 'dark'
-                  ? 'text-neutral-200 hover:text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-800'
-                  : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-100 border border-neutral-300'
+                  ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
+                  : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-100 border border-neutral-300 shadow-sm'
               }`}
             >
               <Mail className="w-4 h-4" />

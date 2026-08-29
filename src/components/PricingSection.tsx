@@ -52,7 +52,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       case 'self-paced':
         return <Layers className="w-4 h-4 text-blue-500" />;
       case 'virtual-live':
-        return <Video className="w-4 h-4 text-[#DC2626]" />;
+        return <Video className="w-4 h-4 text-[var(--accent-red-strong)]" />;
       case 'in-person-workshop':
         return <Calendar className="w-4 h-4 text-amber-500" />;
       case 'corporate-onsite':
@@ -60,7 +60,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
       case 'keynote':
         return <Mic className="w-4 h-4 text-rose-500" />;
       default:
-        return <HelpCircle className="w-4 h-4 text-[#DC2626]" />;
+        return <HelpCircle className="w-4 h-4 text-[var(--accent-red-strong)]" />;
     }
   };
 
@@ -77,12 +77,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
     <section 
       id="pricing-section" 
       className={`py-24 border-b transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#090909] text-white border-white/10' : 'bg-[#f7f4ee] text-neutral-900 border-neutral-200'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-white/10' : 'bg-[#f7f4ee] text-neutral-900 border-neutral-200'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         <div className="text-center max-w-3xl mx-auto space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#ff3b30]/30 bg-[#ff3b30]/10 text-[#ff3b30] text-[10px] font-bold uppercase tracking-[0.22em]">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 text-[var(--accent-red-strong)] text-[10px] font-bold uppercase tracking-[0.22em]">
             <span>{t.pricing.badge}</span>
           </div>
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.06em] ${
@@ -109,7 +109,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                 onClick={() => setActiveChannelFilter(tab.id as any)}
                 className={`px-3.5 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] transition-all border ${
                   activeChannelFilter === tab.id
-                    ? 'bg-[#ff3b30] border-[#ff3b30] text-white shadow-[0_12px_30px_rgba(255,59,48,0.28)]'
+                    ? 'bg-[var(--accent-red)] border-[var(--accent-red)] text-white shadow-[0_12px_30px_rgba(255,59,48,0.28)]'
                     : theme === 'dark'
                     ? 'bg-white/5 text-neutral-300 hover:text-white border-white/10'
                     : 'bg-white text-neutral-800 hover:text-neutral-900 border-neutral-200'
@@ -129,7 +129,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                 onClick={() => setCurrency(curr)}
                 className={`px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] transition-all ${
                   currency === curr 
-                    ? 'bg-[#ff3b30] text-white shadow-[0_10px_24px_rgba(255,59,48,0.3)]' 
+                    ? 'bg-[var(--accent-red)] text-white shadow-[0_10px_24px_rgba(255,59,48,0.3)]' 
                     : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
                 }`}
               >
@@ -149,7 +149,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
               <div key={item.title} className={`rounded-2xl border p-4 ${
                 theme === 'dark' ? 'border-white/10 bg-white/[0.03]' : 'border-neutral-200 bg-white/70'
               }`}>
-                <div className="mb-1 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.12em] text-[#ff3b30]">
+                <div className="mb-1 flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.12em] text-[var(--accent-red-strong)]">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   <span>{item.title}</span>
                 </div>
@@ -182,11 +182,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
             return (
               <div
                 key={plan.id}
-                className={`group relative min-w-0 overflow-hidden rounded-[2rem] border p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+                className={`group relative min-w-0 overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
                   isPopular 
                     ? theme === 'dark'
-                      ? 'bg-[#111111] border-[#ff3b30]/60 shadow-[0_26px_80px_rgba(255,59,48,0.16)] lg:-translate-y-1'
-                      : 'bg-white border-[#ff3b30]/40 shadow-[0_22px_60px_rgba(255,59,48,0.12)] lg:-translate-y-1'
+                      ? 'bg-[#111111] border-[var(--accent-red)]/60 shadow-[0_26px_80px_rgba(255,59,48,0.16)] lg:-translate-y-1'
+                      : 'bg-white border-[var(--accent-red)]/40 shadow-[0_22px_60px_rgba(255,59,48,0.12)] lg:-translate-y-1'
                     : theme === 'dark'
                     ? 'bg-[#111111] border-white/10 hover:border-white/20'
                     : 'bg-white border-neutral-200 hover:border-neutral-300'
@@ -195,7 +195,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.10),transparent_35%)]" />
                 <div className="relative z-10 space-y-5">
                   {plan.badge && (
-                    <div className="inline-flex items-center rounded-full bg-[#ff3b30] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-white shadow-[0_10px_25px_rgba(255,59,48,0.3)]">
+                    <div className="inline-flex items-center rounded-full bg-[var(--accent-red)] px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.18em] text-white shadow-[0_10px_25px_rgba(255,59,48,0.3)]">
                       {plan.badge}
                     </div>
                   )}
@@ -229,7 +229,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                       <div className={`mt-2 flex min-w-0 items-start gap-1.5 text-[10px] font-semibold ${
                         theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
                       }`}>
-                        <Wifi className="w-3 h-3 text-[#ff3b30]" />
+                        <Wifi className="w-3 h-3 text-[var(--accent-red-strong)]" />
                         <span className="min-w-0 break-words">Bandwidth: {plan.bandwidthRequirement}</span>
                       </div>
                     )}
@@ -245,7 +245,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                       <div key={idx} className={`flex items-start gap-2 text-sm ${
                         theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                       }`}>
-                        <CheckCircle2 className="w-4 h-4 text-[#ff3b30] shrink-0 mt-0.5" />
+                        <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
                         <span className="leading-snug">{feat}</span>
                       </div>
                     ))}
@@ -271,7 +271,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
                     })}
                     className={`w-full py-3.5 px-4 rounded-full text-[10px] font-black uppercase tracking-[0.18em] transition-all flex items-center justify-center gap-2 ${
                       isPopular
-                        ? 'bg-[#ff3b30] hover:bg-[#ff564d] text-white shadow-[0_14px_30px_rgba(255,59,48,0.35)]'
+                        ? 'bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white shadow-[0_14px_30px_rgba(255,59,48,0.35)]'
                         : theme === 'dark'
                         ? 'bg-white/5 hover:bg-white/10 transition-colors duration-200 text-neutral-200 border border-white/10'
                         : 'bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200 text-neutral-800 border border-neutral-200'

@@ -1,10 +1,10 @@
 export const siteConfig = {
   academyName: "CS ACADEMY",
   shortName: "CS Academy",
-  parentOrg: "CyberSwahili",
-  tagline: "Bridging Digital Skills Through Practical Swahili & English Tech Education",
+  parentOrg: "Cyber Academy",
+  tagline: "Bridging Digital Skills Through Practical English & Local-Language Tech Education",
   establishedYear: 2026,
-  email: "support@cyberswahili.co.tz",
+  email: "support@cyberacademy.africa",
   phone: "+255753969379",
   phoneDisplay: "+255 753 969 379",
   whatsapp: "255753969379",
@@ -18,7 +18,7 @@ export const siteConfig = {
     hoursDelivered: "500+",
     satisfactionRate: "99.2%",
     citiesCovered: "8+ East African Cities",
-    swahiliCurriculaCount: "100%"
+    englishCurriculaCount: "100%"
   },
 
   // Target audiences
@@ -61,7 +61,7 @@ export const siteConfig = {
   values: [
     {
       title: "Accessibility",
-      description: "Making digital education accessible through Swahili-first curricula, mobile money payments, and low-bandwidth channels.",
+       description: "Making digital education accessible through English-first curricula, mobile money payments, and low-bandwidth channels.",
       icon: "Globe"
     },
     {
@@ -219,18 +219,18 @@ export const siteConfig = {
   founder: {
     name: "Alex Rweyemamu",
     titles: [
-      "Founder, CS Academy & CyberSwahili",
+       "Founder, CS Academy & Cyber Academy",
       "AI Educator & Literacy Advocate",
       "Cybersecurity Professional",
       "Digital Safety Specialist"
     ],
-    bio: "Alex Rweyemamu is a technology educator and cybersecurity professional dedicated to demystifying artificial intelligence, digital design, and coding for African youth, educators, and enterprise workforces. Through CS Academy and the CyberSwahili initiative, he leads practical training programs that bridge complex modern technologies with accessible, Swahili-language and contextually relevant learning experiences.",
+     bio: "Alex Rweyemamu is a technology educator and cybersecurity professional dedicated to demystifying artificial intelligence, digital design, and coding for African youth, educators, and enterprise workforces. Through CS Academy, he leads practical training programs that bridge complex modern technologies with accessible, culturally relevant learning experiences.",
     quote: "Language should never be a barrier to learning technology. We empower East African youth with practical, accessible digital skills that turn curiosity into real opportunity and lasting economic impact."
   },
 
   socialLinks: {
-    linkedin: "https://linkedin.com/company/cyberswahili",
-    youtube: "https://youtube.com/@cyberswahili",
+     linkedin: "https://linkedin.com/company/cyberacademy",
+     youtube: "https://youtube.com/@cyberacademy",
     whatsappCommunity: "https://wa.me/255753969379"
   }
 };

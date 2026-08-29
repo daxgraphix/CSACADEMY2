@@ -68,7 +68,7 @@ export interface Translations {
     customQuote: string;
     verifiedLearner: string;
     qrVerification: string;
-    swahiliInstruction: string;
+    localInstruction: string;
     englishInstruction: string;
     bilingual: string;
     close: string;
@@ -94,7 +94,7 @@ export interface Translations {
     subtitle: string;
     viewAllCourses: string;
   };
-  swahiliAi: {
+  localAi: {
     badge: string;
     title: string;
     subtitle: string;
@@ -155,18 +155,18 @@ export const translations: Translations = {
   hero: {
     badge: "EAST AFRICA'S PREMIER TECH LEARNING PLATFORM",
     badgeHighlight: "NEW: Vibe Coding & AI",
-    headlineMain: "TURN YOUR IDEAS INTO",
-    headlineHighlight: "PRACTICAL DIGITAL SKILLS",
+    headlineMain: "MASTER AI, CYBERSECURITY",
+    headlineHighlight: "& DIGITAL SKILLS",
     subheadline: "Learn AI, web development, and cybersecurity through hands-on projects that help you move forward at work, in business, and in everyday life.",
     ctaExplore: "Start Free Learning",
     ctaEnroll: "Join Live Cohort",
     ctaWatchTour: "Explore Platform Tour",
     stat1Val: "1,200+",
-    stat1Label: "Graduated Learners",
+    stat1Label: "Graduates Trained",
     stat2Val: "30+",
-    stat2Label: "Hands-On Modules",
+    stat2Label: "AI & Cybersecurity Modules",
     stat3Val: "100%",
-    stat3Label: "Swahili-First Content",
+    stat3Label: "English-First Content",
     stat4Val: "4.9/5",
     stat4Label: "Learner Rating",
     mobileMoneyNotice: "Instant Mobile Money Activation (M-Pesa, Tigo Pesa, Airtel Money & Card)"
@@ -190,9 +190,9 @@ export const translations: Translations = {
     customQuote: "Custom Quote",
     verifiedLearner: "Verified Learner",
     qrVerification: "Tamper-Proof QR PDF Certificate",
-    swahiliInstruction: "Swahili Instruction",
+    localInstruction: "Local Language Instruction",
     englishInstruction: "English Tech Terms & Glossary",
-    bilingual: "Swahili & English",
+    bilingual: "English & Local Languages",
     close: "Close",
     backToHome: "Back to Home",
     contactInstructor: "Contact Instructor"
@@ -220,10 +220,10 @@ export const translations: Translations = {
     subtitle: "Curricula tailored to help you land tech jobs, start freelance businesses, or accelerate corporate productivity.",
     viewAllCourses: "Explore All Comprehensive Curricula"
   },
-  swahiliAi: {
+  localAi: {
     badge: "AI IN PRACTICE",
     title: "BUILD WITH AI IN YOUR LANGUAGE",
-    subtitle: "Learn AI in a clear Swahili-first context, use it safely, and turn everyday ideas into useful work, reports, and digital products.",
+    subtitle: "Learn AI in a clear English-first context with local language support, use it safely, and turn everyday ideas into useful work, reports, and digital products.",
     vibeCodingTitle: "What is Vibe Coding?",
     vibeCodingDesc: "The modern paradigm of building full-stack web applications and software using natural language prompts and AI agents rather than manual boilerplate coding.",
     ctaMasterclass: "Reserve Vibe Coding Masterclass Seat"
@@ -252,7 +252,7 @@ export const translations: Translations = {
   whyUs: {
     badge: "WHY CS ACADEMY?",
     title: "BUILT SPECIFICALLY FOR EAST AFRICAN MINDS",
-    subtitle: "Bridging the gap between world-class technology and native Swahili context with zero friction."
+    subtitle: "Bridging the gap between world-class technology and local context with zero friction."
   },
   socialProof: {
     badge: "PROOF OF PRACTICAL PROGRESS",
@@ -285,7 +285,7 @@ export const translations: Translations = {
     subtitle: "Simple, flexible plans with zero hidden fees. Pay seamlessly with M-Pesa, Tigo Pesa, Airtel Money, or credit card."
   },
   footer: {
-    about: "CS Academy is East Africa's leading platform delivering practical technology education and cybersecurity resilience in Swahili.",
+    about: "CS Academy is East Africa's leading platform delivering practical technology education and cybersecurity resilience.",
     quickLinks: "Quick Links",
     programs: "Our Programs",
     delivery: "Delivery Channels",

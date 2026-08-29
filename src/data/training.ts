@@ -14,7 +14,7 @@ export const featuredTrainingData: TrainingProgram[] = [
       'Zero technical background required',
       'Hands-on prompting exercises with instant feedback',
       'Daily productivity workflows for research and writing',
-      'Offered in English & Kiswahili'
+      'Offered in English & local African languages'
     ],
     curriculum: [
       'Understanding generative AI vs search engines',
@@ -71,7 +71,7 @@ export const featuredTrainingData: TrainingProgram[] = [
       'Generating tailored quizzes, tests, and active learning prompts',
       'Navigating academic integrity, plagiarism, and AI policies',
       'Teaching AI literacy and fact-checking to students',
-      'Developing bilingual educational aids in English & Kiswahili'
+       'Developing bilingual educational aids in English & local African languages'
     ],
     idealFor: 'School headmasters, university faculty, high school teachers, and training institute facilitators.',
     isPopular: false

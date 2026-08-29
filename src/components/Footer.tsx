@@ -120,26 +120,26 @@ export const Footer: React.FC<FooterProps> = ({
       id="main-footer"
       className={`relative border-t pt-20 pb-8 transition-colors duration-300 ${
         theme === 'dark'
-          ? 'bg-[#080808] text-white border-white/10'
-          : 'bg-[#f7f4ee] text-neutral-900 border-neutral-200'
+          ? 'bg-[var(--bg-primary)] text-white border-[var(--border-subtle)]'
+          : 'bg-[var(--bg-primary)] text-neutral-900 border-[var(--border-subtle)]'
       }`}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff3b30]/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-red)]/40 to-transparent" />
 
       <div ref={contentRef} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 reveal">
         {/* ==================== Newsletter Card ==================== */}
         <div className="relative">
-          <div className={`relative overflow-hidden rounded-[2rem] border p-8 sm:p-10 lg:p-12 ${
+          <div className={`relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-10 lg:p-12 ${
             theme === 'dark'
-              ? 'bg-gradient-to-br from-[#141414] via-[#101010] to-[#0a0a0a] border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.4)]'
-              : 'bg-gradient-to-br from-white via-[#fdfcfa] to-[#f7f4ee] border-neutral-200 shadow-[0_25px_70px_rgba(17,17,17,0.07)]'
+              ? 'bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-secondary)] to-[var(--bg-primary)] border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.4)]'
+              : 'bg-gradient-to-br from-white via-[var(--bg-primary)] to-[var(--bg-primary)] border-[var(--border-subtle)] shadow-[0_25px_70px_rgba(17,17,17,0.07)]'
           }`}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,_rgba(255,59,48,0.18),transparent_45%)]" />
-            <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-[#ff3b30]/8 blur-3xl pointer-events-none" />
+            <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-[var(--accent-red-subtle)] blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               <div className="lg:col-span-6 space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#ff3b30]/30 bg-[#ff3b30]/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#ff3b30]">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent-red-strong)]">
                   <Bell className="w-3.5 h-3.5" />
                   <span>CS Academy Dispatch</span>
                 </div>
@@ -147,7 +147,7 @@ export const Footer: React.FC<FooterProps> = ({
                   theme === 'dark' ? 'text-white' : 'text-neutral-900'
                 }`}>
                   STAY AHEAD IN{' '}
-                  <span className="text-[#ff3b30]">TECH, AI &amp; SECURITY</span>
+                  <span className="text-[var(--accent-red-strong)]">TECH, AI &amp; SECURITY</span>
                 </h3>
                 <p className={`text-sm leading-relaxed max-w-md ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                   Weekly practical guides, free prompt cheat sheets, live cohort announcements, and East African cybersecurity insights delivered straight to your inbox.
@@ -157,7 +157,7 @@ export const Footer: React.FC<FooterProps> = ({
               <div className="lg:col-span-6">
                 {isSubscribed ? (
                   <div className={`rounded-2xl border p-6 flex items-start gap-3.5 animate-in fade-in slide-in-from-bottom-2 duration-300 ${
-                    theme === 'dark' ? 'bg-[#0d0d0d] border-emerald-800/60' : 'bg-emerald-50 border-emerald-200'
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--accent-green)]' : 'bg-emerald-50 border-[var(--border-subtle)]'
                   }`}>
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500">
                       <CheckCircle2 className="h-5 w-5" />
@@ -171,7 +171,7 @@ export const Footer: React.FC<FooterProps> = ({
                       </p>
                       <button
                         onClick={() => setIsSubscribed(false)}
-                        className="mt-3 text-[11px] font-bold text-[#ff3b30] hover:underline"
+                        className="mt-3 text-[11px] font-bold text-[var(--accent-red-strong)] hover:underline"
                       >
                         Register another email
                       </button>
@@ -190,11 +190,11 @@ export const Footer: React.FC<FooterProps> = ({
                           onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
                           aria-invalid={!!emailError}
                           placeholder="Enter your email address..."
-                          className={`w-full rounded-full border pl-10 pr-4 py-3.5 text-xs focus:outline-none focus:border-[#ff3b30] focus:ring-4 focus:ring-[#ff3b30]/10 transition-all ${
+                          className={`w-full rounded-full border pl-10 pr-4 py-3.5 text-xs focus:outline-none focus:border-[var(--accent-red)] focus:ring-4 focus:ring-[var(--accent-red-subtle)] transition-all ${
                             emailError
                               ? 'border-red-500'
                               : theme === 'dark'
-                                ? 'bg-[#0d0d0d] border-white/10 text-white placeholder-neutral-500'
+                                ? 'bg-[var(--bg-primary)] border-white/10 text-white placeholder-neutral-500'
                                 : 'bg-white border-neutral-200 text-neutral-900 placeholder-neutral-500 shadow-sm'
                           }`}
                         />
@@ -202,7 +202,7 @@ export const Footer: React.FC<FooterProps> = ({
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-[#ff3b30] px-7 py-3.5 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-[0_15px_30px_rgba(255,59,48,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#ff564d] hover:shadow-[0_18px_40px_rgba(255,59,48,0.45)] disabled:opacity-60 disabled:translate-y-0 active:scale-[0.98]"
+                        className="shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-[var(--accent-red)] px-7 py-3.5 text-[10px] font-black uppercase tracking-[0.2em] text-white shadow-[0_15px_30px_rgba(255,59,48,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] hover:shadow-[0_18px_40px_rgba(255,59,48,0.45)] disabled:opacity-60 disabled:translate-y-0 active:scale-[0.98]"
                       >
                         {isLoading ? (
                           <span className="inline-flex items-center gap-2">
@@ -235,7 +235,7 @@ export const Footer: React.FC<FooterProps> = ({
                             onClick={() => setInterest(opt.id)}
                             className={`rounded-full border px-2.5 py-1 font-bold uppercase tracking-wider transition-all duration-150 ${
                               active
-                                ? 'border-[#ff3b30] bg-[#ff3b30] text-white shadow-sm'
+                                ? 'border-[var(--accent-red)] bg-[var(--accent-red)] text-white shadow-sm'
                                 : theme === 'dark'
                                   ? 'border-white/10 bg-white/5 text-neutral-300 hover:border-white/30 hover:text-white'
                                   : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-300 hover:text-neutral-900'
@@ -248,7 +248,7 @@ export const Footer: React.FC<FooterProps> = ({
                     </div>
 
                     <div className={`flex items-center gap-1.5 text-[10px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
-                      <ShieldCheck className="h-3 w-3 text-[#ff3b30]" />
+                      <ShieldCheck className="h-3 w-3 text-[var(--accent-red-strong)]" />
                       <span>Zero spam. Unsubscribe with 1-click at any time.</span>
                     </div>
                   </form>
@@ -264,11 +264,11 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="col-span-2 md:col-span-4 space-y-5">
             <button
               onClick={() => navigate('home')}
-              className="flex items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ff3b30] rounded-xl p-1 -ml-1"
+              className="flex items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1 -ml-1"
             >
-              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-[#ff3b30] to-[#1a1a1a] p-[1.5px] shadow-[0_12px_26px_rgba(255,59,48,0.3)] group-hover:scale-105 transition-transform">
-                <div className={`flex h-full w-full items-center justify-center rounded-[14px] text-base font-black tracking-[-0.08em] ${theme === 'dark' ? 'bg-[#0d0d0d] text-white' : 'bg-neutral-900 text-white'}`}>
-                  <span className="text-[#ff3b30]">C</span>S
+              <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-[var(--accent-red)] to-[var(--bg-card)] p-[1.5px] shadow-[0_12px_26px_rgba(255,59,48,0.3)] group-hover:scale-105 transition-transform">
+                <div className={`flex h-full w-full items-center justify-center rounded-[14px] text-base font-black tracking-[-0.08em] ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-neutral-900 text-white'}`}>
+                  <span className="text-[var(--accent-red-strong)]">C</span>S
                 </div>
               </div>
               <div>
@@ -289,10 +289,10 @@ export const Footer: React.FC<FooterProps> = ({
             <div className={`space-y-2 text-xs ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-2.5 group hover:text-[#ff3b30] transition-colors"
+                className="flex items-center gap-2.5 group hover:text-[var(--accent-red-strong)] transition-colors"
               >
                 <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${theme === 'dark' ? 'bg-white/5' : 'bg-red-50'}`}>
-                  <Mail className="h-3.5 w-3.5 text-[#ff3b30]" />
+                  <Mail className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" />
                 </span>
                 <span className="truncate">{siteConfig.email}</span>
               </a>
@@ -309,7 +309,7 @@ export const Footer: React.FC<FooterProps> = ({
               </a>
               <div className={`flex items-center gap-2.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                 <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${theme === 'dark' ? 'bg-white/5' : 'bg-neutral-100'}`}>
-                  <MapPin className="h-3.5 w-3.5 text-[#ff3b30]" />
+                  <MapPin className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" />
                 </span>
                 <span>East Africa Hub</span>
               </div>
@@ -345,7 +345,7 @@ export const Footer: React.FC<FooterProps> = ({
                       item.accent === 'green'
                         ? 'text-emerald-500 hover:text-emerald-400'
                         : item.highlight
-                          ? 'text-[#ff3b30] hover:text-[#ff564d] font-bold'
+                          ? 'text-[var(--accent-red-strong)] hover:text-[var(--accent-red-hover)] font-bold'
                           : theme === 'dark'
                             ? 'text-neutral-400 hover:text-white'
                             : 'text-neutral-700 hover:text-neutral-900';
@@ -386,7 +386,7 @@ export const Footer: React.FC<FooterProps> = ({
         <div className={`flex flex-col-reverse sm:flex-row items-center justify-between gap-4 text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
           <div className="flex items-center gap-2">
             <span>© 2026 {siteConfig.academyName}.</span>
-            <span className="hidden sm:inline">CyberSwahili Tech Ecosystem.</span>
+            <span className="hidden sm:inline">Cyber Academy Tech Ecosystem.</span>
             <span>All rights reserved.</span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">

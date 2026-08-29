@@ -12,7 +12,8 @@ export type PageRoute =
   | 'resources'
   | 'blog'
   | 'about'
-  | 'contact';
+  | 'contact'
+  | 'not-found';
 
 export interface PlatformFeature {
   id: string;
@@ -22,7 +23,7 @@ export interface PlatformFeature {
   icon: string;
   badge: string;
   points: string[];
-  swahiliNote?: string;
+  note?: string;
 }
 
 export interface PricingPlan {

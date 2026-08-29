@@ -14,7 +14,7 @@ export const platformFeaturesData: PlatformFeature[] = [
       'Personal learning progress dashboard and score tracking',
       'Unlimited retakes to ensure 100% conceptual mastery'
     ],
-    swahiliNote: 'Mazoezi na mitihani ya kupima uelewa wako na kukuwezesha kukariri ujuzi.'
+    note: 'Practice exercises and assessments to test your understanding and reinforce your skills.'
   },
   {
     id: 'pdf-certificates',
@@ -29,7 +29,7 @@ export const platformFeaturesData: PlatformFeature[] = [
       'Instant 1-click sharing to LinkedIn, CVs, and client proposals',
       'Recognized credential across East African tech employers'
     ],
-    swahiliNote: 'Vyeti rasmi vya kidijitali vyenye QR code inayoweza kuhakikiwa na waajiri popote.'
+    note: 'Official digital certificate with QR code that employers can verify anywhere.'
   },
   {
     id: 'digital-shop',
@@ -44,7 +44,7 @@ export const platformFeaturesData: PlatformFeature[] = [
       'Included FREE for Premium members',
       'Unlock individual products or the entire shop via friend invites'
     ],
-    swahiliNote: 'Pakua vitabu, templates za tovuti, na mifumo iliyo tayari kutumika.'
+    note: 'Download ebooks, website templates, and ready-to-use systems.'
   },
   {
     id: 'live-meetings',
@@ -59,7 +59,7 @@ export const platformFeaturesData: PlatformFeature[] = [
       'Live code reviews and portfolio critique clinics',
       '1-click seat booking with calendar reminders inside the platform'
     ],
-    swahiliNote: 'Mikutano ya moja kwa moja (Live Sessions) kujifunza pamoja na kuuliza maswali.'
+    note: 'Real-time live sessions to learn together and ask questions.'
   },
   {
     id: 'invite-and-earn',
@@ -74,7 +74,7 @@ export const platformFeaturesData: PlatformFeature[] = [
       '10 Friends: Get 100% FREE Lifetime Access to all courses',
       '11+ Friends: Earn 3,000 Tsh cash reward per friend paid via Mobile Money'
     ],
-    swahiliNote: 'Alika marafiki: fungua bidhaa, pata uanachama wa maisha, na jipatie 3,000 Tsh taslimu!'
+    note: 'Refer friends: unlock products, get lifetime membership, and earn 3,000 Tsh cash!'
   },
   {
     id: 'mentor-support',
@@ -84,7 +84,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Users',
     badge: 'Human Guidance',
     points: ['Instructor and teaching assistant guidance', 'Practical feedback on exercises and projects', 'Clear escalation for difficult blockers', 'Support designed for beginner confidence'],
-    swahiliNote: 'Pata mwongozo wa vitendo kutoka kwa wakufunzi na wasaidizi wa masomo.'
+    note: 'Get step-by-step guidance from instructors and teaching assistants.'
   },
   {
     id: 'low-bandwidth-learning',
@@ -94,7 +94,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Video',
     badge: 'Mobile Ready',
     points: ['Lightweight reading and audio resources', 'Mobile-friendly lesson materials', 'Flexible WhatsApp learning options', 'Downloadable references for later use'],
-    swahiliNote: 'Jifunze kwa kutumia data kidogo na kifaa ulicho nacho.'
+    note: 'Learn using minimal data on the device you already have.'
   },
   {
     id: 'project-briefs',
@@ -104,7 +104,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'CheckSquare',
     badge: 'Portfolio Building',
     points: ['Projects grounded in African use cases', 'Clear briefs and completion criteria', 'Practical review checkpoints', 'Evidence you can discuss with employers or clients'],
-    swahiliNote: 'Jenga miradi halisi inayoweza kuonekana kwenye portfolio yako.'
+    note: 'Build real projects that are visible in your portfolio.'
   },
   {
     id: 'cohort-community',
@@ -114,7 +114,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Users',
     badge: 'Peer Learning',
     points: ['Focused cohort discussion groups', 'Peer examples and accountability', 'Shared Q&A and learning prompts', 'East African professional context'],
-    swahiliNote: 'Jifunze pamoja na jamii ya wanafunzi kutoka Afrika Mashariki.'
+    note: 'Learn together with a community of students from across East Africa.'
   },
   {
     id: 'corporate-customization',
@@ -124,17 +124,17 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Building2',
     badge: 'For Organizations',
     points: ['Needs discovery and programme scoping', 'Role-specific examples and exercises', 'Flexible online or on-site delivery', 'Outcome-focused recommendations'],
-    swahiliNote: 'Pata mafunzo yanayolingana na mahitaji ya timu na taasisi yako.'
+    note: 'Get customized training that matches your team and organization needs.'
   },
   {
     id: 'bilingual-teaching',
     title: 'Bilingual Teaching',
-    shortDescription: 'Understand complex technology in clear Kiswahili with the English terms used at work.',
+    shortDescription: 'Understand complex technology in clear local language with the English terms used at work.',
     fullDescription: 'Our language approach makes advanced ideas easier to grasp without isolating learners from global technology practice. Key terms are explained in context and connected to practical use.',
     icon: 'Sparkles',
-    badge: 'Kiswahili First',
-    points: ['Clear Kiswahili explanations', 'English industry vocabulary in context', 'Examples adapted for local audiences', 'Better confidence asking technical questions'],
-    swahiliNote: 'Elewa teknolojia kwa Kiswahili huku ukijenga istilahi za kazi kwa Kiingereza.'
+    badge: 'English with Local Support',
+    points: ['Clear local language explanations', 'English industry vocabulary in context', 'Examples adapted for local audiences', 'Better confidence asking technical questions'],
+    note: 'Understand technology in your local language while building English industry terminology.'
   },
   {
     id: 'career-pathways',
@@ -144,7 +144,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Award',
     badge: 'Outcome Focused',
     points: ['Beginner-to-professional pathways', 'Portfolio and CV guidance', 'Skills mapped to real roles', 'Practical next-step recommendations'],
-    swahiliNote: 'Jenga njia ya kazi kwa ujuzi na ushahidi wa kazi uliofanya.'
+    note: 'Build career pathways with demonstrated skills and completed work.'
   },
   {
     id: 'safe-ai-practice',
@@ -154,7 +154,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'ShieldCheck',
     badge: 'Responsible AI',
     points: ['Privacy-aware prompting habits', 'Verification before sharing or acting', 'Human review in important workflows', 'Practical AI safety guidance'],
-    swahiliNote: 'Tumia AI kwa tija huku ukilinda faragha, usahihi na uaminifu.'
+    note: 'Use AI productively while protecting privacy, accuracy, people, and trust.'
   },
   {
     id: 'learning-roadmaps',
@@ -164,7 +164,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'Layers',
     badge: 'Clear Direction',
     points: ['Structured skill progression', 'Recommended practice milestones', 'Project checkpoints', 'Guidance for choosing the next module'],
-    swahiliNote: 'Fuata mpangilio wazi wa ujuzi, mazoezi na miradi.'
+    note: 'Follow a clear progression of skills, practice, and projects.'
   },
   {
     id: 'workshop-outcomes',
@@ -174,7 +174,7 @@ export const platformFeaturesData: PlatformFeature[] = [
     icon: 'CheckSquare',
     badge: 'Actionable Results',
     points: ['Defined outcomes before delivery', 'Exercises tied to participant roles', 'Practical take-home resources', 'Post-session action planning'],
-    swahiliNote: 'Maliza warsha ukiwa na mpango na matokeo ya kutumia mara moja.'
+    note: 'Complete workshops with a clear plan and immediately applicable outcomes.'
   }
 ];
 

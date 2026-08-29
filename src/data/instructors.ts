@@ -7,14 +7,14 @@ export const instructorsData: Instructor[] = [
     role: 'Founder & Lead Instructor',
     specialtyBadge: 'AI & Cybersecurity Lead',
     experience: '10+ Years Experience',
-    bio: 'Pioneer of Swahili-first technology education, cybersecurity strategist, and AI educator. Alex leads CS Academy curricula, advising regional organizations on AI adoption, digital trust, and practical technological literacy.',
+    bio: 'Pioneer of English-first technology education with local language context, cybersecurity strategist, and AI educator. Alex leads CS Academy curricula, advising regional organizations on AI adoption, digital trust, and practical technological literacy.',
     avatarInitials: 'AR',
     avatarGradient: 'from-[#DC2626] to-[#7F1D1D]',
     expertise: [
       'Prompt Engineering',
       'Cybersecurity & OSINT',
       'Vibe Coding Architecture',
-      'Swahili Tech Pedagogy',
+      'Local Language Tech Pedagogy',
       'Executive AI Strategy'
     ],
     coursesCount: 14,
@@ -112,13 +112,13 @@ export const instructorsData: Instructor[] = [
     id: 'baraka-mwita',
     name: 'Eng. Baraka Mwita',
     role: 'AI & Data Solutions Architect',
-    specialtyBadge: 'Machine Learning & Swahili NLP',
+    specialtyBadge: 'Machine Learning & Local Language NLP',
     experience: '9+ Years Experience',
     bio: 'Data scientist and machine learning engineer researching local language NLP models. Baraka teaches practical data analysis, predictive automation, and business intelligence for corporate and academic institutions.',
     avatarInitials: 'BM',
     avatarGradient: 'from-red-900 to-amber-900',
     expertise: [
-      'Swahili NLP Models',
+      'Local Language NLP Models',
       'Python for Data Science',
       'Workflow Automation',
       'Business Intelligence',
@@ -128,7 +128,7 @@ export const instructorsData: Instructor[] = [
     featuredCourses: [
       'AI Automation for Organizations',
       'Data Analytics with Python',
-      'Swahili AI Integration Workshop'
+      'Local Language AI Integration Workshop'
     ],
     socialLinks: {
       linkedin: 'https://linkedin.com',

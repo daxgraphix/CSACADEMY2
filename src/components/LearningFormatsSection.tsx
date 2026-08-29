@@ -42,19 +42,19 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
   const getFormatIcon = (iconName: string) => {
     switch (iconName) {
       case 'Video':
-        return <Video className="w-5 h-5 text-[#DC2626]" />;
+        return <Video className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'MonitorPlay':
-        return <MonitorPlay className="w-5 h-5 text-[#DC2626]" />;
+        return <MonitorPlay className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'MessageSquare':
-        return <MessageSquare className="w-5 h-5 text-[#DC2626]" />;
+        return <MessageSquare className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'Mic':
-        return <Mic className="w-5 h-5 text-[#DC2626]" />;
+        return <Mic className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'Calendar':
-        return <Calendar className="w-5 h-5 text-[#DC2626]" />;
+        return <Calendar className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'Building2':
-        return <Building2 className="w-5 h-5 text-[#DC2626]" />;
+        return <Building2 className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       default:
-        return <Video className="w-5 h-5 text-[#DC2626]" />;
+        return <Video className="w-5 h-5 text-[var(--accent-red-strong)]" />;
     }
   };
 
@@ -62,7 +62,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
     <section 
       id="learning-formats-section" 
       className={`py-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#0E0E0E] text-white' : 'bg-white text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
@@ -70,7 +70,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
-            theme === 'dark' ? 'bg-[#171717] border-neutral-800 text-neutral-300' : 'bg-neutral-50 border-neutral-300 text-neutral-800'
+            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-neutral-300' : 'bg-neutral-50 border-neutral-300 text-neutral-800'
           }`}>
             <span>{t.formats.badge}</span>
           </div>
@@ -88,7 +88,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
           {/* Currency Toggle */}
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <div className={`inline-flex items-center p-1 border rounded-2xl ${
-              theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-neutral-100 border-neutral-300'
+              theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-100 border-neutral-300'
             }`}>
               {(['TSH', 'KES', 'USD'] as const).map((curr) => (
                 <button
@@ -96,7 +96,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
                   onClick={() => setCurrency(curr)}
                   className={`px-4 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider transition-all ${
                     currency === curr 
-                      ? 'bg-[#B91C1C] text-white shadow-md' 
+                      ? 'bg-[var(--accent-red-hover)] text-white shadow-md' 
                       : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
                   }`}
                 >
@@ -122,7 +122,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
               id={`format-card-${format.id}`}
               className={`border rounded-3xl p-7 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-lg group relative ${
                 theme === 'dark'
-                  ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700'
+                  ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700'
                   : 'bg-white border-neutral-300 hover:border-red-400 hover:shadow-xl'
               }`}
             >
@@ -131,12 +131,12 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
                 {/* Header with Number, Icon and Bandwidth */}
                 <div className="flex items-center justify-between">
                   <div className={`w-12 h-12 rounded-2xl border flex items-center justify-center group-hover:scale-105 transition-transform ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
                   }`}>
                     {getFormatIcon(format.icon)}
                   </div>
                   <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800 text-neutral-400' : 'bg-neutral-100 border-neutral-300 text-neutral-800'
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-400' : 'bg-neutral-100 border-neutral-300 text-neutral-800'
                   }`}>
                     Channel {format.number}
                   </span>
@@ -144,7 +144,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
 
                 {/* Title */}
                 <div>
-                  <h3 className={`text-xl font-extrabold tracking-tight group-hover:text-[#DC2626] transition-colors ${
+                  <h3 className={`text-xl font-extrabold tracking-tight group-hover:text-[var(--accent-red-strong)] transition-colors ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {format.title}
@@ -152,14 +152,14 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
                   <div className={`text-[11px] font-mono flex items-center gap-1.5 mt-1 ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
                   }`}>
-                    <Wifi className="w-3 h-3 text-[#DC2626]" />
+                    <Wifi className="w-3 h-3 text-[var(--accent-red-strong)]" />
                     <span>{format.bandwidthLevel}</span>
                   </div>
                 </div>
 
                 {/* Price Box */}
                 <div className={`p-4 rounded-2xl border flex items-baseline justify-between gap-2 ${
-                  theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800/90' : 'bg-neutral-50 border-neutral-300'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]/90' : 'bg-neutral-50 border-neutral-300'
                 }`}>
                   <div>
                     <span className={`text-[10px] font-mono uppercase block ${
@@ -189,7 +189,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
 
                 {/* Best For Pill */}
                 <div className={`p-3 rounded-2xl border ${
-                  theme === 'dark' ? 'bg-[#0B0B0B]/60 border-neutral-800/80' : 'bg-neutral-50 border-neutral-300'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)]/60 border-[var(--border-color)]/80' : 'bg-neutral-50 border-neutral-300'
                 }`}>
                   <div className={`text-[10px] font-bold uppercase tracking-wider mb-1 ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
@@ -214,7 +214,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
                     <div key={i} className={`flex items-center gap-2 text-xs ${
                       theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                     }`}>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -224,7 +224,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
 
               {/* Card CTA */}
               <div className={`mt-6 pt-4 border-t ${
-                theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'
+                theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
               }`}>
                 <button
                   id={`btn-request-format-${format.id}`}
@@ -232,7 +232,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
                     format: format.title,
                     program: `Delivery Option: ${format.title} (${getFormatPrice(format)})`
                   })}
-                  className="group w-full py-3 px-4 text-xs font-bold rounded-xl flex items-center justify-center gap-2 uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 duration-200 bg-[#DC2626] hover:bg-[#B91C1C] text-white border border-transparent hover:border-transparent"
+                  className="group w-full py-3 px-4 text-xs font-bold rounded-xl flex items-center justify-center gap-2 uppercase tracking-wider transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 duration-200 bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] text-white border border-transparent hover:border-transparent"
                 >
                   <span>Request Service</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

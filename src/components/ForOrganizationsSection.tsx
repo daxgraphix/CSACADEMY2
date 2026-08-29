@@ -62,14 +62,14 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
     <section 
       id="for-organizations-section" 
       className={`py-24 border-y transition-colors duration-300 relative ${
-        theme === 'dark' ? 'bg-[#0B0B0B] text-white border-neutral-800' : 'bg-[#FAFAFA] text-neutral-900 border-neutral-300'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-[#FAFAFA] text-neutral-900 border-neutral-300'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <Building2 className="w-3.5 h-3.5" />
             <span>{t.organizations.badge}</span>
           </div>
@@ -94,13 +94,13 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
                 key={idx}
                 className={`p-6 rounded-3xl border transition-all duration-200 hover:-translate-y-1 space-y-3 flex flex-col justify-between shadow-sm ${
                   theme === 'dark'
-                    ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700'
+                    ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700'
                     : 'bg-white border-neutral-300 hover:border-red-400 hover:shadow-md'
                 }`}
               >
                 <div className="space-y-2.5">
-                  <div className={`w-11 h-11 rounded-2xl border flex items-center justify-center text-[#DC2626] ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-red-50 border-red-100'
+                  <div className={`w-11 h-11 rounded-2xl border flex items-center justify-center text-[var(--accent-red-strong)] ${
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-red-50 border-red-100'
                   }`}>
                     <Icon className="w-5 h-5" />
                   </div>
@@ -109,7 +109,7 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
                 </div>
                 <button
                   onClick={() => openBookingModal({ program: service.title, organizationType: 'Corporate/Enterprise' })}
-                  className="text-left text-xs font-bold text-[#DC2626] hover:text-red-700 flex items-center gap-1 pt-2 transition-colors"
+                  className="text-left text-xs font-bold text-[var(--accent-red-strong)] hover:text-red-700 flex items-center gap-1 pt-2 transition-colors"
                 >
                   <span>Request Outline</span>
                   <ArrowRight className="w-3 h-3" />
@@ -122,13 +122,13 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
         {/* Highlight Banner / Value Card */}
         <div className={`border rounded-3xl p-8 sm:p-12 shadow-2xl ${
           theme === 'dark' 
-            ? 'bg-gradient-to-r from-[#171717] via-[#1a1212] to-[#171717] border-red-900/40' 
+            ? 'bg-gradient-to-r from-[var(--bg-secondary)] via-[var(--accent-red-subtle)] to-[var(--bg-secondary)] border-[var(--accent-red-border)]' 
             : 'bg-gradient-to-r from-red-50/80 via-white to-red-50/80 border-red-200'
         }`}>
           <div className="grid lg:grid-cols-12 gap-8 items-center">
             
             <div className="lg:col-span-8 space-y-4">
-              <span className="text-xs font-mono font-bold text-[#DC2626] uppercase">
+              <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
                 Institutional Partnership
               </span>
               <h3 className={`text-2xl sm:text-3xl font-extrabold ${
@@ -140,19 +140,19 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
                 theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
               }`}>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                   <span>Customized to your internal tech stack</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                   <span>Pre & Post training impact assessments</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                   <span>Confidentiality & NDA compliance</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
                   <span>Official Certificates of Completion</span>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
               <button
                 id="btn-request-corporate-proposal"
                 onClick={() => openBookingModal({ program: 'Corporate AI & Security Workforce Training' })}
-                className="w-full py-4 px-6 text-xs font-extrabold text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] rounded-2xl shadow-lg hover:shadow-red-900/40 uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-center"
+                className="w-full py-4 px-6 text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-2xl shadow-lg hover:shadow-red-900/40 uppercase tracking-wider transition-all flex items-center justify-center gap-2 text-center"
               >
                 <span>REQUEST CORPORATE PROPOSAL</span>
                 <ArrowRight className="w-4 h-4" />
@@ -173,7 +173,7 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
                 onClick={() => openBookingModal({ program: 'Executive Consultation' })}
                 className={`w-full py-3 px-6 text-xs font-bold rounded-2xl border transition-colors uppercase tracking-wider text-center ${
                   theme === 'dark'
-                    ? 'text-neutral-200 hover:text-white bg-[#0B0B0B] hover:bg-neutral-800 border-neutral-800'
+                    ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border-[var(--border-color)]'
                     : 'text-neutral-800 hover:text-neutral-950 bg-white hover:bg-neutral-100 transition-colors duration-200 border-neutral-300'
                 }`}
               >

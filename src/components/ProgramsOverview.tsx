@@ -29,11 +29,11 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Sparkles':
-        return <Laptop className="w-6 h-6 text-[#DC2626]" />;
+        return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'ShieldCheck':
-        return <ShieldCheck className="w-6 h-6 text-[#DC2626]" />;
+        return <ShieldCheck className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       default:
-        return <Laptop className="w-6 h-6 text-[#DC2626]" />;
+        return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
     }
   };
 
@@ -47,12 +47,12 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
     <section 
       id="programs-section" 
       className={`py-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[#090909] text-white' : 'bg-[#f7f4ee] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-5 mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#ff3b30]/30 bg-[#ff3b30]/10 text-[#ff3b30] text-[10px] font-bold uppercase tracking-[0.22em]">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 text-[var(--accent-red)] text-[10px] font-bold uppercase tracking-[0.22em]">
             <span>{t.programsSection.badge}</span>
           </div>
           <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.06em] ${
@@ -73,16 +73,16 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
             <div
               key={pillar.id}
               id={`card-${pillar.id}`}
-              className={`group relative overflow-hidden rounded-[2rem] border p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+              className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
                 theme === 'dark'
-                  ? 'bg-[#111111] border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:border-[#ff3b30]/40'
-                  : 'bg-white border-neutral-200 shadow-[0_18px_50px_rgba(17,17,17,0.06)] hover:border-[#ff3b30]/30'
+                  ? 'bg-[#111111] border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:border-[var(--accent-red)]/40'
+                  : 'bg-white border-neutral-200 shadow-[0_18px_50px_rgba(17,17,17,0.06)] hover:border-[var(--accent-red)]/30'
               }`}
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.12),transparent_40%)] opacity-70" />
               <div className="relative z-10 space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#ff3b30]/30 bg-[#ff3b30]/10 transition-transform group-hover:scale-105">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 transition-transform group-hover:scale-105">
                     {getIcon(pillar.icon)}
                   </div>
                   <span className={`text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1.5 rounded-full border ${
@@ -93,7 +93,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                 </div>
 
                 <div>
-                  <h3 className={`text-2xl font-black tracking-[-0.05em] mb-2 group-hover:text-[#ff3b30] transition-colors ${
+                  <h3 className={`text-2xl font-black tracking-[-0.05em] mb-2 group-hover:text-[var(--accent-red-strong)] transition-colors ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {pillar.title}
@@ -114,7 +114,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                   <div className={`mb-3 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.18em] ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
                   }`}>
-                    <Layers className="w-3.5 h-3.5 text-[#ff3b30]" />
+                    <Layers className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
                     <span>Curriculum Focus</span>
                   </div>
                   <div className="flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                   <div className={`flex items-start gap-2 text-sm ${
                     theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                   }`}>
-                    <CheckCircle className="w-4 h-4 text-[#ff3b30] shrink-0 mt-0.5" />
+                    <CheckCircle className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
                     <span>{pillar.outcomes[0]}</span>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                 <button
                   id={`btn-explore-${pillar.slug}`}
                   onClick={() => handlePillarNavigation(pillar.slug)}
-                  className="w-full py-3.5 px-4 text-[11px] font-black uppercase tracking-[0.18em] text-white bg-[#ff3b30] hover:-translate-y-0.5 hover:bg-[#ff564d] rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-[0_18px_40px_rgba(255,59,48,0.3)]"
+                  className="w-full py-3.5 px-4 text-[11px] font-black uppercase tracking-[0.18em] text-white bg-[var(--accent-red)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-[0_18px_40px_rgba(255,59,48,0.3)]"
                 >
                   <span>{pillar.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

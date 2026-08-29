@@ -18,6 +18,7 @@ import { BlogPage } from './pages/BlogPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { VibeCodingPage } from './pages/VibeCodingPage';
+import { NotFound } from './components/NotFound';
 
 // Modals
 import { BookingModal } from './components/BookingModal';
@@ -169,12 +170,14 @@ export default function App() {
             openBookingModal={handleOpenBooking}
           />
         );
-      case 'contact':
+       case 'contact':
         return (
           <ContactPage
             openBookingModal={() => handleOpenBooking()}
           />
         );
+      case 'not-found':
+        return <NotFound setCurrentRoute={setCurrentRoute} />;
       default:
         return (
           <HomePage
@@ -193,8 +196,8 @@ export default function App() {
     <div
       className={`min-h-screen flex flex-col font-sans antialiased transition-colors duration-300 scroll-smooth ${
         theme === 'dark'
-          ? 'bg-[#090909] text-white selection:bg-[#DC2626] selection:text-white'
-          : 'bg-[#f7f4ee] text-neutral-900 selection:bg-[#ff3b30] selection:text-white'
+          ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white'
+          : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
       }`}
     >
       {/* Fixed Navigation Header */}

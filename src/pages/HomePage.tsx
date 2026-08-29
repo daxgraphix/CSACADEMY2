@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from '../types';
 import { Hero } from '../components/Hero';
 import { AudienceStrip } from '../components/AudienceStrip';
@@ -37,6 +38,17 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   return (
     <main className="w-full">
+      <Helmet>
+        <title>CS Academy | AI, Cybersecurity & Digital Skills Training - East Africa</title>
+        <meta name="description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first AI education with local language support. M-Pesa payments. 1,200+ graduates." />
+        <meta name="keywords" content="AI training Tanzania, cybersecurity courses Kenya, web development East Africa, digital skills training, vibe coding Africa, AI education, M-Pesa payment, practical tech skills" />
+        <meta property="og:title" content="CS Academy | AI, Cybersecurity & Digital Skills Training" />
+        <meta property="og:description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first education with local language support. M-Pesa payments. 1,200+ graduates." />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://cyberacademy.africa/og-image.jpg" />
+        <link rel="canonical" href="https://cyberacademy.africa/academy" />
+      </Helmet>
+
       {/* 1. Hero Section */}
       <Hero 
         setCurrentRoute={setCurrentRoute} 

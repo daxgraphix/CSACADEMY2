@@ -18,7 +18,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
 
   return (
     <div className={`pt-20 min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-900'
+      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
       {/* Main Pricing Section */}
       <PricingSection openBookingModal={openBookingModal} />
@@ -26,7 +26,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
       {/* Support & Inquiries Strip */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-6">
         <div className={`p-8 sm:p-12 rounded-3xl border space-y-4 shadow-sm ${
-          theme === 'dark' ? 'bg-[#171717] border-neutral-800' : 'bg-neutral-50 border-neutral-300'
+          theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
         }`}>
           <h3 className={`text-2xl sm:text-3xl font-extrabold ${
             theme === 'dark' ? 'text-white' : 'text-neutral-900'
@@ -53,7 +53,7 @@ export const PricingPage: React.FC<PricingPageProps> = ({
               onClick={() => setCurrentRoute('contact')}
               className={`px-6 py-3.5 rounded-2xl font-extrabold text-xs border uppercase tracking-wider transition-colors ${
                 theme === 'dark'
-                  ? 'text-neutral-300 hover:text-white bg-[#0B0B0B] hover:bg-neutral-800 border-neutral-800'
+                  ? 'text-neutral-300 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border-[var(--border-color)]'
                   : 'text-neutral-800 hover:text-neutral-950 bg-white hover:bg-neutral-100 transition-colors duration-200 border-neutral-300 shadow-sm'
               }`}
             >

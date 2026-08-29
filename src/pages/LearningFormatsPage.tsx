@@ -41,37 +41,37 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
   const getFormatIcon = (iconName: string) => {
     switch (iconName) {
       case 'Video':
-        return <Video className="w-6 h-6 text-[#DC2626]" />;
+        return <Video className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'MonitorPlay':
-        return <MonitorPlay className="w-6 h-6 text-[#DC2626]" />;
+        return <MonitorPlay className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'MessageSquare':
-        return <MessageSquare className="w-6 h-6 text-[#DC2626]" />;
+        return <MessageSquare className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'Mic':
-        return <Mic className="w-6 h-6 text-[#DC2626]" />;
+        return <Mic className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'Calendar':
-        return <Calendar className="w-6 h-6 text-[#DC2626]" />;
+        return <Calendar className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'Building2':
-        return <Building2 className="w-6 h-6 text-[#DC2626]" />;
+        return <Building2 className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       default:
-        return <Video className="w-6 h-6 text-[#DC2626]" />;
+        return <Video className="w-6 h-6 text-[var(--accent-red-strong)]" />;
     }
   };
 
   return (
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-900'
+      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[#DC2626] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>Flexible Multi-Channel Delivery</span>
           </div>
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-950'
           }`}>
-            LEARN ANYWHERE. <span className="text-[#DC2626]">CONNECT YOUR WAY.</span>
+            LEARN ANYWHERE. <span className="text-[var(--accent-red-strong)]">CONNECT YOUR WAY.</span>
           </h1>
           <p className={`text-base sm:text-lg leading-relaxed ${
             theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
@@ -87,7 +87,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
                 onClick={() => setCurrency(curr)}
                 className={`px-4 py-1.5 rounded-xl text-xs font-mono font-bold tracking-wider transition-all ${
                   currency === curr 
-                    ? 'bg-[#B91C1C] text-white shadow-md' 
+                    ? 'bg-[var(--accent-red-hover)] text-white shadow-md' 
                     : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
                 }`}
               >
@@ -104,19 +104,19 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
               key={format.id}
               className={`border rounded-3xl p-8 flex flex-col justify-between shadow-lg space-y-6 group transition-all duration-200 ${
                 theme === 'dark' 
-                  ? 'bg-[#171717] border-neutral-800 hover:border-neutral-700' 
+                  ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' 
                   : 'bg-neutral-50 border-neutral-300 hover:border-red-400 hover:shadow-xl'
               }`}
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center group-hover:scale-105 transition-transform ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
                   }`}>
                     {getFormatIcon(format.icon)}
                   </div>
                   <span className={`text-[11px] font-mono font-bold px-3 py-1 rounded-full border ${
-                    theme === 'dark' ? 'bg-[#0B0B0B] text-neutral-400 border-neutral-800' : 'bg-white text-neutral-700 border-neutral-300'
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] text-neutral-400 border-[var(--border-color)]' : 'bg-white text-neutral-700 border-neutral-300'
                   }`}>
                     {format.bestFor}
                   </span>
@@ -129,12 +129,12 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
 
                 {/* Specs Box */}
                 <div className={`p-4 rounded-2xl border space-y-2 text-xs font-mono ${
-                  theme === 'dark' ? 'bg-[#0B0B0B] border-neutral-800 text-neutral-300' : 'bg-white border-neutral-300 text-neutral-700'
+                  theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-300' : 'bg-white border-neutral-300 text-neutral-700'
                 }`}>
                   <div className="flex items-center justify-between">
                     <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Bandwidth:</span>
                     <span className="font-bold flex items-center gap-1">
-                      <Wifi className="w-3.5 h-3.5 text-[#DC2626]" />
+                      <Wifi className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
                       {format.bandwidthLevel}
                     </span>
                   </div>
@@ -159,7 +159,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
                     <div key={fIdx} className={`flex items-start gap-2 text-xs ${
                       theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                     }`}>
-                      <CheckCircle2 className="w-4 h-4 text-[#DC2626] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -168,7 +168,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
 
               {/* Bottom Price & Action */}
               <div className={`pt-6 border-t space-y-4 ${
-                theme === 'dark' ? 'border-neutral-800' : 'border-neutral-300'
+                theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
               }`}>
                 <div>
                   <div className={`text-[10px] font-mono uppercase ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
@@ -184,7 +184,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
                     format: format.title,
                     program: `Delivery Track: ${format.title}`
                   })}
-                  className="w-full py-3.5 px-4 rounded-2xl text-xs font-extrabold uppercase tracking-wider text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 transition-all"
+                  className="w-full py-3.5 px-4 rounded-2xl text-xs font-extrabold uppercase tracking-wider text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] shadow-lg flex items-center justify-center gap-2 transition-all"
                 >
                   <span>SELECT THIS DELIVERY TRACK</span>
                   <ArrowRight className="w-4 h-4" />

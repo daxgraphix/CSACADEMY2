@@ -32,45 +32,45 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
   const getIndustryIcon = (iconName: string) => {
     switch (iconName) {
       case 'Building2':
-        return <Building2 className="w-5 h-5 text-[#DC2626]" />;
+        return <Building2 className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'GraduationCap':
-        return <GraduationCap className="w-5 h-5 text-[#DC2626]" />;
+        return <GraduationCap className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'HeartHandshake':
-        return <HeartHandshake className="w-5 h-5 text-[#DC2626]" />;
+        return <HeartHandshake className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'Landmark':
-        return <Landmark className="w-5 h-5 text-[#DC2626]" />;
+        return <Landmark className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'Store':
-        return <Store className="w-5 h-5 text-[#DC2626]" />;
+        return <Store className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       case 'ShieldCheck':
-        return <ShieldCheck className="w-5 h-5 text-[#DC2626]" />;
+        return <ShieldCheck className="w-5 h-5 text-[var(--accent-red-strong)]" />;
       default:
-        return <Building2 className="w-5 h-5 text-[#DC2626]" />;
+        return <Building2 className="w-5 h-5 text-[var(--accent-red-strong)]" />;
     }
   };
 
   const isDark = theme === 'dark';
-  const pageBg = isDark ? 'bg-[#0B0B0B] text-white' : 'bg-[#f7f4ee] text-neutral-900';
-  const cardBg = isDark ? 'bg-[#171717] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm';
-  const cardInnerBg = isDark ? 'bg-[#0B0B0B] border-neutral-800' : 'bg-neutral-50 border-neutral-200';
+  const pageBg = isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900';
+  const cardBg = isDark ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm';
+  const cardInnerBg = isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-200';
   const heading = isDark ? 'text-white' : 'text-neutral-950';
   const body = isDark ? 'text-neutral-300' : 'text-neutral-800';
   const subtle = isDark ? 'text-neutral-400' : 'text-neutral-700';
   const badge = isDark
-    ? 'bg-red-950/60 border-red-900/60 text-[#DC2626]'
-    : 'bg-red-50 border-red-200 text-[#DC2626]';
+    ? 'bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)]'
+    : 'bg-red-50 border-red-200 text-[var(--accent-red-strong)]';
   const ghostBtn = isDark
-    ? 'text-neutral-300 hover:text-white bg-[#0B0B0B] hover:bg-neutral-800 border-neutral-800'
+    ? 'text-neutral-300 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border-[var(--border-color)]'
     : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-50 border-neutral-300';
-  const divider = isDark ? 'border-neutral-800' : 'border-neutral-200';
+  const divider = isDark ? 'border-[var(--border-color)]' : 'border-neutral-200';
 
   return (
     <>
       <Helmet>
-        <title>For Organizations | Corporate AI & Cybersecurity Training — CS Academy</title>
+        <title>For Organizations | Corporate AI & Cybersecurity Training - CS Academy</title>
         <meta name="description" content="CS Academy delivers customized AI, cybersecurity, and digital skills training for banks, governments, universities, NGOs, and enterprises across East Africa. Request a corporate proposal today." />
         <meta name="keywords" content="corporate training Tanzania, AI training for banks Africa, institutional tech education, enterprise cybersecurity East Africa, CS Academy organizations" />
         <meta property="og:title" content="For Organizations | CS Academy Corporate Training" />
-        <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs. Delivery in Swahili & English across East Africa." />
+        <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs. Delivery in English and local languages across East Africa." />
         <meta property="og:type" content="website" />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${pageBg}`}>
@@ -82,7 +82,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             <span>Enterprise, Academic &amp; Public Sector Solutions</span>
           </div>
           <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${heading}`}>
-            FOR <span className="text-[#DC2626]">ORGANIZATIONS</span>
+            FOR <span className="text-[var(--accent-red-strong)]">ORGANIZATIONS</span>
           </h1>
           <p className={`text-base sm:text-lg leading-relaxed ${body}`}>
             Equip your entire workforce, academic faculty, or institutional leadership with tailored AI capability and cyber resilience.
@@ -90,7 +90,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <div className="pt-2">
             <button
               onClick={() => openBookingModal({ program: 'Institutional / Corporate Workforce Proposal' })}
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
+              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
             >
               <span>REQUEST INSTITUTIONAL PROPOSAL</span>
               <ArrowRight className="w-4 h-4" />
@@ -106,7 +106,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
               className={`p-6 rounded-2xl border space-y-4 flex flex-col justify-between shadow-xl ${cardBg}`}
             >
               <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-[#DC2626] uppercase">
+                <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
                   {item.badge}
                 </span>
                 <h3 className={`text-lg font-bold ${heading}`}>{item.title}</h3>
@@ -115,7 +115,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                 <div className="space-y-1.5 pt-2">
                   {item.points.map((pt, pIdx) => (
                     <div key={pIdx} className={`flex items-center gap-2 text-xs ${body}`}>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                       <span>{pt}</span>
                     </div>
                   ))}
@@ -160,7 +160,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
 
                   <div className={`p-3 rounded-xl border text-xs space-y-1 ${cardInnerBg} ${body}`}>
                     <span className={`text-[10px] font-bold uppercase tracking-wider ${subtle}`}>Critical Needs:</span>
-                    <ul className={`space-y-1 text-[11px] list-disc list-inside pl-1 marker:text-[#DC2626] ${subtle}`}>
+                    <ul className={`space-y-1 text-[11px] list-disc list-inside pl-1 marker:text-[var(--accent-red-strong)] ${subtle}`}>
                       {sol.criticalNeeds.slice(0, 3).map((need, nIdx) => (
                         <li key={nIdx}>{need}</li>
                       ))}
@@ -172,8 +172,8 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                   onClick={() => openBookingModal({ program: `${sol.name} Customized Program`, organizationType: sol.name })}
                   className={`w-full py-2.5 px-3 text-xs font-bold rounded-xl transition-colors uppercase tracking-wider text-center ${
                     isDark
-                      ? 'text-[#DC2626] hover:text-white bg-[#0B0B0B] hover:bg-[#B91C1C] border-neutral-800'
-                      : 'text-[#B91C1C] hover:text-white bg-white hover:bg-[#B91C1C] border-neutral-300'
+                      ? 'text-[var(--accent-red-strong)] hover:text-white bg-[var(--bg-primary)] hover:bg-[var(--accent-red-hover)] border-[var(--border-color)]'
+                      : 'text-[#B91C1C] hover:text-white bg-white hover:bg-[var(--accent-red-hover)] border-neutral-300'
                   }`}
                 >
                   Request {sol.name} Syllabus
@@ -201,7 +201,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                 className={`p-6 rounded-2xl border space-y-4 flex flex-col justify-between shadow-xl ${cardBg}`}
               >
                 <div className="space-y-3">
-                  <span className="text-xs font-mono font-bold text-[#DC2626] uppercase">
+                  <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
                     {pkg.category} Package
                   </span>
                   <h3 className={`text-lg font-extrabold ${heading}`}>{pkg.title}</h3>
@@ -215,7 +215,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                   <div className="space-y-1.5 pt-2">
                     {pkg.keyOutcomes.map((inc, i) => (
                       <div key={i} className={`flex items-center gap-2 text-xs ${body}`}>
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#DC2626] shrink-0" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                         <span>{inc}</span>
                       </div>
                     ))}
@@ -225,7 +225,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                 <div className={`pt-4 border-t ${divider}`}>
                   <button
                     onClick={() => openBookingModal({ program: pkg.title, duration: pkg.durations[0] })}
-                    className="w-full py-2.5 px-3 text-xs font-bold text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] rounded-xl transition-colors uppercase tracking-wider"
+                    className="w-full py-2.5 px-3 text-xs font-bold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-xl transition-colors uppercase tracking-wider"
                   >
                     Select This Tier
                   </button>
@@ -250,7 +250,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             {trainingProcessSteps.map((step, idx) => (
               <div key={idx} className={`p-5 rounded-2xl border space-y-2 ${cardBg}`}>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-mono font-bold text-[#DC2626]">Step {step.step}</span>
+                  <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)]">Step {step.step}</span>
                   <span className={`text-[10px] uppercase font-bold font-mono ${subtle}`}>{step.name}</span>
                 </div>
                 <h3 className={`text-sm font-bold ${heading}`}>{step.title}</h3>
@@ -271,7 +271,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <div className="pt-2">
             <button
               onClick={() => openBookingModal({ program: 'Institutional Consultation & Customized Training Proposal' })}
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[#B91C1C] hover:bg-[#DC2626] active:scale-[0.98] uppercase tracking-wider shadow-lg"
+              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg"
             >
               Schedule Institutional Consultation
             </button>

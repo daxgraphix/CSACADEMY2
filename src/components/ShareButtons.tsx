@@ -129,7 +129,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
       <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider ${
         theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
       }`}>
-        <Share2 className="w-3.5 h-3.5 text-[#DC2626]" />
+        <Share2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
         <span>Share This Content:</span>
       </div>
 
