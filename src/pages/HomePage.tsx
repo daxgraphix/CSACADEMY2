@@ -45,8 +45,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         <meta property="og:title" content="CS Academy | AI, Cybersecurity & Digital Skills Training" />
         <meta property="og:description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first education with local language support. M-Pesa payments. 1,200+ graduates." />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://cyberacademy.africa/og-image.jpg" />
-        <link rel="canonical" href="https://cyberacademy.africa/academy" />
+        <meta property="og:image" content="https://academy.cyberswahili.co.tz/og-image.jpg" />
+        <link rel="canonical" href="https://academy.cyberswahili.co.tz" />
       </Helmet>
 
       {/* 1. Hero Section */}

@@ -52,7 +52,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         <meta property="og:title" content="Contact Us | CS Academy" />
         <meta property="og:description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://cyberacademy.africa/academy/contact" />
+        <link rel="canonical" href="https://academy.cyberswahili.co.tz/contact" />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
         theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'

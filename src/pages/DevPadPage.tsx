@@ -211,7 +211,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
         <meta property="og:title" content="DevPad | Developer Community for Builders and Launchers" />
         <meta property="og:description" content="Build, test, support, and launch with a community of developers and creators. Monthly testathons, accountability, and meaningful peer feedback." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://cyberacademy.africa/devpad" />
+        <link rel="canonical" href="https://academy.cyberswahili.co.tz/devpad" />
       </Helmet>
 
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${

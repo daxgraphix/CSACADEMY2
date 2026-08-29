@@ -174,7 +174,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
         <meta property="og:description" content="Build real websites, dashboards, and apps using AI tools. Covers AI safety, cybersecurity fundamentals, and digital skills. No prior coding required. Mobile money enrollment." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://cyberacademy.africa/academy/vibe-coding" />
+        <link rel="canonical" href="https://academy.cyberswahili.co.tz/vibe-coding" />
       </Helmet>
 
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${

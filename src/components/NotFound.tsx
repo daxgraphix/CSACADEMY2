@@ -68,7 +68,7 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentRoute }) => {
           <div className={`mt-10 pt-8 border-t text-xs ${
             theme === 'dark' ? 'border-neutral-800 text-neutral-500' : 'border-neutral-200 text-neutral-600'
           }`}>
-            <p>Need help? Contact us at support@cyberacademy.africa</p>
+            <p>Need help? Contact us at support@cyberswahili.co.tz</p>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ The framework content is defined in `src/data/smartFramework.ts` and rendered by
 ## Platform Features
 
 ### QR-Verifiable Digital Certificates
-Every certificate includes a unique QR code linking to a live verification page (`cyberacademy.africa/verify`) showing the learner's name, assessed skills, completion dates, peer-review scores, and a timestamped serial number. Certificates are append-only and tamper-resistant.
+Every certificate includes a unique QR code linking to a live verification page (`academy.cyberswahili.co.tz/verify`) showing the learner's name, assessed skills, completion dates, peer-review scores, and a timestamped serial number. Certificates are append-only and tamper-resistant.
 
 ### The Digital Shop
 A micro-credential marketplace where learners purchase verified skill badges, redeem Invite & Earn credits, access premium toolkits (PDF guides, template libraries), and subscribe to monthly plans. Accepts M-Pesa, Tigo Pesa, Airtel Money, Visa, and Mastercard. Prices displayed in TZS, KES, and UGX/RWF where applicable.
@@ -503,14 +503,14 @@ Optimizations in place: text-first content, aggressive CSS caching, Intersection
 ## Get Started
 
 ### For Individual Learners
-1. Visit **cyberacademy.africa/academy** on your phone or computer.
+1. Visit **https://academy.cyberswahili.co.tz** on your phone or computer.
 2. Browse the free toolkit library on the Resources page.
 3. Enroll in your first professional track via the Programs page.
 4. Join a WhatsApp cohort or start self-paced learning.
 5. Earn your first QR-verifiable certificate.
 
 ### For Organizations
-1. Contact **support@cyberacademy.africa** with your organization's name, headcount, and goals.
+1. Contact **support@cyberswahili.co.tz** with your organization's name, headcount, and goals.
 2. Receive a customized training-needs assessment within 48 hours.
 3. Review and approve the proposed curriculum and pricing.
 4. Launch with a pilot cohort; measure impact; scale organization-wide.

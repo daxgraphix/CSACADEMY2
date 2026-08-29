@@ -459,7 +459,7 @@ const buildHtml = (r: ResourceItem): string => `
       </div>
       <div class="footer-contact">
         <div><a href="mailto:${siteConfig.email}">${siteConfig.email}</a></div>
-        <div><a href="https://cyberacademy.africa">${siteConfig.phoneDisplay}</a></div>
+        <div><a href="https://academy.cyberswahili.co.tz">${siteConfig.phoneDisplay}</a></div>
         <div class="footer-contact-divider"></div>
       </div>
     </div>
