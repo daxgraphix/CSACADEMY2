@@ -81,7 +81,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${badge}`}>
             <span>Enterprise, Academic &amp; Public Sector Solutions</span>
           </div>
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${heading}`}>
+          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${heading}`}>
             FOR <span className="text-[var(--accent-red-strong)]">ORGANIZATIONS</span>
           </h1>
           <p className={`text-base sm:text-lg leading-relaxed ${body}`}>
@@ -99,7 +99,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         </div>
 
         {/* Corporate Core Pillars */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {corporateOfferingsData.map((item, idx) => (
             <div
               key={idx}
@@ -145,7 +145,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {industrySolutionsData.map((sol) => (
               <div
                 key={sol.id}
@@ -194,7 +194,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {trainingPackagesData.slice(0, 6).map((pkg) => (
               <div
                 key={pkg.id}
@@ -246,7 +246,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {trainingProcessSteps.map((step, idx) => (
               <div key={idx} className={`p-5 rounded-2xl border space-y-2 ${cardBg}`}>
                 <div className="flex items-center justify-between">

@@ -83,8 +83,8 @@ export const siteConfig = {
 
   testimonials: [
     {
-      initials: "NA",
-      name: "Naomi Achebe",
+      initials: "ZA",
+      name: "Zara A",
       role: "Junior Frontend Developer",
       location: "Kampala, Uganda",
       quote: "I came in knowing almost nothing about modern web development. Within ten weeks I had shipped three small business websites, used M-Pesa to pay for the cohort, and landed my first paid freelance contract. The mentors reviewed my code line by line and treated every question as worth answering.",
@@ -94,8 +94,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "JM",
-      name: "Joseph Marwa",
+      initials: "MK",
+      name: "Mei K",
       role: "IT Security Associate",
       location: "Mombasa, Kenya",
       quote: "The cyber defense track changed how I think about risk. I went from running basic antivirus to auditing a real bank branch for phishing exposure, drafting the remediation report, and presenting it to management. The QR-verifiable certificate made the difference at interview.",
@@ -105,8 +105,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "FK",
-      name: "Faith Kamau",
+      initials: "RW",
+      name: "Ravi W",
       role: "Marketing Operations Lead",
       location: "Nairobi, Kenya",
       quote: "We rebuilt our content workflow around the prompting framework from the AI in Practice module. Campaign briefs that used to take a full day now take an hour, and our team finally agrees on tone. The case studies drawn from real East African businesses made the lessons stick.",
@@ -117,7 +117,7 @@ export const siteConfig = {
     },
     {
       initials: "EO",
-      name: "Emmanuel Okafor",
+      name: "Elena O",
       role: "Product Designer",
       location: "Lagos, Nigeria",
       quote: "I had been designing in Figma for two years but never had a structured way to test assumptions. The cohort pushed me to ship three real prototypes, run usability sessions, and iterate on real feedback. I closed my first product contract within a month of finishing.",
@@ -127,8 +127,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "HA",
-      name: "Halima Abdi",
+      initials: "HI",
+      name: "Hana I",
       role: "High School ICT Teacher",
       location: "Garissa, Kenya",
       quote: "I expected another generic ICT workshop and got the opposite. The lesson plans and assessment templates were ready to use the next day. My students built their first working web page by the end of the unit, and the principal asked me to lead the school digital club.",
@@ -138,8 +138,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "DN",
-      name: "David Njoroge",
+      initials: "FJ",
+      name: "Femi J",
       role: "Full-Stack Engineer",
       location: "Eldoret, Kenya",
       quote: "The live Vibe Coding sessions are the closest thing to pair programming with a senior engineer. I got unstuck in real time, learned the modern AI-assisted workflow my company uses, and rebuilt our internal dashboard over a weekend using the patterns taught in week six.",
@@ -149,8 +149,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "SM",
-      name: "Sarah Mlay",
+      initials: "SB",
+      name: "Suki B",
       role: "Data & Reporting Analyst",
       location: "Dodoma, Tanzania",
       quote: "The data literacy track gave me a system I can actually repeat every month. I used to dread the quarterly reports; now the templates and formulas do most of the heavy lifting and I focus on the insights. My manager noticed the difference within the first cycle.",
@@ -160,8 +160,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "PJ",
-      name: "Peter Juma",
+      initials: "KO",
+      name: "Kenji O",
       role: "Founder, Logistics Startup",
       location: "Kisumu, Kenya",
       quote: "I needed my small operations team to handle customer data and payments without becoming a security liability. The corporate digital safety engagement gave us clear rules, simple habits, and a one-page incident playbook we actually use. Worth every shilling.",
@@ -171,8 +171,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "AW",
-      name: "Aisha Wambui",
+      initials: "NA",
+      name: "Nia A",
       role: "Programme Manager, NGO",
       location: "Kigali, Rwanda",
       quote: "We came in with a tight donor reporting calendar and left with templates, prompts, and a clean data workflow. The two-day in-house workshop paid for itself in the first reporting cycle. Our field officers now send structured updates without a second reminder.",
@@ -182,8 +182,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "BO",
-      name: "Brian Otieno",
+      initials: "CM",
+      name: "Caleb M",
       role: "Computer Science Student",
       location: "Kampala, Uganda",
       quote: "University taught me theory; CS Academy taught me how real teams ship. The vibe coding exercises, code reviews, and security checkpoints mirror the workflow at the startup I now intern with. I show up to my supervisor already knowing the playbook.",
@@ -193,8 +193,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "LN",
-      name: "Linet Nyambura",
+      initials: "LI",
+      name: "Lena I",
       role: "Digital Marketing Specialist",
       location: "Arusha, Tanzania",
       quote: "I came in stuck on creative blocks. The AI-assisted creative workflow turned those blocks into a steady content engine, and the analytics module helped me prove the lift to my client. We renewed for a full year and doubled the ad budget on my recommendation.",
@@ -204,8 +204,8 @@ export const siteConfig = {
       verified: true
     },
     {
-      initials: "TM",
-      name: "Thomas Mwendwa",
+      initials: "TW",
+      name: "Tao W",
       role: "Operations Manager, Sacco",
       location: "Nairobi, Kenya",
       quote: "We had forty staff across three branches, and one of them clicking the wrong link was my biggest fear. The cyber hygiene engagement turned fear into a checklist. Six months in we have not had a single phishing-related incident and the auditor flagged zero major findings.",

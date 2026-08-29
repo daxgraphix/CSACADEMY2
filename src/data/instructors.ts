@@ -30,7 +30,7 @@ export const instructorsData: Instructor[] = [
   },
   {
     id: 'fatma-mrema',
-    name: 'Fatma Mrema',
+    name: 'Fathi M',
     role: 'Senior Full-Stack & Cloud Facilitator',
     specialtyBadge: 'Web & Cloud Architecture',
     experience: '8+ Years Experience',
@@ -57,7 +57,7 @@ export const instructorsData: Instructor[] = [
   },
   {
     id: 'david-ochieng',
-    name: 'David Ochieng',
+    name: 'Dalia O',
     role: 'Cybersecurity Specialist & Ethical Hacker',
     specialtyBadge: 'Defensive Security & Threat Hunting',
     experience: '7+ Years Experience',
@@ -84,7 +84,7 @@ export const instructorsData: Instructor[] = [
   },
   {
     id: 'neema-kimaro',
-    name: 'Neema Kimaro',
+    name: 'Nia K',
     role: 'Lead UI/UX & Digital Media Creator',
     specialtyBadge: 'Design Systems & Creative Tech',
     experience: '6+ Years Experience',
@@ -110,7 +110,7 @@ export const instructorsData: Instructor[] = [
   },
   {
     id: 'baraka-mwita',
-    name: 'Eng. Baraka Mwita',
+    name: 'Biko M',
     role: 'AI & Data Solutions Architect',
     specialtyBadge: 'Machine Learning & Local Language NLP',
     experience: '9+ Years Experience',

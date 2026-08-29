@@ -48,7 +48,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>{t.about.badge}</span>
           </div>
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-950'
           }`}>
             {(
@@ -128,7 +128,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </h2>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
             {siteConfig.pillars.map((pillar) => (
               <div key={pillar.id} className={`p-6 rounded-3xl border space-y-3 ${
                 theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
@@ -164,7 +164,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {instructorsData.map((instructor) => (
               <div
                 key={instructor.id}
@@ -177,7 +177,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                   {/* Avatar & Header */}
                   <div className="flex items-start gap-4">
                     <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${instructor.avatarGradient || 'from-red-600 to-black'} p-0.5 shadow-md shrink-0`}>
-                      <div className="w-full h-full rounded-[14px] bg-[var(--bg-primary)] flex items-center justify-center text-white font-extrabold text-lg">
+                      <div className="w-full h-full rounded-[14px] bg-[var(--bg-primary)] flex items-center justify-center text-white font-extrabold text-lg" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
                         {instructor.avatarInitials}
                       </div>
                     </div>

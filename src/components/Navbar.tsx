@@ -100,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
 {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-0.5">
+          <nav className="hidden lg:flex items-center gap-0.5">
             <button
               id="nav-link-home"
               onClick={() => navigateTo('home')}
@@ -331,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Desktop Right Controls: Theme Switcher & Book CTA */}
-          <div className="hidden xl:flex items-center gap-2">
+          <div className="hidden lg:flex items-center gap-2">
 
             {/* Theme Toggle (Light / Dark) */}
             <button
@@ -359,7 +359,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Menu & Quick Controls */}
-          <div className="flex items-center gap-2 xl:hidden">
+          <div className="flex items-center gap-2 lg:hidden">
             {/* Quick Theme Toggle */}
             <button
               id="theme-toggle-mobile"
@@ -397,7 +397,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className={`xl:hidden border-b px-4 pt-3 pb-6 max-h-[85vh] overflow-y-auto ${
+        <div className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto ${
           theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
           <div className="space-y-1">

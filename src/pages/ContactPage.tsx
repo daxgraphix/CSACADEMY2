@@ -214,7 +214,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g. David Mwangi"
+                    placeholder="e.g. Neema K"
                     className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[var(--accent-red)] ${
                       theme === 'dark'
                         ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500 border-[var(--border-color)]'
@@ -232,7 +232,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="e.g. david@organization.org"
+                    placeholder="e.g. neema@organization.org"
                     className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[var(--accent-red)] ${
                       theme === 'dark'
                         ? 'bg-[var(--bg-primary)] text-white placeholder-neutral-500 border-[var(--border-color)]'

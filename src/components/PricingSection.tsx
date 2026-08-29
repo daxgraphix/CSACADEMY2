@@ -159,15 +159,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({
           </div>
         </div>
 
-        <div className={`grid gap-6 items-stretch ${
-          filteredPlans.length === 1 
-            ? 'max-w-md mx-auto md:grid-cols-1' 
-            : filteredPlans.length === 2 
-            ? 'max-w-4xl mx-auto md:grid-cols-2' 
-            : filteredPlans.length === 3 
-            ? 'md:grid-cols-3' 
-            : 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-        }`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch`}>
           {filteredPlans.map((plan) => {
             const isPopular = plan.popular;
             const membershipLabel = plan.deliveryType === 'mobile-first'

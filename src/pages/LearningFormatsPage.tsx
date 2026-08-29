@@ -68,7 +68,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>Flexible Multi-Channel Delivery</span>
           </div>
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-950'
           }`}>
             LEARN ANYWHERE. <span className="text-[var(--accent-red-strong)]">CONNECT YOUR WAY.</span>

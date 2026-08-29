@@ -136,24 +136,24 @@ const rules = [
 
 const testimonials = [
   {
-    initials: 'JN',
-    name: 'James N.',
+    initials: 'JM',
+    name: 'Jina M',
     role: 'Indie Developer, Nairobi',
     quote: 'DevPad gave me the testing structure I never had as a solo builder. Within two months I shipped my first Android app to the Play Store with confidence.',
     color: '#dc2626',
     outcome: 'Shipped to Play Store'
   },
   {
-    initials: 'AM',
-    name: 'Amina M.',
+    initials: 'AO',
+    name: 'Amara O',
     role: 'Frontend Developer, Dar es Salaam',
     quote: 'The accountability alone changed everything. I finally stopped abandoning side projects at the 70% mark. The community keeps me shipping.',
     color: '#7c3aed',
     outcome: '3 Side Projects Completed'
   },
   {
-    initials: 'TO',
-    name: 'Tony O.',
+    initials: 'TE',
+    name: 'Tunde E',
     role: 'Startup Founder, Kampala',
     quote: 'I came in with a half-built product and walked out with real user feedback from 12 actual testers. The Testathon format is genuinely useful.',
     color: '#0ea5e9',
@@ -189,10 +189,10 @@ const faqs = [
 ];
 
 const whatsappPreview = [
-  { author: 'Sarah', initials: 'SK', time: '9:12 AM', msg: 'Pushed build 0.7 today. Looking for testers to stress the new onboarding flow.', color: '#10b981' },
-  { author: 'Devon', initials: 'DK', time: '9:14 AM', msg: 'Installing now. Will run it through three scenarios and drop feedback tonight.', color: '#3b82f6' },
-  { author: 'Aisha', initials: 'AM', time: '9:21 AM', msg: 'Testathon kicks off Friday. Bring a product to be tested, leave with three peer reviews.', color: '#ec4899' },
-  { author: 'Toby', initials: 'TJ', time: '9:24 AM', msg: 'Reminder: launch clinic next Wednesday. Reply with your launch date if you want a slot.', color: '#8b5cf6' }
+  { author: 'Kenji W', initials: 'KW', time: '9:12 AM', msg: 'Pushed build 0.7 today. Looking for testers to stress the new onboarding flow.', color: '#10b981' },
+  { author: 'Priya R', initials: 'PR', time: '9:14 AM', msg: 'Installing now. Will run it through three scenarios and drop feedback tonight.', color: '#3b82f6' },
+  { author: 'Sven L', initials: 'SL', time: '9:21 AM', msg: 'Testathon kicks off Friday. Bring a product to be tested, leave with three peer reviews.', color: '#ec4899' },
+  { author: 'Yuki J', initials: 'YJ', time: '9:24 AM', msg: 'Reminder: launch clinic next Wednesday. Reply with your launch date if you want a slot.', color: '#8b5cf6' }
 ];
 
 export const DevPadPage: React.FC<DevPadPageProps> = ({
@@ -222,7 +222,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
 
           {/* HERO */}
           <section className="text-center pt-8 pb-4 space-y-8">
-            <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] leading-[1.05] ${
+            <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] leading-[1.05] ${
               theme === 'dark' ? 'text-white' : 'text-neutral-950'
             }`}>
               DevPad
@@ -340,8 +340,8 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
           </section>
 
           {/* WHAT IS DEVPAD - NARRATIVE */}
-          <section className="grid lg:grid-cols-5 gap-10 items-center">
-            <div className="lg:col-span-3 space-y-6">
+          <section className="grid md:grid-cols-5 gap-10 items-center">
+            <div className="md:col-span-3 space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-red-subtle)]/10 border border-[var(--accent-red-subtle)]/20 text-[var(--accent-red-strong)] text-xs font-black uppercase tracking-wider">
                 What Is DevPad
               </div>
@@ -362,7 +362,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
               </p>
             </div>
 
-            <div className="lg:col-span-2 space-y-4">
+            <div className="md:col-span-2 space-y-4">
               <div className={`rounded-3xl border p-5 ${
                 theme === 'dark' ? 'bg-emerald-950/30 border-emerald-800/40' : 'bg-emerald-50 border-emerald-200'
               }`}>
@@ -436,12 +436,12 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
             <div className={`p-4 sm:p-5 space-y-3 ${theme === 'dark' ? 'bg-[#0f0f0f]' : 'bg-neutral-50'}`}>
               {whatsappPreview.map((m, i) => (
                 <div key={i} className="flex items-start gap-3">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0"
-                    style={{ background: m.color }}
-                  >
-                    {m.initials}
-                  </div>
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0"
+                      style={{ background: m.color, textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}
+                    >
+                      {m.initials}
+                    </div>
                   <div className="flex-1 min-w-0">
                     <div className={`rounded-2xl rounded-tl-sm px-4 py-2.5 ${
                       theme === 'dark' ? 'bg-neutral-800' : 'bg-white border border-neutral-200'
@@ -608,8 +608,8 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
           <section className={`rounded-3xl border p-8 sm:p-10 ${
             theme === 'dark' ? 'bg-[#111] border-neutral-800' : 'bg-white border-neutral-200'
           }`}>
-            <div className="grid lg:grid-cols-3 gap-10 items-start">
-              <div className="lg:col-span-1 space-y-4">
+            <div className="grid md:grid-cols-3 gap-10 items-start">
+              <div className="md:col-span-1 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-red-subtle)]/10 border border-[var(--accent-red-subtle)]/20 text-[var(--accent-red-strong)] text-xs font-black uppercase tracking-wider">
                   <CheckSquare className="w-3 h-3" />
                   House Rules
@@ -626,7 +626,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
                 </p>
               </div>
 
-              <div className="lg:col-span-2 grid sm:grid-cols-2 gap-3">
+              <div className="md:col-span-2 grid sm:grid-cols-2 gap-3">
                 {rules.map((r, i) => (
                   <div
                     key={r}
@@ -664,7 +664,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-w-4xl mx-auto">
               {audience.map((item) => (
                 <div
                   key={item}
@@ -718,7 +718,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
                   <div className="flex items-center gap-3 mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
                     <div
                       className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-black"
-                      style={{ background: t.color }}
+                      style={{ background: t.color, textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}
                     >
                       {t.initials}
                     </div>

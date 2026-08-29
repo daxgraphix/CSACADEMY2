@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({
       }`}
     >
       <div className="absolute inset-0 opacity-90">
-        <div className="absolute left-1/2 top-0 h-[640px] w-[640px] -translate-x-1/2 rounded-full bg-[var(--accent-red-subtle)] blur-[120px]" />
+        <div className="absolute left-1/2 top-0 h-[400px] sm:h-[500px] lg:h-[640px] w-[400px] sm:w-[500px] lg:w-[640px] -translate-x-1/2 rounded-full bg-[var(--accent-red-subtle)] blur-[100px] sm:blur-[120px]" />
         <div className="absolute right-0 top-24 h-64 w-64 rounded-full bg-white/5 blur-[90px]" />
       </div>
 
@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
         <div ref={contentRef} className="max-w-4xl reveal reveal-delay-200">
           <div className="space-y-8">
             <div className="space-y-5">
-              <h1 className={`text-4xl sm:text-6xl lg:text-[5.2rem] lg:leading-[0.94] font-black tracking-[-0.06em] break-words ${
+              <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.06em] break-words ${
                 theme === 'dark' ? 'text-white' : 'text-neutral-950'
               }`}>
                 {t.hero.headlineMain}
@@ -107,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({
                   }`}>
                     <item.icon className={`h-5 w-5 ${item.accent}`} />
                   </div>
-                  <div className={`text-[4rem] sm:text-[5rem] font-black tracking-[-0.05em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none ${
+                  <div className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.05em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none ${
                     theme === 'dark' ? 'text-[var(--accent-red-strong)]' : 'text-[var(--accent-red)]'
                   }`}>{item.value}</div>
                   <div className={`mt-3 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${

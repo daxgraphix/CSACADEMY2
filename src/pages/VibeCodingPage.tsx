@@ -139,21 +139,21 @@ const faqs = [
 const testimonials = [
   {
     quote: 'I went from never writing a line of code to deploying a complete e-commerce product page in one afternoon. The local language prompt guide made everything click.',
-    name: 'Amina Juma',
+    name: 'Zawadi M',
     role: 'Fashion Boutique Owner, Dar es Salaam',
-    initials: 'AJ'
+    initials: 'ZM'
   },
   {
     quote: 'The Vibe Coding workflow our team uses now is completely different from a year ago. We ship features in days, not weeks. The CS Academy framework gave us the language to direct AI precisely.',
-    name: 'David Mwangi',
+    name: 'Chidi O',
     role: 'CTO, Fintech Startup, Nairobi',
-    initials: 'DM'
+    initials: 'CO'
   },
   {
     quote: 'I used to be embarrassed about my coding speed. Now I am the fastest developer in my cohort because I understand how to prompt, review, and iterate. The AI handles the boilerplate.',
-    name: 'Fatuma Omari',
+    name: 'Lars N',
     role: 'Junior Developer, Kampala',
-    initials: 'FO'
+    initials: 'LN'
   }
 ];
 
@@ -185,7 +185,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
 
           {/* HERO */}
           <section className="text-center pt-12 pb-8 space-y-8">
-            <h1 className={`text-5xl sm:text-6xl lg:text-7xl font-black tracking-[-0.03em] leading-[1.05] ${
+            <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-black tracking-[-0.03em] leading-[1.05] ${
               theme === 'dark' ? 'text-white' : 'text-neutral-950'
             }`}>
               Vibe Coding
@@ -233,7 +233,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
           </section>
 
           {/* WHAT IS VIBE CODING */}
-          <section className="grid lg:grid-cols-2 gap-12 items-center">
+          <section className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-red-subtle)]/10 border border-[var(--accent-red-subtle)]/20 text-[var(--accent-red-strong)] text-xs font-black uppercase tracking-wider">
                 The New Paradigm
@@ -457,7 +457,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
                     theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                   }`}>"{t.quote}"</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white text-xs font-black">
+                    <div className="w-9 h-9 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white text-xs font-black" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
                       {t.initials}
                     </div>
                     <div>
@@ -518,7 +518,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
           </section>
 
           {/* CTA BANNER */}
-          <section className={`rounded-3xl p-10 sm:p-14 border text-center space-y-6 ${
+          <section className={`rounded-3xl p-6 sm:p-10 lg:p-14 border text-center space-y-6 ${
             theme === 'dark'
               ? 'bg-gradient-to-br from-[var(--accent-red-subtle)] via-[var(--accent-red-hover)] to-[var(--accent-red-subtle)] border-[var(--accent-red-border)]'
               : 'bg-gradient-to-br from-[var(--accent-red-subtle)] via-[var(--accent-red-hover)] to-[var(--accent-red-subtle)] border-red-800/40'

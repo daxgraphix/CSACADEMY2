@@ -150,7 +150,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   autoFocus
                   value={name}
                   onChange={(e) => { setName(e.target.value); if (errors.name) setErrors((p) => ({ ...p, name: undefined })); }}
-                  placeholder="e.g. Maria Joseph"
+                  placeholder="e.g. Neema K"
                   aria-invalid={!!errors.name}
                   className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                     theme === 'dark'
@@ -175,7 +175,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   type="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors((p) => ({ ...p, email: undefined })); }}
-                  placeholder="e.g. maria@company.com"
+                  placeholder="e.g. neema@company.com"
                   aria-invalid={!!errors.email}
                   className={`w-full px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                     theme === 'dark'

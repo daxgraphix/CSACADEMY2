@@ -173,7 +173,7 @@ export const SocialProof: React.FC = () => {
                   <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[var(--accent-red-hover)] to-neutral-800 p-0.5 shadow-md shrink-0">
                     <div className={`w-full h-full rounded-[14px] flex items-center justify-center font-bold text-xs ${
                       theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-900'
-                    }`}>
+                    }`} style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
                       {item.initials}
                     </div>
                   </div>

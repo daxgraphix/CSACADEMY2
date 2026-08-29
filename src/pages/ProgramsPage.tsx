@@ -165,7 +165,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
           }`}>
             <span>Comprehensive Curriculum Directory</span>
           </div>
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
             theme === 'dark' ? 'text-white' : 'text-neutral-950'
           }`}>
             CS ACADEMY <span className="text-[var(--accent-red-strong)]">PROGRAMS</span>
@@ -301,7 +301,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
             </div>
 
             <Suspense fallback={
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1,2,3].map(i => <ProgramCardSkeleton key={i} />)}
               </div>
             }>
@@ -355,8 +355,8 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                 </div>
 
                 {/* Descriptions & Topics */}
-                <div className="grid lg:grid-cols-12 gap-8">
-                  <div className="lg:col-span-6 space-y-4">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                  <div className="grid-cols-1 lg:col-span-6 space-y-4">
                     <h3 className={`text-lg font-bold ${
                       theme === 'dark' ? 'text-white' : 'text-neutral-900'
                     }`}>{pillar.tagline}</h3>
@@ -387,7 +387,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                     </div>
                   </div>
 
-                  <div className="lg:col-span-6 space-y-4">
+                  <div className="grid-cols-1 lg:col-span-6 space-y-4">
                     <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
                       Core Curriculum Modules & Hands-on Skills:
                     </h4>
@@ -467,11 +467,11 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
             </div>
 
             <Suspense fallback={
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[1,2,3,4,5,6].map(i => <BlogCardSkeleton key={i} />)}
               </div>
             }>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCourses.map((course) => (
                 <div
                   key={course.id}
