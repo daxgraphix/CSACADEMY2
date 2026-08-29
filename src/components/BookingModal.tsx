@@ -42,7 +42,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
 
-  const emailValid = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  const emailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
 
   useEffect(() => {
     if (prefill) {
@@ -51,6 +51,21 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       if (prefill.organizationType) setAudienceType(prefill.organizationType);
     }
   }, [prefill, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setName('');
+      setEmail('');
+      setOrganization('');
+      setProgram('AI Academy Flagship');
+      setFormat('Live Online (Zoom/Google Meet)');
+      setAudienceType('Individual Professional');
+      setLocation('Tanzania');
+      setNotes('');
+      setErrors({});
+      setCopied(false);
+    }
+  }, [isOpen]);
 
   // Close on Escape for accessibility
   useEffect(() => {

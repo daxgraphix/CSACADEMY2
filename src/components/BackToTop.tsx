@@ -85,7 +85,7 @@ export const BackToTop: React.FC = () => {
           cy="22"
           r="20"
           fill="none"
-          stroke="#ff3b30"
+          stroke={theme === 'dark' ? '#ff3b30' : '#dc2626'}
           strokeWidth="2.5"
           strokeLinecap="round"
           strokeDasharray={circumference}

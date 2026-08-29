@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { PageRoute } from '../types';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
@@ -29,23 +29,59 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [programsDropdownOpen, setProgramsDropdownOpen] = useState(false);
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState(false);
 
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = useCallback(() => {
+    setIsScrolled(window.scrollY > 20);
+  }, []);
+
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (programsDropdownOpen && !target.closest('#programs-dropdown-wrapper')) {
+      setProgramsDropdownOpen(false);
+    }
+  }, [programsDropdownOpen]);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    const handleClickOutside = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (programsDropdownOpen && !target.closest('#programs-dropdown-wrapper')) {
-        setProgramsDropdownOpen(false);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', onScroll);
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [programsDropdownOpen]);
+  }, [handleScroll, handleClickOutside]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+      const focusable = menuRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [mobileMenuOpen]);
 
   const navigateTo = (route: PageRoute) => {
     setCurrentRoute(route);
@@ -58,7 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header
       id="main-header"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all transition-shadow duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? theme === 'dark' 
             ? 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-3' 
@@ -397,7 +433,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto ${
+        <div ref={menuRef} className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto ${
           theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
           <div className="space-y-1">

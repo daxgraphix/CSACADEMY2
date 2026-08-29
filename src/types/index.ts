@@ -71,7 +71,7 @@ export interface ProgramPillar {
 export interface TrainingProgram {
   id: string;
   title: string;
-  category: 'ai' | 'cybersecurity' | 'digital-skills';
+  category: 'ai' | 'cybersecurity' | 'digital-skills' | 'web-coding' | 'design-uiux';
   audience: string;
   level: 'Beginner' | 'Professional' | 'Educator' | 'Awareness' | 'Executive' | 'All Levels';
   format: string;

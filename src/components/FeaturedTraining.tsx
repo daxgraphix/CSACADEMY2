@@ -22,13 +22,15 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
   openTrainingDetailModal
 }) => {
   const { theme, t } = useApp();
-  const [filter, setFilter] = useState<'ALL' | 'AI' | 'CYBER' | 'DIGITAL'>('ALL');
+  const [filter, setFilter] = useState<'ALL' | 'AI' | 'CYBER' | 'DIGITAL' | 'WEB' | 'DESIGN'>('ALL');
   const gridRef = useReveal<HTMLDivElement>();
 
   const filteredTrainings = featuredTrainingData.filter((item) => {
     if (filter === 'AI') return item.category === 'ai';
     if (filter === 'CYBER') return item.category === 'cybersecurity';
     if (filter === 'DIGITAL') return item.category === 'digital-skills';
+    if (filter === 'WEB') return item.category === 'web-coding';
+    if (filter === 'DESIGN') return item.category === 'design-uiux';
     return true;
   });
 
@@ -38,6 +40,10 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
         return <Laptop className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />;
       case 'cybersecurity':
         return <Shield className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />;
+      case 'web-coding':
+        return <Laptop className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />;
+      case 'design-uiux':
+        return <Laptop className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />;
       default:
         return <Laptop className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />;
     }
@@ -81,42 +87,62 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             <button
               onClick={() => setFilter('ALL')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
-                filter === 'ALL' 
-                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
+                filter === 'ALL'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              All Programs
+              All Programs ({featuredTrainingData.length})
             </button>
             <button
               onClick={() => setFilter('AI')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
-                filter === 'AI' 
-                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
+                filter === 'AI'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              AI Tracks
+              AI Tracks ({featuredTrainingData.filter(t => t.category === 'ai').length})
             </button>
             <button
               onClick={() => setFilter('CYBER')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
-                filter === 'CYBER' 
-                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
+                filter === 'CYBER'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              Cybersecurity
+              Cybersecurity ({featuredTrainingData.filter(t => t.category === 'cybersecurity').length})
             </button>
             <button
               onClick={() => setFilter('DIGITAL')}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
-                filter === 'DIGITAL' 
-                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
+                filter === 'DIGITAL'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              Digital Skills
+              Digital Skills ({featuredTrainingData.filter(t => t.category === 'digital-skills').length})
+            </button>
+            <button
+              onClick={() => setFilter('WEB')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                filter === 'WEB'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
+                  : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
+              }`}
+            >
+              Web & Coding ({featuredTrainingData.filter(t => t.category === 'web-coding').length})
+            </button>
+            <button
+              onClick={() => setFilter('DESIGN')}
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+                filter === 'DESIGN'
+                  ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
+                  : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
+              }`}
+            >
+              Design & UI/UX ({featuredTrainingData.filter(t => t.category === 'design-uiux').length})
             </button>
           </div>
         </div>

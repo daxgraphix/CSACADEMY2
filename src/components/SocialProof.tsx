@@ -11,18 +11,18 @@ export const SocialProof: React.FC = () => {
 
   const filterOptions = [
     { id: 'all', label: 'All Reviews'},
-    { id: 'web', label: 'Web & Coding'},
-    { id: 'ai', label: 'AI & Vibe Coding'},
-    { id: 'security', label: 'Cybersecurity'},
-    { id: 'design', label: 'Design & UI/UX'},
+    { id: 'web-coding', label: 'Web & Coding'},
+    { id: 'ai-vibe-coding', label: 'AI & Vibe Coding'},
+    { id: 'cybersecurity', label: 'Cybersecurity'},
+    { id: 'design-uiux', label: 'Design & UI/UX'},
   ];
 
   const filteredTestimonials = siteConfig.testimonials.filter((item) => {
     if (selectedFilter === 'all') return true;
-    if (selectedFilter === 'web') return item.courseTag?.toLowerCase().includes('web') || item.courseTag?.toLowerCase().includes('coding');
-    if (selectedFilter === 'ai') return item.courseTag?.toLowerCase().includes('ai') || item.courseTag?.toLowerCase().includes('vibe');
-    if (selectedFilter === 'security') return item.courseTag?.toLowerCase().includes('cyber') || item.courseTag?.toLowerCase().includes('security');
-    if (selectedFilter === 'design') return item.courseTag?.toLowerCase().includes('design') || item.courseTag?.toLowerCase().includes('figma');
+    if (selectedFilter === 'web-coding') return item.category === 'web-coding';
+    if (selectedFilter === 'ai-vibe-coding') return item.category === 'ai-vibe-coding';
+    if (selectedFilter === 'cybersecurity') return item.category === 'cybersecurity';
+    if (selectedFilter === 'design-uiux') return item.category === 'design-uiux';
     return true;
   });
 

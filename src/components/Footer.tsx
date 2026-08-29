@@ -61,9 +61,10 @@ const footerNav: Array<{ title: string; items: Array<{ label: string; route?: Pa
 ];
 
 const socialLinks = [
-  { href: siteConfig.socialLinks.linkedin, label: 'LinkedIn', Icon: Linkedin, hover: 'hover:text-[#0A66C2]' },
   { href: siteConfig.socialLinks.youtube, label: 'YouTube', Icon: Youtube, hover: 'hover:text-[#FF0000]' },
-  { href: `https://wa.me/${siteConfig.whatsapp}`, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-emerald-500' },
+  { href: siteConfig.socialLinks.linkedin, label: 'LinkedIn', Icon: Linkedin, hover: 'hover:text-[#0A66C2]' },
+  { href: siteConfig.socialLinks.whatsapp, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-emerald-500' },
+  { href: `mailto:${siteConfig.email}`, label: 'Email', Icon: Mail, hover: 'hover:text-[var(--accent-red)]' },
 ];
 
 export const Footer: React.FC<FooterProps> = ({
@@ -91,7 +92,7 @@ export const Footer: React.FC<FooterProps> = ({
     }
   };
 
-  const emailValid = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
+  const emailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();

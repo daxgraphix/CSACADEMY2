@@ -78,10 +78,11 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
 
   const categories = [
     { id: 'ALL', label: 'All Programs', icon: Layers },
-    { id: 'vibe-coding', label: 'Vibe Coding', icon: Zap },
-    { id: 'ai', label: 'AI & Vibe Coding', icon: Laptop },
-    { id: 'cybersecurity', label: 'Cybersecurity & Defense', icon: ShieldCheck },
-    { id: 'digital-skills', label: 'Digital Skills & Web', icon: Laptop },
+    { id: 'ai', label: 'AI Tracks', icon: Laptop },
+    { id: 'cybersecurity', label: 'Cybersecurity', icon: ShieldCheck },
+    { id: 'digital-skills', label: 'Digital Skills', icon: Laptop },
+    { id: 'web-coding', label: 'Web & Coding', icon: Laptop },
+    { id: 'design-uiux', label: 'Design & UI/UX', icon: Laptop },
   ];
 
   const getIcon = (iconName: string) => {

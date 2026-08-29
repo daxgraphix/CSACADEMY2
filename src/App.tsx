@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { NotFound } from './components/NotFound';
 
 import { HomePage } from './pages/HomePage';
 import { FeaturesPage } from './pages/FeaturesPage';
@@ -19,9 +20,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { VibeCodingPage } from './pages/VibeCodingPage';
 import { DevPadPage } from './pages/DevPadPage';
-import { NotFound } from './components/NotFound';
 
-// Modals
 import { BookingModal } from './components/BookingModal';
 import { ProgramDetailModal } from './components/ProgramDetailModal';
 import { TrainingDetailModal } from './components/TrainingDetailModal';
@@ -33,12 +32,10 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
   const { theme } = useApp();
 
-  // Reset scroll on route change
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [currentRoute]);
 
-  // Modal states
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [bookingPrefill, setBookingPrefill] = useState<{
     program?: string;
@@ -52,7 +49,11 @@ export default function App() {
   const [selectedResource, setSelectedResource] = useState<ResourceItem | null>(null);
   const [selectedBlogArticle, setSelectedBlogArticle] = useState<BlogPost | null>(null);
 
-  // Close any open modal with Esc key
+  const anyModalOpen = useMemo(() =>
+    isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle,
+    [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]
+  );
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return;
@@ -66,16 +67,11 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]);
 
-  // Lock body scroll when any modal is open
   useEffect(() => {
-    const anyOpen = isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle;
-    document.body.style.overflow = anyOpen ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]);
+    document.body.style.overflow = anyModalOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [anyModalOpen]);
 
-  // Modal Triggers
   const handleOpenBooking = (prefill?: {
     program?: string;
     format?: string;
@@ -105,19 +101,9 @@ export default function App() {
           />
         );
       case 'features':
-        return (
-          <FeaturesPage
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <FeaturesPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'pricing':
-        return (
-          <PricingPage
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <PricingPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'programs':
         return (
           <ProgramsPage
@@ -127,79 +113,27 @@ export default function App() {
           />
         );
       case 'programs/ai':
-        return (
-          <ProgramDeepDivePage
-            slug="ai"
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <ProgramDeepDivePage slug="ai" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'programs/cybersecurity':
-        return (
-          <ProgramDeepDivePage
-            slug="cybersecurity"
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <ProgramDeepDivePage slug="cybersecurity" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'programs/digital-skills':
-        return (
-          <ProgramDeepDivePage
-            slug="digital-skills"
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <ProgramDeepDivePage slug="digital-skills" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'vibe-coding':
-        return (
-          <VibeCodingPage
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <VibeCodingPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'devpad':
-        return (
-          <DevPadPage
-            setCurrentRoute={setCurrentRoute}
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <DevPadPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
       case 'learning-formats':
-        return (
-          <LearningFormatsPage
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <LearningFormatsPage openBookingModal={handleOpenBooking} />;
       case 'for-organizations':
-        return (
-          <ForOrganizationsPage
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <ForOrganizationsPage openBookingModal={handleOpenBooking} />;
       case 'resources':
-        return (
-          <ResourcesPage
-            openResourceModal={handleOpenResourceModal}
-          />
-        );
+        return <ResourcesPage openResourceModal={handleOpenResourceModal} />;
       case 'blog':
-        return (
-          <BlogPage
-            openBlogArticleModal={handleOpenBlogArticleModal}
-          />
-        );
+        return <BlogPage openBlogArticleModal={handleOpenBlogArticleModal} />;
       case 'about':
-        return (
-          <AboutPage
-            openBookingModal={handleOpenBooking}
-          />
-        );
+        return <AboutPage openBookingModal={handleOpenBooking} />;
       case 'contact':
-        return (
-          <ContactPage
-            openBookingModal={() => handleOpenBooking()}
-          />
-        );
+        return <ContactPage openBookingModal={() => handleOpenBooking()} />;
       case 'not-found':
         return <NotFound setCurrentRoute={setCurrentRoute} />;
       default:
@@ -225,25 +159,21 @@ export default function App() {
             : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
         }`}
       >
-        {/* Fixed Navigation Header */}
         <Navbar
           currentRoute={currentRoute}
           setCurrentRoute={setCurrentRoute}
           openBookingModal={() => handleOpenBooking()}
         />
 
-        {/* Main Content Area */}
         <div className="flex-grow">
           {renderCurrentPage()}
         </div>
 
-        {/* Site Footer */}
         <Footer
           setCurrentRoute={setCurrentRoute}
           openBookingModal={() => handleOpenBooking()}
         />
 
-        {/* Interactive Modals */}
         <BookingModal
           isOpen={isBookingModalOpen}
           onClose={() => setIsBookingModalOpen(false)}
