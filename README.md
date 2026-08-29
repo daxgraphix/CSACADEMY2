@@ -1,267 +1,493 @@
 # CS Academy — Digital Skills Platform for East Africa
 
-> Practical, accessible, and locally relevant digital skills training for the East African workforce.
+> Practical, accessible, and locally relevant AI, cybersecurity, web development, and digital-skills training for the East African workforce. English-first instruction with local-language support and mobile-money payments.
 
 ---
 
-## Mission & Vision
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Mission, Vision & Values](#mission-vision--values)
+3. [The SMART Framework](#the-smart-framework)
+4. [Platform Features](#platform-features)
+5. [Delivery Channels](#delivery-channels)
+6. [Program Catalog & Pricing](#program-catalog--pricing)
+7. [Architecture](#architecture)
+   - [High-Level Overview](#high-level-overview)
+   - [Tech Stack](#tech-stack)
+   - [Directory Structure](#directory-structure)
+   - [Routing Model](#routing-model)
+   - [State Management](#state-management)
+   - [Theming System](#theming-system)
+   - [Animations & Motion](#animations--motion)
+   - [Data Layer](#data-layer)
+   - [Internationalization & Localization](#internationalization--localization)
+   - [Modals & Detail Views](#modals--detail-views)
+   - [SEO](#seo)
+   - [Security](#security)
+8. [Pages & Routes](#pages--routes)
+9. [Components](#components)
+10. [Build & Development](#build--development)
+11. [Browser Support](#browser-support)
+12. [Accessibility](#accessibility)
+13. [Performance](#performance)
+14. [Get Started](#get-started)
+
+---
+
+## Overview
+
+**CS Academy** is a client-side single-page application (SPA) that delivers practical digital-skills education to learners across Tanzania, Kenya, Uganda, Rwanda, Burundi, and the DRC. It is operated under the **Cyber Academy** parent organization and led by founder **Alex Rweyemamu**.
+
+The platform is fully **data-driven**: every piece of visible content (courses, pricing, testimonials, blog posts, FAQs, instructors) lives in typed data modules under `src/data/` and `src/config/`. UI components are thin presentational layers that map over that data, which makes the site easy to localize, re-theme, and extend without touching component logic.
+
+Key characteristics:
+
+- **English-first, language-aware** pedagogy with local contextual examples.
+- **Mobile-money-first** payments (M-Pesa, Tigo Pesa, Airtel Money, HaloPesa).
+- **Low-bandwidth** friendly delivery (WhatsApp micro-learning, text-first PWA).
+- **Dark/Light** theme with full CSS-variable theming and smooth transitions.
+- **Multi-currency** pricing (TZS / KES / USD).
+- **No backend required** for the static build — content is bundled at build time. (Optional backend dependencies for AI features, e.g. DevPad, are present in `package.json` but the production `vite build` is a pure SPA.)
+
+---
+
+## Mission, Vision & Values
 
 ### Mission
 
-CS Academy exists to bridge the digital divide across East Africa by delivering practical, jargon-free digital skills training that is accessible to anyone with a smartphone — regardless of location, formal education level, or economic background. We believe that digital literacy is not a luxury for the elite but a foundational right for every working professional, student, and entrepreneur in Tanzania, Kenya, Uganda, and Rwanda.
+CS Academy exists to bridge the digital divide across East Africa by delivering practical, jargon-free digital skills training that is accessible to anyone with a smartphone — regardless of location, formal education level, or economic background.
 
 ### Vision
 
-We envision an East Africa where every working adult — the shopkeeper in Mwanza, the nurse in Kampala, the teacher in Kigali, the entrepreneur in Arusha — can confidently navigate digital tools, leverage AI for productivity, and transact safely online. A region where digital skills are a bridge to opportunity, not a barrier to it.
+An East Africa where every working adult — the shopkeeper in Mwanza, the nurse in Kampala, the teacher in Kigali — can confidently navigate digital tools, leverage AI for productivity, and transact safely online.
 
-### The Problem We Solve
+### Core Values
 
-- **70% of East African workers** lack foundational digital skills needed for the modern economy (World Bank, 2024).
-- **AI adoption is widening gaps**: Workers without AI literacy earn 30–40% less productivity premium compared to peers who use AI tools effectively (McKinsey, 2024).
-- **Language barriers** exclude millions from quality training: most digital courses are available only in English, despite many African languages being the lingua franca of local communities.
-- **Connectivity constraints** make video-heavy Western e-learning platforms inaccessible: the average mobile data user in East Africa cannot stream a 10-minute instructional video on a daily commute without exceeding their data budget.
-- **Training that does not translate to the job**: Generic international certifications do not prepare workers for the actual tools, platforms, and workflows used by East African employers.
-
-CS Academy addresses all four gaps simultaneously.
-
----
-
-## Core Values
-
-### 1. English-First Instruction
-
-Every course, guide, and tool at CS Academy is designed in English, with local language references only where needed for cultural context. We recognize that most East African learners think, work, and solve problems in their native languages — and that designing with cultural context from the start is not the same as translating a course after design. Our content uses culturally familiar examples, local contexts, and idiomatic expressions that resonate with East African learners rather than adapting Western curricula.
-
-### 2. Practical Outcomes, Not Academic Abstraction
-
-Every CS Academy learning outcome is tied to a real-world task. We do not teach "what AI is." We teach "how to use AI to draft a customer email in 60 seconds." We do not teach "digital security theory." We teach "how to configure MFA on your M-Pesa account in 5 minutes." If a learner cannot apply what they learned within 24 hours of completing a module, we consider the module a failure — not the learner.
-
-### 3. Low-Bandwidth Accessibility
-
-CS Academy is built to work on 2G and 3G connections. Our micro-learning content is delivered in text-first, low-resolution-image formats that consume a fraction of the data of video streaming. We optimize for the phone most East Africans actually own — not the device we wish they had. Offline access is a design requirement, not an afterthought. Every feature we ship is tested on an entry-level Android phone with 2GB of RAM.
-
-### 4. Affordability by Design
-
-We reject the model where good digital education is only available to those who can afford it. CS Academy courses are free to access in their foundational tiers. Paid professional tracks are priced in Tanzanian Shillings and Kenyan Shillings — not USD — to reflect local purchasing power. We offer mobile money payment options because we know our learners pay for things in M-Pesa and Tigo Pesa, not credit cards.
-
-### 5. Community-Centered Learning
-
-Digital skills spread through communities, not just individuals. CS Academy builds its growth model around peer learning, local champions, and organizational partnerships. We measure success not only by individual completion rates but by how many community members a trained learner goes on to teach, mentor, or employ.
-
-### 6. Radical Transparency
-
-We are honest about what technology can and cannot do. We do not oversell AI as a magic solution, nor do we sensationalize cybersecurity as an unsolvable threat. Our AI tools guide teaches learners to question AI output, not accept it uncritically. Our cybersecurity content acknowledges real risks without inducing paranoia. Trust is built through accuracy, not alarm.
+| Value | Description |
+|---|---|
+| **Accessibility** | English-first curricula, mobile-money payments, and low-bandwidth channels make education reachable. |
+| **Practical Value** | Real-world skills and tangible projects that directly improve employability and business outcomes. |
+| **Community** | An active, supportive network of tech learners and mentors across East Africa. |
+| **Innovation & Safety** | Forward-looking generative-AI and cybersecurity tools with ethics and privacy built in. |
 
 ---
 
 ## The SMART Framework
 
-CS Academy's proprietary pedagogical methodology — **SMART** — is a five-stage learning cycle engineered for working adults in resource-constrained environments. Each stage is designed to maximize retention, minimize cognitive load, and ensure transfer of skill to the workplace.
+CS Academy's proprietary pedagogical methodology — **SMART** — is a five-stage learning cycle engineered for working adults in resource-constrained environments.
 
-### Stage 1: Understand
+| Stage | Name | Focus |
+|---|---|---|
+| **S** | **Understand** | Encounter a concept through a concrete, locally relevant problem scenario. |
+| **M** | **Master** | Guided, step-by-step practice with AI-assisted real-time correction. |
+| **A** | **Apply** | Apply the skill to a real workplace task with genuine stakes. |
+| **R** | **Review** | Structured metacognitive reflection and peer review. |
+| **T** | **Trust** | Earn a QR-verifiable digital certificate demonstrating verified competence. |
 
-**What happens**: Learners encounter a new concept through a concrete, locally relevant problem scenario — not an abstract definition. The scenario is written in English, uses familiar settings (a shop, a school, a health clinic), and ends with a question the learner genuinely wants to answer.
-
-**Why it works**: Adults learn when they see relevance. A shopkeeper in Moshi does not need to understand "what a prompt is." She needs to understand that typing the right question into a phone can save her 2 hours of writing customer messages by hand. We build understanding from the problem outward, not from the theory inward.
-
-**Example**: Before teaching "prompt engineering," we show a scenario: "Amina runs a small salon in Dar es Salaam. Every day she writes the same WhatsApp message to 20 different customers confirming appointments. Yesterday she forgot to message 3 customers and lost TZS 180,000 in bookings. What if she could draft all 20 messages in 3 minutes using her phone?"
-
-### Stage 2: Master
-
-**What happens**: The learner is guided through a structured, step-by-step mastery exercise where they perform the core skill — with AI assistance — in a low-stakes environment. The AI provides real-time correction, not final answers. The learner builds muscle memory through repetition with variation.
-
-**Why it works**: Mastery requires doing, not watching. Traditional e-learning fails because it asks learners to watch a 10-minute video and then apply the skill from memory hours later. CS Academy's Mastery stage puts the tool in the learner's hands immediately. The AI acts as a patient tutor who never judges, never runs out of patience, and adapts the difficulty to the learner's pace.
-
-**Example**: "Amina opens the CS Academy AI assistant on WhatsApp. She types her first prompt: 'Write a confirmation message for a hair appointment at 10am tomorrow.' The AI drafts a message. She edits it. She sends it to one real customer. She comes back and tries again — this time adding the appointment location. By the fifth prompt, she has internalized the pattern: context + timing + service = a complete message."
-
-### Stage 3: Apply
-
-**What happens**: The learner applies the mastered skill to a real workplace task — not a synthetic exercise. The task is assigned context and stakes: it must actually be done in their job, submitted to a real supervisor, or used to serve a real customer. The output is evaluated by a peer or supervisor using a simple rubric.
-
-**Why it works**: Learning that has real consequences drives retention. When the output of an exercise matters — when a real customer receives the message, when a real supervisor reviews the report — the brain encodes the learning differently than when it is a "practice task." We design application tasks that create genuine accountability.
-
-**Example**: "Amina's homework for Week 2 is to use the AI assistant to draft confirmation messages for all her appointments for one full week. At the end of the week, she shows her phone to her CS Academy cohort facilitator: 87 messages sent, 3 no-shows prevented, 2 hours reclaimed. She presents her results to 5 peers in her WhatsApp cohort. They ask questions. She explains her prompt structure. Teaching is the highest form of learning."
-
-### Stage 4: Review
-
-**What happens**: After application, the learner engages in structured reflection — not passive feedback. The CS Academy review stage uses a specific protocol: What worked? What did not work? What will I do differently next time? What will I teach someone else? This metacognitive step is where shallow learning becomes durable skill.
-
-**Why it works**: Most e-learning platforms skip reflection because it does not scale. We solve this with cohort-based peer review and AI-assisted self-reflection prompts. The Review stage is also where our facilitators identify learners who are falling behind and trigger targeted intervention — before they disengage.
-
-**Example**: "After applying AI-assisted messaging for one month, Amina's cohort meets on WhatsApp for a 30-minute review session. Each learner shares one insight and one challenge. The facilitator surfaces a pattern: most learners are writing prompts that are too vague. The group co-creates a prompt refinement checklist. Amina realizes she has been underspecifying the context — adding the customer's name and preferred style would improve response quality. She updates her approach."
-
-### Stage 5: Trust
-
-**What happens**: Trust is the outcome of verified competence. After completing the full SMART cycle, learners earn a QR-verifiable digital certificate that employers, partners, and clients can independently authenticate. Trust is not declared — it is demonstrated and verified. Learners who complete the Trust stage are eligible for the CS Academy employer network job matching service.
-
-**Why it works**: Credential value is the primary motivation for most working adult learners in East Africa. CS Academy certificates carry weight because they are tied to demonstrated competence — not just time-on-platform. A QR code on a CV links to a verifiable record of exactly which skills a learner has practiced and applied. Employers trust what they can verify.
-
-**Example**: "Amina completes the AI Productivity Professional track. Her certificate — stored in her CS Academy wallet and on the blockchain-verified registry — shows she has applied AI tools to real customer communication tasks, been peer-reviewed, and demonstrated competence in 14 practical assessments. When she applies for a supervisory role at a cosmetics distribution company, the HR manager scans the QR code and sees exactly what Amina can do — not just that she attended a training."
+The framework content is defined in `src/data/smartFramework.ts` and rendered by `src/components/SmartFramework.tsx`.
 
 ---
 
 ## Platform Features
 
 ### QR-Verifiable Digital Certificates
-
-Every CS Academy certificate includes a unique QR code that links to a live verification page showing:
-
-- The learner's name and photo (uploaded at enrollment)
-- The specific skills and competencies assessed
-- The dates of program completion
-- The peer review scores and facilitator sign-off
-- The certificate serial number and issuance timestamp
-
-Employers, HR managers, and partners can scan the QR or enter the serial number at `csacademy.africa/verify` to authenticate any certificate in real time. Certificates cannot be forged, transferred, or claimed by someone who did not complete the program. The registry is append-only and timestamped.
+Every certificate includes a unique QR code linking to a live verification page (`cyberacademy.africa/verify`) showing the learner's name, assessed skills, completion dates, peer-review scores, and a timestamped serial number. Certificates are append-only and tamper-resistant.
 
 ### The Digital Shop
-
-The CS Academy Digital Shop is a micro-credential marketplace where learners can:
-
-- **Purchase verified skill badges** for individual competencies (e.g., "AI Email Management — Level 1", "M-Pesa Business Security", "Data Privacy Fundamentals")
-- **Redeem earned credits** from the Invite & Earn program toward paid professional tracks
-- **Access premium toolkits** — deep-dive PDF guides and template libraries that complement free learning paths
-- **Subscribe to monthly learning plans** for structured progression with cohort accountability
-
-The Digital Shop accepts M-Pesa, Tigo Pesa, Airtel Money, Visa, and Mastercard. Prices are displayed in TZS and KES by default, with UGX and RWF available. All transactions are receipted via SMS and email.
+A micro-credential marketplace where learners purchase verified skill badges, redeem Invite & Earn credits, access premium toolkits (PDF guides, template libraries), and subscribe to monthly plans. Accepts M-Pesa, Tigo Pesa, Airtel Money, Visa, and Mastercard. Prices displayed in TZS, KES, and UGX/RWF where applicable.
 
 ### Vibe Coding
-
-Vibe Coding is CS Academy's flagship applied AI programming track — teaching learners to build working software by describing what they want in plain language, then iteratively refining the output. Vibe Coding is not about memorizing syntax. It is about:
-
-- **Understanding what AI can build**: Learners leave with actual working products — WhatsApp bots, data dashboards, automation scripts, simple web apps
-- **Knowing what questions to ask**: Prompting skill is programming skill in the AI era
-- **Deploying with confidence**: Learners publish their first live project by the end of Week 2
-- **Thinking like a product builder**: Not just consuming AI, but directing it toward business problems
-
-Vibe Coding is available as a 6-week intensive cohort, a self-paced track, and an enterprise team workshop. Early cohort graduates have built inventory management bots for retail shops, appointment reminder systems for salons, and automated SMS reminder systems for schools.
+CS Academy's flagship applied-AI programming track — building working software by describing what you want in plain language, then iteratively refining output. Available as a 6-week intensive cohort, a self-paced track, and an enterprise team workshop.
 
 ### Invite & Earn Referral System
-
-CS Academy's growth is built on community. The Invite & Earn system rewards learners who bring new members into the platform:
 
 | Action | Reward |
 |---|---|
 | Invite a friend who enrolls in a free track | Earn 500 CS Points |
-| Invite a friend who purchases a professional track | Earn 2,000 CS Points + 10% commission on their first purchase |
+| Invite a friend who purchases a professional track | Earn 2,000 CS Points + 10% commission on first purchase |
 | Your invited friend completes a professional track | Earn 5,000 CS Points + TZS 15,000 mobile money bonus |
 
-CS Points are redeemable in the Digital Shop for skill badges, premium toolkits, and course discounts. The referral link is shareable via WhatsApp, SMS, and social media. Learners can track their referrals and earnings from the CS Academy dashboard.
+### DevPad (Interactive Playground)
+`DevPadPage` is an in-app, AI-assisted coding playground where learners prototype, test, and share small applications with mentor feedback. Backed by the optional `@google/genai` integration declared in `package.json`.
 
 ---
 
 ## Delivery Channels
 
-CS Academy delivers learning through 6 channels, optimized for different learner contexts, connectivity conditions, and organizational preferences:
+| # | Channel | Summary |
+|---|---|---|
+| 1 | **WhatsApp Micro-Learning** | Text/voice lessons via chat; works on 2G; the most accessible format. |
+| 2 | **USSD & SMS Review** | Session-based review for intermittent-connectivity learners. |
+| 3 | **Progressive Web App (PWA)** | Full browser access with offline caching and text-first rendering. |
+| 4 | **Mobile Application (iOS/Android)** | Native apps with push reminders and offline sync. |
+| 5 | **Corporate On-Site Training** | Facilitated on-site programs for organizations (banks, schools, NGOs). |
+| 6 | **Self-Paced Online** | Asynchronous learning at the learner's own speed. |
 
-### 1. WhatsApp Micro-Learning
-
-Our primary delivery channel. Short, text-based lessons (200–500 words) delivered as WhatsApp messages through a structured chat experience. Learners receive one lesson per day with a practical exercise. Completed exercises are submitted by sending a voice note, text response, or photo of the output. This channel requires no data beyond WhatsApp (which most East African learners already use), works on 2G, and is accessible on entry-level Android phones. WhatsApp micro-learning is the backbone of our individual learner experience and the most accessible format for learners in rural and peri-urban areas.
-
-### 2. USSD & SMS Review
-
-For learners in areas with intermittent data connectivity, CS Academy offers a USSD-based review system where learners dial a short code to access lesson summaries, practice quizzes, and receive SMS reminders for their learning schedule. USSD sessions are session-based (not data-dependent) and work on any phone, including basic feature phones. This channel is used for reinforcement and review — not initial content delivery.
-
-### 3. Progressive Web App (PWA)
-
-The CS Academy web application — this platform — provides full access to all course content, progress tracking, certificate management, the Digital Shop, peer discussion forums, and AI assistant features. The PWA is optimized for mobile-first access, supports offline reading of downloaded lessons, and consumes minimal data through aggressive caching and text-first rendering. The PWA is the primary channel for learners who have consistent data access and prefer learning on a browser.
-
-### 4. Mobile Application (Native iOS & Android)
-
-The native CS Academy mobile apps provide push notification-based learning reminders, offline content sync, background data compression, and camera integration for submitting photo-based assignments (e.g., a learner photographing a completed spreadsheet or a configured business WhatsApp setup). The apps are built with aggressive data compression (content is delivered in a proprietary binary format that is 60% smaller than equivalent web content) and support download of entire course modules for offline study. Available on Google Play Store and Apple App Store.
-
-### 5. Corporate On-Site Training
-
-CS Academy partners with organizations — banks, schools, hospitals, NGOs, government agencies, and enterprises — to deliver facilitated on-site training programs. A CS Academy certified facilitator leads a 3-day to 4-week intensive program tailored to the organization's operational context. On-site programs include:
-
-- Pre-training digital skills assessment for all participants
-- Customized curriculum aligned to the organization's tools and workflows
-- Post-training follow-up coaching via WhatsApp for 30 days
-- Organization-level impact reporting on skills adoption and productivity metrics
-
-Corporate programs are priced per organization, not per learner, making them cost-effective for teams of 10 or more. Volume discounts apply for organizations enrolling 50+ employees.
-
-### 6. Self-Paced Online (PWA & App)
-
-Fully asynchronous learning for learners who prefer to progress at their own speed. Self-paced learners access the same course content as cohort learners but without the daily lesson cadence or peer cohort deadlines. Self-paced learners can purchase individual skill tracks or subscribe to monthly plans. Self-paced learners are eligible for certificates and Digital Shop access but are not eligible for the peer review component or employer job matching.
+Delivery-format metadata lives in `src/data/learningFormats.ts` and is rendered by `LearningFormatsSection` / `LearningFormatsPage`.
 
 ---
 
-## Project Structure
+## Program Catalog & Pricing
 
-### Overview
+### Core Pillars (from `src/config/site.ts`)
 
-CS Academy is a **React 19 + TypeScript** single-page application built with **Vite 6**, styled with **Tailwind CSS v4**, and deployed as a Progressive Web App. It uses **React Context + useReducer** for global state management. No server-side rendering or backend is included in this repository — content management and certificate issuance are handled through a future headless CMS integration.
+| Pillar | Badge | Description |
+|---|---|---|
+| **AI Literacy & Vibe Coding** | Flagship Track | Generative AI, workplace automation, prompt engineering, voice-assisted vibe coding. |
+| **Cybersecurity & Safety** | Core Defense | Defensive hygiene, anti-phishing, mobile-payment fraud prevention, deepfake detection. |
+| **Modern Digital Skills & Code** | Job Ready | Web development (React, Tailwind), UI/UX in Figma, digital marketing, data analytics. |
+
+Training tracks are categorized as `ai`, `cybersecurity`, `digital-skills`, `web-coding`, and `design-uiux` (see `src/types/index.ts` and `src/data/training.ts`). Program deep-dives are available at `/programs/ai`, `/programs/cybersecurity`, and `/programs/digital-skills`.
+
+### Pricing & Membership Plans (PRICING & MEMBERSHIP PLANS)
+
+Defined in `src/data/pricing.ts` and rendered by `PricingSection.tsx`. All TZS prices include a +15,000 TZS adjustment, with KES/USD equivalents at the platform's standard rates (1 USD = 2,500 TZS; 1 TZS ≈ 1/18.75 KES).
+
+| Plan | TZS | KES | USD | Billing |
+|---|---|---|---|---|
+| **WhatsApp Micro-Learning** | 20,000 | 1,050 | 8 | per month |
+| **Self-Paced Video Platform** | 30,000 | 1,600 | 12 | per month |
+| **Zoom & Meet Live Cohorts** _(Most Popular)_ | 50,000 | 2,700 | 20 | per month |
+| **VIP Annual Pass (All Channels)** | 135,000 | 7,200 | 54 | per year |
+| **Workshops & Seminars** | 465,000 | 24,800 | 186 | per workshop session (up to 30 participants) |
+| **Physical Training (On-Site)** | 1,215,000 | 64,800 | 486 | per corporate cohort (multi-day) |
+| **Conferences & Keynotes** | Custom | Custom | Custom | per keynote address |
+
+Accepted payment methods (`paymentMethods` in `pricing.ts`): M-Pesa, Tigo Pesa, Airtel Money, HaloPesa, Debit/Credit Card.
+
+---
+
+## Architecture
+
+### High-Level Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         index.html                           │
+│  ├─ Meta / CSP / SEO / JSON-LD                              │
+│  └─ <div id="root">  ← React mounts here                    │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│  main.tsx                                                   │
+│   ├─ HelmetProvider (SEO)                                   │
+│   ├─ AppProvider  (theme, currency, translations)           │
+│   ├─ import './index.css'   (Tailwind v4 + theme vars)      │
+│   └─ import './styles/reveal.css' (scroll reveal)           │
+│            │                                                │
+│            ▼                                                │
+│  App.tsx  ── routing state machine (currentRoute)          │
+│   ├─ Navbar / Footer / BackToTop / ScrollProgress          │
+│   ├─ Page renderer (switch on currentRoute)                │
+│   └─ Modal stack (Booking, Program, Training, Resource, …) │
+└─────────────────────────────────────────────────────────────┘
+            │                      │
+            ▼                      ▼
+   ┌────────────────┐     ┌──────────────────────┐
+   │  Pages/*       │     │  Data Layer          │
+   │  (route views) │◄────│  src/data/*, config  │
+   └────────────────┘     └──────────────────────┘
+```
+
+The application is a **single-page state machine**, not a URL-driven router. Navigation is handled by a `currentRoute` state variable in `App.tsx` and a `setCurrentRoute` callback passed down to children. There is no `react-router` dependency; deep routes (`programs/ai`, etc.) are simply enumerated union members of the `PageRoute` type.
+
+### Tech Stack
+
+| Concern | Choice | Notes |
+|---|---|---|
+| Language | **TypeScript 5.8** (ES2022) | Strict typing via `src/types/index.ts`. |
+| UI Library | **React 19** | Hooks-based function components. |
+| Build Tool | **Vite 6** | `@vitejs/plugin-react`, `@tailwindcss/vite`. |
+| Styling | **Tailwind CSS v4** | Zero-config, CSS-first; theming via CSS custom properties. |
+| Animation | **motion** (Framer Motion successor) + custom CSS keyframes | `useReveal` hook for IntersectionObserver scroll reveals. |
+| SEO | **react-helmet-async** | Per-page `<title>`, meta, OG, and JSON-LD. |
+| Icons | **lucide-react** | Consistent open-source icon set. |
+| State | **React Context + useReducer pattern** | `AppContext` for theme/currency/translations. |
+| Forms | Validated locally | Zod-style schemas referenced in `utils/` (where used). |
+| AI (optional) | **@google/genai** | Used by DevPad; not required for the static build. |
+| Server (optional) | **express** + **dotenv** | Declared for future/optional backend; `vite build` is pure SPA. |
 
 ### Directory Structure
 
 ```
-src/
-├── assets/                  # Static images, logos, and brand assets
-├── components/
-│   ├── ui/                  # Reusable primitive UI components (buttons, inputs, cards)
-│   ├── layout/              # Shell components: Navbar, Footer, PageContainer
-│   ├── sections/            # Page section components (Hero, Features, Testimonials)
-│   ├── modals/              # Modal dialogs (BookingModal, ProgramDetailModal, ResourceViewModal)
-│   └── animations/          # Framer Motion variants, transition configurations
-├── config/
-│   ├── site.ts              # Site-wide configuration: contact info, social links, SEO defaults
-│   └── navigation.ts        # Navigation structure: routes, page titles, breadcrumb config
-├── context/
-│   └── AppContext.tsx       # Global state: theme, locale, user session, modal state
-├── data/
-│   ├── resources.ts         # 28 toolkit items with full content: highlights, use cases, previews
-│   ├── training.ts          # Training program catalog: tracks, categories, featured training
-│   └── programs.ts          # Program catalog: pillars, badges, deep-dive slugs
-├── hooks/
-│   ├── useModal.ts          # Modal open/close logic with focus trap and scroll lock
-│   ├── useScrollProgress.ts # Reading progress tracking for blog articles
-│   └── useTheme.ts          # Theme switching (dark/light) with system preference detection
-├── pages/
-│   ├── HomePage.tsx         # Landing page: hero, features, testimonials, CTA sections
-│   ├── AboutPage.tsx        # Organization, team, impact numbers, partner logos
-│   ├── ProgramsPage.tsx     # Program catalog with category filtering and search
-│   ├── ProgramDeepDivePage.tsx # Individual program detail with curriculum breakdown
-│   ├── ResourcesPage.tsx    # Free toolkit library with category and search filters
-│   ├── BlogPage.tsx         # Blog listing with category tabs and search
-│   ├── VibeCodingPage.tsx   # Vibe Coding landing page: features, pricing, testimonials, FAQ
-│   └── DevPadPage.tsx       # Interactive AI coding playground with Monaco Editor
-├── styles/
-│   └── reveal.css           # Scroll-reveal animation utility classes (.reveal, .reveal-stagger)
-├── types/
-│   └── index.ts             # Shared TypeScript interfaces: ResourceItem, Program, PageRoute, etc.
-├── utils/
-│   ├── download.ts          # HTML-to-print PDF generation with CS Academy branded template
-│   ├── formatters.ts        # Date, currency, and reading time formatting utilities
-│   └── validators.ts       # Form validation schemas (Zod) for booking and contact forms
-├── App.tsx                  # Root component: router configuration and global layout
-├── main.tsx                 # Entry point: HelmetProvider, AppContext, global CSS, reveal.css
-└── index.css               # Tailwind base, CSS custom properties, theme variables, keyframes
+CSACADEMY2/
+├── index.html                  # Entry HTML: meta, CSP, SEO, JSON-LD, theme bootstrap script
+├── vite.config.ts              # Vite + React + Tailwind plugins, '@' path alias
+├── tsconfig.json               # TypeScript config (bundler resolution, JSX react-jsx)
+├── package.json                # Dependencies & scripts
+├── metadata.json               # Project metadata
+└── src/
+    ├── main.tsx                # React root: HelmetProvider → AppProvider → App
+    ├── App.tsx                 # Routing state machine, modal orchestration, layout
+    ├── index.css               # Tailwind v4 import, CSS variables (dark/light), keyframes
+    ├── config/
+    │   └── site.ts             # Academy info, contact, socials, pillars, testimonials, founder
+    ├── context/
+    │   └── AppContext.tsx      # Global state: theme, currency, translations (+ localStorage)
+    ├── types/
+    │   └── index.ts            # Shared interfaces & PageRoute union
+    ├── data/
+    │   ├── translations.ts     # UI strings, section badges, Theme/Currency types
+    │   ├── training.ts         # Training programs, featured training, packages
+    │   ├── smartFramework.ts   # SMART methodology steps
+    │   ├── resources.ts        # Downloadable toolkits/guides
+    │   ├── programs.ts         # Program pillars & deep-dive content
+    │   ├── pricing.ts          # Membership/pricing plans + payment methods
+    │   ├── platformFeatures.ts # Feature cards (certificates, shop, etc.)
+    │   ├── organizationIndustries.ts # Industry-specific solutions
+    │   ├── learningFormats.ts  # Delivery-channel definitions
+    │   ├── instructors.ts      # Instructor profiles
+    │   ├── faq.ts              # Frequently asked questions
+    │   └── blog.ts             # Blog articles
+    ├── hooks/
+    │   └── useReveal.ts        # IntersectionObserver scroll-reveal hook
+    ├── utils/
+    │   ├── download.ts         # HTML→PDF generation (branded certificates/guides)
+    │   └── highlight.tsx       # Syntax/text highlighting helpers
+    ├── styles/
+    │   └── reveal.css          # .reveal / .reveal.is-revealed / .reveal-stagger
+    ├── components/
+    │   ├── Navbar.tsx          # Responsive nav (lg breakpoint), theme/currency toggles
+    │   ├── Footer.tsx          # Site footer with social links
+    │   ├── BackToTop.tsx       # Scroll-to-top button (theme-aware)
+    │   ├── ScrollProgress.tsx  # Reading-progress bar
+    │   ├── ErrorBoundary.tsx   # React error boundary
+    │   ├── NotFound.tsx        # 404 / not-found route
+    │   ├── Hero.tsx            # Landing hero
+    │   ├── WhyCSAcademy.tsx    # Value-proposition section
+    │   ├── TrainingProcess.tsx # How-it-works steps
+    │   ├── TrainingPackages.tsx# Package cards
+    │   ├── SocialProof.tsx     # Testimonials (category-filtered)
+    │   ├── SmartFramework.tsx  # SMART framework display
+    │   ├── ShareButtons.tsx    # Social share controls
+    │   ├── ResourcesSection.tsx
+    │   ├── ProgramsOverview.tsx
+    │   ├── PricingSection.tsx  # Membership/pricing plans
+    │   ├── PlatformFeaturesSection.tsx
+    │   ├── LearningFormatsSection.tsx
+    │   ├── ForOrganizationsSection.tsx
+    │   ├── FeaturedTraining.tsx# Filterable training catalog (counts per category)
+    │   ├── FAQSection.tsx
+    │   ├── BlogSection.tsx
+    │   ├── AboutSection.tsx
+    │   ├── AudienceStrip.tsx
+    │   ├── ContactCTA.tsx
+    │   ├── BookingModal.tsx          # Inquiry form → WhatsApp / Email dispatch
+    │   ├── ProgramDetailModal.tsx
+    │   ├── TrainingDetailModal.tsx
+    │   ├── ResourceViewModal.tsx
+    │   └── BlogArticleModal.tsx
+    └── pages/
+        ├── HomePage.tsx
+        ├── FeaturesPage.tsx
+        ├── PricingPage.tsx
+        ├── ProgramsPage.tsx
+        ├── ProgramDeepDivePage.tsx   # slug-driven (ai | cybersecurity | digital-skills)
+        ├── LearningFormatsPage.tsx
+        ├── ForOrganizationsPage.tsx
+        ├── ResourcesPage.tsx
+        ├── BlogPage.tsx
+        ├── AboutPage.tsx
+        ├── ContactPage.tsx
+        ├── VibeCodingPage.tsx
+        └── DevPadPage.tsx
+
 ```
 
-### Key Technical Decisions
+### Routing Model
 
-| Decision | Rationale |
+`App.tsx` holds `const [currentRoute, setCurrentRoute] = useState<PageRoute>('home')`. A `renderCurrentPage()` switch maps each `PageRoute` to its page component and injects callbacks (`setCurrentRoute`, `openBookingModal`, `openProgramModal`, etc.). On every route change, `window.scrollTo({ top: 0 })` runs, and the page container is keyed (`<div key={currentRoute} className="page-enter">`) to trigger the `page-enter` transition (defined in `index.css`).
+
+```ts
+export type PageRoute =
+  | 'home' | 'features' | 'pricing' | 'programs'
+  | 'programs/ai' | 'programs/cybersecurity' | 'programs/digital-skills'
+  | 'vibe-coding' | 'devpad' | 'learning-formats' | 'for-organizations'
+  | 'resources' | 'blog' | 'about' | 'contact' | 'not-found';
+```
+
+### State Management
+
+Global state is provided by `AppContext` (`src/context/AppContext.tsx`):
+
+| State | Type | Persistence |
+|---|---|---|
+| `theme` | `'dark' \| 'light'` | `localStorage['cs_academy_theme']` (default `light`) |
+| `currency` | `'TSH' \| 'KES' \| 'USD'` | `localStorage['cs_academy_currency']` (default `TSH`) |
+| `t` | `Translations` | In-memory (from `translations.ts`) |
+
+The provider toggles the `light` class on `document.documentElement` to drive theming (see below). Components consume state via the `useApp()` hook, which throws if used outside `AppProvider`.
+
+Modal state (booking, program, training, resource, blog article) is local to `App.tsx` and coordinated with a single `Escape`-key handler and a body `overflow:hidden` lock while any modal is open.
+
+### Theming System
+
+Theming is **CSS-variable driven** and toggled by a single class on the root `<html>` element:
+
+- `:root` defines the **dark** palette (`--bg-primary: #090909`, `--accent-red: #ff3b30`, etc.).
+- `html.light` overrides the same variables with the **light** palette (`--bg-primary: #f7f4ee`, `--accent-red: #dc2626`, etc.).
+
+`index.css` also exposes semantic helpers (`.text-theme-primary`, `.glass-surface`, `.theme-card`, `.badge-theme`, `.keyword-mark`, etc.) and a full keyframe library (`page-enter`, `float-soft`, `pulse-glow`, `shimmer-text`, `gradient-shift`, …). A `prefers-reduced-motion` block disables animations for accessibility. The initial theme is applied before paint by an inline script in `index.html` to avoid flash-of-wrong-theme.
+
+### Animations & Motion
+
+- **Page transitions**: `.page-enter` keyframe (fade + 12px rise) applied to the keyed route wrapper in `App.tsx`.
+- **Scroll reveals**: `useReveal.ts` (IntersectionObserver) toggles `.is-revealed` on elements with `.reveal` / `.reveal-stagger` classes, defined in `src/styles/reveal.css` (700ms cubic-bezier easing). `index.css` defers to `reveal.css` as the source of truth (it is imported after `index.css` in `main.tsx`).
+- **Component motion**: the `motion` library is used for modal entrances, micro-interactions, and hover states.
+- **Reduced motion**: all animation durations are neutralized under `prefers-reduced-motion: reduce`.
+
+### Data Layer
+
+All content is typed and centralized:
+
+| Module | Exports | Consumed by |
+|---|---|---|
+| `config/site.ts` | `siteConfig` (academy info, contact, socials, pillars, 20 testimonials, founder) | Footer, Hero, SocialProof, BookingModal |
+| `data/translations.ts` | `translations`, `Theme`, `Currency` types | AppContext, all section components |
+| `data/training.ts` | `featuredTrainingData`, `trainingPackagesData` | FeaturedTraining, TrainingPackages, TrainingDetailModal |
+| `data/programs.ts` | Program pillars & deep-dive content | ProgramsPage, ProgramDeepDivePage, ProgramsOverview |
+| `data/pricing.ts` | `pricingPlansData`, `paymentMethods` | PricingSection, PricingPage |
+| `data/learningFormats.ts` | `learningFormatsData` | LearningFormatsSection/Page |
+| `data/platformFeatures.ts` | `platformFeaturesData` | PlatformFeaturesSection |
+| `data/resources.ts` | `resourcesData` | ResourcesSection, ResourcesPage, ResourceViewModal |
+| `data/blog.ts` | `blogPosts` | BlogSection, BlogPage, BlogArticleModal |
+| `data/faq.ts` | `faqData` | FAQSection |
+| `data/instructors.ts` | `instructorsData` | AboutPage |
+| `data/smartFramework.ts` | SMART steps | SmartFramework |
+| `data/organizationIndustries.ts` | Industry solutions | ForOrganizationsSection/Page |
+
+### Internationalization & Localization
+
+The platform supports **currency localization** out of the box (TZS / KES / USD) via the `currency` context and `priceTsh` / `priceKes` / `priceUsd` fields on price-bearing data. UI copy is centralized in `translations.ts` (section badges, nav labels, hero copy, CTAs). English is the primary instruction language; the content strategy embeds local East-African context rather than post-hoc translation.
+
+### Modals & Detail Views
+
+Detail and inquiry flows are rendered as overlay modals (not routes) for instant, stateful interaction:
+
+- **BookingModal** — inquiry form that constructs a pre-filled message ending with *"Please provide curriculum details and scheduling availability."* and dispatches it via **WhatsApp** (`wa.me`) or **Email** (`mailto:`), with a copy-to-clipboard fallback.
+- **ProgramDetailModal / TrainingDetailModal / ResourceViewModal / BlogArticleModal** — content detail overlays with focus trapping, `aria-modal`, and `Escape` handling.
+
+### SEO
+
+- `react-helmet-async` sets per-page `<title>`, `meta description`, canonical, and Open Graph/Twitter tags.
+- `index.html` ships two JSON-LD blocks (`Organization` + `EducationalOrganization`).
+- Meta keywords target East-African AI/cybersecurity/digital-skills search intent.
+- `lang="en"` and `notranslate` set on `<html>` to stabilize rendering.
+
+### Security
+
+Implemented at the document level in `index.html`:
+
+| Header / Policy | Value |
 |---|---|
-| **Tailwind CSS v4** | Utility-first CSS with zero runtime overhead. CSS custom properties for theming eliminate per-component theme prop drilling. |
-| **React Context + useReducer** | Lightweight global state (theme, locale, modal state) without the bundle weight of Redux or Zustand. |
-| **React 19** | Latest React with enhanced hooks, no separate @types/react package needed. |
-| **Vite 6** | Sub-second HMR in development, optimized production builds with code splitting per route. |
-| **Framer Motion** | Spring-physics animations for modals, page transitions, and micro-interactions. |
-| **React Helmet Async** | Declarative SEO metadata management per page. SSR-compatible via a `HelmetProvider` wrapper in `main.tsx`. |
-| **Lucide React** | Consistent, open-source icon library covering all UI needs without a custom icon sprite. |
-| **@formspree/react** | Serverless form handling for the contact and booking forms without a dedicated backend. |
+| **Content-Security-Policy** | `default-src 'self'`; scripts/styles `self` + `unsafe-inline`/`unsafe-eval` (Vite HMR requirement); images `self data: https:`; fonts `self` + gstatic; `upgrade-insecure-requests`; `block-all-mixed-content`. |
+| **X-Content-Type-Options** | `nosniff` |
+| **X-Frame-Options** | `DENY` (anti-clickjacking) |
+| **X-XSS-Protection** | `1; mode=block` |
+| **Referrer-Policy** | `strict-origin-when-cross-origin` |
+| **Permissions-Policy** | `camera=(), microphone=(), geolocation=(), interest-cohort=()` |
+| **Cross-Origin-Opener-Policy** | `same-origin` |
+| **Cross-Origin-Resource-Policy** | `same-origin` |
 
-### Browser Support
+> Note: `unsafe-inline` / `unsafe-eval` are required by Vite's dev/HMR runtime; tighten the CSP for a hardened production deployment if HMR is disabled.
 
-CS Academy targets the following browser versions:
+---
 
-- **Chrome/Edge**: Last 2 stable versions (approximately 98%+ of East African desktop/mobile Chrome users)
-- **Firefox**: Last 2 stable versions
-- **Safari iOS**: Last 2 stable versions on iOS 14+
-- **Samsung Internet**: Last 2 stable versions
+## Pages & Routes
 
-### Performance Budget
+| Route | Page Component | Purpose |
+|---|---|---|
+| `home` | `HomePage` | Hero, features, programs, pricing, testimonials, blog, FAQ, CTA. |
+| `features` | `FeaturesPage` | Platform capabilities overview. |
+| `pricing` | `PricingPage` | Membership & pricing plans. |
+| `programs` | `ProgramsPage` | Full program catalog with category filtering. |
+| `programs/ai` | `ProgramDeepDivePage` (`slug="ai"`) | AI Literacy deep dive. |
+| `programs/cybersecurity` | `ProgramDeepDivePage` (`slug="cybersecurity"`) | Cybersecurity deep dive. |
+| `programs/digital-skills` | `ProgramDeepDivePage` (`slug="digital-skills"`) | Digital Skills deep dive. |
+| `vibe-coding` | `VibeCodingPage` | Vibe Coding landing. |
+| `devpad` | `DevPadPage` | AI-assisted coding playground. |
+| `learning-formats` | `LearningFormatsPage` | Delivery channels & formats. |
+| `for-organizations` | `ForOrganizationsPage` | Enterprise/NGO solutions. |
+| `resources` | `ResourcesPage` | Free toolkit library. |
+| `blog` | `BlogPage` | Articles listing & reading. |
+| `about` | `AboutPage` | Organization, team, impact. |
+| `contact` | `ContactPage` | Contact & inquiry. |
+| `not-found` | `NotFound` | 404 fallback. |
+
+---
+
+## Components
+
+**Layout / Chrome**
+`Navbar` · `Footer` · `BackToTop` · `ScrollProgress` · `ErrorBoundary` · `NotFound`
+
+**Sections (composable homepage/landing blocks)**
+`Hero` · `WhyCSAcademy` · `TrainingProcess` · `TrainingPackages` · `SocialProof` · `SmartFramework` · `ShareButtons` · `ResourcesSection` · `ProgramsOverview` · `PricingSection` · `PlatformFeaturesSection` · `LearningFormatsSection` · `ForOrganizationsSection` · `FeaturedTraining` · `FAQSection` · `BlogSection` · `AboutSection` · `AudienceStrip` · `ContactCTA`
+
+**Modals**
+`BookingModal` · `ProgramDetailModal` · `TrainingDetailModal` · `ResourceViewModal` · `BlogArticleModal`
+
+---
+
+## Build & Development
+
+### Prerequisites
+- Node.js 18+ (tested with current LTS)
+- npm (or compatible package manager)
+
+### Scripts (`package.json`)
+
+| Script | Command | Description |
+|---|---|---|
+| `dev` | `vite --port=3000 --host=0.0.0.0` | Start dev server with HMR. |
+| `build` | `vite build` | Production build to `dist/`. |
+| `preview` | `vite preview` | Preview the production build locally. |
+| `clean` | `rm -rf dist server.js` | Remove build artifacts. |
+| `lint` | `tsc --noEmit` | Type-check without emitting. |
+
+### Common Commands
+
+```bash
+npm install        # install dependencies
+npm run dev        # start dev server (http://localhost:3000)
+npm run build      # production build
+npm run preview    # serve the built app
+npm run lint       # type-check
+```
+
+### Configuration Notes
+- **Path alias**: `@/*` → project root (see `vite.config.ts` and `tsconfig.json` `paths`).
+- **Tailwind v4** is configured via the `@tailwindcss/vite` plugin; no `tailwind.config.js` is required (theme tokens are CSS-first).
+- **HMR** can be disabled in agent/CI environments via the `DISABLE_HMR=true` env var (disables file watching to reduce CPU).
+
+---
+
+## Browser Support
+
+- **Chrome / Edge**: last 2 stable versions
+- **Firefox**: last 2 stable versions
+- **Safari iOS**: last 2 stable versions (iOS 14+)
+- **Samsung Internet**: last 2 stable versions
+
+---
+
+## Accessibility
+
+CS Academy targets **WCAG 2.1 AA**:
+
+- All interactive elements are keyboard navigable with visible focus indicators.
+- Color-contrast ratios meet AA thresholds (e.g., `--text-primary` tuned to `#1a1a1a` in light mode).
+- All images carry descriptive `alt` text; icons use `lucide-react` with `aria-hidden` where decorative.
+- All modals implement focus trapping, `role="dialog"`, `aria-modal`, and `Escape` handling.
+- `aria-live` regions announce dynamic updates.
+- `prefers-reduced-motion` is respected across all animation systems.
+- `prefers-color-scheme` is used for the initial render before hydration.
+
+---
+
+## Performance
 
 | Metric | Target |
 |---|---|
@@ -270,119 +496,39 @@ CS Academy targets the following browser versions:
 | Cumulative Layout Shift (CLS) | < 0.1 |
 | Time to Interactive (TTI) | < 5s on 3G |
 
-### Accessibility
-
-CS Academy targets **WCAG 2.1 AA** compliance:
-
-- All interactive elements are keyboard navigable with visible focus indicators
-- Color contrast ratios meet AA thresholds for normal and large text
-- All images carry descriptive `alt` text
-- All modals implement proper focus trapping and ARIA roles
-- Screen reader announcements for dynamic content updates via `aria-live` regions
-- `prefers-reduced-motion` media query respected across all animations
-- `prefers-color-scheme` (system theme) respected for initial render before hydration
-
-### Security
-
-CS Academy implements the following security measures at the application level:
-
-- **Content Security Policy (CSP)**: Strict CSP meta tag in `index.html` restricting script/style/img sources to self and whitelisted CDNs
-- **X-Content-Type-Options**: `nosniff` to prevent MIME-type sniffing
-- **X-Frame-Options**: `DENY` to prevent clickjacking
-- **X-XSS-Protection**: `1; mode=block` for legacy browser support
-- **Referrer-Policy**: `strict-origin-when-cross-origin` to limit referrer leakage
-- **Permissions-Policy**: Restricts geolocation, camera, and microphone access
-- **Cross-Origin Resource Policy**: `same-origin` to prevent resource cross-origin loading
-- **Cross-Origin Opener Policy**: `same-origin` to isolate browsing context
-
----
-
-## Organizational Focus
-
-CS Academy serves three primary institutional segments, each with tailored curriculum, delivery format, and impact measurement:
-
-### Banks & Financial Services
-
-Financial institutions in East Africa face a dual challenge: upskilling their workforce in digital tools while simultaneously protecting their systems from cybersecurity threats as digital transformation accelerates. CS Academy works with banks, microfinance institutions, mobile money operators, and insurance companies to deliver:
-
-- **Digital productivity programs** for branch staff, relationship managers, and operations teams — covering AI-assisted reporting, email management, and customer communication
-- **Cybersecurity fundamentals** for all staff, with specialized tracks for IT security teams covering threat intelligence, incident response, and social engineering defense
-- **M-Pesa and mobile money security training** specifically addressing the fraud patterns most relevant to financial service providers
-- **AI governance and ethics** for risk, compliance, and senior leadership teams — covering regulatory obligations under the EU AI Act and emerging African regulatory frameworks
-- **Regulatory compliance reporting** aligned to BOT Tanzania, CMA Kenya, and UMA Uganda requirements
-
-**Impact measurement**: We track measurable outcomes — reduction in phishing click rates, time saved on routine reporting tasks, compliance audit scores — not just satisfaction ratings.
-
-### Schools & Educational Institutions
-
-From primary schools to universities, East African educational institutions are struggling to integrate digital skills and AI literacy into curricula that were designed for an analog world. CS Academy partners with schools to:
-
-- **AI Literacy curriculum** for secondary schools (Forms 1–6) — a 6-module, semester-long program that is exam-aligned and teacher-friendly
-- **STEM AI Tools** integration for science and mathematics departments — specific prompt packs and tool guides for physics, chemistry, biology, and mathematics teachers
-- **Digital pedagogy** for teacher training colleges — preparing the next generation of teachers to use AI as an instructional tool
-- **Student career readiness** programs covering digital communication, AI-assisted job search, and cybersecurity awareness for final-year students
-- **Infrastructure assessment** to help schools understand what digital tools they actually have vs. what they need
-
-**Impact measurement**: We measure student skill gains through pre- and post-assessment, teacher confidence surveys, and long-term tracking of student digital tool usage patterns.
-
-### Enterprises & NGOs
-
-Beyond financial services and education, CS Academy serves the broader enterprise ecosystem — from manufacturing and retail to logistics, healthcare, and government. Common organizational needs include:
-
-- **Remote work security** for distributed teams using personal devices and public networks
-- **Data privacy compliance** for organizations handling customer or beneficiary data under Tanzania's Data Protection Act 2022 and Kenya's Data Protection Act 2019
-- **AI adoption roadmaps** for organizations unsure how to integrate AI tools into existing workflows without creating new risks
-- **Digital onboarding** for new employees who need to reach a baseline digital competency within 30 days of joining
-- **Change management** for organizations transitioning from legacy systems to digital-first operations — addressing the human behavioral change challenge that technology projects underestimate
-
-**Engagement model**: Enterprise engagements begin with a digital skills baseline assessment of the organization, followed by a customized curriculum design workshop, a pilot cohort, and a full rollout with measurable KPIs. All enterprise programs include a 90-day post-training support period via WhatsApp coaching.
-
-### Partnership Model
-
-CS Academy actively seeks partnerships with:
-
-- **Telecommunications companies** interested in bundling digital skills training with data packages
-- **Banks and MFIs** seeking to differentiate their financial literacy offerings with digital skills components
-- **Government skills development agencies** aligned to national digital economy strategies
-- **International development partners** funding digital inclusion programs in East Africa
-- **EdTech platforms** seeking to white-label or co-develop content for the East African market
-
-Contact: **partnerships@cyberacademy.africa**
+Optimizations in place: text-first content, aggressive CSS caching, IntersectionObserver-based lazy reveals, and theme variables that avoid per-component prop drilling. (The current bundle is a single chunk; consider `manualChunks` / route-level code-splitting to reduce initial payload if needed.)
 
 ---
 
 ## Get Started
 
 ### For Individual Learners
-
-1. Visit **csacademy.africa** on your phone or computer
-2. Browse the free toolkit library at the Resources page
-3. Enroll in your first professional track via the Programs page
-4. Join your WhatsApp cohort or start self-paced learning
-5. Earn your first QR-verifiable certificate
+1. Visit **cyberacademy.africa/academy** on your phone or computer.
+2. Browse the free toolkit library on the Resources page.
+3. Enroll in your first professional track via the Programs page.
+4. Join a WhatsApp cohort or start self-paced learning.
+5. Earn your first QR-verifiable certificate.
 
 ### For Organizations
-
-1. Contact **support@cyberacademy.africa** with your organization's name, headcount, and training goals
-2. Receive a customized training needs assessment within 48 hours
-3. Review and approve the proposed curriculum and pricing
-4. Launch with a pilot cohort; measure impact; scale organization-wide
+1. Contact **support@cyberacademy.africa** with your organization's name, headcount, and goals.
+2. Receive a customized training-needs assessment within 48 hours.
+3. Review and approve the proposed curriculum and pricing.
+4. Launch with a pilot cohort; measure impact; scale organization-wide.
 
 ### For Developers
-
 ```bash
 # Clone the repository
   git clone https://github.com/cyberacademy/csacademy.git
-cd csacademy
+  cd csacademy
 
 # Install dependencies
-npm install
+  npm install
 
 # Start development server
-npm run dev
+  npm run dev
 
 # Type check
-npx tsc --noEmit
+  npm run lint
 ```
 
 ---
