@@ -191,7 +191,7 @@ Fully asynchronous learning for learners who prefer to progress at their own spe
 
 ### Overview
 
-CS Academy is a **React 18 + TypeScript 5** single-page application built with **Vite 5**, styled with **Tailwind CSS v4**, and deployed as a Progressive Web App. It uses **React Router v6** for client-side routing and **React Context + useReducer** for global state management. No server-side rendering or backend is included in this repository — content management and certificate issuance are handled through a future headless CMS integration.
+CS Academy is a **React 19 + TypeScript** single-page application built with **Vite 6**, styled with **Tailwind CSS v4**, and deployed as a Progressive Web App. It uses **React Context + useReducer** for global state management. No server-side rendering or backend is included in this repository — content management and certificate issuance are handled through a future headless CMS integration.
 
 ### Directory Structure
 
@@ -211,8 +211,8 @@ src/
 │   └── AppContext.tsx       # Global state: theme, locale, user session, modal state
 ├── data/
 │   ├── resources.ts         # 28 toolkit items with full content: highlights, use cases, previews
-│   ├── programs.ts          # Program catalog: tracks, formats, pricing tiers
-│   └── team.ts              # Team member profiles for About page
+│   ├── training.ts          # Training program catalog: tracks, categories, featured training
+│   └── programs.ts          # Program catalog: pillars, badges, deep-dive slugs
 ├── hooks/
 │   ├── useModal.ts          # Modal open/close logic with focus trap and scroll lock
 │   ├── useScrollProgress.ts # Reading progress tracking for blog articles
@@ -224,8 +224,10 @@ src/
 │   ├── ProgramDeepDivePage.tsx # Individual program detail with curriculum breakdown
 │   ├── ResourcesPage.tsx    # Free toolkit library with category and search filters
 │   ├── BlogPage.tsx         # Blog listing with category tabs and search
-│   ├── BlogArticlePage.tsx  # Individual article with reading progress and related content
-│   └── VibeCodingPage.tsx   # Vibe Coding landing page: features, pricing, testimonials, FAQ
+│   ├── VibeCodingPage.tsx   # Vibe Coding landing page: features, pricing, testimonials, FAQ
+│   └── DevPadPage.tsx       # Interactive AI coding playground with Monaco Editor
+├── styles/
+│   └── reveal.css           # Scroll-reveal animation utility classes (.reveal, .reveal-stagger)
 ├── types/
 │   └── index.ts             # Shared TypeScript interfaces: ResourceItem, Program, PageRoute, etc.
 ├── utils/
@@ -233,8 +235,8 @@ src/
 │   ├── formatters.ts        # Date, currency, and reading time formatting utilities
 │   └── validators.ts       # Form validation schemas (Zod) for booking and contact forms
 ├── App.tsx                  # Root component: router configuration and global layout
-├── main.tsx                 # Entry point: HelmetProvider, AppContext, global CSS
-└── index.css               # Tailwind base, CSS custom properties, glass-surface utility, scrollbar styles
+├── main.tsx                 # Entry point: HelmetProvider, AppContext, global CSS, reveal.css
+└── index.css               # Tailwind base, CSS custom properties, theme variables, keyframes
 ```
 
 ### Key Technical Decisions
@@ -243,8 +245,8 @@ src/
 |---|---|
 | **Tailwind CSS v4** | Utility-first CSS with zero runtime overhead. CSS custom properties for theming eliminate per-component theme prop drilling. |
 | **React Context + useReducer** | Lightweight global state (theme, locale, modal state) without the bundle weight of Redux or Zustand. |
-| **React Router v6** | Standard client-side routing with nested routes for blog articles and program deep dives. |
-| **Vite** | Sub-second HMR in development, optimized production builds with code splitting per route. |
+| **React 19** | Latest React with enhanced hooks, no separate @types/react package needed. |
+| **Vite 6** | Sub-second HMR in development, optimized production builds with code splitting per route. |
 | **Framer Motion** | Spring-physics animations for modals, page transitions, and micro-interactions. |
 | **React Helmet Async** | Declarative SEO metadata management per page. SSR-compatible via a `HelmetProvider` wrapper in `main.tsx`. |
 | **Lucide React** | Consistent, open-source icon library covering all UI needs without a custom icon sprite. |
@@ -258,7 +260,6 @@ CS Academy targets the following browser versions:
 - **Firefox**: Last 2 stable versions
 - **Safari iOS**: Last 2 stable versions on iOS 14+
 - **Samsung Internet**: Last 2 stable versions
-- **Facebook/Instagram In-App Browser**: Supported with fallbacks for reduced CSS capabilities
 
 ### Performance Budget
 
@@ -267,7 +268,6 @@ CS Academy targets the following browser versions:
 | Largest Contentful Paint (LCP) | < 2.5s on 3G |
 | First Input Delay (FID) | < 100ms |
 | Cumulative Layout Shift (CLS) | < 0.1 |
-| Total bundle size (initial load) | < 350KB gzipped |
 | Time to Interactive (TTI) | < 5s on 3G |
 
 ### Accessibility
@@ -275,12 +275,25 @@ CS Academy targets the following browser versions:
 CS Academy targets **WCAG 2.1 AA** compliance:
 
 - All interactive elements are keyboard navigable with visible focus indicators
-- Color contrast ratios meet AA thresholds for normal and large text (see contrast audit in project notes)
+- Color contrast ratios meet AA thresholds for normal and large text
 - All images carry descriptive `alt` text
 - All modals implement proper focus trapping and ARIA roles
 - Screen reader announcements for dynamic content updates via `aria-live` regions
 - `prefers-reduced-motion` media query respected across all animations
 - `prefers-color-scheme` (system theme) respected for initial render before hydration
+
+### Security
+
+CS Academy implements the following security measures at the application level:
+
+- **Content Security Policy (CSP)**: Strict CSP meta tag in `index.html` restricting script/style/img sources to self and whitelisted CDNs
+- **X-Content-Type-Options**: `nosniff` to prevent MIME-type sniffing
+- **X-Frame-Options**: `DENY` to prevent clickjacking
+- **X-XSS-Protection**: `1; mode=block` for legacy browser support
+- **Referrer-Policy**: `strict-origin-when-cross-origin` to limit referrer leakage
+- **Permissions-Policy**: Restricts geolocation, camera, and microphone access
+- **Cross-Origin Resource Policy**: `same-origin` to prevent resource cross-origin loading
+- **Cross-Origin Opener Policy**: `same-origin` to isolate browsing context
 
 ---
 

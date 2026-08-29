@@ -249,6 +249,23 @@
     50% { opacity: 0.6; transform: scale(0.85); }
   }
 
+  /* ─── Page Enter Animation ─── */
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .page-enter {
+    animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
   /* ─── Animation Utility Classes ─── */
 
   .soft-float {
@@ -341,17 +358,8 @@
   }
 
   /* ─── Reveal on scroll ─── */
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Reveal animation rules are defined in styles/reveal.css (.reveal / .reveal.is-revealed / .reveal-stagger) */
+  /* index.css is imported before reveal.css in main.tsx, so reveal.css wins as source of truth */
 
 /* ─── Glass Surface ─── */
 

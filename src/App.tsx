@@ -153,7 +153,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <div
-        className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth ${
+        className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth overflow-x-hidden ${
           theme === 'dark'
             ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white'
             : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
@@ -165,8 +165,10 @@ export default function App() {
           openBookingModal={() => handleOpenBooking()}
         />
 
-        <div className="flex-grow">
-          {renderCurrentPage()}
+        <div className="flex-grow overflow-x-hidden">
+          <div key={currentRoute} className="page-enter">
+            {renderCurrentPage()}
+          </div>
         </div>
 
         <Footer
