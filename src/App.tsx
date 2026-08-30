@@ -1,5 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from './types';
+import { routeToPath, resolveRoute } from './utils/routes';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
@@ -29,12 +31,27 @@ import { BlogArticleModal } from './components/BlogArticleModal';
 import { useApp } from './context/AppContext';
 
 export default function App() {
-  const [currentRoute, setCurrentRoute] = useState<PageRoute>('home');
+  const location = useLocation();
+  const navigate = useNavigate();
   const { theme } = useApp();
 
+  // Derive the current route from the browser URL so refresh, sharing, and
+  // back/forward all work. The whole tree reads this the same way it read
+  // the old useState<PageRoute> value.
+  const currentRoute: PageRoute = resolveRoute(location.pathname);
+
+  // navigateTo preserves the original (route: PageRoute) => void signature,
+  // so every child that still receives setCurrentRoute works unchanged.
+  const setCurrentRoute = useCallback(
+    (route: PageRoute) => {
+      navigate(routeToPath[route]);
+    },
+    [navigate]
+  );
+
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [currentRoute]);
+    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
+  }, [location.pathname]);
 
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [bookingPrefill, setBookingPrefill] = useState<{

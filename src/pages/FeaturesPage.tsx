@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PlatformFeaturesSection } from '../components/PlatformFeaturesSection';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { PageRoute } from '../types';
 import { ArrowRight } from 'lucide-react';
 
@@ -16,6 +17,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
 }) => {
   const { theme } = useApp();
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -25,6 +27,8 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
         <meta property="og:title" content="Platform Features | CS Academy" />
         <meta property="og:description" content="Discover what makes CS Academy East Africa's most accessible AI and cybersecurity learning platform - English-first, mobile-ready, and employer-verified." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
       <div className={`pt-20 min-h-screen transition-colors duration-300 ${

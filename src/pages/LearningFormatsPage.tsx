@@ -1,14 +1,16 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { learningFormatsData } from '../data/learningFormats';
 import { useApp } from '../context/AppContext';
-import { 
-  Video, 
-  MonitorPlay, 
-  MessageSquare, 
-  Mic, 
-  Calendar, 
-  Building2, 
-  CheckCircle2, 
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import {
+  Video,
+  MonitorPlay,
+  MessageSquare,
+  Mic,
+  Calendar,
+  Building2,
+  CheckCircle2,
   ArrowRight,
   Wifi
 } from 'lucide-react';
@@ -21,6 +23,7 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
   openBookingModal
 }) => {
   const { theme, currency, setCurrency } = useApp();
+  const canonical = useCanonicalUrl();
 
   const getFormatPrice = (format: typeof learningFormatsData[0]) => {
     if (currency === 'TSH') {
@@ -58,6 +61,17 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Learning Formats | Live, Self-Paced, Cohort & Corporate - CS Academy</title>
+        <meta name="description" content="Compare CS Academy learning formats: live cohort, self-paced, private team, on-site, and webinar delivery. Transparent pricing across USD, KES, and Tsh." />
+        <meta name="keywords" content="learning formats, live cohort training, self-paced, corporate training, on-site training, webinar, pricing, KES, Tsh, USD" />
+        <meta property="og:title" content="Learning Formats - CS Academy" />
+        <meta property="og:description" content="Live, self-paced, corporate, on-site, and webinar delivery with transparent multi-currency pricing." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
+      </Helmet>
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
@@ -196,5 +210,6 @@ export const LearningFormatsPage: React.FC<LearningFormatsPageProps> = ({
 
       </div>
     </div>
+    </>
   );
 };

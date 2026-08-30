@@ -7,6 +7,7 @@ import {
 } from '../data/organizationIndustries';
 import { trainingPackagesData } from '../data/training';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
   Building2,
   ShieldCheck,
@@ -63,6 +64,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
     : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-50 border-neutral-300';
   const divider = isDark ? 'border-[var(--border-color)]' : 'border-neutral-200';
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -72,6 +74,8 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         <meta property="og:title" content="For Organizations | CS Academy Corporate Training" />
         <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs. Delivery in English and local languages across East Africa." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${pageBg}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">

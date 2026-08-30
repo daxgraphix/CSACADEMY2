@@ -1,9 +1,11 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { PricingSection } from '../components/PricingSection';
 import { PageRoute } from '../types';
 import { MessageCircle } from 'lucide-react';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 
 interface PricingPageProps {
   setCurrentRoute: (route: PageRoute) => void;
@@ -15,9 +17,22 @@ export const PricingPage: React.FC<PricingPageProps> = ({
   openBookingModal
 }) => {
   const { theme } = useApp();
+  const canonical = useCanonicalUrl();
 
   return (
-    <div className={`pt-20 min-h-screen transition-colors duration-300 ${
+    <>
+      <Helmet>
+        <title>Pricing & Plans | CS Academy - Transparent Fees in TZS, KES, USD</title>
+        <meta name="description" content="CS Academy pricing in Tanzanian Shillings, Kenyan Shillings, and US Dollars. Plans start at TZS 20,000/month. Pay with M-Pesa, Tigo Pesa, Airtel Money, or card. WhatsApp-based, self-paced, and live cohort options." />
+        <meta name="keywords" content="CS Academy pricing, TZS pricing, M-Pesa payment, AI course cost Tanzania, cybersecurity training fees, digital skills subscription, affordable tech training East Africa" />
+        <meta property="og:title" content="Pricing & Plans | CS Academy" />
+        <meta property="og:description" content="Transparent membership plans from TZS 20,000/month. Pay with M-Pesa, Tigo Pesa, or card. WhatsApp, self-paced, and live cohort options." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
+      </Helmet>
+
+      <div className={`pt-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
       {/* Main Pricing Section */}
@@ -63,5 +78,6 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         </div>
       </div>
     </div>
+    </>
   );
 };

@@ -1,17 +1,25 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
 import {HelmetProvider} from 'react-helmet-async';
+import {BrowserRouter} from 'react-router-dom';
 import App from './App.tsx';
 import { AppProvider } from './context/AppContext.tsx';
 import './index.css';
 import './styles/reveal.css';
 
+// NOTE: We use BrowserRouter for clean, shareable URLs and SEO.
+// Because this is a static SPA, deep-link refreshes (e.g. /pricing) require
+// an SPA-fallback on the host that serves index.html for any unknown path.
+// Included: public/_redirects (Netlify). Vercel auto-detects Vite SPAs.
+// For other hosts, configure a catch-all rewrite to /index.html.
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HelmetProvider>
-      <AppProvider>
-        <App />
-      </AppProvider>
+      <BrowserRouter>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </BrowserRouter>
     </HelmetProvider>
   </StrictMode>,
 );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from '../types';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { Hero } from '../components/Hero';
 import { AudienceStrip } from '../components/AudienceStrip';
 import { ProgramsOverview } from '../components/ProgramsOverview';
@@ -36,6 +37,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   openResourceModal,
   openBlogArticleModal
 }) => {
+  const canonical = useCanonicalUrl();
   return (
     <main className="w-full">
       <Helmet>
@@ -45,8 +47,9 @@ export const HomePage: React.FC<HomePageProps> = ({
         <meta property="og:title" content="CS Academy" />
         <meta property="og:description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first education with local language support. M-Pesa payments. 1,200+ graduates." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
         <meta property="og:image" content="https://academy.cyberswahili.co.tz/og-image.jpg" />
-        <link rel="canonical" href="https://academy.cyberswahili.co.tz" />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
       {/* 1. Hero Section */}

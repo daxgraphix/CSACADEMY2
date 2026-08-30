@@ -1,6 +1,8 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { instructorsData } from '../data/instructors';
 import { 
   ShieldCheck, 
@@ -36,10 +38,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({
   openBookingModal
 }) => {
   const { theme, t } = useApp();
+  const canonical = useCanonicalUrl();
 
   return (
+    <>
+      <Helmet>
+        <title>About CS Academy | Our Mission, Instructors & East Africa Story</title>
+        <meta name="description" content="CS Academy is an East Africa-based applied cyber, AI, and digital skills school. Meet the instructors, mission, and outcomes behind the academy." />
+        <meta name="keywords" content="about CS Academy, cybersecurity training East Africa, AI training Africa, applied learning, instructors, mission" />
+        <meta property="og:title" content="About CS Academy" />
+        <meta property="og:description" content="Our mission, instructors, and approach to applied cyber, AI, and digital skills training across East Africa." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
+      </Helmet>
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
-      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
+      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
         
@@ -305,5 +319,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
       </div>
     </div>
+    </>
   );
 };

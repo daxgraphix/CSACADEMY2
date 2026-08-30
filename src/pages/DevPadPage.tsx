@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PageRoute } from '../types';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
   Code2,
   Users,
@@ -202,6 +203,7 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
   const { theme } = useApp();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -211,7 +213,8 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
         <meta property="og:title" content="DevPad | Developer Community for Builders and Launchers" />
         <meta property="og:description" content="Build, test, support, and launch with a community of developers and creators. Monthly testathons, accountability, and meaningful peer feedback." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://academy.cyberswahili.co.tz/devpad" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${

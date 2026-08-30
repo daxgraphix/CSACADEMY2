@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PageRoute } from '../types';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
   Sparkles,
   Code2,
@@ -164,6 +165,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
   const { theme } = useApp();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -174,7 +176,8 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
         <meta property="og:description" content="Build real websites, dashboards, and apps using AI tools. Covers AI safety, cybersecurity fundamentals, and digital skills. No prior coding required. Mobile money enrollment." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://academy.cyberswahili.co.tz/vibe-coding" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${

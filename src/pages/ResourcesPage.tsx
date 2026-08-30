@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { resourcesData } from '../data/resources';
 import { ResourceItem } from '../types';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { 
   FileText, 
   Download, 
@@ -36,6 +37,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
     return matchCat && matchSearch;
   });
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -45,6 +47,8 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
         <meta property="og:title" content="Free Resources | CS Academy" />
         <meta property="og:description" content="Download free AI, cybersecurity, and education toolkits. No signup required. Practical guides for African digital learners." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'

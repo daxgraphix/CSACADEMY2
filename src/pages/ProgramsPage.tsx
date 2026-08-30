@@ -4,6 +4,7 @@ import { PageRoute, ProgramPillar, TrainingProgram } from '../types';
 import { programsData } from '../data/programs';
 import { featuredTrainingData } from '../data/training';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
   ShieldCheck,
   Laptop,
@@ -143,6 +144,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
 
   const totalResultsCount = filteredPillars.length + filteredCourses.length;
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -152,6 +154,8 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
         <meta property="og:title" content="CS Academy Programs | AI, Cybersecurity & Web Development" />
         <meta property="og:description" content="Explore 30+ hands-on modules in AI, Cybersecurity, and Digital Skills. Taught in English & local languages. Mobile money enrollment." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${

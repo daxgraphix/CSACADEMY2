@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { blogPostsData } from '../data/blog';
 import { BlogPost } from '../types';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { ShareButtons } from '../components/ShareButtons';
 import {
   Clock,
@@ -56,6 +57,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
     return matchCat && matchSearch;
   });
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -65,6 +67,8 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         <meta property="og:title" content="CS Academy Blog | AI, Cybersecurity & Digital Skills" />
         <meta property="og:description" content="Expert essays and practical guides on AI, cybersecurity, and digital skills for East African learners, professionals, and organizations." />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'

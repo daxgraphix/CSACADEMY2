@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
   Mail,
   MessageCircle,
@@ -43,6 +44,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
     "Hello CS Academy, I would like to inquire about training programs for myself / my organization."
   )}`;
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -52,7 +54,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         <meta property="og:title" content="Contact Us | CS Academy" />
         <meta property="og:description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://academy.cyberswahili.co.tz/contact" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
         theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'

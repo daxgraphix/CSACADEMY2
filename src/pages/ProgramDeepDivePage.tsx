@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { PageRoute, ProgramPillar } from '../types';
 import { programsData } from '../data/programs';
 import { useApp } from '../context/AppContext';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { ShareButtons } from '../components/ShareButtons';
 import { 
   ShieldCheck, 
@@ -42,6 +43,7 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
     }
   };
 
+  const canonical = useCanonicalUrl();
   return (
     <>
       <Helmet>
@@ -51,6 +53,8 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
         <meta property="og:title" content={`${program.title} | CS Academy Tanzania`} />
         <meta property="og:description" content={program.tagline} />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
