@@ -861,3 +861,44 @@
     color var(--transition-base),
     box-shadow var(--transition-base) !important;
 }
+
+/* ─── Responsive & Asset Handling ─── */
+
+/* Fluid media: never exceed their container (rule: max-w-full h-auto) */
+img,
+video,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Long unbreakable strings (emails, URLs) must wrap to avoid h-breakage */
+body {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Larger tap targets on touch devices for mobile-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea,
+  label {
+    min-height: 44px;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible {
+    outline-offset: 3px;
+  }
+}

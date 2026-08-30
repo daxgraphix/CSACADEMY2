@@ -433,7 +433,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div ref={menuRef} className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto ${
+        <div ref={menuRef} className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto fade-in ${
           theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
           <div className="space-y-1">

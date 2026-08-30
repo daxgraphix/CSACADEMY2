@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { trainingPackagesData } from '../data/training';
 import { useApp } from '../context/AppContext';
+import { useDeviceType } from '../hooks/useWindowSize';
 import { 
   Clock, 
   MapPin, 
@@ -17,6 +18,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
   openBookingModal
 }) => {
   const { theme, t } = useApp();
+  const { isMobile } = useDeviceType();
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
 
   const categories = ['ALL', 'AI', 'Cybersecurity', 'Digital Skills', 'Executive', 'Institutional'];
@@ -73,13 +75,13 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
           </div>
         </div>
 
-        {/* Packages Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Packages Grid — 1 column on mobile, 2 on small tablet, 3 on desktop */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredPackages.map((pkg) => (
             <div
               key={pkg.id}
               id={`package-card-${pkg.id}`}
-              className={`border rounded-3xl p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-md group ${
+              className={`border rounded-3xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-md group ${
                 theme === 'dark'
                   ? 'bg-[#0B0B0B] border-neutral-800 hover:border-neutral-700'
                   : 'bg-white border-neutral-300 hover:border-red-400 hover:shadow-xl'
@@ -99,7 +101,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   }`}>
                     {pkg.title}
                   </h3>
-                  <p className={`text-xs mt-1 leading-relaxed ${
+                  <p className={`text-xs sm:text-sm mt-1 leading-relaxed ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
                   }`}>
                     {pkg.tagline}
@@ -134,7 +136,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   }`}>
                     Key Outcomes:
                   </span>
-                  {pkg.keyOutcomes.slice(0, 3).map((item, dIdx) => (
+                  {pkg.keyOutcomes.slice(0, isMobile ? 2 : 3).map((item, dIdx) => (
                     <div key={dIdx} className={`flex items-start gap-2 text-xs ${
                       theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                     }`}>

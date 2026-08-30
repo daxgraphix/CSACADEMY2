@@ -3,6 +3,7 @@ import { featuredTrainingData } from '../data/training';
 import { TrainingProgram } from '../types';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
+import { useDeviceType } from '../hooks/useWindowSize';
 import {
   Users,
   MapPin,
@@ -22,6 +23,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
   openTrainingDetailModal
 }) => {
   const { theme, t } = useApp();
+  const { isMobile } = useDeviceType();
   const [filter, setFilter] = useState<'ALL' | 'AI' | 'CYBER' | 'DIGITAL' | 'WEB' | 'DESIGN'>('ALL');
   const gridRef = useReveal<HTMLDivElement>();
 
@@ -148,7 +150,8 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
         </div>
 
         {/* 6 Training Cards Grid */}
-        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger">
+        {/* Training Cards Grid — 1 column on mobile, 2 on small tablet, 3 on desktop */}
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 reveal-stagger">
           {filteredTrainings.map((course) => {
             return (
             <div
@@ -224,8 +227,8 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   }`}>
                     Core Takeaways:
                   </span>
-                  <div className="grid grid-cols-1 gap-1.5">
-                    {course.highlights.slice(0, 4).map((highlight, idx) => (
+                   <div className="grid grid-cols-1 gap-1.5">
+                     {course.highlights.slice(0, isMobile ? 2 : 4).map((highlight, idx) => (
                       <div key={idx} className={`flex items-start gap-2 text-xs ${
                         theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                       }`}>
@@ -239,7 +242,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
               </div>
 
               {/* Bottom Actions */}
-              <div className={`mt-6 pt-4 border-t flex gap-2 ${
+              <div className={`mt-6 pt-4 border-t flex flex-col gap-2 sm:flex-row ${
                 theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
               }`}>
                 <button
