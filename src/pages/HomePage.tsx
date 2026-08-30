@@ -7,6 +7,7 @@ import { AudienceStrip } from '../components/AudienceStrip';
 import { ProgramsOverview } from '../components/ProgramsOverview';
 import { SmartFramework } from '../components/SmartFramework';
 import { FeaturedTraining } from '../components/FeaturedTraining';
+import { DevPadTile } from '../components/DevPadTile';
 import { PlatformFeaturesSection } from '../components/PlatformFeaturesSection';
 import { LearningFormatsSection } from '../components/LearningFormatsSection';
 import { ForOrganizationsSection } from '../components/ForOrganizationsSection';
@@ -75,6 +76,12 @@ export const HomePage: React.FC<HomePageProps> = ({
       <FeaturedTraining 
         openBookingModal={openBookingModal}
         openTrainingDetailModal={openTrainingDetailModal}
+      />
+
+      {/* 5b. DevPad Community Tile */}
+      <DevPadTile
+        setCurrentRoute={setCurrentRoute}
+        openBookingModal={() => openBookingModal({ program: 'DevPad Developer Community' })}
       />
 
       {/* 6. Social Proof / Decision Confidence */}

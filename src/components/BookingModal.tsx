@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
-import { 
-  X, 
-  MessageCircle, 
-  Mail, 
-  CheckCircle2, 
+import {
+  X,
+  MessageCircle,
+  Mail,
+  CheckCircle2,
   Calendar,
-  Building2, 
-  User, 
+  Building2,
+  User,
   MapPin,
   Clock,
-  ArrowRight
+  ArrowRight,
+  Copy,
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 
 interface BookingModalProps {
@@ -24,6 +27,28 @@ interface BookingModalProps {
     organizationType?: string;
   };
 }
+
+interface SubmissionReceipt {
+  reference: string;
+  submittedAt: Date;
+  via: 'whatsapp' | 'email';
+}
+
+const generateReference = (): string => {
+  const ts = Date.now().toString(36).toUpperCase().slice(-5);
+  const rand = Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 4);
+  return `CSA-${ts}-${rand}`;
+};
+
+const formatDate = (d: Date): string => {
+  return d.toLocaleString(undefined, {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+};
 
 export const BookingModal: React.FC<BookingModalProps> = ({
   isOpen,
@@ -41,6 +66,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [notes, setNotes] = useState('');
   const [copied, setCopied] = useState(false);
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [receipt, setReceipt] = useState<SubmissionReceipt | null>(null);
+  const [refCopied, setRefCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false);
 
   const emailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
 
@@ -64,6 +92,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setNotes('');
       setErrors({});
       setCopied(false);
+      setReceipt(null);
+      setRefCopied(false);
+      setMessageCopied(false);
     }
   }, [isOpen]);
 
@@ -98,6 +129,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const handleWhatsAppSend = () => {
     if (!validate()) return;
     const text = encodeURIComponent(constructMessageText());
+    const ref = generateReference();
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'whatsapp' });
     window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
   };
 
@@ -105,6 +138,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (!validate()) return;
     const subject = encodeURIComponent(`Training Inquiry: ${program} | CS Academy`);
     const body = encodeURIComponent(constructMessageText());
+    const ref = generateReference();
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'email' });
     window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
   };
 
@@ -112,6 +147,30 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     navigator.clipboard.writeText(constructMessageText());
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleCopyReference = () => {
+    if (!receipt) return;
+    navigator.clipboard.writeText(receipt.reference);
+    setRefCopied(true);
+    setTimeout(() => setRefCopied(false), 2500);
+  };
+
+  const handleCopyMessageFromReceipt = () => {
+    navigator.clipboard.writeText(constructMessageText());
+    setMessageCopied(true);
+    setTimeout(() => setMessageCopied(false), 2500);
+  };
+
+  const openWaDeepLink = () => {
+    const text = encodeURIComponent(constructMessageText());
+    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
+  };
+
+  const openMailDeepLink = () => {
+    const subject = encodeURIComponent(`Training Inquiry: ${program} | CS Academy`);
+    const body = encodeURIComponent(constructMessageText());
+    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -155,6 +214,23 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         {/* Modal Body / Form Inputs */}
         <div className="p-6 sm:p-8 space-y-5">
 
+          {receipt ? (
+            <BookingSuccess
+              receipt={receipt}
+              program={program}
+              format={format}
+              constructMessageText={constructMessageText}
+              theme={theme}
+              refCopied={refCopied}
+              messageCopied={messageCopied}
+              onCopyReference={handleCopyReference}
+              onCopyMessage={handleCopyMessageFromReceipt}
+              onWhatsApp={openWaDeepLink}
+              onEmail={openMailDeepLink}
+              onSubmitAnother={() => setReceipt(null)}
+            />
+          ) : (
+            <>
           <div className="grid sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
                 <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
@@ -404,9 +480,192 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               <span>Send via Email</span>
             </button>
           </div>
+            </>
+          )}
 
         </div>
       </div>
+    </div>
+  );
+};
+
+interface BookingSuccessProps {
+  receipt: SubmissionReceipt;
+  program: string;
+  format: string;
+  constructMessageText: () => string;
+  theme: string;
+  refCopied: boolean;
+  messageCopied: boolean;
+  onCopyReference: () => void;
+  onCopyMessage: () => void;
+  onWhatsApp: () => void;
+  onEmail: () => void;
+  onSubmitAnother: () => void;
+}
+
+const BookingSuccess: React.FC<BookingSuccessProps> = ({
+  receipt,
+  program,
+  format,
+  constructMessageText,
+  theme,
+  refCopied,
+  messageCopied,
+  onCopyReference,
+  onCopyMessage,
+  onWhatsApp,
+  onEmail,
+  onSubmitAnother
+}) => {
+  const isDark = theme === 'dark';
+  return (
+    <div className="space-y-5" role="status" aria-live="polite">
+      <div className="text-center space-y-4 pt-2">
+        <div className="relative mx-auto w-16 h-16">
+          <span className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping" aria-hidden="true" />
+          <span className="absolute inset-0 rounded-full bg-emerald-500/30" aria-hidden="true" />
+          <div className="relative w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg">
+            <CheckCircle2 className="w-9 h-9 text-white" strokeWidth={2.5} />
+          </div>
+        </div>
+        <div className="space-y-1.5">
+          <h4 className={`text-xl sm:text-2xl font-black ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+            Inquiry Dispatched
+          </h4>
+          <p className={`text-xs sm:text-sm leading-relaxed max-w-md mx-auto ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
+            Your request has been handed off to the CS Academy advisors via {receipt.via === 'whatsapp' ? 'WhatsApp' : 'your email app'}. Keep this reference handy.
+          </p>
+        </div>
+      </div>
+
+      <div className={`rounded-2xl border p-4 sm:p-5 space-y-3 ${
+        isDark ? 'bg-emerald-950/30 border-emerald-800/40' : 'bg-emerald-50 border-emerald-200'
+      }`}>
+        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-wider text-emerald-700">
+          <ShieldCheck className="w-3.5 h-3.5" />
+          Reference Number
+        </div>
+        <div className="flex items-center gap-2">
+          <code className={`flex-1 font-mono text-sm sm:text-base font-bold tracking-wider break-all ${
+            isDark ? 'text-white' : 'text-neutral-900'
+          }`}>
+            {receipt.reference}
+          </code>
+          <button
+            type="button"
+            onClick={onCopyReference}
+            className={`shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-colors ${
+              isDark
+                ? 'bg-emerald-900/50 hover:bg-emerald-900 text-emerald-200'
+                : 'bg-white hover:bg-emerald-100 text-emerald-800 border border-emerald-200'
+            }`}
+          >
+            {refCopied ? <CheckCircle2 className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+            {refCopied ? 'Copied' : 'Copy'}
+          </button>
+        </div>
+        <div className={`text-[10px] font-mono ${isDark ? 'text-emerald-300/80' : 'text-emerald-700/80'}`}>
+          Submitted {formatDate(receipt.submittedAt)} &middot; {program} &middot; {format}
+        </div>
+      </div>
+
+      <div className={`rounded-2xl border p-4 flex items-start gap-3 ${
+        isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
+      }`}>
+        <div className="w-9 h-9 rounded-xl bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] flex items-center justify-center text-[var(--accent-red-strong)] shrink-0">
+          <Clock className="w-4 h-4" />
+        </div>
+        <div className="space-y-0.5">
+          <div className={`text-xs font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+            We reply within 24 hours
+          </div>
+          <p className={`text-[11px] leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-700'}`}>
+            An advisor will confirm curriculum, schedule, and payment options. Reference the ID above if you message us again.
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-2">
+        <div className={`text-[10px] font-black uppercase tracking-wider ${isDark ? 'text-neutral-400' : 'text-neutral-700'}`}>
+          Re-send or copy your inquiry
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={onWhatsApp}
+            className="w-full py-3 px-4 rounded-xl font-extrabold text-xs text-white bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span>Open WhatsApp</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+          <button
+            type="button"
+            onClick={onEmail}
+            className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 ${
+              isDark
+                ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
+                : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-100 border border-neutral-300 shadow-sm'
+            }`}
+          >
+            <Mail className="w-4 h-4" />
+            <span>Open Email</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+        <button
+          type="button"
+          onClick={onCopyMessage}
+          className={`w-full py-2.5 px-4 rounded-xl text-[11px] font-bold flex items-center justify-center gap-2 uppercase tracking-wider transition-colors ${
+            isDark
+              ? 'text-[var(--accent-red-strong)] hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
+              : 'text-[var(--accent-red-hover)] hover:text-[var(--accent-red-strong)] bg-white hover:bg-red-50 border border-neutral-300'
+          }`}
+        >
+          {messageCopied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+          {messageCopied ? 'Message Copied' : 'Copy Inquiry Text'}
+        </button>
+      </div>
+
+      <div className={`pt-2 border-t flex flex-col sm:flex-row items-center justify-between gap-3 ${
+        isDark ? 'border-[var(--border-color)]' : 'border-neutral-200'
+      }`}>
+        <div className={`inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider ${
+          isDark ? 'text-neutral-500' : 'text-neutral-600'
+        }`}>
+          <Sparkles className="w-3 h-3" />
+          Save your reference: {receipt.reference}
+        </div>
+        <button
+          type="button"
+          onClick={onSubmitAnother}
+          className={`text-[10px] font-bold uppercase tracking-wider transition-colors ${
+            isDark
+              ? 'text-neutral-400 hover:text-white'
+              : 'text-neutral-600 hover:text-neutral-900'
+          }`}
+        >
+          Submit another inquiry
+        </button>
+      </div>
+
+      <details
+        className={`rounded-xl border text-xs ${
+          isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
+        }`}
+      >
+        <summary className={`cursor-pointer select-none px-4 py-2.5 font-bold uppercase tracking-wider text-[10px] ${
+          isDark ? 'text-neutral-400 hover:text-white' : 'text-neutral-700 hover:text-neutral-900'
+        }`}>
+          View submitted message
+        </summary>
+        <pre className={`px-4 pb-3 pt-1 whitespace-pre-wrap font-mono text-[11px] leading-relaxed ${
+          isDark ? 'text-neutral-300' : 'text-neutral-800'
+        }`}>
+          {constructMessageText()}
+        </pre>
+      </details>
     </div>
   );
 };

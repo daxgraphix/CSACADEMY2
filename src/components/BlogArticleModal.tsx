@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { BlogPost } from '../types';
 import { useApp } from '../context/AppContext';
 import { ShareButtons } from './ShareButtons';
-import { 
-  X, 
-  Clock, 
-  User, 
-  Calendar, 
-  Tag, 
+import { getAuthor } from '../data/authors';
+import { blogPostsData } from '../data/blog';
+import { getCanonicalUrl } from '../utils/seo';
+import { formatPublishedDate, toIsoDate } from '../utils/dates';
+import {
+  X,
+  Clock,
+  User,
+  Calendar,
+  Tag,
   ArrowLeft,
   Share2,
   Lightbulb,
-  CheckCircle2
+  CheckCircle2,
+  Linkedin,
+  Twitter,
+  ArrowRight,
+  Mail,
+  Sparkles
 } from 'lucide-react';
 
 interface BlogArticleModalProps {
@@ -20,17 +29,84 @@ interface BlogArticleModalProps {
   openBookingModal: (prefill?: { program?: string }) => void;
 }
 
+const pickRelated = (post: BlogPost, count: number): BlogPost[] => {
+  const others = blogPostsData.filter((p) => p.id !== post.id);
+  const sameCategory = others.filter((p) => p.category === post.category);
+  const sharedTags = (a: BlogPost, b: BlogPost) =>
+    a.tags.some((t) => b.tags.includes(t)) ? 1 : 0;
+  const ranked = others
+    .map((p) => ({
+      post: p,
+      score: (sameCategory.includes(p) ? 2 : 0) + sharedTags(p, post)
+    }))
+    .sort((a, b) => b.score - a.score);
+  return ranked.slice(0, count).map((r) => r.post);
+};
+
 export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
   post,
   onClose,
   openBookingModal
 }) => {
   const { theme } = useApp();
+  const related = useMemo(() => (post ? pickRelated(post, 3) : []), [post]);
+  const author = useMemo(() => (post ? getAuthor(post.author) : null), [post]);
+
+  useEffect(() => {
+    if (!post || !author) return;
+    const canonical = getCanonicalUrl(`/blog`);
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      articleSection: post.category,
+      keywords: post.tags.join(', '),
+      inLanguage: 'en',
+      datePublished: toIsoDate(post.publishedDate),
+      dateModified: toIsoDate(post.publishedDate),
+      author: {
+        '@type': 'Person',
+        name: author.name,
+        jobTitle: author.role,
+        description: author.bio,
+        url: canonical
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'CS Academy',
+        url: 'https://academy.cyberswahili.co.tz',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://academy.cyberswahili.co.tz/og-image.jpg'
+        }
+      },
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': canonical
+      }
+    };
+
+    let script = document.getElementById('blog-jsonld') as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = 'blog-jsonld';
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(jsonLd);
+
+    return () => {
+      const existing = document.getElementById('blog-jsonld');
+      if (existing) existing.remove();
+    };
+  }, [post, author]);
+
   if (!post) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200">
-      <div 
+      <div
         className={`border rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl relative transition-colors ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' : 'bg-white border-neutral-200 text-neutral-900'
         }`}
@@ -54,8 +130,8 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
           <button
             onClick={onClose}
             className={`p-2 rounded-xl transition-colors ${
-              theme === 'dark' 
-                ? 'bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white' 
+              theme === 'dark'
+                ? 'bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white'
                 : 'bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200 text-neutral-800 hover:text-neutral-900'
             }`}
           >
@@ -65,7 +141,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
 
         {/* Article Body */}
         <div className="p-6 sm:p-10 space-y-8">
-          
+
           {/* Article Header */}
           <div className="space-y-4">
             <h1 className={`text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight ${
@@ -73,18 +149,35 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
             }`}>
               {post.title}
             </h1>
-            
-            <div className={`flex flex-wrap items-center justify-between gap-4 text-xs pt-2 border-b pb-4 ${
+
+            {/* Author + published + read time (in human format) */}
+            <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 text-xs pt-2 border-b pb-4 ${
               theme === 'dark' ? 'border-neutral-800 text-neutral-400' : 'border-neutral-200 text-neutral-800'
             }`}>
               <div className="flex items-center gap-2">
-                <User className="w-3.5 h-3.5 text-[var(--accent-red-strong)]" />
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0"
+                  style={{ background: author?.avatarGradient, textShadow: '0 1px 2px rgba(0,0,0,0.4)' }}
+                  aria-hidden="true"
+                >
+                  {author?.initials}
+                </div>
                 <span className={`font-semibold ${theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'}`}>{post.author}</span>
-                <span> | </span>
-                <div>CS Academy Editorial</div>
               </div>
+              <div className={`flex items-center gap-1.5 ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-500'}`}>
+                <Calendar className="w-3.5 h-3.5" aria-hidden="true" />
+                <time dateTime={toIsoDate(post.publishedDate)}>
+                  {formatPublishedDate(post.publishedDate)}
+                </time>
+              </div>
+              <div className={`flex items-center gap-1.5 ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-500'}`}>
+                <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>{post.readingTime}</span>
+              </div>
+            </div>
 
-              {/* Share in Article Header */}
+            {/* Share in Article Header */}
+            <div className="pt-1">
               <ShareButtons
                 title={post.title}
                 description={post.excerpt}
@@ -118,8 +211,8 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
                 </div>
                 {sec.keyTip && (
                   <div className={`p-4 rounded-xl border text-xs sm:text-sm flex items-start gap-2.5 mt-3 ${
-                    theme === 'dark' 
-                      ? 'bg-red-950/20 border-red-900/40 text-red-200' 
+                    theme === 'dark'
+                      ? 'bg-red-950/20 border-red-900/40 text-red-200'
                       : 'bg-red-50 border-red-200 text-red-900'
                   }`}>
                     <Lightbulb className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
@@ -142,6 +235,127 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
             }`}>
               {post.content.conclusion}
             </p>
+          </div>
+
+          {/* Author bio block */}
+          {author && (
+            <div
+              itemScope
+              itemType="https://schema.org/Person"
+              className={`p-5 sm:p-6 rounded-2xl border flex flex-col sm:flex-row items-start gap-4 ${
+                theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-200'
+              }`}
+            >
+              <div
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-white text-base sm:text-lg font-black shrink-0"
+                style={{ background: author.avatarGradient, textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}
+                aria-hidden="true"
+              >
+                {author.initials}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className={`text-[10px] font-black uppercase tracking-[0.18em] ${
+                  theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'
+                }`}>
+                  Written by
+                </div>
+                <div className={`text-base sm:text-lg font-extrabold mt-0.5 ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                  <span itemProp="name">{author.name}</span>
+                </div>
+                <div className="text-xs text-[var(--accent-red-strong)] font-bold uppercase tracking-wider mt-0.5">
+                  <span itemProp="jobTitle">{author.role}</span>
+                </div>
+                <p
+                  itemProp="description"
+                  className={`text-sm leading-relaxed mt-2 ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}
+                >
+                  {author.bio}
+                </p>
+                {author.socialLinks && (
+                  <div className="flex items-center gap-2 mt-3">
+                    {author.socialLinks.linkedin && (
+                      <a
+                        href={author.socialLinks.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${author.name} on LinkedIn`}
+                        className={`p-1.5 rounded-lg border transition-colors ${
+                          theme === 'dark'
+                            ? 'border-[var(--border-color)] text-neutral-400 hover:text-white hover:border-white/30'
+                            : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
+                        }`}
+                      >
+                        <Linkedin className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                    {author.socialLinks.twitter && (
+                      <a
+                        href={author.socialLinks.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${author.name} on X / Twitter`}
+                        className={`p-1.5 rounded-lg border transition-colors ${
+                          theme === 'dark'
+                            ? 'border-[var(--border-color)] text-neutral-400 hover:text-white hover:border-white/30'
+                            : 'border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300'
+                        }`}
+                      >
+                        <Twitter className="w-3.5 h-3.5" />
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Newsletter CTA inside the article */}
+          <div className={`rounded-2xl p-5 sm:p-6 border-2 ${
+            theme === 'dark'
+              ? 'border-[var(--accent-red-border)] bg-gradient-to-br from-red-950/40 via-[var(--bg-primary)] to-[var(--bg-primary)]'
+              : 'border-red-200 bg-gradient-to-br from-red-50 via-white to-white'
+          }`}>
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[var(--accent-red)] flex items-center justify-center text-white shrink-0">
+                <Mail className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className={`text-sm sm:text-base font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                    Get one practical lesson every Friday
+                  </h3>
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                </div>
+                <p className={`text-xs sm:text-sm leading-relaxed mt-1 ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>
+                  Short, ad-free lessons on AI, cybersecurity, and digital skills. Free. Unsubscribe in one tap.
+                </p>
+                <div className="mt-3 flex flex-col sm:flex-row gap-2">
+                  <a
+                    href="https://wa.me/255753969379?text=Hello%20CS%20Academy%2C%20please%20add%20me%20to%20the%20Friday%20lessons%20newsletter."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[var(--accent-red)] text-white text-xs font-extrabold uppercase tracking-wider shadow hover:bg-[var(--accent-red-hover)] transition-colors"
+                  >
+                    Join on WhatsApp
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onClose();
+                      openBookingModal({ program: 'Friday Lessons Newsletter' });
+                    }}
+                    className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
+                      theme === 'dark'
+                        ? 'bg-white/5 text-neutral-200 hover:bg-white/10 border border-white/10'
+                        : 'bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200'
+                    }`}
+                  >
+                    Email me instead
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Tags & Full Share Bar */}
@@ -167,6 +381,55 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
               />
             </div>
           </div>
+
+          {/* Related Articles */}
+          {related.length > 0 && (
+            <div className="pt-4 border-t" style={{ borderColor: theme === 'dark' ? 'var(--border-color)' : 'rgb(229 229 229)' }}>
+              <div className={`text-[10px] font-black uppercase tracking-[0.18em] mb-3 ${
+                theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'
+              }`}>
+                Related Reading
+              </div>
+              <div className="grid sm:grid-cols-3 gap-3">
+                {related.map((r) => (
+                  <button
+                    type="button"
+                    key={r.id}
+                    onClick={() => {
+                      onClose();
+                      setTimeout(() => {
+                        const event = new CustomEvent('cs:open-blog', { detail: { id: r.id } });
+                        window.dispatchEvent(event);
+                      }, 50);
+                    }}
+                    className={`text-left p-4 rounded-2xl border transition-colors group ${
+                      theme === 'dark'
+                        ? 'border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-[var(--accent-red-border)]'
+                        : 'border-neutral-200 bg-white hover:border-red-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between text-[10px] font-mono font-bold uppercase tracking-wider mb-2">
+                      <span className="text-[var(--accent-red-strong)]">{r.category}</span>
+                      <span className={theme === 'dark' ? 'text-neutral-500' : 'text-neutral-500'}>
+                        {r.readingTime}
+                      </span>
+                    </div>
+                    <h4 className={`text-sm font-extrabold leading-snug mb-2 group-hover:text-[var(--accent-red-strong)] transition-colors ${
+                      theme === 'dark' ? 'text-white' : 'text-neutral-900'
+                    }`}>
+                      {r.title}
+                    </h4>
+                    <div className={`flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider ${
+                      theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
+                    }`}>
+                      <span>Read</span>
+                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Footer Call to Action */}
           <div className={`pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 ${

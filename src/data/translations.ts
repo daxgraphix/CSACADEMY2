@@ -33,6 +33,17 @@ export interface Translations {
   hero: {
     badge: string;
     badgeHighlight: string;
+    outcome: string;
+    outcomeHighlight: string;
+    outcomeTrailing: string;
+    primaryCta: string;
+    proof1Value: string;
+    proof1Label: string;
+    proof2Value: string;
+    proof2Label: string;
+    proof3Value: string;
+    proof3Label: string;
+    trustLine: string;
     headlineMain: string;
     headlineHighlight: string;
     subheadline: string;
@@ -153,8 +164,19 @@ export const translations: Translations = {
     switchTheme: "Toggle Theme"
   },
   hero: {
-    badge: "EAST AFRICA'S PREMIER TECH LEARNING PLATFORM",
+    badge: "AFRICA PREMIER TECH LEARNING PLATFORM",
     badgeHighlight: "NEW: Vibe Coding & AI",
+    outcome: "Get job-ready in",
+    outcomeHighlight: "AI, cybersecurity, or web dev",
+    outcomeTrailing: "in weeks from your phone, in Swahili and English.",
+    primaryCta: "Start with a free WhatsApp lesson",
+    proof1Value: "1,200+",
+    proof1Label: "Graduates",
+    proof2Value: "8",
+    proof2Label: "Countries",
+    proof3Value: "4.9/5",
+    proof3Label: "Learner satisfaction",
+    trustLine: "No prior experience needed. Built for low-bandwidth. English-first with local-language support.",
     headlineMain: "MASTER AI, CYBERSECURITY",
     headlineHighlight: "& DIGITAL SKILLS",
     subheadline: "Learn AI, web development, and cybersecurity through hands-on projects that help you move forward at work, in business, and in everyday life.",

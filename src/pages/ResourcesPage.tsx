@@ -4,13 +4,15 @@ import { resourcesData } from '../data/resources';
 import { ResourceItem } from '../types';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
-import { 
-  FileText, 
-  Download, 
-  Eye, 
-  Clock, 
-  Search, 
-  ShieldCheck, 
+import { siteConfig } from '../config/site';
+import { EmptyState } from '../components/EmptyState';
+import {
+  FileText,
+  Download,
+  Eye,
+  Clock,
+  Search,
+  ShieldCheck,
   ArrowRight,
   BookOpen
 } from 'lucide-react';
@@ -114,7 +116,27 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
 
         {/* Resources Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((resource) => (
+          {filtered.length === 0 ? (
+            <EmptyState
+              hasActiveSearch={search.trim() !== ''}
+              hasActiveFilter={selectedCat !== 'ALL'}
+              searchQuery={search}
+              onClearSearch={() => setSearch('')}
+              onClearFilter={() => setSelectedCat('ALL')}
+              onClearAll={() => { setSearch(''); setSelectedCat('ALL'); }}
+              onRequestTopic={() => {
+                const text = encodeURIComponent(
+                  `Hello CS Academy, I couldn't find a resource on "${search || selectedCat}". Could you add one?`
+                );
+                window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
+              }}
+              suggestions={['AI prompts', 'Phishing', 'M-Pesa safety', 'Student guides']}
+              onSuggestionClick={(term) => setSearch(term)}
+              title="No resources match your filters"
+              description="Try a different keyword, switch the category, or ask us to add this topic — we add new toolkits every month."
+            />
+          ) : (
+            filtered.map((resource) => (
             <div
               key={resource.id}
               className={`border rounded-3xl p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-sm group ${
@@ -190,7 +212,8 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
                 </button>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
 
       </div>

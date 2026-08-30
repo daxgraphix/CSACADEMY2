@@ -9,7 +9,21 @@ import {
   ArrowRight,
   MessageCircle,
   Sun,
-  Moon
+  Moon,
+  Home,
+  Sparkles,
+  Star,
+  Bot,
+  ShieldCheck,
+  Code2,
+  Users,
+  Layers,
+  BookOpen,
+  Info,
+  Phone,
+  CreditCard,
+  Building2,
+  Wallet
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -433,148 +447,227 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div ref={menuRef} className={`lg:hidden border-b px-4 pt-3 pb-6 max-h-[90vh] overflow-y-auto fade-in ${
+        <div ref={menuRef} className={`lg:hidden border-b pt-3 pb-6 max-h-[90vh] overflow-y-auto fade-in ${
           theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
-          <div className="space-y-1">
-            <button
-              onClick={() => navigateTo('home')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.home}
-            </button>
+          <div className="px-4 space-y-1.5">
 
-            <button
-              onClick={() => navigateTo('features')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold flex items-center justify-between ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              <span>{t.nav.features}</span>
-              <span className="text-[10px] bg-red-950 text-[var(--accent-red-strong)] font-bold px-2 py-0.5 rounded border border-red-800/60">New</span>
-            </button>
+            {/* Top-level nav items with icons for scannability */}
+            {[
+              { route: 'home' as PageRoute, label: t.nav.home, Icon: Home, badge: null as string | null },
+              { route: 'features' as PageRoute, label: t.nav.features, Icon: Layers, badge: 'New' },
+              { route: 'pricing' as PageRoute, label: t.nav.pricing, Icon: Wallet, badge: 'M-Pesa' },
+              { route: 'learning-formats' as PageRoute, label: t.nav.formats, Icon: BookOpen, badge: null },
+              { route: 'for-organizations' as PageRoute, label: t.nav.organizations, Icon: Building2, badge: 'Corporate' },
+              { route: 'resources' as PageRoute, label: t.nav.resources, Icon: BookOpen, badge: null },
+              { route: 'blog' as PageRoute, label: t.nav.blog, Icon: BookOpen, badge: null },
+              { route: 'about' as PageRoute, label: t.nav.about, Icon: Info, badge: null },
+              { route: 'contact' as PageRoute, label: t.nav.contact, Icon: Phone, badge: null }
+            ].map(({ route, label, Icon, badge }) => {
+              const active = currentRoute === route;
+              return (
+                <button
+                  key={route}
+                  onClick={() => navigateTo(route)}
+                  className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-bold text-left transition-colors ${
+                    active
+                      ? theme === 'dark'
+                        ? 'bg-white/5 text-white border border-white/10'
+                        : 'bg-neutral-100 text-neutral-900 border border-neutral-200'
+                      : theme === 'dark'
+                        ? 'hover:bg-neutral-900 text-neutral-200'
+                        : 'hover:bg-neutral-100 text-neutral-800'
+                  }`}
+                >
+                  <span className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-white/5 text-[var(--accent-red-strong)]' : 'bg-red-50 text-[var(--accent-red-hover)]'
+                  }`}>
+                    <Icon className="w-4 h-4" />
+                  </span>
+                  <span className="flex-1">{label}</span>
+                  {badge && (
+                    <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${
+                      badge === 'M-Pesa'
+                        ? theme === 'dark'
+                          ? 'bg-emerald-950 text-emerald-300 border-emerald-800/60'
+                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : badge === 'Corporate'
+                          ? theme === 'dark'
+                            ? 'bg-red-950 text-red-300 border-red-800/60'
+                            : 'bg-red-50 text-red-700 border-red-200'
+                          : theme === 'dark'
+                            ? 'bg-red-950 text-[var(--accent-red-strong)] border-red-800/60'
+                            : 'bg-red-50 text-[var(--accent-red-hover)] border-red-200'
+                    }`}>
+                      {badge}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
 
-            <button
-              onClick={() => navigateTo('pricing')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold flex items-center justify-between ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              <span>{t.nav.pricing}</span>
-              <span className="text-[10px] bg-emerald-950 text-emerald-300 font-bold px-2 py-0.5 rounded border border-emerald-800/60">M-Pesa</span>
-            </button>
-
-            {/* Mobile Programs Section */}
-            <div className={`rounded-2xl p-3 my-2 border ${
+            {/* PROGRAMS — grouped for mobile */}
+            <div className={`mt-4 rounded-2xl p-3 border ${
               theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-[var(--border-subtle)]'
             }`}>
               <button
                 onClick={() => navigateTo('programs')}
-                className="w-full text-left text-xs font-extrabold uppercase tracking-wider text-[var(--accent-red-strong)] mb-2 flex items-center justify-between"
+                className="w-full flex items-center justify-between px-1 py-1.5 text-[10px] font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]"
               >
-                <span>{t.nav.programs}</span>
+                <span>Programs & Tracks</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
-              
-              <div className="grid gap-1 pl-1">
+
+              {/* ★ Most Popular */}
+              <div className="mt-2 space-y-1">
+                <div className={`px-2 pt-1.5 pb-1 flex items-center gap-1.5 text-[9px] font-black uppercase tracking-[0.18em] ${
+                  theme === 'dark' ? 'text-amber-400' : 'text-amber-600'
+                }`}>
+                  <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                  Most Popular
+                </div>
                 <button
                   onClick={() => navigateTo('vibe-coding')}
-                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                  className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
+                    theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-white'
+                  }`}
                 >
-                  <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">New</span>
-                  <span>Vibe Coding (New)</span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-amber-500/15 text-amber-400' : 'bg-amber-50 text-amber-600'
+                  }`}>
+                    <Sparkles className="w-4 h-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center gap-1.5">
+                      <span className={`text-sm font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                        Vibe Coding
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">
+                        New
+                      </span>
+                    </span>
+                    <span className={`block text-[11px] leading-snug mt-0.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                      AI-powered web dev with Cursor & Bolt
+                    </span>
+                  </span>
                 </button>
+              </div>
+
+              <div className={`my-2 h-px ${theme === 'dark' ? 'bg-neutral-800' : 'bg-neutral-200'}`} />
+
+              {/* Academies */}
+              <div className="space-y-1">
+                <div className={`px-2 pt-1 pb-1 text-[9px] font-black uppercase tracking-[0.18em] ${
+                  theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'
+                }`}>
+                  Academies
+                </div>
                 <button
                   onClick={() => navigateTo('programs/ai')}
-                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                  className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
+                    theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-white'
+                  }`}
                 >
-                  <span>AI & Vibe Coding Academy</span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-blue-500/15 text-blue-400' : 'bg-blue-50 text-blue-600'
+                  }`}>
+                    <Bot className="w-4 h-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block text-sm font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                      AI & Prompting
+                    </span>
+                    <span className={`block text-[11px] leading-snug mt-0.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                      LLMs, AI safety & local-language prompts
+                    </span>
+                  </span>
                 </button>
                 <button
                   onClick={() => navigateTo('programs/cybersecurity')}
-                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                  className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
+                    theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-white'
+                  }`}
                 >
-                  <span>Cybersecurity Academy</span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-emerald-50 text-emerald-600'
+                  }`}>
+                    <ShieldCheck className="w-4 h-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block text-sm font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                      Cybersecurity
+                    </span>
+                    <span className={`block text-[11px] leading-snug mt-0.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                      Digital defense, phishing & data safety
+                    </span>
+                  </span>
                 </button>
                 <button
                   onClick={() => navigateTo('programs/digital-skills')}
-                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                  className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
+                    theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-white'
+                  }`}
                 >
-                  <span>Digital Skills & Web Development</span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-purple-500/15 text-purple-400' : 'bg-purple-50 text-purple-600'
+                  }`}>
+                    <Code2 className="w-4 h-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block text-sm font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                      Digital Skills
+                    </span>
+                    <span className={`block text-[11px] leading-snug mt-0.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                      Web dev, Figma UI/UX & digital marketing
+                    </span>
+                  </span>
                 </button>
+              </div>
+
+              <div className={`my-2 h-px ${theme === 'dark' ? 'bg-neutral-800' : 'bg-neutral-200'}`} />
+
+              {/* Community */}
+              <div className="space-y-1">
+                <div className={`px-2 pt-1 pb-1 text-[9px] font-black uppercase tracking-[0.18em] ${
+                  theme === 'dark' ? 'text-neutral-500' : 'text-neutral-600'
+                }`}>
+                  Community
+                </div>
                 <button
                   onClick={() => navigateTo('devpad')}
-                  className="w-full text-left py-2 px-2 text-xs font-medium flex items-center gap-2"
+                  className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
+                    theme === 'dark' ? 'hover:bg-neutral-800' : 'hover:bg-white'
+                  }`}
                 >
-                  <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">Community</span>
-                  <span>DevPad</span>
+                  <span className={`shrink-0 flex h-9 w-9 items-center justify-center rounded-lg ${
+                    theme === 'dark' ? 'bg-pink-500/15 text-pink-400' : 'bg-pink-50 text-pink-600'
+                  }`}>
+                    <Users className="w-4 h-4" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="flex items-center gap-1.5">
+                      <span className={`text-sm font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
+                        DevPad
+                      </span>
+                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-[var(--accent-red)] text-white">
+                        Community
+                      </span>
+                    </span>
+                    <span className={`block text-[11px] leading-snug mt-0.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
+                      Build, test & launch with developer peers
+                    </span>
+                  </span>
                 </button>
               </div>
             </div>
-
-            <button
-              onClick={() => navigateTo('learning-formats')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.formats}
-            </button>
-
-            <button
-              onClick={() => navigateTo('for-organizations')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold flex items-center justify-between ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              <span>{t.nav.organizations}</span>
-              <span className="text-[10px] bg-red-950 text-red-300 font-bold px-2 py-0.5 rounded border border-red-800/60">Corporate</span>
-            </button>
-
-            <button
-              onClick={() => navigateTo('resources')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.resources}
-            </button>
-
-            <button
-              onClick={() => navigateTo('blog')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.blog}
-            </button>
-
-            <button
-              onClick={() => navigateTo('about')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.about}
-            </button>
-
-            <button
-              onClick={() => navigateTo('contact')}
-              className={`w-full text-left px-3 py-2.5 rounded-xl text-sm font-bold ${
-                theme === 'dark' ? 'hover:bg-neutral-900' : 'hover:bg-neutral-100 transition-colors duration-200'
-              }`}
-            >
-              {t.nav.contact}
-            </button>
           </div>
 
-          <div className="mt-5 pt-4 border-t border-neutral-800 space-y-2">
+          <div className="mt-5 mx-4 pt-4 border-t border-neutral-800 dark:border-neutral-800 space-y-2">
             <button
               onClick={() => { setMobileMenuOpen(false); openBookingModal(); }}
-              className="w-full py-3.5 text-center text-xs font-bold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-xl tracking-wider uppercase shadow-lg"
+              className="w-full py-3.5 text-center text-xs font-bold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-xl tracking-wider uppercase shadow-lg inline-flex items-center justify-center gap-2"
             >
+              <CreditCard className="w-3.5 h-3.5" />
               {t.nav.bookTraining}
             </button>
 

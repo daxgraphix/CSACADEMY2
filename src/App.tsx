@@ -28,7 +28,9 @@ import { ProgramDetailModal } from './components/ProgramDetailModal';
 import { TrainingDetailModal } from './components/TrainingDetailModal';
 import { ResourceViewModal } from './components/ResourceViewModal';
 import { BlogArticleModal } from './components/BlogArticleModal';
+import { PriceStrip } from './components/PriceStrip';
 import { useApp } from './context/AppContext';
+import { blogPostsData } from './data/blog';
 
 export default function App() {
   const location = useLocation();
@@ -70,6 +72,19 @@ export default function App() {
     isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle,
     [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]
   );
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<{ id: string }>).detail;
+      const target = blogPostsData.find((p) => p.id === detail.id);
+      if (target) {
+        setSelectedBlogArticle(target);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('cs:open-blog', handler as EventListener);
+    return () => window.removeEventListener('cs:open-blog', handler as EventListener);
+  }, []);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -224,6 +239,7 @@ export default function App() {
 
         <BackToTop />
         <ScrollProgress />
+        <PriceStrip variant="sticky-mobile" openBookingModal={() => handleOpenBooking()} />
       </div>
     </ErrorBoundary>
   );

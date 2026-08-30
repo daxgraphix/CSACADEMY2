@@ -4,7 +4,9 @@ import { blogPostsData } from '../data/blog';
 import { BlogPost } from '../types';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { siteConfig } from '../config/site';
 import { ShareButtons } from '../components/ShareButtons';
+import { EmptyState } from '../components/EmptyState';
 import {
   Clock,
   User,
@@ -140,7 +142,27 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           </div>
         }>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((post) => (
+          {filtered.length === 0 ? (
+            <EmptyState
+              hasActiveSearch={search.trim() !== ''}
+              hasActiveFilter={selectedCategory !== 'ALL'}
+              searchQuery={search}
+              onClearSearch={() => setSearch('')}
+              onClearFilter={() => setSelectedCategory('ALL')}
+              onClearAll={() => { setSearch(''); setSelectedCategory('ALL'); }}
+              onRequestTopic={() => {
+                const text = encodeURIComponent(
+                  `Hello CS Academy, I couldn't find an article on "${search || selectedCategory}". Could you write one?`
+                );
+                window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
+              }}
+              suggestions={['AI safety', 'Phishing', 'M-Pesa', 'Prompting', 'Local language AI']}
+              onSuggestionClick={(term) => setSearch(term)}
+              title="No articles match your filters"
+              description="Try a different keyword, switch the category, or request a topic — we publish new essays every two weeks."
+            />
+          ) : (
+            filtered.map((post) => (
             <article
               key={post.id}
               onClick={() => openBlogArticleModal(post)}
@@ -213,8 +235,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 </div>
               </div>
             </article>
-            ))}
-          </div>
+          ))
+          )}
+        </div>
         </Suspense>
 
       </div>

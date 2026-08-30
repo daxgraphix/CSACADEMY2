@@ -267,25 +267,37 @@
   }
 
   /* ─── Animation Utility Classes ─── */
+  /*
+   * ANIMATION BUDGET
+   * ----------------
+   * At most TWO true infinite loops may be visible per viewport.
+   * The two ambient loops retained across the site are:
+   *   1. .dot-pulse     → the brand-logo dot in the Navbar (live "we're online" cue)
+   *   2. .pulse-glow    → the Navbar dot glow, a coupled visual signal
+   * Everything else is entrance-only (one-shot, forwards) so the page
+   * settles into stillness once it's in view. prefers-reduced-motion below
+   * collapses even those.
+   */
 
   .soft-float {
-    animation: float-soft 7s ease-in-out infinite;
+    animation: float-soft 1.4s ease-out 1 both;
   }
 
   .soft-float-delayed {
-    animation: float-soft-delayed 9s ease-in-out infinite;
+    animation: float-soft-delayed 1.4s ease-out 1 both;
+    animation-delay: 0.2s;
   }
 
   .soft-float-slow {
-    animation: float-soft 12s ease-in-out infinite;
+    animation: float-soft 1.6s ease-out 1 both;
   }
 
   .glow-accent {
-    animation: pulse-glow 5s ease-in-out infinite;
+    animation: pulse-glow 1.6s ease-out 1 both;
   }
 
   .glow-accent-strong {
-    animation: pulse-glow-strong 4s ease-in-out infinite;
+    animation: pulse-glow-strong 1.8s ease-out 1 both;
   }
 
   .fade-in {
@@ -304,12 +316,14 @@
     animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
+  /* One-shot "breath in" on mount; the element then sits still. */
   .icon-breathe {
-    animation: icon-breathe 4s ease-in-out infinite;
+    animation: icon-breathe 1.2s ease-out 1 both;
   }
 
+  /* One-shot rotation on mount. */
   .icon-spin-slow {
-    animation: icon-spin-slow 8s linear infinite;
+    animation: icon-spin-slow 1.2s ease-out 1 both;
   }
 
   .shimmer-text {
@@ -324,7 +338,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shimmer-text 4s linear infinite;
+    animation: shimmer-text 2.4s ease-out 1 both;
   }
 
   .gradient-text {
@@ -333,11 +347,11 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 3s ease infinite;
+    animation: gradient-shift 2.4s ease-out 1 both;
   }
 
   .border-glow {
-    animation: border-glow 3s ease-in-out infinite;
+    animation: border-glow 1.6s ease-out 1 both;
   }
 
   .badge-ping::before {
@@ -345,16 +359,17 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    animation: badge-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: badge-ping 1.5s cubic-bezier(0, 0, 0.2, 1) 1 both;
     background: var(--accent-red);
   }
 
   .scroll-indicator {
-    animation: scroll-indicator 2s ease-in-out infinite;
+    animation: scroll-indicator 1.6s ease-in-out 1 both;
   }
 
+  /* Single retained ambient infinite loop: brand-logo dot */
   .dot-pulse {
-    animation: dot-pulse 2s ease-in-out infinite;
+    animation: dot-pulse 2.5s ease-in-out infinite;
   }
 
   /* ─── Reveal on scroll ─── */
@@ -467,7 +482,7 @@
   /* ─── Subtle icon pulse for emphasis ─── */
 
   .icon-pulse-subtle {
-    animation: icon-pulse-soft 3.5s ease-in-out infinite;
+    animation: icon-pulse-soft 1.4s ease-out 1 both;
   }
 
   @keyframes icon-pulse-soft {
@@ -563,7 +578,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: gradient-shift 4s ease infinite;
+    animation: gradient-shift 2.4s ease-out 1 both;
   }
 
   /* ─── Hover scale for cards/icons ─── */
@@ -782,7 +797,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    animation: badge-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: badge-ping 1.8s cubic-bezier(0, 0, 0.2, 1) 1 both;
     background: var(--accent-red);
   }
 

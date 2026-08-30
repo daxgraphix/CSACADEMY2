@@ -57,10 +57,15 @@ export const BackToTop: React.FC = () => {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       data-visible={visible}
-      className={`group fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-[60] flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-opacity duration-300 ${
+      className={`group fixed right-5 sm:right-6 z-[60] flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-[bottom,opacity] duration-300 ${
         visible
           ? 'opacity-100 pointer-events-auto'
           : 'opacity-0 pointer-events-none'
+      } ${
+        // On mobile the PriceStrip is anchored at the bottom; lift the back-to-top
+        // button above it. On sm+ the price bar is hidden, so the button sits
+        // flush to the bottom-right corner.
+        'bottom-20 sm:bottom-6'
       } ${
         theme === 'dark'
           ? 'bg-[var(--bg-secondary)] hover:bg-[#1f1f1f] text-white border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
