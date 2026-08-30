@@ -158,7 +158,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
                   <h3 className={`text-sm font-extrabold tracking-tight ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>{item.title}</h3>
-                  <p className={`text-xs leading-relaxed ${
+                   <p className={`text-sm leading-relaxed ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
                   }`}>{item.desc}</p>
                 </div>

@@ -9,7 +9,7 @@ export interface UseRevealOptions {
 export function useReveal<T extends Element = HTMLDivElement>(
   options: UseRevealOptions = {}
 ) {
-  const { threshold = 0.1, rootMargin = '0px 0px -40px 0px', once = true } = options;
+  const { threshold = 0, rootMargin = '0px 0px -40px 0px', once = true } = options;
   const ref = useRef<T | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 

@@ -56,14 +56,14 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
           </div>
 
           {/* Category Tabs */}
-          <div className={`flex items-center gap-1.5 p-1 border rounded-2xl self-start md:self-auto overflow-x-auto max-w-full ${
+          <div className={`grid grid-cols-2 gap-1.5 p-1 border rounded-2xl self-start md:self-auto sm:grid-cols-3 lg:flex lg:flex-nowrap lg:gap-1.5 ${
             theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
+                className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all w-full text-center sm:w-auto ${
                   selectedCategory === cat 
                     ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
                     : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -137,7 +137,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                     Key Outcomes:
                   </span>
                   {pkg.keyOutcomes.slice(0, isMobile ? 2 : 3).map((item, dIdx) => (
-                    <div key={dIdx} className={`flex items-start gap-2 text-xs ${
+                       <div key={dIdx} className={`flex items-start gap-2 text-sm ${
                       theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                     }`}>
                       <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />

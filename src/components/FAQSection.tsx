@@ -142,7 +142,7 @@ export const FAQSection: React.FC = () => {
           </div>
 
           {/* Quick Category Filters with result counts */}
-          <div className="flex flex-nowrap items-center justify-start gap-2 pt-3 overflow-x-auto pb-1 sm:flex-wrap sm:justify-center sm:overflow-visible">
+          <div className="grid grid-cols-2 gap-2 pt-3 pb-1 sm:flex sm:flex-wrap sm:justify-center sm:overflow-visible">
             {categories.map(cat => {
               const Icon = cat.icon;
               const isSelected = selectedCategory === cat.id;
@@ -154,7 +154,7 @@ export const FAQSection: React.FC = () => {
                   key={cat.id}
                   id={`faq-category-btn-${cat.id.toLowerCase().replace(/[^a-z0-9]/g, '-')}`}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex shrink-0 items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 hover:-translate-y-0.5 ${
+                  className={`inline-flex shrink-0 items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all duration-200 hover:-translate-y-0.5 w-full justify-center sm:w-auto ${
                     isSelected
                       ? 'bg-[var(--accent-red-hover)] text-white shadow-md'
                       : theme === 'dark'

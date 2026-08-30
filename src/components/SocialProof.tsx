@@ -98,14 +98,14 @@ export const SocialProof: React.FC = () => {
 
         {/* Filter Tabs */}
         <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
-          <div className={`inline-flex items-center gap-1.5 p-1 rounded-2xl border ${
+          <div className={`grid grid-cols-2 gap-1.5 p-1 rounded-2xl border sm:grid-cols-3 lg:inline-flex lg:flex-nowrap lg:gap-1.5 ${
             theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
             {filterOptions.map((opt) => (
               <button
                 key={opt.id}
                 onClick={() => setSelectedFilter(opt.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 hover:-translate-y-0.5 ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 w-full text-center sm:w-auto ${
                   selectedFilter === opt.id
                     ? 'bg-[#B91C1C] text-white shadow-md'
                     : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'

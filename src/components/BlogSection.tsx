@@ -114,14 +114,14 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
         </div>
 
         {/* Tag Filter */}
-        <div className={`flex items-center gap-1.5 p-1 border rounded-2xl self-start md:self-auto overflow-x-auto max-w-full mb-8 ${
+        <div className={`grid grid-cols-2 gap-1.5 p-1 border rounded-2xl self-start md:self-auto sm:grid-cols-3 lg:flex lg:flex-nowrap lg:gap-1.5 mb-8 ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-100 border-neutral-300'
         }`}>
           {tags.map((tag) => (
             <button
               key={tag}
               onClick={() => setSelectedTag(tag)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
+              className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all w-full text-center sm:w-auto ${
                 selectedTag === tag 
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'

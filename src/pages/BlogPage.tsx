@@ -110,12 +110,12 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           </div>
 
           {/* Category Tabs */}
-          <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto">
+          <div className="grid grid-cols-2 gap-1.5 w-full sm:grid-cols-3 md:flex md:flex-nowrap md:gap-1.5 md:w-auto md:overflow-visible">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 ${
+                className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 w-full text-center sm:w-auto ${
                   selectedCategory === cat
                     ? 'bg-[var(--accent-red-hover)] text-white shadow-sm ring-2 ring-[var(--accent-red-hover)]/30'
                     : theme === 'dark'

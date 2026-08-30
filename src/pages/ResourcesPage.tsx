@@ -89,12 +89,12 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
             />
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1">
+          <div className="grid grid-cols-2 gap-1.5 w-full pb-1 sm:grid-cols-3 md:flex md:flex-nowrap md:gap-1.5 md:w-auto md:overflow-visible">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCat(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${
+                className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all w-full text-center sm:w-auto ${
                   selectedCat === cat 
                     ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
                     : theme === 'dark'

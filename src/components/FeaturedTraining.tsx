@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { featuredTrainingData } from '../data/training';
 import { TrainingProgram } from '../types';
 import { useApp } from '../context/AppContext';
-import { useReveal } from '../hooks/useReveal';
 import { useDeviceType } from '../hooks/useWindowSize';
 import {
   Users,
@@ -25,7 +24,6 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
   const { theme, t } = useApp();
   const { isMobile } = useDeviceType();
   const [filter, setFilter] = useState<'ALL' | 'AI' | 'CYBER' | 'DIGITAL' | 'WEB' | 'DESIGN'>('ALL');
-  const gridRef = useReveal<HTMLDivElement>();
 
   const filteredTrainings = featuredTrainingData.filter((item) => {
     if (filter === 'AI') return item.category === 'ai';
@@ -82,13 +80,13 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </p>
           </div>
 
-          {/* Filter Tabs */}
-          <div className={`flex items-center gap-1.5 p-1.5 border rounded-2xl self-start md:self-auto overflow-x-auto max-w-full ${
+          {/* Filter Tabs — 2-col grid on mobile, 3-col on small tablet, horizontal row on desktop */}
+          <div className={`grid grid-cols-2 gap-1.5 p-1.5 border rounded-2xl self-start md:self-auto sm:grid-cols-3 lg:flex lg:flex-nowrap lg:gap-1.5 ${
             theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
             <button
               onClick={() => setFilter('ALL')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'ALL'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -98,7 +96,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </button>
             <button
               onClick={() => setFilter('AI')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'AI'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -108,7 +106,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </button>
             <button
               onClick={() => setFilter('CYBER')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'CYBER'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -118,7 +116,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </button>
             <button
               onClick={() => setFilter('DIGITAL')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'DIGITAL'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -128,7 +126,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </button>
             <button
               onClick={() => setFilter('WEB')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'WEB'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -138,7 +136,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </button>
             <button
               onClick={() => setFilter('DESIGN')}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors ${
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors w-full text-center sm:w-auto ${
                 filter === 'DESIGN'
                   ? 'bg-[var(--accent-red-hover)] text-white shadow-sm'
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
@@ -149,9 +147,8 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
           </div>
         </div>
 
-        {/* 6 Training Cards Grid */}
         {/* Training Cards Grid — 1 column on mobile, 2 on small tablet, 3 on desktop */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 reveal-stagger">
+        <div key={filter} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 animate-[fadeIn_0.3s_ease-out]">
           {filteredTrainings.map((course) => {
             return (
             <div
@@ -194,7 +191,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                 </h3>
 
                 {/* Description */}
-                <p className={`text-xs leading-relaxed line-clamp-3 ${
+                 <p className={`text-sm leading-relaxed line-clamp-3 ${
                   theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
                 }`}>
                   {course.description}
@@ -229,7 +226,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   </span>
                    <div className="grid grid-cols-1 gap-1.5">
                      {course.highlights.slice(0, isMobile ? 2 : 4).map((highlight, idx) => (
-                      <div key={idx} className={`flex items-start gap-2 text-xs ${
+                         <div key={idx} className={`flex items-start gap-2 text-sm ${
                         theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                       }`}>
                         <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />

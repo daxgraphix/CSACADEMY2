@@ -878,12 +878,28 @@ canvas {
   display: block;
 }
 
-/* Long unbreakable strings (emails, URLs) must wrap to avoid h-breakage */
+/* Long unbreakable strings (emails, URLs) wrap only when truly necessary */
 body {
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
 }
 
+/* Cleaner text wrapping on small screens (avoids ugly mid-word breaks) */
+h1, h2, h3, h4, h5 {
+  text-wrap: balance;
+}
+
+p, li, blockquote, dd, dt {
+  text-wrap: pretty;
+}
+
+/* Improve legibility of the smallest text on phones (no layout shift) */
+@media (max-width: 639px) {
+  .text-xs {
+    font-size: 0.8125rem;
+    line-height: 1.45rem;
+  }
+}
 /* Larger tap targets on touch devices for mobile-friendly interactions */
 @media (hover: none) and (pointer: coarse) {
   button,
