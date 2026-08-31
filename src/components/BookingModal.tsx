@@ -31,7 +31,9 @@ interface BookingModalProps {
 interface SubmissionReceipt {
   reference: string;
   submittedAt: Date;
-  via: 'whatsapp' | 'email';
+  via: 'whatsapp' | 'email' | 'server' | 'draft';
+  delivered: boolean;
+  needsActivation?: boolean;
 }
 
 const generateReference = (): string => {
@@ -48,6 +50,80 @@ const formatDate = (d: Date): string => {
     hour: '2-digit',
     minute: '2-digit'
   });
+};
+
+/**
+ * Copy text to the clipboard with a fallback for browsers that block the
+ * async Clipboard API (insecure contexts, permission denied, etc.).
+ * Returns true on success.
+ */
+const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    if (navigator?.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    /* fall through to legacy path */
+  }
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+};
+
+// Endpoint that accepts a JSON POST and forwards the inquiry to CS Academy
+// and a copy to the user. Set via VITE_BOOKING_ENDPOINT. When unset, the modal
+// falls back to wa.me / mailto deep links (the original behaviour).
+const BOOKING_ENDPOINT: string =
+  (typeof import.meta !== 'undefined' &&
+    (import.meta as ImportMeta & { env?: Record<string, string> }).env
+      ?.VITE_BOOKING_ENDPOINT) ||
+  '';
+
+const buildSubject = (program: string) => `Training Inquiry: ${program} | CS Academy`;
+
+const buildMessageWithRef = (
+  fields: {
+    name: string;
+    email: string;
+    organization: string;
+    program: string;
+    format: string;
+    audienceType: string;
+    location: string;
+    notes: string;
+  },
+  reference: string
+) => {
+  const base = `Hello CS Academy Team,
+
+I would like to inquire about a training program:
+Name: ${fields.name || '[Your Name]'}
+Email: ${fields.email || '[Your Email]'}
+Organization / Role: ${fields.organization || '[Individual/Company]'}
+Program: ${fields.program}
+Preferred Format: ${fields.format}
+Audience Segment: ${fields.audienceType}
+Location: ${fields.location}
+${fields.notes ? `Specific Goals/Notes: ${fields.notes}\n` : ''}
+Please provide curriculum details and scheduling availability.
+
+---
+Reference: ${reference}
+Submitted via CS Academy website.`;
+  return base;
 };
 
 export const BookingModal: React.FC<BookingModalProps> = ({
@@ -69,6 +145,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [receipt, setReceipt] = useState<SubmissionReceipt | null>(null);
   const [refCopied, setRefCopied] = useState(false);
   const [messageCopied, setMessageCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const emailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
 
@@ -95,6 +173,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setReceipt(null);
       setRefCopied(false);
       setMessageCopied(false);
+      setIsSubmitting(false);
+      setSubmitError(null);
     }
   }, [isOpen]);
 
@@ -123,54 +203,223 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   if (!isOpen) return null;
 
   const constructMessageText = () => {
-    return `Hello CS Academy Team,\n\nI would like to inquire about a training program:\nName: ${name || '[Your Name]'}\nEmail: ${email || '[Your Email]'}\nOrganization / Role: ${organization || '[Individual/Company]'}\nProgram: ${program}\nPreferred Format: ${format}\nAudience Segment: ${audienceType}\nLocation: ${location}\n${notes ? `Specific Goals/Notes: ${notes}\n` : ''}\nPlease provide curriculum details and scheduling availability.`;
+    return buildMessageWithRef(
+      { name, email, organization, program, format, audienceType, location, notes },
+      receipt?.reference ?? '[assigned on submit]'
+    );
   };
 
-  const handleWhatsAppSend = () => {
-    if (!validate()) return;
-    const text = encodeURIComponent(constructMessageText());
+  const submitToServer = async (): Promise<{ ok: boolean; ref: string; needsActivation?: boolean }> => {
+    if (!BOOKING_ENDPOINT) return { ok: false, ref: '', needsActivation: false };
     const ref = generateReference();
-    setReceipt({ reference: ref, submittedAt: new Date(), via: 'whatsapp' });
-    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
+    try {
+      setIsSubmitting(true);
+      setSubmitError(null);
+      const fullMessage = buildMessageWithRef(
+        { name, email, organization, program, format, audienceType, location, notes },
+        ref
+      );
+
+      // formsubmit.co accepts a standard form-encoded POST and emails the
+      // recipient encoded in the URL. Notable fields:
+      //   _subject -> custom email subject (overrides the default)
+      //   email    -> reply-to / auto-response To-address
+      //   name     -> sender display name
+      //   _honey   -> honeypot; must be empty (real users won't fill it)
+      //   *_other  -> arbitrary fields become rows in the email
+      const form = new URLSearchParams();
+      form.set('_subject', `[CS Academy] New inquiry — ${program} (ref ${ref})`);
+      if (name) form.set('name', name);
+      if (email) form.set('email', email);
+      form.set('organization', organization || '');
+      form.set('program', program);
+      form.set('format', format);
+      form.set('audienceType', audienceType);
+      form.set('location', location);
+      form.set('notes', notes || '');
+      form.set('reference', ref);
+      form.set('submittedAt', new Date().toISOString());
+      if (typeof window !== 'undefined') form.set('page', window.location.href);
+      form.set('message', fullMessage);
+      form.set('_honey', '');
+
+      const res = await fetch(BOOKING_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Accept: 'application/json'
+        },
+        body: form.toString()
+      });
+
+      // formsubmit.co returns 200 with a JSON body of the form
+      //   { success: "true" | "false", message: "..." }
+      // Parse defensively — content-type can be text/html with JSON body.
+      let data: { success?: string | boolean; message?: string } = {};
+      try {
+        const text = await res.text();
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        data = {};
+      }
+
+      const okFlag = data.success === true || data.success === 'true';
+      if (!res.ok || !okFlag) {
+        // Special-case formsubmit.co's one-time activation step so the
+        // first user doesn't see a hard error.
+        const msg = (data.message || '').toLowerCase();
+        if (msg.includes('activation')) {
+          setSubmitError(
+            'Form activation required for this site. formsubmit.co has emailed support@cyberswahili.co.tz a one-time activation link. CS Academy must click it once to enable this origin, and your message will deliver automatically after that.'
+          );
+          setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, needsActivation: true });
+          return { ok: false, ref, needsActivation: true };
+        }
+        throw new Error(data.message || `Server returned ${res.status}`);
+      }
+
+      setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: true });
+      return { ok: true, ref };
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : 'Could not reach the server. Use WhatsApp or Email below.'
+      );
+      return { ok: false, ref };
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  const handleEmailSend = () => {
+  const handleWhatsAppSend = async () => {
     if (!validate()) return;
-    const subject = encodeURIComponent(`Training Inquiry: ${program} | CS Academy`);
-    const body = encodeURIComponent(constructMessageText());
+    if (BOOKING_ENDPOINT) {
+      const { ok, ref, needsActivation } = await submitToServer();
+      if (needsActivation) {
+        // Don't fall back to a WhatsApp draft — the formsubmit
+        // activation-needed state is the real story and the success
+        // screen already explains it. Opening WhatsApp here would
+        // mask the real problem and produce noise.
+        return;
+      }
+      if (ok) {
+        // Also open WhatsApp as a parallel channel.
+        const text = encodeURIComponent(
+          buildMessageWithRef(
+            { name, email, organization, program, format, audienceType, location, notes },
+            ref
+          )
+        );
+        window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
+        return;
+      }
+    }
     const ref = generateReference();
-    setReceipt({ reference: ref, submittedAt: new Date(), via: 'email' });
-    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
+    const text = encodeURIComponent(
+      buildMessageWithRef(
+        { name, email, organization, program, format, audienceType, location, notes },
+        ref
+      )
+    );
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'whatsapp', delivered: true });
+    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
-  const handleCopyInquiry = () => {
-    navigator.clipboard.writeText(constructMessageText());
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleEmailSend = async () => {
+    if (!validate()) return;
+    if (BOOKING_ENDPOINT) {
+      const { ok, ref, needsActivation } = await submitToServer();
+      if (needsActivation) {
+        // Don't fall back to a mailto draft — the formsubmit
+        // activation-needed state is the real story and the success
+        // screen already explains it. Opening a mailto here would
+        // mask the real problem and produce noise (this was the
+        // source of the misleading "Draft Opened In Your Mail App"
+        // screen on unactivated origins).
+        return;
+      }
+      if (ok) {
+        // formsubmit has just delivered the inquiry to
+        // support@cyberswahili.co.tz automatically. We intentionally do
+        // NOT auto-open a mailto: here — programmatic anchor clicks for
+        // mailto after an async await are silently dropped by most
+        // browsers (the user-gesture token is consumed). The success
+        // screen renders a real mailto anchor ("Email CS Academy") that
+        // the user can click as a manual second channel with a fresh
+        // gesture.
+        return;
+      }
+    }
+    const ref = generateReference();
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'email', delivered: false });
+    openMailDeepLink(false, ref);
   };
 
-  const handleCopyReference = () => {
+  const handleCopyInquiry = async () => {
+    const ok = await copyToClipboard(constructMessageText());
+    if (ok) {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  const handleCopyReference = async () => {
     if (!receipt) return;
-    navigator.clipboard.writeText(receipt.reference);
-    setRefCopied(true);
-    setTimeout(() => setRefCopied(false), 2500);
+    const ok = await copyToClipboard(receipt.reference);
+    if (ok) {
+      setRefCopied(true);
+      setTimeout(() => setRefCopied(false), 2500);
+    }
   };
 
-  const handleCopyMessageFromReceipt = () => {
-    navigator.clipboard.writeText(constructMessageText());
-    setMessageCopied(true);
-    setTimeout(() => setMessageCopied(false), 2500);
+  const handleCopyMessageFromReceipt = async () => {
+    const ok = await copyToClipboard(constructMessageText());
+    if (ok) {
+      setMessageCopied(true);
+      setTimeout(() => setMessageCopied(false), 2500);
+    }
+  };
+
+  const buildMailto = (to: string, overrideRef?: string) => {
+    const subject = encodeURIComponent(buildSubject(program));
+    const body = encodeURIComponent(
+      buildMessageWithRef(
+        { name, email, organization, program, format, audienceType, location, notes },
+        overrideRef ?? receipt?.reference ?? ''
+      )
+    );
+    return `mailto:${to}?subject=${subject}&body=${body}`;
   };
 
   const openWaDeepLink = () => {
-    const text = encodeURIComponent(constructMessageText());
-    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
+    const text = encodeURIComponent(
+      buildMessageWithRef(
+        { name, email, organization, program, format, audienceType, location, notes },
+        receipt?.reference ?? ''
+      )
+    );
+    window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
-  const openMailDeepLink = () => {
-    const subject = encodeURIComponent(`Training Inquiry: ${program} | CS Academy`);
-    const body = encodeURIComponent(constructMessageText());
-    window.location.href = `mailto:${siteConfig.email}?subject=${subject}&body=${body}`;
+  const openMailDeepLink = (asUserCopy = false, overrideRef?: string) => {
+    const to = asUserCopy && email ? email : siteConfig.email;
+    const href = buildMailto(to, overrideRef);
+    // Use an anchor click for maximum browser compatibility — anchors
+    // are honoured by every major browser as a true user gesture, even
+    // when window.location.href = "mailto:…" gets suppressed.
+    // Do NOT set target="_blank" on a mailto anchor: browsers open a blank
+    // tab instead of launching the OS mail client.
+    const a = document.createElement('a');
+    a.href = href;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  const sendCopyToUser = () => {
+    openMailDeepLink(true);
   };
 
   return (
@@ -226,7 +475,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               onCopyReference={handleCopyReference}
               onCopyMessage={handleCopyMessageFromReceipt}
               onWhatsApp={openWaDeepLink}
-              onEmail={openMailDeepLink}
+              emailHref={buildMailto(siteConfig.email)}
+              sendCopyHref={email ? buildMailto(email, receipt?.reference) : undefined}
               onSubmitAnother={() => setReceipt(null)}
             />
           ) : (
@@ -461,25 +711,51 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <button
               id="modal-send-whatsapp"
               onClick={handleWhatsAppSend}
-              className="w-full py-3.5 px-4 rounded-xl font-extrabold text-xs text-white bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+              disabled={isSubmitting}
+              className="w-full py-3.5 px-4 rounded-xl font-extrabold text-xs text-white bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Send via WhatsApp</span>
+              {isSubmitting ? (
+                <>
+                  <span className="h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                  <span>Sending…</span>
+                </>
+              ) : (
+                <>
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Send via WhatsApp</span>
+                </>
+              )}
             </button>
 
             <button
               id="modal-send-email"
               onClick={handleEmailSend}
-              className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 ${
+              disabled={isSubmitting}
+              className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 ${
                 theme === 'dark'
                   ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
                   : 'text-neutral-800 hover:text-neutral-900 bg-white hover:bg-neutral-100 border border-neutral-300 shadow-sm'
               }`}
             >
-              <Mail className="w-4 h-4" />
-              <span>Send via Email</span>
+              {isSubmitting ? (
+                <>
+                  <span className="h-3 w-3 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                  <span>Sending…</span>
+                </>
+              ) : (
+                <>
+                  <Mail className="w-4 h-4" />
+                  <span>Send via Email</span>
+                </>
+              )}
             </button>
           </div>
+
+          {submitError && (
+            <div className="text-[11px] font-semibold text-amber-600 dark:text-amber-400 text-center">
+              {submitError} Falling back to direct app below.
+            </div>
+          )}
             </>
           )}
 
@@ -500,7 +776,8 @@ interface BookingSuccessProps {
   onCopyReference: () => void;
   onCopyMessage: () => void;
   onWhatsApp: () => void;
-  onEmail: () => void;
+  emailHref: string;
+  sendCopyHref?: string;
   onSubmitAnother: () => void;
 }
 
@@ -515,26 +792,48 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
   onCopyReference,
   onCopyMessage,
   onWhatsApp,
-  onEmail,
+  emailHref,
+  sendCopyHref,
   onSubmitAnother
 }) => {
   const isDark = theme === 'dark';
+
+  const headline = receipt.needsActivation
+    ? 'Activation Required'
+    : receipt.delivered
+      ? 'Inquiry Dispatched'
+      : receipt.via === 'email'
+        ? 'Draft Opened In Your Mail App'
+        : 'Inquiry Ready To Send';
+
+  const subtitle = receipt.needsActivation
+    ? 'formsubmit.co requires a one-time activation for this site. CS Academy has been emailed an activation link — once it is clicked, your inquiry (and every future one from this site) will deliver automatically to support@cyberswahili.co.tz. Until then, please use the WhatsApp or Email buttons below to reach us directly.'
+    : receipt.delivered
+      ? `Your request has been delivered to support@cyberswahili.co.tz${
+          receipt.via === 'server' ? ' via our secure server' : ' via WhatsApp'
+        }. Keep this reference handy.`
+      : receipt.via === 'email'
+        ? 'Press Send in your mail app to deliver the inquiry to support@cyberswahili.co.tz. The reference below is already in the email body.'
+        : 'WhatsApp opened with your pre-filled inquiry. Press send there to deliver it.';
+
   return (
     <div className="space-y-5" role="status" aria-live="polite">
       <div className="text-center space-y-4 pt-2">
         <div className="relative mx-auto w-16 h-16">
-          <span className="absolute inset-0 rounded-full bg-emerald-500/20 animate-ping" aria-hidden="true" />
-          <span className="absolute inset-0 rounded-full bg-emerald-500/30" aria-hidden="true" />
-          <div className="relative w-16 h-16 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg">
+          <span className={`absolute inset-0 rounded-full ${receipt.delivered ? 'bg-emerald-500/20 animate-ping' : 'bg-amber-500/20'} `} aria-hidden="true" />
+          <span className={`absolute inset-0 rounded-full ${receipt.delivered ? 'bg-emerald-500/30' : 'bg-amber-500/30'}`} aria-hidden="true" />
+          <div className={`relative w-16 h-16 rounded-full flex items-center justify-center shadow-lg ${
+            receipt.delivered ? 'bg-emerald-500' : 'bg-amber-500'
+          }`}>
             <CheckCircle2 className="w-9 h-9 text-white" strokeWidth={2.5} />
           </div>
         </div>
         <div className="space-y-1.5">
           <h4 className={`text-xl sm:text-2xl font-black ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-            Inquiry Dispatched
+            {headline}
           </h4>
           <p className={`text-xs sm:text-sm leading-relaxed max-w-md mx-auto ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
-            Your request has been handed off to the CS Academy advisors via {receipt.via === 'whatsapp' ? 'WhatsApp' : 'your email app'}. Keep this reference handy.
+            {subtitle}
           </p>
         </div>
       </div>
@@ -597,12 +896,12 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
             className="w-full py-3 px-4 rounded-xl font-extrabold text-xs text-white bg-emerald-500 hover:bg-emerald-600 flex items-center justify-center gap-2 uppercase tracking-wider shadow-lg transition-all duration-200 hover:-translate-y-0.5"
           >
             <MessageCircle className="w-4 h-4" />
-            <span>Open WhatsApp</span>
+            <span>{receipt.delivered && receipt.via === 'whatsapp' ? 'Reopen WhatsApp' : 'Open WhatsApp'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
-          <button
-            type="button"
-            onClick={onEmail}
+          {/* Email CS Academy — mailto anchors must NOT use target="_blank" or the browser opens a blank tab instead of the mail client */}
+          <a
+            href={emailHref}
             className={`w-full py-3 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-2 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 ${
               isDark
                 ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
@@ -610,22 +909,37 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
             }`}
           >
             <Mail className="w-4 h-4" />
-            <span>Open Email</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+            <span>Email CS Academy</span>
+            <ArrowRight className="w-3 h-3" />
+          </a>
         </div>
-        <button
-          type="button"
-          onClick={onCopyMessage}
-          className={`w-full py-2.5 px-4 rounded-xl text-[11px] font-bold flex items-center justify-center gap-2 uppercase tracking-wider transition-colors ${
-            isDark
-              ? 'text-[var(--accent-red-strong)] hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
-              : 'text-[var(--accent-red-hover)] hover:text-[var(--accent-red-strong)] bg-white hover:bg-red-50 border border-neutral-300'
-          }`}
-        >
-          {messageCopied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-          {messageCopied ? 'Message Copied' : 'Copy Inquiry Text'}
-        </button>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={onCopyMessage}
+            className={`w-full py-2.5 px-4 rounded-xl text-[11px] font-bold flex items-center justify-center gap-2 uppercase tracking-wider transition-colors ${
+              isDark
+                ? 'text-[var(--accent-red-strong)] hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
+                : 'text-[var(--accent-red-hover)] hover:text-[var(--accent-red-strong)] bg-white hover:bg-red-50 border border-neutral-300'
+            }`}
+          >
+            {messageCopied ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+            {messageCopied ? 'Message Copied' : 'Copy Inquiry Text'}
+          </button>
+          {sendCopyHref && (
+            <a
+              href={sendCopyHref}
+              className={`w-full py-2.5 px-4 rounded-xl text-[11px] font-bold flex items-center justify-center gap-2 uppercase tracking-wider transition-colors ${
+                isDark
+                  ? 'text-emerald-300 hover:text-white bg-emerald-950/30 hover:bg-emerald-900/50 border border-emerald-800/40'
+                  : 'text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200'
+              }`}
+            >
+              <Mail className="w-3.5 h-3.5" />
+              Send a copy to my email
+            </a>
+          )}
+        </div>
       </div>
 
       <div className={`pt-2 border-t flex flex-col sm:flex-row items-center justify-between gap-3 ${
