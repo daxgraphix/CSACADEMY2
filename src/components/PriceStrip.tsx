@@ -34,133 +34,77 @@ export const PriceStrip: React.FC<PriceStripProps> = ({
     <div
       role="region"
       aria-label="Pricing summary"
-      className={`relative overflow-hidden rounded-3xl border ${
-        theme === 'dark'
-          ? 'border-emerald-800/40 bg-gradient-to-br from-emerald-950/40 via-[var(--bg-secondary)] to-[var(--bg-secondary)]'
-          : 'border-emerald-200 bg-gradient-to-br from-emerald-50 via-white to-white'
-      } shadow-lg`}
+      className={`flex flex-wrap items-baseline gap-x-3 gap-y-2 text-sm ${
+        theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
+      }`}
     >
-      <div
-        aria-hidden="true"
-        className="absolute -top-12 -right-10 h-40 w-40 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"
-      />
+      <span className="inline-flex items-baseline gap-1.5 font-medium">
+        <span className="text-xl font-extrabold tracking-tight" style={{ color: 'var(--bk-title-color)' }}>
+          {price.symbol} {price.value}
+        </span>
+        <span className="text-sm font-medium opacity-80">/ month</span>
+      </span>
 
-      <div className="relative p-4 sm:p-5 flex flex-col md:flex-row md:items-center gap-4 md:gap-5">
-        <div className="flex items-center gap-3 min-w-0 flex-1">
-          <div
-            className={`shrink-0 flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl ${
-              theme === 'dark' ? 'bg-emerald-500/15' : 'bg-emerald-500/10'
-            }`}
-            aria-hidden="true"
-          >
-            <Smartphone className="h-5 w-5 sm:h-6 sm:w-6 text-emerald-500" />
-          </div>
+      <span className="opacity-40">·</span>
 
-          <div className="min-w-0 flex-1">
-            <div
-              className={`text-[10px] font-black uppercase tracking-[0.14em] ${
-                theme === 'dark' ? 'text-emerald-400' : 'text-emerald-700'
+      <span className="inline-flex items-center p-1 rounded-full border" style={{
+        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : '#d4ccbe',
+        background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#faf7f1'
+      }}>
+        {(['TSH', 'KES', 'USD'] as const).map((curr) => {
+          const active = currency === curr;
+          const label = PRICE_PER_MONTH[curr].symbol;
+          return (
+            <button
+              key={curr}
+              type="button"
+              role="radio"
+              aria-checked={active}
+              onClick={() => setCurrency(curr)}
+              className={`px-3 py-1 rounded-full text-[11.5px] font-bold tracking-wider transition-colors ${
+                active
+                  ? 'bg-[var(--accent-red)] text-white'
+                  : theme === 'dark'
+                    ? 'text-neutral-400 hover:text-white'
+                    : 'text-neutral-600 hover:text-neutral-900'
               }`}
             >
-              Affordable East Africa Pricing
-            </div>
-            <div className="mt-0.5 flex items-baseline gap-1.5 flex-wrap">
-              <span
-                className={`text-[11px] font-bold uppercase tracking-wider ${
-                  theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
-                }`}
-              >
-                Plans from
-              </span>
-              <span
-                className={`text-2xl sm:text-3xl font-black tracking-tight leading-none ${
-                  theme === 'dark' ? 'text-white' : 'text-neutral-950'
-                }`}
-              >
-                {price.symbol} {price.value}
-              </span>
-              <span
-                className={`text-xs sm:text-sm font-bold ${
-                  theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
-                }`}
-              >
-                / month
-              </span>
-            </div>
-            <div
-              className={`mt-1 flex items-center gap-1.5 text-[11px] font-semibold ${
-                theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
-              }`}
-            >
-              <ShieldCheck className="h-3 w-3 text-emerald-500 shrink-0" />
-              <span>Pay with M-Pesa, Tigo Pesa, Airtel Money or card</span>
-            </div>
-          </div>
-        </div>
+              {label}
+            </button>
+          );
+        })}
+      </span>
 
-        <div
-          className={`flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0 ${
-            theme === 'dark' ? '' : ''
-          }`}
-        >
-          <div
-            className={`inline-flex items-center p-1 rounded-full border self-start sm:self-auto ${
-              theme === 'dark'
-                ? 'border-white/10 bg-white/5'
-                : 'border-neutral-200 bg-white'
-            }`}
-            role="radiogroup"
-            aria-label="Currency"
-          >
-            {(['TSH', 'KES', 'USD'] as const).map((curr) => {
-              const active = currency === curr;
-              const label = PRICE_PER_MONTH[curr].symbol;
-              return (
-                <button
-                  key={curr}
-                  type="button"
-                  role="radio"
-                  aria-checked={active}
-                  onClick={() => setCurrency(curr)}
-                  className={`px-3 py-1.5 rounded-full text-[11px] font-bold tracking-wider transition-colors ${
-                    active
-                      ? 'bg-[var(--accent-red)] text-white shadow'
-                      : theme === 'dark'
-                        ? 'text-neutral-400 hover:text-white'
-                        : 'text-neutral-700 hover:text-neutral-900'
-                  }`}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+      <span className="opacity-40">·</span>
 
+      <span className="font-medium">M-Pesa · Card</span>
+
+      <span className="opacity-40">·</span>
+
+      <button
+        type="button"
+        onClick={openBookingModal}
+        className="inline-flex items-center gap-1.5 font-extrabold tracking-wider uppercase text-xs"
+        style={{ color: 'var(--accent-red)' }}
+      >
+        Book a lesson
+        <ArrowRight className="w-3.5 h-3.5" />
+      </button>
+
+      {onSeeFullPricing && (
+        <>
+          <span className="opacity-40">·</span>
           <button
             type="button"
-            onClick={openBookingModal}
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-full bg-[var(--accent-red)] text-white text-xs font-extrabold uppercase tracking-wider shadow-lg shadow-red-500/20 hover:bg-[var(--accent-red-hover)] transition-colors"
+            onClick={onSeeFullPricing}
+            className="inline-flex items-center gap-1.5 font-extrabold tracking-wider uppercase text-xs hover:underline"
+            style={{ color: 'var(--bk-title-color)' }}
           >
-            <MessageCircle className="w-3.5 h-3.5" />
-            <span>Book a lesson</span>
+            See all plans
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
-
-          {onSeeFullPricing && (
-            <button
-              type="button"
-              onClick={onSeeFullPricing}
-              className={`inline-flex items-center justify-center gap-1 px-3 py-2 rounded-full text-[10px] font-bold uppercase tracking-wider transition-colors ${
-                theme === 'dark'
-                  ? 'text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10'
-                  : 'text-neutral-700 hover:text-neutral-950 bg-white hover:bg-neutral-100 border border-neutral-200'
-              }`}
-            >
-              See all plans
-              <ArrowRight className="w-3 h-3" />
-            </button>
-          )}
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
