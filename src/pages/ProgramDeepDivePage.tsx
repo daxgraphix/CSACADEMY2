@@ -84,18 +84,18 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
         </div>
 
         {/* Hero Banner */}
-        <div className={`border rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden transition-colors ${
+        <div className={`border rounded-3xl p-5 sm:p-14 shadow-2xl relative overflow-hidden transition-colors ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
         }`}>
-          <div className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="grid min-w-0 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-8 space-y-5">
+            <div className="min-w-0 lg:col-span-8 space-y-5">
               <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest ${
                 theme === 'dark' ? 'bg-red-950/80 border border-red-800/80 text-[var(--accent-red-strong)]' : 'bg-red-100 border border-red-300 text-red-700'
               }`}>
                 <span>{program.badge}</span>
               </div>
-              <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight ${
+              <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight break-words ${
                 theme === 'dark' ? 'text-white' : 'text-neutral-950'
               }`}>
                 {program.title}
@@ -111,18 +111,18 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
                 {program.extendedDescription}
               </p>
 
-              <div className="pt-2 flex flex-wrap items-center gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
                 <button
                   id={`btn-deepdive-book-${program.slug}`}
                   onClick={() => openBookingModal({ program: program.title })}
-                  className="px-8 py-4 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center gap-2 transition-all"
+                  className="w-full sm:w-auto justify-center px-8 py-4 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center gap-2 transition-all"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>{`BOOK ${program.title}`}</span>
                 </button>
                 <button
                   onClick={() => openBookingModal({ program: `${program.title} - Custom Corporate In-House` })}
-                  className={`px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors border ${
+                  className={`w-full sm:w-auto justify-center px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-colors border ${
                     theme === 'dark'
                       ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border-[var(--border-color)]'
                       : 'text-neutral-800 hover:text-neutral-950 bg-white hover:bg-neutral-100 transition-colors duration-200 border-neutral-300 shadow-sm'
@@ -142,12 +142,12 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
               </div>
             </div>
 
-            <div className="lg:col-span-4 flex justify-center">
-              <div className={`w-52 h-52 rounded-3xl border flex flex-col items-center justify-center p-6 text-center shadow-xl ${
+            <div className="min-w-0 lg:col-span-4 flex justify-center">
+              <div className={`w-full max-w-52 min-h-52 rounded-3xl border flex flex-col items-center justify-center p-6 text-center shadow-xl ${
                 theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-md'
               }`}>
                 {getIcon(program.icon)}
-                <span className={`text-xs font-bold mt-4 ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{program.title}</span>
+                <span className={`text-xs font-bold mt-4 break-words ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{program.title}</span>
                 <span className={`text-[10px] font-mono mt-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>CS Academy Pillar</span>
               </div>
             </div>
