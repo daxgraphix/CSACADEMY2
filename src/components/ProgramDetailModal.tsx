@@ -66,7 +66,7 @@ export const ProgramDetailModal: React.FC<ProgramDetailModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 sm:p-8 space-y-8">
+        <div className="p-4 sm:p-8 space-y-6 sm:space-y-8">
           
           {/* Tagline & Overview */}
           <div className="space-y-2">
@@ -195,7 +195,7 @@ export const ProgramDetailModal: React.FC<ProgramDetailModalProps> = ({
                 onClose();
                 openBookingModal({ program: program.title });
               }}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
             >
               <span>BOOK THIS PROGRAM</span>
               <ArrowRight className="w-4 h-4" />

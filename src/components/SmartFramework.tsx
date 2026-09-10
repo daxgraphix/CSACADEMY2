@@ -36,14 +36,14 @@ export const SmartFramework: React.FC = () => {
   return (
     <section 
       id="smart-framework-section" 
-      className={`py-24 border-y transition-colors duration-300 ${
+      className={`py-16 sm:py-24 border-y transition-colors duration-300 ${
         theme === 'dark' ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-neutral-50 text-neutral-900 border-neutral-200'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
             <span>THE CS ACADEMY METHOD</span>
           </div>
@@ -68,7 +68,7 @@ export const SmartFramework: React.FC = () => {
         </div>
 
         {/* Interactive Desktop Grid + Mobile Cards */}
-        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-12 gap-5 sm:gap-8 items-stretch">
           
           {/* S M A R T Letter Selector Column (5 cols on lg) */}
           <div className="lg:col-span-5 space-y-2.5 flex flex-col justify-between">
@@ -128,7 +128,7 @@ export const SmartFramework: React.FC = () => {
           </div>
 
           {/* Detailed Spotlight Panel (7 cols on lg) */}
-          <div className={`lg:col-span-7 border rounded-3xl p-8 sm:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden ${
+          <div className={`lg:col-span-7 border rounded-3xl p-5 sm:p-10 flex flex-col justify-between shadow-2xl relative overflow-hidden ${
             theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-200 shadow-neutral-200'
           }`}>
             

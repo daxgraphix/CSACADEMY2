@@ -46,12 +46,12 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
   return (
     <section 
       id="programs-section" 
-      className={`py-24 transition-colors duration-300 ${
+      className={`py-16 sm:py-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-5 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-5 mb-10 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 text-[var(--accent-red)] text-[10px] font-bold uppercase tracking-[0.22em]">
             <span>{t.programsSection.badge}</span>
           </div>
@@ -67,20 +67,20 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
           </p>
         </div>
 
-        <div ref={gridRef} className="grid md:grid-cols-3 gap-8 reveal-stagger">
+        <div ref={gridRef} className="grid md:grid-cols-3 gap-5 sm:gap-8 reveal-stagger">
           {programsData.map((pillar) => {
             return (
             <div
               key={pillar.id}
               id={`card-${pillar.id}`}
-              className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+              className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-4 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
                 theme === 'dark'
                   ? 'bg-[#111111] border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:border-[var(--accent-red)]/40'
                   : 'bg-white border-neutral-200 shadow-[0_18px_50px_rgba(17,17,17,0.06)] hover:border-[var(--accent-red)]/30'
               }`}
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.12),transparent_40%)] opacity-70" />
-              <div className="relative z-10 space-y-6">
+              <div className="relative z-10 space-y-4 sm:space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 transition-transform group-hover:scale-105">
                     {getIcon(pillar.icon)}
@@ -155,13 +155,13 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                 </div>
               </div>
 
-              <div className={`relative z-10 mt-8 pt-5 border-t flex flex-col gap-3 ${
+              <div className={`relative z-10 mt-6 sm:mt-8 pt-4 sm:pt-5 border-t flex flex-col gap-3 ${
                 theme === 'dark' ? 'border-white/10' : 'border-neutral-200'
               }`}>
                 <button
                   id={`btn-explore-${pillar.slug}`}
                   onClick={() => handlePillarNavigation(pillar.slug)}
-                  className="w-full py-3.5 px-4 text-[11px] font-black uppercase tracking-[0.18em] text-white bg-[var(--accent-red)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-[0_18px_40px_rgba(255,59,48,0.3)]"
+                  className="w-full py-3 sm:py-3.5 px-3 sm:px-4 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.14em] sm:tracking-[0.18em] text-white bg-[var(--accent-red)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-[0_18px_40px_rgba(255,59,48,0.3)]"
                 >
                   <span>{pillar.ctaText}</span>
                   <ArrowRight className="w-3.5 h-3.5" />

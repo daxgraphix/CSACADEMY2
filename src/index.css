@@ -1088,11 +1088,17 @@ p, li, blockquote, dd, dt {
   text-wrap: pretty;
 }
 
-/* Improve legibility of the smallest text on phones (no layout shift) */
+/* Keep compact labels compact on narrow screens so controls can wrap cleanly. */
 @media (max-width: 639px) {
   .text-xs {
-    font-size: 0.8125rem;
-    line-height: 1.45rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+  }
+}
+
+@media (max-width: 374px) {
+  .price-bar-currency {
+    display: none;
   }
 }
 /* Larger tap targets on touch devices for mobile-friendly interactions */
@@ -1102,14 +1108,31 @@ p, li, blockquote, dd, dt {
   [role="button"],
   input,
   select,
-  textarea,
-  label {
+  textarea {
     min-height: 44px;
+  }
+
+  label {
+    min-height: 0;
   }
 
   button:focus-visible,
   a:focus-visible,
   [role="button"]:focus-visible {
     outline-offset: 3px;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Keep compact controls usable without making every pill and card oversized. */
+  button,
+  [role="button"] {
+    min-height: 40px;
+  }
+
+  input,
+  select,
+  textarea {
+    min-height: 42px;
   }
 }

@@ -139,7 +139,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
                 <button
                   id="cta-book-training-primary"
                   onClick={openBookingModal}
-                  className="w-full py-4 px-5 text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.99] rounded-2xl shadow-lg hover:shadow-red-900/30 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
+                  className="w-full py-3 sm:py-4 px-4 sm:px-5 text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.99] rounded-xl sm:rounded-2xl shadow-lg hover:shadow-red-900/30 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-4 h-4" />
                   <span>BOOK TRAINING NOW</span>

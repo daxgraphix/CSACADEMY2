@@ -62,7 +62,7 @@ export const TrainingDetailModal: React.FC<TrainingDetailModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 sm:p-8 space-y-6">
+        <div className="p-4 sm:p-8 space-y-5 sm:space-y-6">
           
           <p className={`text-sm leading-relaxed ${
             theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'

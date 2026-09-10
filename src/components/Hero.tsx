@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:42px_42px] [mask-image:radial-gradient(ellipse_80%_60%_at_45%_40%,#000_55%,transparent_100%)] opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center">
           {/* LEFT: primary narrative (headline, CTAs, trust) */}
           <div ref={contentRef} className="lg:col-span-7 xl:col-span-7 reveal reveal-delay-200">
             <div className="space-y-6 lg:space-y-7">
@@ -62,7 +62,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <button
                   id="hero-primary-cta"
                   onClick={() => openBookingModal()}
-                  className="inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-[var(--accent-red)] text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(255,59,48,0.35)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] transition-all duration-200"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:gap-3 sm:px-7 sm:py-4 rounded-full bg-[var(--accent-red)] text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(255,59,48,0.35)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] transition-all duration-200"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>{t.hero.primaryCta}</span>
@@ -74,7 +74,7 @@ export const Hero: React.FC<HeroProps> = ({
                     setCurrentRoute('programs');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className={`inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border text-sm font-bold uppercase tracking-[0.12em] transition-all duration-200 hover:-translate-y-0.5 ${
+                  className={`inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 rounded-full border text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] transition-all duration-200 hover:-translate-y-0.5 ${
                     isDark
                       ? 'border-white/10 bg-white/5 text-white hover:bg-white/10'
                       : 'border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100'
@@ -101,7 +101,9 @@ export const Hero: React.FC<HeroProps> = ({
           </div>
 
           {/* RIGHT: proof panel + price card */}
-          <div className="lg:col-span-5 xl:col-span-5 space-y-5 lg:pt-2">
+          <div className={`lg:col-span-5 xl:col-span-5 space-y-5 lg:rounded-3xl lg:border lg:p-5 lg:shadow-sm ${
+            isDark ? 'lg:border-white/10 lg:bg-white/[0.02]' : 'lg:border-neutral-200/80 lg:bg-white/30'
+          }`}>
             <div
               className={`rounded-3xl border p-5 lg:p-6 shadow-xl ${
                 isDark
@@ -144,18 +146,20 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            <PriceStrip
-              openBookingModal={openBookingModal}
-              onSeeFullPricing={() => {
-                setCurrentRoute('pricing');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-            />
+            <div className="hidden sm:block">
+              <PriceStrip
+                openBookingModal={openBookingModal}
+                onSeeFullPricing={() => {
+                  setCurrentRoute('pricing');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              />
+            </div>
           </div>
         </div>
 
         {/* Supporting copy + full stat row — demoted, full-width on all sizes */}
-        <div className="mt-14 lg:mt-20 space-y-8">
+        <div className="mt-8 sm:mt-14 lg:mt-20 space-y-6 sm:space-y-8">
           <div className={`pt-8 border-t space-y-3 ${
             isDark ? 'border-white/10' : 'border-neutral-200'
           }`}>

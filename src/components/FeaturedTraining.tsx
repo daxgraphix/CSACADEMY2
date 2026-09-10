@@ -24,8 +24,11 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
   const { theme, t } = useApp();
   const { isMobile } = useDeviceType();
   const [filter, setFilter] = useState<'ALL' | 'AI' | 'CYBER' | 'DIGITAL' | 'WEB' | 'DESIGN'>('ALL');
+  const uniqueTrainingData = Array.from(
+    new Map(featuredTrainingData.map((item) => [item.id, item])).values()
+  );
 
-  const filteredTrainings = featuredTrainingData.filter((item) => {
+  const filteredTrainings = uniqueTrainingData.filter((item) => {
     if (filter === 'AI') return item.category === 'ai';
     if (filter === 'CYBER') return item.category === 'cybersecurity';
     if (filter === 'DIGITAL') return item.category === 'digital-skills';
@@ -92,7 +95,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              All Programs ({featuredTrainingData.length})
+              All Programs ({uniqueTrainingData.length})
             </button>
             <button
               onClick={() => setFilter('AI')}
@@ -102,7 +105,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              AI Tracks ({featuredTrainingData.filter(t => t.category === 'ai').length})
+              AI Tracks ({uniqueTrainingData.filter(t => t.category === 'ai').length})
             </button>
             <button
               onClick={() => setFilter('CYBER')}
@@ -112,7 +115,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              Cybersecurity ({featuredTrainingData.filter(t => t.category === 'cybersecurity').length})
+              Cybersecurity ({uniqueTrainingData.filter(t => t.category === 'cybersecurity').length})
             </button>
             <button
               onClick={() => setFilter('DIGITAL')}
@@ -122,7 +125,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              Digital Skills ({featuredTrainingData.filter(t => t.category === 'digital-skills').length})
+              Digital Skills ({uniqueTrainingData.filter(t => t.category === 'digital-skills').length})
             </button>
             <button
               onClick={() => setFilter('WEB')}
@@ -132,7 +135,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                   : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
               }`}
             >
-              Web & Coding ({featuredTrainingData.filter(t => t.category === 'web-coding').length})
+              Web & Coding ({uniqueTrainingData.filter(t => t.category === 'web-coding').length})
             </button>
             <button
               onClick={() => setFilter('DESIGN')}

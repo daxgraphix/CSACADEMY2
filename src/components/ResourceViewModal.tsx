@@ -113,7 +113,7 @@ export const ResourceViewModal: React.FC<ResourceViewModalProps> = ({
         </div>
 
         {/* Body */}
-        <div className="p-6 sm:p-8 space-y-6">
+        <div className="p-4 sm:p-8 space-y-5 sm:space-y-6">
 
           <p className={`text-sm leading-relaxed ${
             theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
@@ -220,7 +220,7 @@ export const ResourceViewModal: React.FC<ResourceViewModalProps> = ({
             </span>
             <button
               onClick={handleDownload}
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all"
+              className="w-full sm:w-auto px-5 sm:px-8 py-3 sm:py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all"
             >
               {downloaded ? (
                 <>

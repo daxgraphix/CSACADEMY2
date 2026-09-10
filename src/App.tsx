@@ -197,7 +197,7 @@ export default function App() {
           openBookingModal={() => handleOpenBooking()}
         />
 
-        <div className="flex-grow overflow-x-hidden">
+        <div className="flex-grow overflow-x-hidden pb-20 md:pb-0">
           <div key={currentRoute} className="page-enter">
             {renderCurrentPage()}
           </div>

@@ -78,6 +78,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   useEffect(() => {
     if (!mobileMenuOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileMenuOpen(false);
+        return;
+      }
       if (e.key !== 'Tab') return;
       const focusable = menuRef.current?.querySelectorAll<HTMLElement>(
         'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -111,11 +115,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
           ? theme === 'dark' 
-            ? 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-3' 
-            : 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-3'
+            ? 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-2 sm:py-3' 
+            : 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-2 sm:py-3'
           : theme === 'dark'
-            ? 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-4'
-            : 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-4'
+            ? 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
+            : 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
