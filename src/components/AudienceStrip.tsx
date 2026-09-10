@@ -34,7 +34,7 @@ export const AudienceStrip: React.FC = () => {
             <span className={`text-[10px] sm:text-xs font-mono font-bold tracking-[0.12em] sm:tracking-wider uppercase ${
               theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
             }`}>
-              PRACTICAL LEARNING FOR THE DIGITAL GENERATION ACROSS AFRICA
+              PRACTICAL LEARNING FOR LEARNERS AND TEAMS ACROSS EAST AFRICA
             </span>
           </div>
 
@@ -45,7 +45,7 @@ export const AudienceStrip: React.FC = () => {
               return (
                 <div 
                   key={idx}
-                    className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold tracking-[0.08em] sm:tracking-wider border transition-all ${
+                    className={`keyword-chip flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-bold tracking-[0.08em] sm:tracking-wider border transition-all ${
                     theme === 'dark'
                       ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-neutral-300 hover:text-white hover:border-[var(--border-color)]'
                       : 'bg-neutral-50 border-neutral-200 text-neutral-700 hover:text-neutral-950 hover:bg-neutral-100 transition-colors duration-200'

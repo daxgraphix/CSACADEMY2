@@ -22,6 +22,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { VibeCodingPage } from './pages/VibeCodingPage';
 import { DevPadPage } from './pages/DevPadPage';
+import { LegalPage } from './pages/LegalPage';
 
 import { BookingModal } from './components/BookingModal';
 import { ProgramDetailModal } from './components/ProgramDetailModal';
@@ -166,6 +167,10 @@ export default function App() {
         return <AboutPage openBookingModal={handleOpenBooking} />;
       case 'contact':
         return <ContactPage openBookingModal={() => handleOpenBooking()} />;
+      case 'privacy':
+        return <LegalPage kind="privacy" setCurrentRoute={setCurrentRoute} />;
+      case 'terms':
+        return <LegalPage kind="terms" setCurrentRoute={setCurrentRoute} />;
       case 'not-found':
         return <NotFound setCurrentRoute={setCurrentRoute} />;
       default:
@@ -191,13 +196,15 @@ export default function App() {
             : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
         }`}
       >
+        <a className="skip-link" href="#main-content">Skip to main content</a>
+
         <Navbar
           currentRoute={currentRoute}
           setCurrentRoute={setCurrentRoute}
           openBookingModal={() => handleOpenBooking()}
         />
 
-        <div className="flex-grow overflow-x-hidden pb-20 md:pb-0">
+        <div id="main-content" tabIndex={-1} className="flex-grow overflow-x-hidden pb-20 outline-none md:pb-0">
           <div key={currentRoute} className="page-enter">
             {renderCurrentPage()}
           </div>

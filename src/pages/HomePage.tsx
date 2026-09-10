@@ -43,10 +43,10 @@ export const HomePage: React.FC<HomePageProps> = ({
     <main className="w-full">
       <Helmet>
         <title>CS Academy</title>
-        <meta name="description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first AI education with local language support. M-Pesa payments. 1,200+ graduates." />
+        <meta name="description" content="Build career-ready AI, cybersecurity, web development, and digital skills through practical projects, flexible learning, local-language support, and M-Pesa payments." />
         <meta name="keywords" content="AI training Tanzania, cybersecurity courses Kenya, web development East Africa, digital skills training, vibe coding Africa, AI education, M-Pesa payment, practical tech skills" />
         <meta property="og:title" content="CS Academy" />
-        <meta property="og:description" content="Learn AI, cybersecurity, web development, and digital skills through hands-on projects. English-first education with local language support. M-Pesa payments. 1,200+ graduates." />
+        <meta property="og:description" content="Build career-ready AI, cybersecurity, web development, and digital skills through practical projects, flexible learning, local-language support, and M-Pesa payments." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <meta property="og:image" content="https://academy.cyberswahili.co.tz/og-image.jpg" />

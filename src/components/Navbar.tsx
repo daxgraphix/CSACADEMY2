@@ -132,7 +132,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex min-w-0 items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[var(--shadow-red)] group-hover:scale-105 transition-transform shrink-0 relative">
-              <div className="w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-[-0.08em] text-base bg-[var(--bg-card)] text-white">
+              <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-[-0.08em] text-base bg-[var(--bg-card)] ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
                 <span className="text-[var(--accent-red)] drop-shadow-[0_0_8px_var(--accent-red-glow)]">C</span>S
               </div>
             </div>
@@ -392,6 +392,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="header-theme-toggle-btn"
               onClick={toggleTheme}
               title={t.nav.switchTheme}
+              aria-label={t.nav.switchTheme}
               className={`p-2 rounded-xl border transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 theme === 'dark'
                   ? 'bg-[var(--bg-elevated)] text-amber-400 border-[var(--border-color)] hover:border-[var(--accent-red-border)] hover:text-[var(--accent-red)] hover:shadow-[var(--shadow-red)]'
@@ -418,6 +419,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="theme-toggle-mobile"
               onClick={toggleTheme}
+              aria-label={t.nav.switchTheme}
               className={`p-2 rounded-xl border transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 theme === 'dark'
                   ? 'bg-[var(--bg-elevated)] text-amber-400 border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
@@ -441,6 +443,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 theme === 'dark' ? 'bg-neutral-900 text-neutral-300 border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-neutral-200'
               }`}
               aria-label={'Toggle navigation menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -451,7 +455,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div ref={menuRef} className={`lg:hidden border-b pt-3 pb-6 max-h-[90vh] overflow-y-auto fade-in ${
+        <div id="mobile-navigation" ref={menuRef} role="dialog" aria-label="Mobile navigation" className={`lg:hidden border-b pt-3 pb-6 max-h-[90vh] overflow-y-auto fade-in ${
           theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
         }`}>
           <div className="px-4 space-y-1.5">

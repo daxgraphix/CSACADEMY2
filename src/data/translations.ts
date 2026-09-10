@@ -166,31 +166,31 @@ export const translations: Translations = {
   hero: {
     badge: "AFRICA PREMIER TECH LEARNING PLATFORM",
     badgeHighlight: "NEW: Vibe Coding & AI",
-    outcome: "Get job-ready in",
-    outcomeHighlight: "AI, cybersecurity, or web dev",
-    outcomeTrailing: "in weeks from your phone, in Swahili and English.",
-    primaryCta: "Start with a free WhatsApp lesson",
+    outcome: "Build career-ready skills in",
+    outcomeHighlight: "AI, cybersecurity & web development",
+    outcomeTrailing: "with practical projects you can start from your phone.",
+    primaryCta: "Get a free learning consultation",
     proof1Value: "1,200+",
-    proof1Label: "Graduates",
+    proof1Label: "Learners trained",
     proof2Value: "8",
-    proof2Label: "Countries",
+    proof2Label: "Countries reached",
     proof3Value: "4.9/5",
     proof3Label: "Learner satisfaction",
-    trustLine: "No prior experience needed. Built for low-bandwidth. English-first with local-language support.",
-    headlineMain: "MASTER AI, CYBERSECURITY",
-    headlineHighlight: "& DIGITAL SKILLS",
-    subheadline: "Learn AI, web development, and cybersecurity through hands-on projects that help you move forward at work, in business, and in everyday life.",
-    ctaExplore: "Start Free Learning",
+    trustLine: "Beginner-friendly, low-bandwidth learning with English tech terms and local-language support.",
+    headlineMain: "BUILD SKILLS THAT CREATE",
+    headlineHighlight: "BETTER OPPORTUNITIES",
+    subheadline: "Choose a focused learning path, build portfolio-ready projects, and get practical guidance for work, study, or business.",
+    ctaExplore: "Explore Learning Paths",
     ctaEnroll: "Join Live Cohort",
     ctaWatchTour: "Explore Platform Tour",
     stat1Val: "1,200+",
-    stat1Label: "Graduates Trained",
+    stat1Label: "Learners trained",
     stat2Val: "30+",
-    stat2Label: "AI & Cybersecurity Modules",
-    stat3Val: "100%",
-    stat3Label: "English-First Content",
+    stat2Label: "Practical learning modules",
+    stat3Val: "EN + LOCAL",
+    stat3Label: "Language support",
     stat4Val: "4.9/5",
-    stat4Label: "Learner Rating",
+    stat4Label: "Learner rating",
     mobileMoneyNotice: "Instant Mobile Money Activation (M-Pesa, Tigo Pesa, Airtel Money & Card)"
   },
   common: {
@@ -237,10 +237,10 @@ export const translations: Translations = {
     subtitle: "From low-bandwidth WhatsApp audio lessons to self-paced video streaming, live Zoom cohort bootcamps, and corporate retreats."
   },
   programsSection: {
-    badge: "CORE PILLARS",
-    title: "HIGH-DEMAND DIGITAL SKILLS FOR MODERN CAREERS",
-    subtitle: "Curricula tailored to help you land tech jobs, start freelance businesses, or accelerate corporate productivity.",
-    viewAllCourses: "Explore All Comprehensive Curricula"
+    badge: "CHOOSE YOUR PATH",
+    title: "PRACTICAL SKILLS FOR THE WORK YOU WANT",
+    subtitle: "Start with one focused path, build useful projects, and grow from beginner foundations to confident professional output.",
+    viewAllCourses: "Explore All Learning Paths"
   },
   localAi: {
     badge: "AI IN PRACTICE",
@@ -258,8 +258,8 @@ export const translations: Translations = {
   organizationsSection: {
     badge: "FOR CORPORATES & INSTITUTIONS",
     title: "ELEVATE YOUR WORKFORCE'S DIGITAL CAPABILITIES",
-    subtitle: "Tailored AI, Cyber Safety, and Technology upskilling for Banks, Government bodies, Universities, NGOs, and Enterprises.",
-    requestProposal: "Request Corporate Proposal"
+    subtitle: "Give your team practical AI, cyber safety, and digital workflows they can apply immediately, with delivery designed around your goals.",
+    requestProposal: "Plan Team Training"
   },
   packages: {
     badge: "PROFESSIONAL TRAINING PACKAGES",

@@ -127,7 +127,7 @@ export const Footer: React.FC<FooterProps> = ({
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-red)]/40 to-transparent" />
 
-      <div ref={contentRef} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 reveal">
+      <div ref={contentRef} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 reveal">
         {/* ==================== Newsletter Card ==================== */}
         <div className="relative">
           <div className={`relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-10 lg:p-12 ${
@@ -354,7 +354,7 @@ export const Footer: React.FC<FooterProps> = ({
                       <li key={item.label}>
                         <button
                           onClick={() => handleItemClick(item)}
-                          className={`group inline-flex items-center gap-1 text-left transition-colors duration-150 ${accentColor}`}
+                          className={`hover-underline group inline-flex items-center gap-1 text-left transition-colors duration-150 ${accentColor}`}
                         >
                           <span>{item.label}</span>
                           {item.highlight && (
@@ -401,6 +401,16 @@ export const Footer: React.FC<FooterProps> = ({
             <span className="opacity-30">|</span>
             <span>East Africa</span>
           </div>
+        </div>
+
+        <div className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t pt-5 text-[10px] font-bold uppercase tracking-[0.14em] ${
+          theme === 'dark' ? 'border-white/10 text-neutral-500' : 'border-neutral-200 text-neutral-600'
+        }`}>
+          <button onClick={() => navigate('privacy')} className="transition-colors hover:text-[var(--accent-red-strong)]">Privacy Policy</button>
+          <span className="opacity-30">|</span>
+          <button onClick={() => navigate('terms')} className="transition-colors hover:text-[var(--accent-red-strong)]">Terms &amp; Conditions</button>
+          <span className="opacity-30">|</span>
+          <button onClick={() => navigate('contact')} className="transition-colors hover:text-[var(--accent-red-strong)]">Contact Support</button>
         </div>
       </div>
     </footer>

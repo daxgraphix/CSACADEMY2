@@ -49,8 +49,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   }, [theme]);
 
-  const setTheme = (t: Theme) => {
-    setThemeState(t);
+  const setTheme = (nextTheme: Theme) => {
+    try {
+      const root = document.documentElement;
+      root.classList.add('theme-switching');
+      root.classList.toggle('light', nextTheme === 'light');
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => root.classList.remove('theme-switching'));
+      });
+    } catch {
+      // Keep theme changes working in non-browser rendering environments.
+    }
+    setThemeState(nextTheme);
   };
 
   const toggleTheme = () => {

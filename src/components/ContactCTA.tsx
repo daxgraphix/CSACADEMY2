@@ -54,7 +54,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
               <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
                 theme === 'dark' ? 'bg-[var(--accent-red-subtle)] border-[var(--accent-red-border)] text-[var(--accent-red-strong)]' : 'bg-red-50 border-red-200 text-[var(--accent-red-strong)]'
               }`}>
-                <span>Direct Lead & Training Inquiries</span>
+                <span>Talk to a learning advisor</span>
               </div>
 
               <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight ${
@@ -68,7 +68,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
               <p className={`text-base sm:text-lg leading-relaxed ${
                 theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
               }`}>
-                Tell us what you want to learn or the training your organization needs. Whether you need a 2-hour executive seminar or a workforce AI bootcamp, our team is ready to assist.
+                Tell us your goal, your team size, and when you want to start. We will recommend the right learning path, format, and next step for you or your organization.
               </p>
 
               {/* Quick direct contact links */}
@@ -86,7 +86,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
                   </div>
                   <div className="truncate">
                     <div className={`text-[10px] font-mono uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-700'}`}>
-                      Direct Email
+                      Email an advisor
                     </div>
                     <div className={`text-xs font-bold truncate group-hover:text-[var(--accent-red-strong)] transition-colors ${
                       theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'
@@ -109,7 +109,7 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
                   </div>
                   <div className="truncate">
                     <div className={`text-[10px] font-mono uppercase ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-700'}`}>
-                      WhatsApp Inquiries
+                      WhatsApp an advisor
                     </div>
                     <div className={`text-xs font-bold truncate group-hover:text-emerald-500 transition-colors ${
                       theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'
@@ -125,13 +125,13 @@ export const ContactCTA: React.FC<ContactCTAProps> = ({
             }`}>
               <div className="space-y-1">
                 <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
-                  Instant Interactive Booking
+                  Build your learning plan
                 </span>
                 <h3 className={`text-xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
-                  How would you like to connect?
+                  Start with a quick conversation
                 </h3>
                 <p className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-                  Configure your training request in 60 seconds.
+                  Share a few details and we will help you choose the right next step.
                 </p>
               </div>
 

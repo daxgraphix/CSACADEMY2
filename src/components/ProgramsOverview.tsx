@@ -73,7 +73,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
             <div
               key={pillar.id}
               id={`card-${pillar.id}`}
-              className={`group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-4 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
+              className={`motion-card group relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-4 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 ${
                 theme === 'dark'
                   ? 'bg-[#111111] border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.38)] hover:border-[var(--accent-red)]/40'
                   : 'bg-white border-neutral-200 shadow-[0_18px_50px_rgba(17,17,17,0.06)] hover:border-[var(--accent-red)]/30'
@@ -121,7 +121,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                     {pillar.topics.slice(0, 6).map((topic, i) => (
                       <span
                         key={i}
-                        className={`text-[11px] font-medium px-2.5 py-1.5 rounded-full border ${
+                        className={`keyword-chip text-[11px] font-medium px-2.5 py-1.5 rounded-full border ${
                           theme === 'dark' ? 'border-white/10 bg-white/5 text-neutral-200' : 'border-neutral-200 bg-neutral-50 text-neutral-700'
                         }`}
                       >

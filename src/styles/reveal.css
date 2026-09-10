@@ -24,7 +24,7 @@
   transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-stagger > * {
+  .reveal, .reveal-stagger > *, .hover-underline, .keyword-chip, .motion-card {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

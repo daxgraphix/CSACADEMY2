@@ -112,20 +112,20 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                 <div className={`space-y-2 py-3 border-y text-xs ${
                   theme === 'dark' ? 'border-neutral-800/80 text-neutral-300' : 'border-neutral-100 text-neutral-700'
                 }`}>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-start gap-2">
                     <Clock className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
-                    <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Duration:</span>
-                    <span className="font-semibold">{pkg.durations.join('  |  ')}</span>
+                    <span className="shrink-0 text-neutral-400">Duration:</span>
+                    <span className="min-w-0 font-semibold leading-snug">{pkg.durations.join('  |  ')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-start gap-2">
                     <MapPin className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
-                    <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Format:</span>
-                    <span className="font-semibold">{pkg.formats.join(' / ')}</span>
+                    <span className="shrink-0 text-neutral-400">Format:</span>
+                    <span className="min-w-0 font-semibold leading-snug">{pkg.formats.join(' / ')}</span>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex min-w-0 items-start gap-2">
                     <Users className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
-                    <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>Target:</span>
-                    <span className="font-semibold truncate">{pkg.targetAudience}</span>
+                    <span className="shrink-0 text-neutral-400">Target:</span>
+                    <span className="min-w-0 flex-1 font-semibold leading-snug line-clamp-2">{pkg.targetAudience}</span>
                   </div>
                 </div>
 

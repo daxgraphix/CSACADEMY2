@@ -23,6 +23,8 @@ export const routeToPath: Record<PageRoute, string> = {
   'blog': '/blog',
   'about': '/about',
   'contact': '/contact',
+  'privacy': '/privacy',
+  'terms': '/terms',
   'not-found': '/not-found',
 };
 

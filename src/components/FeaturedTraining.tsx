@@ -204,12 +204,12 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
                 <div className={`space-y-2 py-3 border-y text-xs ${
                   theme === 'dark' ? 'border-[var(--border-color)]/80' : 'border-neutral-300'
                 }`}>
-                  <div className="flex items-center gap-2">
+                  <div className="flex min-w-0 items-start gap-2">
                     <Users className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
                     <span className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>
                       Audience:
                     </span>
-                    <span className={`font-semibold truncate ${theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'}`}>{course.audience}</span>
+                    <span className={`min-w-0 flex-1 font-semibold leading-snug line-clamp-2 ${theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'}`}>{course.audience}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <MapPin className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />

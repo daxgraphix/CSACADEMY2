@@ -299,6 +299,14 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Theme colors should swap as a single frame; hover motion returns afterward. */
+  html.theme-switching *,
+  html.theme-switching *::before,
+  html.theme-switching *::after {
+    transition: none !important;
+    animation-duration: 0s !important;
+  }
+
   button,
   a,
   input,
@@ -317,6 +325,25 @@
     outline-offset: 4px;
     border-radius: 6px;
     box-shadow: 0 0 0 4px var(--accent-red-subtle);
+  }
+
+  /* Keep secondary copy and separators readable across both themes. */
+  html:not(.light) .text-neutral-500,
+  html:not(.light) .text-neutral-400 {
+    color: #b6becb !important;
+  }
+
+  html.light .text-neutral-500,
+  html.light .text-neutral-400 {
+    color: #52525b !important;
+  }
+
+  html:not(.light) .border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.16) !important;
+  }
+
+  html.light .border-white\/10 {
+    border-color: rgba(82, 82, 91, 0.2) !important;
   }
   
   /* Enhanced focus state for interactive elements */
@@ -342,6 +369,31 @@
   body,
   #root {
     min-height: 100%;
+  }
+
+  #main-content {
+    scroll-margin-top: 6rem;
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: 0.75rem;
+    z-index: 100;
+    transform: translateY(-180%);
+    border: 2px solid var(--accent-red);
+    border-radius: 0.75rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.7rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    box-shadow: var(--shadow-md);
+    transition: transform 160ms ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
   }
 
   /* ─── Keyframe Animations ─── */
@@ -444,6 +496,43 @@
 
   .page-enter {
     animation: page-enter 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .hover-underline {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.25em;
+    transition: color 180ms ease, text-decoration-color 180ms ease;
+  }
+
+  .hover-underline:hover,
+  .hover-underline:focus-visible {
+    text-decoration-color: currentColor;
+  }
+
+  .keyword-chip {
+    transition: transform 180ms ease, color 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .keyword-chip:hover,
+  .keyword-chip:focus-visible {
+    transform: translateY(-2px);
+    color: var(--accent-red-strong);
+    border-color: var(--accent-red-border);
+    background-color: var(--accent-red-subtle);
+    box-shadow: 0 5px 14px var(--accent-red-glow);
+  }
+
+  .motion-card {
+    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, border-color 240ms ease;
+  }
+
+  .motion-card:hover,
+  .motion-card:focus-within {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-red-border);
   }
 
   /* ─── Animation Utility Classes ─── */
@@ -1086,6 +1175,13 @@ h1, h2, h3, h4, h5 {
 
 p, li, blockquote, dd, dt {
   text-wrap: pretty;
+}
+
+.prose-content h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 /* Keep compact labels compact on narrow screens so controls can wrap cleanly. */

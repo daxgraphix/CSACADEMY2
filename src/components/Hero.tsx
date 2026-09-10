@@ -200,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({
                   }`}>
                     <Icon className={`h-5 w-5 ${item.accent}`} />
                   </div>
-                  <div className={`text-3xl sm:text-4xl lg:text-5xl font-black tracking-[-0.05em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none ${
+                  <div className={`text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none break-words ${
                     isDark ? 'text-[var(--accent-red-strong)]' : 'text-[var(--accent-red)]'
                   }`}>{item.value}</div>
                   <div className={`mt-3 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${
@@ -213,9 +213,9 @@ export const Hero: React.FC<HeroProps> = ({
 
           <div className={`grid gap-4 md:grid-cols-3 ${isDark ? 'text-white' : 'text-neutral-900'}`}>
             {[
-              { icon: CheckCircle2, text: 'Master AI, cybersecurity, and web development with hands-on projects.' },
-              { icon: Smartphone, text: 'Build real apps, automations, and digital portfolios on day one.' },
-              { icon: Sparkles, text: 'Mobile-friendly learning with M-Pesa payments - start instantly.' }
+              { icon: CheckCircle2, text: 'Learn through guided projects that turn new concepts into usable skills.' },
+              { icon: Smartphone, text: 'Build apps, automations, and portfolio evidence you can show to employers or clients.' },
+              { icon: Sparkles, text: 'Start from your phone with flexible formats and familiar mobile-money payments.' }
             ].map(({ icon: Icon, text }) => (
               <div key={text} className={`flex items-start gap-3 rounded-3xl border p-4 ${
                 isDark ? 'border-white/10 bg-white/5' : 'border-neutral-200 bg-white/80'

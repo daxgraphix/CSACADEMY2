@@ -14,6 +14,8 @@ export type PageRoute =
   | 'blog'
   | 'about'
   | 'contact'
+  | 'privacy'
+  | 'terms'
   | 'not-found';
 
 export interface PlatformFeature {
