@@ -9,6 +9,7 @@ import { PageRoute } from '../types';
  */
 export const routeToPath: Record<PageRoute, string> = {
   'home': '/',
+  'academy': '/academy',
   'features': '/features',
   'pricing': '/pricing',
   'programs': '/programs',

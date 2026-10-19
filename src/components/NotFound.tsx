@@ -2,13 +2,10 @@ import React from 'react';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { Home, Search, ArrowLeft } from 'lucide-react';
 
-interface NotFoundProps {
-  setCurrentRoute: (route: string) => void;
-}
-
-export const NotFound: React.FC<NotFoundProps> = ({ setCurrentRoute }) => {
+export const NotFound: React.FC = () => {
   const { theme } = useApp();
   const contentRef = useReveal<HTMLDivElement>();
 
@@ -45,24 +42,21 @@ export const NotFound: React.FC<NotFoundProps> = ({ setCurrentRoute }) => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => {
-                setCurrentRoute('home');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
+            <Link
+              to="/"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-[var(--accent-red)] text-sm font-bold uppercase tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(255,59,48,0.35)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] transition-all duration-200"
             >
               <Home className="w-4 h-4" />
               <span>BACK TO HOME</span>
-            </button>
+            </Link>
 
-            <button
-              onClick={() => setCurrentRoute('blog')}
+            <Link
+              to="/resources"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full border text-sm font-bold uppercase tracking-[0.12em] transition-all duration-200 hover:-translate-y-0.5"
             >
               <Search className="w-4 h-4" />
               <span>BROWSE RESOURCES</span>
-            </button>
+            </Link>
           </div>
 
           <div className={`mt-10 pt-8 border-t text-xs ${

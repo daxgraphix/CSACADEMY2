@@ -1,19 +1,19 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { PricingSection } from '../components/PricingSection';
-import { PageRoute } from '../types';
 import { MessageCircle } from 'lucide-react';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { PageBreadcrumbs } from '../components/LayoutPrimitives';
+import { PricingFaqSection } from '../components/PricingFaqSection';
 
 interface PricingPageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string }) => void;
 }
 
 export const PricingPage: React.FC<PricingPageProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -35,8 +35,15 @@ export const PricingPage: React.FC<PricingPageProps> = ({
       <div className={`pt-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
-      {/* Main Pricing Section */}
-      <PricingSection openBookingModal={openBookingModal} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <PageBreadcrumbs
+            theme={theme}
+            items={[{ label: 'Home', route: '/' }, { label: 'Pricing' }]}
+          />
+        </div>
+
+        {/* Main Pricing Section */}
+        <PricingSection openBookingModal={openBookingModal} />
 
       {/* Support & Inquiries Strip */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-6">
@@ -64,8 +71,8 @@ export const PricingPage: React.FC<PricingPageProps> = ({
               <MessageCircle className="w-4 h-4" />
               <span>Chat on WhatsApp ({siteConfig.phoneDisplay})</span>
             </a>
-            <button
-              onClick={() => setCurrentRoute('contact')}
+            <Link
+              to="/contact"
               className={`px-6 py-3.5 rounded-2xl font-extrabold text-xs border uppercase tracking-wider transition-colors ${
                 theme === 'dark'
                   ? 'text-neutral-300 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border-[var(--border-color)]'
@@ -73,10 +80,13 @@ export const PricingPage: React.FC<PricingPageProps> = ({
               }`}
             >
               <span>Contact Admissions Team</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Pricing FAQ (also emits FAQPage structured data) */}
+      <PricingFaqSection openBookingModal={openBookingModal} />
     </div>
     </>
   );

@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { BlogPost } from '../types';
 import { useApp } from '../context/AppContext';
 import { ShareButtons } from './ShareButtons';
@@ -44,10 +45,9 @@ const pickRelated = (post: BlogPost, count: number): BlogPost[] => {
 };
 
 export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
-  post,
-  onClose,
-  openBookingModal
+  post, onClose, openBookingModal
 }) => {
+  useModalAccessibility(!!post, onClose);
   const { theme } = useApp();
   const related = useMemo(() => (post ? pickRelated(post, 3) : []), [post]);
   const author = useMemo(() => (post ? getAuthor(post.author) : null), [post]);
@@ -105,7 +105,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
   if (!post) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-label={post?.title} tabIndex={-1}>
       <div
         className={`border rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl relative transition-colors ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' : 'bg-white border-neutral-200 text-neutral-900'

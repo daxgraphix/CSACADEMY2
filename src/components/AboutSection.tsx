@@ -20,14 +20,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
 }) => {
   const { theme, t } = useApp();
   const contentRef = useReveal<HTMLDivElement>();
-  const statsRef = useReveal<HTMLDivElement>();
-
-  const stats = [
-    { value: siteConfig.stats.learnersTrained, label: 'Learners Trained' },
-    { value: siteConfig.stats.institutionsServed, label: 'Institutions Served' },
-    { value: siteConfig.stats.hoursDelivered, label: 'Hours Delivered' },
-    { value: siteConfig.stats.satisfactionRate, label: 'Satisfaction Rate' },
-  ];
 
   return (
     <section
@@ -148,34 +140,15 @@ theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-w
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
-                <span>Instant mobile money integration (M-Pesa & Airtel)</span>
+                <span>Mobile-money options available on selected plans</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
-                <span>Active WhatsApp community of 1,200+ tech learners</span>
+                <span>WhatsApp mentor support on selected learning plans</span>
               </div>
             </div>
           </div>
 
-        </div>
-
-        {/* Impact Stats Row */}
-        <div ref={statsRef} className={`reveal-stagger grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 ${
-          theme === 'dark' ? 'text-white' : 'text-neutral-900'
-        }`}>
-          {stats.map((stat, i) => (
-            <div
-              key={i}
-              className={`p-5 rounded-2xl border text-center ${
-                theme === 'dark' ? 'bg-[var(--bg-primary)] border-neutral-800' : 'bg-white border-neutral-300 shadow-sm'
-              }`}
-            >
-              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[var(--accent-red-strong)]">{stat.value}</div>
-              <div className={`mt-1 text-[11px] font-semibold uppercase tracking-wider ${
-                theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
-              }`}>{stat.label}</div>
-            </div>
-          ))}
         </div>
 
         {/* Founder Profile */}

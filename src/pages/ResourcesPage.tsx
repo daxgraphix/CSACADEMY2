@@ -133,7 +133,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
               suggestions={['AI prompts', 'Phishing', 'M-Pesa safety', 'Student guides']}
               onSuggestionClick={(term) => setSearch(term)}
               title="No resources match your filters"
-              description="Try a different keyword, switch the category, or ask us to add this topic — we add new toolkits every month."
+              description="Try a different keyword, switch the category, or ask us to add this topic we add new toolkits every month."
             />
           ) : (
             filtered.map((resource) => (

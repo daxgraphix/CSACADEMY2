@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { siteConfig } from '../config/site';
 import { Highlight } from '../utils/highlight';
+import { FaqJsonLd } from './FaqJsonLd';
 
 export const FAQSection: React.FC = () => {
   const { theme, t } = useApp();
@@ -91,6 +92,7 @@ export const FAQSection: React.FC = () => {
         theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'
       }`}
     >
+      <FaqJsonLd items={faqData} />
       <div className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.14),transparent_45%)]" />
       <div ref={contentRef} className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 reveal">
         

@@ -1,7 +1,8 @@
 import React from 'react';
-import { PageRoute } from '../types';
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
+import { totalGraduates } from '../data/testimonials';
 import { PriceStrip } from './PriceStrip';
 import {
   ArrowRight,
@@ -15,12 +16,10 @@ import {
 } from 'lucide-react';
 
 interface HeroProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string; format?: string }) => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme, t } = useApp();
@@ -30,7 +29,7 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section
       id="hero-section"
-      className={`relative pt-24 pb-16 md:pt-28 md:pb-24 overflow-hidden transition-colors duration-300 ${
+      className={`relative pt-24 pb-16 md:pt-28 md:pb-24 lg:min-h-[100svh] lg:flex lg:flex-col lg:justify-center lg:pt-24 lg:pb-8 overflow-hidden transition-colors duration-300 ${
         isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[var(--bg-primary)] text-neutral-900'
       }`}
     >
@@ -42,47 +41,70 @@ export const Hero: React.FC<HeroProps> = ({
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:42px_42px] [mask-image:radial-gradient(ellipse_80%_60%_at_45%_40%,#000_55%,transparent_100%)] opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start lg:items-center">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* LEFT: primary narrative (headline, CTAs, trust) */}
           <div ref={contentRef} className="lg:col-span-7 xl:col-span-7 reveal reveal-delay-200">
-            <div className="space-y-6 lg:space-y-7">
-              <h1
-                className={`text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-black tracking-[-0.04em] leading-[1.05] ${
-                  isDark ? 'text-white' : 'text-neutral-950'
-                }`}
-              >
-                {t.hero.outcome}{' '}
-                <span className="text-[var(--accent-red-strong)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-                  {t.hero.outcomeHighlight}
-                </span>{' '}
-                {t.hero.outcomeTrailing}
-              </h1>
+              <div className="space-y-5 lg:space-y-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 text-[var(--accent-red-strong)] text-xs font-semibold uppercase tracking-wider">
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" /> Institution Accredited & Registered
+                </div>
+
+                <h1
+                  className={`text-3xl sm:text-4xl md:text-5xl lg:text-[2.25rem] xl:text-[2.75rem] 2xl:text-[3.25rem] font-extrabold tracking-[-0.045em] leading-[1.06] drop-shadow-sm ${isDark ? 'text-white' : 'text-neutral-950'}`}
+                >
+                  {t.hero.outcome}{' '}
+                  <span className="text-[var(--accent-red-strong)] drop-shadow-[0_2px_8px_rgba(220,38,38,0.4)]">
+                    {t.hero.outcomeHighlight}
+                  </span>{' '}
+                  {t.hero.outcomeTrailing}
+                </h1>
+
+                <p className={`max-w-2xl text-lg sm:text-xl leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'} font-medium`}>CS Academy is East Africa&#x27;s premier institution for practical AI and digital skills training. Join {totalGraduates.toLocaleString()}+ graduates and master technology that matters.</p>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
                   id="hero-primary-cta"
                   onClick={() => openBookingModal()}
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 sm:gap-3 sm:px-7 sm:py-4 rounded-full bg-[var(--accent-red)] text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(255,59,48,0.35)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] transition-all duration-200"
+                  className="group relative inline-flex items-center justify-center gap-2 px-5 py-3 sm:gap-2.5 sm:px-7 sm:py-4 lg:px-8 lg:py-4 rounded-full bg-[var(--accent-red)] text-xs sm:text-sm lg:text-[15px] font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] text-white shadow-[0_18px_40px_rgba(255,59,48,0.35)] transition-all duration-200 hover:-translate-y-1 hover:bg-[var(--accent-red-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
+                  aria-label="Start your practical AI journey with CS Academy"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{t.hero.primaryCta}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <MessageCircle
+                    aria-hidden="true"
+                    className="w-4 h-4 transition-transform duration-200 group-hover:scale-110"
+                  />
+                  <span className="relative">
+                    {t.hero.primaryCta}
+                    <span
+                      aria-hidden="true"
+                      className="absolute -inset-x-1 -inset-y-1 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    />
+                  </span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="w-4 h-4 transition-all duration-200 group-hover:translate-x-1 group-hover:scale-110"
+                  />
                 </button>
-                <button
+                <Link
                   id="hero-secondary-cta"
-                  onClick={() => {
-                    setCurrentRoute('programs');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className={`inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 rounded-full border text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] transition-all duration-200 hover:-translate-y-0.5 ${
-                    isDark
-                      ? 'border-white/10 bg-white/5 text-white hover:bg-white/10'
-                      : 'border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100'
+                  to="/programs"
+                  className={`group relative inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-6 sm:py-4 rounded-full border text-xs sm:text-sm font-bold uppercase tracking-[0.1em] sm:tracking-[0.12em] transition-all duration-200 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${isDark
+                    ? 'border-white/10 bg-white/5 text-white hover:bg-white/10'
+                    : 'border-neutral-200 bg-white text-neutral-900 hover:bg-neutral-100'
                   }`}
+                  aria-label="Explore all available courses and programs"
                 >
-                  <span>{t.hero.ctaExplore}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                  <span className="relative">
+                    {t.hero.ctaExplore}
+                    <span
+                      aria-hidden="true"
+                      className="absolute -inset-x-1 -inset-y-1 bg-[var(--accent-red)]/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    />
+                  </span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="w-4 h-4 transition-all duration-200 group-hover:translate-x-1 group-hover:scale-110"
+                  />
+                </Link>
               </div>
 
               <div className={`flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] font-semibold ${
@@ -114,7 +136,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className={`text-[10px] font-black uppercase tracking-[0.18em] mb-3 ${
                 isDark ? 'text-emerald-400' : 'text-emerald-700'
               }`}>
-                Proven across East Africa
+                Practical ways to start
               </div>
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 {[
@@ -147,30 +169,24 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             <div className="hidden sm:block">
-              <PriceStrip
-                openBookingModal={openBookingModal}
-                onSeeFullPricing={() => {
-                  setCurrentRoute('pricing');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-              />
+              <PriceStrip openBookingModal={openBookingModal} />
             </div>
           </div>
         </div>
 
-        {/* Supporting copy + full stat row — demoted, full-width on all sizes */}
-        <div className="mt-8 sm:mt-14 lg:mt-20 space-y-6 sm:space-y-8">
-          <div className={`pt-8 border-t space-y-3 ${
+        {/* Supporting copy + full stat row — compressed into a single band on desktop */}
+        <div className="mt-8 sm:mt-14 lg:mt-6 space-y-4 sm:space-y-6">
+          <div className={`pt-5 lg:pt-4 border-t space-y-2 ${
             isDark ? 'border-white/10' : 'border-neutral-200'
           }`}>
-            <h2 className={`text-xl sm:text-2xl lg:text-3xl font-black tracking-[-0.04em] ${
+            <h2 className={`text-lg sm:text-xl lg:text-2xl font-black tracking-[-0.04em] ${
               isDark ? 'text-white' : 'text-neutral-950'
             }`}>
               {t.hero.headlineMain}
               <span className="text-[var(--accent-red-strong)]"> {t.hero.headlineHighlight}</span>{' '}
               from beginner to job-ready.
             </h2>
-            <p className={`max-w-3xl text-sm sm:text-base leading-relaxed reading-text ${
+            <p className={`max-w-3xl text-xs sm:text-sm lg:text-[13px] leading-relaxed reading-text ${
               isDark ? 'text-neutral-400' : 'text-neutral-700'
             }`}>
               {t.hero.subheadline}
@@ -183,7 +199,7 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
           </div>
 
-          <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-6 ${
+          <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 pt-5 ${
             isDark ? 'border-t border-white/10' : 'border-t border-neutral-200'
           }`}>
             {[
@@ -194,36 +210,38 @@ export const Hero: React.FC<HeroProps> = ({
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.label} className="flex flex-col items-center text-center pt-2">
-                  <div className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full ${
+                <div key={item.label} className="flex items-center gap-2.5 lg:gap-3">
+                  <div className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-full ${
                     isDark ? 'bg-white/5' : 'bg-neutral-100'
                   }`}>
-                    <Icon className={`h-5 w-5 ${item.accent}`} />
+                    <Icon className={`h-4 w-4 ${item.accent}`} />
                   </div>
-                  <div className={`text-2xl sm:text-4xl lg:text-5xl font-black tracking-[-0.04em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none break-words ${
-                    isDark ? 'text-[var(--accent-red-strong)]' : 'text-[var(--accent-red)]'
-                  }`}>{item.value}</div>
-                  <div className={`mt-3 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] ${
-                    isDark ? 'text-neutral-400' : 'text-neutral-700'
-                  }`}>{item.label}</div>
+                  <div className="min-w-0">
+                    <div className={`text-lg lg:text-xl font-black tracking-[-0.04em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] leading-none break-words ${
+                      isDark ? 'text-[var(--accent-red-strong)]' : 'text-[var(--accent-red)]'
+                    }`}>{item.value}</div>
+                    <div className={`mt-1 text-[9.5px] sm:text-[10px] font-semibold uppercase tracking-[0.12em] leading-tight ${
+                      isDark ? 'text-neutral-400' : 'text-neutral-700'
+                    }`}>{item.label}</div>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          <div className={`grid gap-4 md:grid-cols-3 ${isDark ? 'text-white' : 'text-neutral-900'}`}>
+          <div className={`grid gap-3 md:grid-cols-3 ${isDark ? 'text-white' : 'text-neutral-900'}`}>
             {[
               { icon: CheckCircle2, text: 'Learn through guided projects that turn new concepts into usable skills.' },
               { icon: Smartphone, text: 'Build apps, automations, and portfolio evidence you can show to employers or clients.' },
               { icon: Sparkles, text: 'Start from your phone with flexible formats and familiar mobile-money payments.' }
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className={`flex items-start gap-3 rounded-3xl border p-4 ${
+              <div key={text} className={`flex items-start gap-2.5 rounded-2xl border px-3.5 py-3 ${
                 isDark ? 'border-white/10 bg-white/5' : 'border-neutral-200 bg-white/80'
               }`}>
-                <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-2xl bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
-                  <Icon className="h-5 w-5 icon-visible" />
+                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)]">
+                  <Icon className="h-3.5 w-3.5 icon-visible" />
                 </div>
-                <p className={`text-sm leading-relaxed reading-text ${isDark ? 'text-neutral-200' : 'text-neutral-700'}`}>{text}</p>
+                <p className={`text-xs leading-relaxed reading-text ${isDark ? 'text-neutral-200' : 'text-neutral-700'}`}>{text}</p>
               </div>
             ))}
           </div>

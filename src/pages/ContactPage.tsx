@@ -3,13 +3,16 @@ import { Helmet } from 'react-helmet-async';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { submitForm } from '../utils/booking';
 import {
   Mail,
   MessageCircle,
   Phone,
   MapPin,
   Calendar,
-  Send
+  Send,
+  CheckCircle2,
+  Loader2
 } from 'lucide-react';
 
 interface ContactPageProps {
@@ -27,17 +30,52 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   const [delivery, setDelivery] = useState('Live Online (Zoom/Google Meet)');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const buildMailtoUrl = () => {
     const mailtoBody = `Hello CS Academy Team,\n\nI would like to inquire about training:\nName: ${name}\nEmail: ${email}\nOrganization: ${org || 'N/A'}\nProgram Interest: ${interest}\nPreferred Format: ${delivery}\nMessage / Objectives: ${message}\n\nPlease share availability and enrollment details.`;
-
-    const mailtoUrl = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+    return `mailto:${siteConfig.email}?subject=${encodeURIComponent(
       `Training Request: ${interest} | ${name}`
     )}&body=${encodeURIComponent(mailtoBody)}`;
+  };
 
-    window.location.href = mailtoUrl;
-    setSubmitted(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSending(true);
+    setSubmitError(null);
+
+    const result = await submitForm({
+      _subject: `Training Request: ${interest} | ${name}`,
+      name: name.trim(),
+      email: email.trim(),
+      organization: org.trim() || 'Self',
+      program: interest,
+      format: delivery,
+      message: message.trim(),
+      source: 'contact-page',
+      submittedAt: new Date().toISOString()
+    });
+
+    setIsSending(false);
+
+    if (result.ok) {
+      setSubmitted(true);
+      return;
+    }
+
+    // The endpoint could not take the enquiry. Fall back to the user's mail
+    // client so the message is never silently lost, and say so plainly.
+    setSubmitError(
+      `${result.errorMessage ?? 'We could not send your inquiry just now.'} Opening your email app so you can send it directly.`
+    );
+    try {
+      window.location.href = buildMailtoUrl();
+    } catch {
+      // Some browsers and test environments cannot navigate to a mailto URL.
+      // The message is already recorded above, so the form still reports the
+      // failure instead of silently swallowing it.
+    }
   };
 
   const whatsappDirect = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
@@ -207,12 +245,46 @@ export const ContactPage: React.FC<ContactPageProps> = ({
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
+              {submitted && (
+                <div
+                  role="status"
+                  className={`flex items-start gap-3 rounded-2xl border p-4 ${
+                    theme === 'dark'
+                      ? 'border-emerald-500/30 bg-emerald-950/20 text-emerald-300'
+                      : 'border-emerald-200 bg-emerald-50 text-emerald-800'
+                  }`}
+                >
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-500" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-bold">Inquiry sent</p>
+                    <p className="mt-1 text-xs leading-relaxed">
+                      Thanks {name.trim() || 'for reaching out'} — our training coordinators reply within
+                      24 business hours. A copy is on its way to {email.trim() || 'your inbox'}.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setName('');
+                        setEmail('');
+                        setOrg('');
+                        setMessage('');
+                      }}
+                      className="mt-2 text-[11px] font-bold underline hover:no-underline"
+                    >
+                      Send another inquiry
+                    </button>
+                  </div>
+                </div>
+              )}
+
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                  <label htmlFor="contact-name" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                     Your Full Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     required
                     value={name}
@@ -227,10 +299,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                  <label htmlFor="contact-email" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                     Email Address
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     required
                     value={email}
@@ -247,10 +320,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                  <label htmlFor="contact-org" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                     Company / University / Self
                   </label>
                   <input
+                    id="contact-org"
                     type="text"
                     value={org}
                     onChange={(e) => setOrg(e.target.value)}
@@ -264,10 +338,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                  <label htmlFor="contact-delivery" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                     Preferred Delivery Format
                   </label>
                   <select
+                    id="contact-delivery"
                     value={delivery}
                     onChange={(e) => setDelivery(e.target.value)}
                     className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[var(--accent-red)] ${
@@ -286,10 +361,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                <label htmlFor="contact-interest" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                   Program Track of Interest
                 </label>
                 <select
+                  id="contact-interest"
                   value={interest}
                   onChange={(e) => setInterest(e.target.value)}
                   className={`w-full px-4 py-2.5 border rounded-xl text-xs focus:outline-none focus:border-[var(--accent-red)] ${
@@ -309,10 +385,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               <div className="space-y-1.5">
-                <label className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
-                  Objectives & Notes
+                <label htmlFor="contact-message" className={`text-xs font-bold uppercase tracking-wider ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
+                  Objectives &amp; Notes
                 </label>
                 <textarea
+                  id="contact-message"
                   rows={3}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -325,13 +402,29 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 />
               </div>
 
+              {submitError && (
+                <p role="alert" className="text-xs font-semibold text-red-500">
+                  {submitError}
+                </p>
+              )}
+
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all"
+                  disabled={isSending || submitted}
+                  className="w-full py-3.5 px-6 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-all disabled:opacity-60 disabled:translate-y-0"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>Submit Training Inquiry</span>
+                  {isSending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Sending…</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>Submit Training Inquiry</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

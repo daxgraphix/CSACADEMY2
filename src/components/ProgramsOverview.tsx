@@ -1,5 +1,6 @@
 import React from 'react';
-import { PageRoute, ProgramPillar } from '../types';
+import { Link } from 'react-router-dom';
+import { ProgramPillar } from '../types';
 import { programsData } from '../data/programs';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
@@ -13,13 +14,11 @@ import {
 } from 'lucide-react';
 
 interface ProgramsOverviewProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openProgramModal: (program: ProgramPillar) => void;
   openBookingModal: (prefill?: { program?: string }) => void;
 }
 
 export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
-  setCurrentRoute,
   openProgramModal,
   openBookingModal
 }) => {
@@ -35,12 +34,6 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
       default:
         return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
     }
-  };
-
-  const handlePillarNavigation = (slug: string) => {
-    const route = `programs/${slug}` as PageRoute;
-    setCurrentRoute(route);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -82,10 +75,11 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.12),transparent_40%)] opacity-70" />
               <div className="relative z-10 space-y-4 sm:space-y-6">
                 <div className="flex items-center justify-between">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 transition-transform group-hover:scale-105">
+                  <div className="group relative flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 transition-all duration-300 hover:-translate-y-1 hover:scale-105 hover:border-[var(--accent-red)]/60 hover:bg-[var(--accent-red)]/20">
                     {getIcon(pillar.icon)}
+                    <div aria-hidden="true" className="absolute inset-0 rounded-2xl bg-[var(--accent-red)]/10 opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
-                  <span className={`text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1.5 rounded-full border ${
+                  <span className={`text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1.5 rounded-full border transition-all duration-300 hover:border-[var(--accent-red)]/40 hover:bg-[var(--accent-red)]/10 ${
                     theme === 'dark' ? 'bg-white/5 border-white/10 text-neutral-300' : 'bg-neutral-100 border-neutral-200 text-neutral-700'
                   }`}>
                     {pillar.badge}
@@ -93,17 +87,17 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                 </div>
 
                 <div>
-                  <h3 className={`text-2xl font-black tracking-[-0.05em] mb-2 group-hover:text-[var(--accent-red-strong)] transition-colors ${
+                  <h3 className={`text-2xl font-black tracking-[-0.05em] mb-2 transition-all duration-300 group-hover:text-[var(--accent-red-strong)] group-hover:transform group-hover:translate-x-1 ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>
                     {pillar.title}
                   </h3>
-                  <p className={`text-sm font-semibold ${
+                  <p className={`text-sm font-semibold transition-colors duration-300 group-hover:text-[var(--accent-red-strong)] ${
                     theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                   }`}>
                     {pillar.tagline}
                   </p>
-                  <p className={`mt-3 text-sm leading-relaxed ${
+                  <p className={`mt-3 text-sm leading-relaxed transition-colors duration-300 group-hover:text-neutral-200/90 ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
                   }`}>
                     {pillar.description}
@@ -138,18 +132,21 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
                   </div>
                 </div>
 
-                <div className={`space-y-3 pt-4 border-t ${
+                <div className={`space-y-3 pt-4 border-t transition-all duration-300 group-hover:border-[var(--accent-red)]/30 ${
                   theme === 'dark' ? 'border-white/10' : 'border-neutral-200'
                 }`}>
-                  <div className={`text-[10px] font-bold uppercase tracking-[0.18em] ${
+                  <div className={`text-[10px] font-bold uppercase tracking-[0.18em] transition-colors duration-300 group-hover:text-[var(--accent-red-strong)] ${
                     theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
                   }`}>
                     Key Practical Outcome:
                   </div>
-                  <div className={`flex items-start gap-2 text-sm ${
+                  <div className={`flex items-start gap-2 text-sm transition-all duration-300 group-hover:translate-x-1 ${
                     theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
                   }`}>
-                    <CheckCircle className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
+                    <CheckCircle
+                      aria-hidden="true"
+                      className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0 mt-0.5 transition-transform duration-300 group-hover:scale-110"
+                    />
                     <span>{pillar.outcomes[0]}</span>
                   </div>
                 </div>
@@ -158,14 +155,24 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
               <div className={`relative z-10 mt-6 sm:mt-8 pt-4 sm:pt-5 border-t flex flex-col gap-3 ${
                 theme === 'dark' ? 'border-white/10' : 'border-neutral-200'
               }`}>
-                <button
+                <Link
                   id={`btn-explore-${pillar.slug}`}
-                  onClick={() => handlePillarNavigation(pillar.slug)}
-                  className="w-full py-3 sm:py-3.5 px-3 sm:px-4 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.14em] sm:tracking-[0.18em] text-white bg-[var(--accent-red)] hover:-translate-y-0.5 hover:bg-[var(--accent-red-hover)] rounded-full flex items-center justify-center gap-2 transition-all duration-200 shadow-[0_18px_40px_rgba(255,59,48,0.3)]"
+                  to={`/programs/${pillar.slug}`}
+                  className="group relative w-full py-3 sm:py-3.5 px-3 sm:px-4 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.14em] sm:tracking-[0.18em] text-white bg-[var(--accent-red)] hover:-translate-y-1 hover:bg-[var(--accent-red-hover)] rounded-full flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_18px_40px_rgba(255,59,48,0.3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
+                  aria-label={`Explore ${pillar.title} training programs and curriculum`}
                 >
-                  <span>{pillar.ctaText}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                  <span className="relative">
+                    {pillar.ctaText}
+                    <span
+                      aria-hidden="true"
+                      className="absolute -inset-x-1 -inset-y-1 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </span>
+                  <ArrowRight
+                    aria-hidden="true"
+                    className="w-3.5 h-3.5 transition-all duration-300 group-hover:translate-x-1 group-hover:scale-110"
+                  />
+                </Link>
 
                 <div className="flex gap-2">
                   <button

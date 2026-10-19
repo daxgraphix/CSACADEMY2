@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PageRoute } from '../types';
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
@@ -13,7 +13,6 @@ import {
   CheckCircle2,
   ArrowRight,
   Globe,
-  Star,
   Sparkles,
   Play,
   ChevronDown,
@@ -30,7 +29,6 @@ import {
 } from 'lucide-react';
 
 interface DevPadPageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string; format?: string }) => void;
 }
 
@@ -135,32 +133,7 @@ const rules = [
   'Respect every member\'s stage, from student to founder'
 ];
 
-const testimonials = [
-  {
-    initials: 'JM',
-    name: 'Jina M',
-    role: 'Indie Developer, Nairobi',
-    quote: 'DevPad gave me the testing structure I never had as a solo builder. Within two months I shipped my first Android app to the Play Store with confidence.',
-    color: '#dc2626',
-    outcome: 'Shipped to Play Store'
-  },
-  {
-    initials: 'AO',
-    name: 'Amara O',
-    role: 'Frontend Developer, Dar es Salaam',
-    quote: 'The accountability alone changed everything. I finally stopped abandoning side projects at the 70% mark. The community keeps me shipping.',
-    color: '#7c3aed',
-    outcome: '3 Side Projects Completed'
-  },
-  {
-    initials: 'TE',
-    name: 'Tunde E',
-    role: 'Startup Founder, Kampala',
-    quote: 'I came in with a half-built product and walked out with real user feedback from 12 actual testers. The Testathon format is genuinely useful.',
-    color: '#0ea5e9',
-    outcome: '12 Real Testers in One Sprint'
-  }
-];
+
 
 const faqs = [
   {
@@ -197,7 +170,6 @@ const whatsappPreview = [
 ];
 
 export const DevPadPage: React.FC<DevPadPageProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -684,57 +656,6 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
             </div>
           </section>
 
-          {/* TESTIMONIALS */}
-          <section className="space-y-8">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-red-subtle)]/10 border border-[var(--accent-red-subtle)]/20 text-[var(--accent-red-strong)] text-xs font-black uppercase tracking-wider mb-4">
-                <Star className="w-3.5 h-3.5" />
-                Member Stories
-              </div>
-              <h2 className={`text-3xl sm:text-4xl font-black tracking-tight ${
-                theme === 'dark' ? 'text-white' : 'text-neutral-950'
-              }`}>
-                Built Together
-              </h2>
-            </div>
-            <div className="grid sm:grid-cols-3 gap-5">
-              {testimonials.map((t) => (
-                <div key={t.name} className={`rounded-2xl p-6 border ${
-                  theme === 'dark'
-                    ? 'bg-[#111] border-neutral-800'
-                    : 'bg-white border-neutral-200'
-                }`}>
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    ))}
-                  </div>
-                  <p className={`text-sm leading-relaxed mb-5 ${
-                    theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
-                  }`}>"{t.quote}"</p>
-                  <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
-                    theme === 'dark' ? 'bg-emerald-950/40 text-emerald-400' : 'bg-emerald-50 text-emerald-700'
-                  }`}>
-                    <Trophy className="w-3 h-3" />
-                    {t.outcome}
-                  </div>
-                  <div className="flex items-center gap-3 mt-4 pt-4 border-t border-neutral-200 dark:border-neutral-800">
-                    <div
-                      className="w-10 h-10 rounded-full flex items-center justify-center text-white text-xs font-black"
-                      style={{ background: t.color, textShadow: '0 1px 3px rgba(0,0,0,0.4)' }}
-                    >
-                      {t.initials}
-                    </div>
-                    <div>
-                      <div className={`text-sm font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{t.name}</div>
-                      <div className={`text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>{t.role}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
           {/* FAQ */}
           <section className="max-w-3xl mx-auto space-y-6">
             <div className="text-center space-y-3">
@@ -812,12 +733,12 @@ export const DevPadPage: React.FC<DevPadPageProps> = ({
                 Join DevPad
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
-              <button
-                onClick={() => setCurrentRoute('programs/ai')}
+              <Link
+                to="/programs/ai"
                 className="px-8 py-4 rounded-2xl font-bold text-sm text-white border-2 border-white/30 hover:bg-white/10 uppercase tracking-wider transition-all"
               >
                 View Build Tracks
-              </button>
+              </Link>
             </div>
           </section>
 

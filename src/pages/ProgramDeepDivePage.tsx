@@ -1,41 +1,53 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PageRoute, ProgramPillar } from '../types';
+import { Link } from 'react-router-dom';
+import { ProgramPillar } from '../types';
 import { programsData } from '../data/programs';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { ShareButtons } from '../components/ShareButtons';
-import { 
-  ShieldCheck, 
-  Laptop, 
-  ArrowRight, 
-  CheckCircle2, 
-  Clock, 
-  MapPin, 
+import { PageBreadcrumbs } from '../components/LayoutPrimitives';
+import {
+  ShieldCheck,
+  Laptop,
+  ArrowRight,
+  CheckCircle2,
+  Clock,
+  MapPin,
   Users,
   BookOpen,
   ArrowLeft,
-  Calendar
+  Calendar,
+  Sparkles
 } from 'lucide-react';
 
 interface ProgramDeepDivePageProps {
   slug: string;
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string; format?: string }) => void;
 }
 
+/**
+ * Module titles arrive as "Module 4: The Human Firewall". The card already
+ * renders a numbered badge, so strip the prefix to avoid showing
+ * "Module 04" and "Module 4:" side by side.
+ */
+const splitModuleTitle = (raw: string): { number: string; title: string } => {
+  const match = raw.match(/^Module\s+(\d+)\s*:\s*(.*)$/i);
+  if (!match) return { number: '', title: raw };
+  return { number: match[1], title: match[2] };
+};
+
 export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
   slug,
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
-  const program = programsData.find(p => p.slug === slug) || programsData[0];
+  const program = programsData.find(p => p.slug === slug);
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Sparkles':
-        return <Laptop className="w-8 h-8 text-[var(--accent-red-strong)]" />;
+        return <Sparkles className="w-8 h-8 text-[var(--accent-red-strong)]" />;
       case 'ShieldCheck':
         return <ShieldCheck className="w-8 h-8 text-[var(--accent-red-strong)]" />;
       default:
@@ -44,6 +56,40 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
   };
 
   const canonical = useCanonicalUrl();
+
+  // An unknown slug should not silently render a different program.
+  if (!program) {
+    return (
+      <>
+        <Helmet>
+          <title>Program not found | CS Academy</title>
+          <meta name="robots" content="noindex" />
+          <link rel="canonical" href={canonical} />
+        </Helmet>
+        <div
+          className={`pt-32 pb-20 min-h-screen transition-colors duration-300 ${
+            theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
+          }`}
+        >
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-6">
+            <h1 className="text-3xl sm:text-4xl font-extrabold">Program not found</h1>
+            <p className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}>
+              The program you are looking for is not available. Browse the full catalog to find the
+              right track.
+            </p>
+            <Link
+              to="/programs"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] uppercase tracking-wider transition-colors"
+            >
+              <BookOpen className="w-4 h-4" />
+              Browse all programs
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Helmet>
@@ -61,20 +107,27 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
-        {/* Back Link & Share */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <button
-            onClick={() => {
-              setCurrentRoute('programs');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className={`inline-flex items-center gap-2 text-xs font-semibold transition-colors ${
-              theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-950'
-            }`}
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Programmes</span>
-          </button>
+        {/* Breadcrumbs & Share */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <PageBreadcrumbs
+              theme={theme}
+              items={[
+                { label: 'Home', route: '/' },
+                { label: 'Programs', route: '/programs' },
+                { label: program.title }
+              ]}
+            />
+            <Link
+              to="/programs"
+              className={`inline-flex items-center gap-2 text-xs font-semibold transition-colors ${
+                theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-950'
+              }`}
+            >
+              <ArrowLeft className="w-4 h-4" />
+              <span>Back to All Programmes</span>
+            </Link>
+          </div>
 
           <ShareButtons
             title={`CS Academy: ${program.title} (${program.tagline})`}
@@ -159,38 +212,41 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
-              Syllabus & Practical Competency Modules
+              Syllabus &amp; Practical Competency Modules
             </h2>
             <p className={`text-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              Each module combines direct instruction, live demonstrations, guided practice, and real-world exercises.
+              {program.modules.length} modules each combines direct instruction, live demonstrations, guided practice, and real-world exercises.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {program.modules.map((mod, idx) => (
-              <div
-                key={idx}
-                className={`p-6 rounded-2xl border space-y-3 shadow-lg flex flex-col justify-between transition-colors ${
-                  theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
-                }`}
-              >
-                <div className="space-y-2">
-                  <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${
-                    theme === 'dark' ? 'text-[var(--accent-red-strong)] bg-red-950/60 border-red-900/40' : 'text-red-700 bg-red-100 border-red-200'
+            {program.modules.map((mod, idx) => {
+              const { number, title } = splitModuleTitle(mod.title);
+              return (
+                <div
+                  key={idx}
+                  className={`p-6 rounded-2xl border space-y-3 shadow-lg flex flex-col justify-between transition-colors ${
+                    theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded border ${
+                      theme === 'dark' ? 'text-[var(--accent-red-strong)] bg-red-950/60 border-red-900/40' : 'text-red-700 bg-red-100 border-red-200'
+                    }`}>
+                      Module {number || idx + 1}
+                    </span>
+                    <h3 className={`text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{title}</h3>
+                    <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>{mod.description}</p>
+                  </div>
+                  <div className={`p-3 rounded-xl border text-xs flex items-start gap-2 ${
+                    theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]/80 text-neutral-200' : 'bg-white border-neutral-300 text-neutral-800'
                   }`}>
-                    Module 0{idx + 1}
-                  </span>
-                  <h3 className={`text-base font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{mod.title}</h3>
-                  <p className={`text-xs leading-relaxed ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>{mod.description}</p>
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
+                    <span><strong>Hands-on Output:</strong> {mod.practicalSkill}</span>
+                  </div>
                 </div>
-                <div className={`p-3 rounded-xl border text-xs flex items-start gap-2 ${
-                  theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]/80 text-neutral-200' : 'bg-white border-neutral-300 text-neutral-800'
-                }`}>
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
-                  <span><strong>Hands-on Output:</strong> {mod.practicalSkill}</span>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

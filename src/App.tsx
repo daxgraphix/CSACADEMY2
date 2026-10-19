@@ -1,60 +1,100 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useState, useCallback, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from './types';
-import { routeToPath, resolveRoute } from './utils/routes';
+import { resolveRoute } from './utils/routes';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
+import { ScrollToHash } from './components/ScrollToHash';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { NotFound } from './components/NotFound';
 
-import { HomePage } from './pages/HomePage';
-import { FeaturesPage } from './pages/FeaturesPage';
-import { PricingPage } from './pages/PricingPage';
-import { ProgramsPage } from './pages/ProgramsPage';
-import { ProgramDeepDivePage } from './pages/ProgramDeepDivePage';
-import { LearningFormatsPage } from './pages/LearningFormatsPage';
-import { ForOrganizationsPage } from './pages/ForOrganizationsPage';
-import { ResourcesPage } from './pages/ResourcesPage';
-import { BlogPage } from './pages/BlogPage';
-import { AboutPage } from './pages/AboutPage';
-import { ContactPage } from './pages/ContactPage';
-import { VibeCodingPage } from './pages/VibeCodingPage';
-import { DevPadPage } from './pages/DevPadPage';
-import { LegalPage } from './pages/LegalPage';
+const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
+const MarketingHomePage = lazy(() => import('./pages/MarketingHomePage').then(m => ({ default: m.MarketingHomePage })));
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
+const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
+const ProgramsPage = lazy(() => import('./pages/ProgramsPage').then(m => ({ default: m.ProgramsPage })));
+const ProgramDeepDivePage = lazy(() => import('./pages/ProgramDeepDivePage').then(m => ({ default: m.ProgramDeepDivePage })));
+const LearningFormatsPage = lazy(() => import('./pages/LearningFormatsPage').then(m => ({ default: m.LearningFormatsPage })));
+const ForOrganizationsPage = lazy(() => import('./pages/ForOrganizationsPage').then(m => ({ default: m.ForOrganizationsPage })));
+const ResourcesPage = lazy(() => import('./pages/ResourcesPage').then(m => ({ default: m.ResourcesPage })));
+const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.BlogPage })));
+const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const VibeCodingPage = lazy(() => import('./pages/VibeCodingPage').then(m => ({ default: m.VibeCodingPage })));
+const DevPadPage = lazy(() => import('./pages/DevPadPage').then(m => ({ default: m.DevPadPage })));
+const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
 
-import { BookingModal } from './components/BookingModal';
-import { ProgramDetailModal } from './components/ProgramDetailModal';
-import { TrainingDetailModal } from './components/TrainingDetailModal';
-import { ResourceViewModal } from './components/ResourceViewModal';
-import { BlogArticleModal } from './components/BlogArticleModal';
 import { PriceStrip } from './components/PriceStrip';
 import { useApp } from './context/AppContext';
 import { blogPostsData } from './data/blog';
+import { siteConfig } from './config/site';
+import { buildOrganizationSchema } from './utils/schema';
+
+const organizationSchema = buildOrganizationSchema({
+  name: siteConfig.academyName,
+  url: 'https://academy.cyberswahili.co.tz',
+  email: siteConfig.email,
+  telephone: siteConfig.phone,
+  foundingDate: String(siteConfig.establishedYear),
+  alternateName: siteConfig.parentOrg,
+  logo: 'https://academy.cyberswahili.co.tz/favicon.svg',
+  areaServed: ['Tanzania', 'Kenya', 'Uganda', 'Rwanda', 'Burundi', 'DRC'],
+  address: {
+    addressLocality: 'Dar es Salaam',
+    addressCountry: 'TZ'
+  },
+  sameAs: [
+    siteConfig.socialLinks.linkedin,
+    siteConfig.socialLinks.youtube,
+    siteConfig.socialLinks.whatsapp
+  ]
+});
+
+const BookingModal = React.memo(lazy(() => import('./components/BookingModal').then(m => ({ default: m.BookingModal }))));
+const ProgramDetailModal = React.memo(lazy(() => import('./components/ProgramDetailModal').then(m => ({ default: m.ProgramDetailModal }))));
+const TrainingDetailModal = React.memo(lazy(() => import('./components/TrainingDetailModal').then(m => ({ default: m.TrainingDetailModal }))));
+const ResourceViewModal = React.memo(lazy(() => import('./components/ResourceViewModal').then(m => ({ default: m.ResourceViewModal }))));
+const BlogArticleModal = React.memo(lazy(() => import('./components/BlogArticleModal').then(m => ({ default: m.BlogArticleModal }))));
+
+interface AppChromeProps {
+  theme: 'dark' | 'light';
+  currentRoute: PageRoute;
+  openBookingModal: () => void;
+  page: React.ReactNode;
+}
+
+const AppChrome = React.memo(function AppChrome({ theme, currentRoute, openBookingModal, page }: AppChromeProps) {
+  return (
+    <div className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth overflow-x-hidden ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white' : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'}`}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <a className="skip-link" href="#main-content">Skip to main content</a>
+      <Navbar currentRoute={currentRoute} openBookingModal={openBookingModal} />
+      <div id="main-content" tabIndex={-1} className="flex-grow overflow-x-hidden pb-20 outline-none md:pb-0">
+        <div key={currentRoute} className="page-enter">
+          <ErrorBoundary key={currentRoute}><Suspense fallback={<div className="min-h-[40vh]" aria-busy="true" aria-label="Loading page" />}>{page}</Suspense></ErrorBoundary>
+        </div>
+      </div>
+      <Footer currentRoute={currentRoute} openBookingModal={openBookingModal} />
+      <BackToTop />
+      <ScrollProgress />
+      <ScrollToHash />
+    </div>
+  );
+});
 
 export default function App() {
   const location = useLocation();
-  const navigate = useNavigate();
   const { theme } = useApp();
 
   // Derive the current route from the browser URL so refresh, sharing, and
   // back/forward all work. The whole tree reads this the same way it read
   // the old useState<PageRoute> value.
   const currentRoute: PageRoute = resolveRoute(location.pathname);
-
-  // navigateTo preserves the original (route: PageRoute) => void signature,
-  // so every child that still receives setCurrentRoute works unchanged.
-  const setCurrentRoute = useCallback(
-    (route: PageRoute) => {
-      navigate(routeToPath[route]);
-    },
-    [navigate]
-  );
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior });
-  }, [location.pathname]);
 
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [bookingPrefill, setBookingPrefill] = useState<{
@@ -69,10 +109,8 @@ export default function App() {
   const [selectedResource, setSelectedResource] = useState<ResourceItem | null>(null);
   const [selectedBlogArticle, setSelectedBlogArticle] = useState<BlogPost | null>(null);
 
-  const anyModalOpen = useMemo(() =>
-    isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle,
-    [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]
-  );
+  const anyModalOpen =
+    isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle;
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -88,24 +126,11 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return;
-      if (isBookingModalOpen) setIsBookingModalOpen(false);
-      if (selectedProgram) setSelectedProgram(null);
-      if (selectedTraining) setSelectedTraining(null);
-      if (selectedResource) setSelectedResource(null);
-      if (selectedBlogArticle) setSelectedBlogArticle(null);
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [isBookingModalOpen, selectedProgram, selectedTraining, selectedResource, selectedBlogArticle]);
-
-  useEffect(() => {
     document.body.style.overflow = anyModalOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [anyModalOpen]);
 
-  const handleOpenBooking = (prefill?: {
+  const handleOpenBooking = useCallback((prefill?: {
     program?: string;
     format?: string;
     duration?: string;
@@ -113,19 +138,26 @@ export default function App() {
   }) => {
     setBookingPrefill(prefill);
     setIsBookingModalOpen(true);
-  };
+  }, []);
 
-  const handleOpenProgramModal = (program: ProgramPillar) => setSelectedProgram(program);
-  const handleOpenTrainingModal = (training: TrainingProgram) => setSelectedTraining(training);
-  const handleOpenResourceModal = (resource: ResourceItem) => setSelectedResource(resource);
-  const handleOpenBlogArticleModal = (post: BlogPost) => setSelectedBlogArticle(post);
+  const handleOpenProgramModal = useCallback((program: ProgramPillar) => setSelectedProgram(program), []);
+  const handleOpenTrainingModal = useCallback((training: TrainingProgram) => setSelectedTraining(training), []);
+  const handleOpenResourceModal = useCallback((resource: ResourceItem) => setSelectedResource(resource), []);
+  const handleOpenBlogArticleModal = useCallback((post: BlogPost) => setSelectedBlogArticle(post), []);
+  const openBookingFromChrome = useCallback(() => handleOpenBooking(), [handleOpenBooking]);
+  const closeBookingModal = useCallback(() => setIsBookingModalOpen(false), []);
+  const closeProgramModal = useCallback(() => setSelectedProgram(null), []);
+  const closeTrainingModal = useCallback(() => setSelectedTraining(null), []);
+  const closeResourceModal = useCallback(() => setSelectedResource(null), []);
+  const closeBlogModal = useCallback(() => setSelectedBlogArticle(null), []);
 
-  const renderCurrentPage = () => {
+  const page = useMemo(() => {
     switch (currentRoute) {
       case 'home':
+        return <MarketingHomePage openBookingModal={handleOpenBooking} />;
+      case 'academy':
         return (
           <HomePage
-            setCurrentRoute={setCurrentRoute}
             openBookingModal={handleOpenBooking}
             openProgramModal={handleOpenProgramModal}
             openTrainingDetailModal={handleOpenTrainingModal}
@@ -134,27 +166,26 @@ export default function App() {
           />
         );
       case 'features':
-        return <FeaturesPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <FeaturesPage openBookingModal={handleOpenBooking} />;
       case 'pricing':
-        return <PricingPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <PricingPage openBookingModal={handleOpenBooking} />;
       case 'programs':
         return (
           <ProgramsPage
-            setCurrentRoute={setCurrentRoute}
             openProgramModal={handleOpenProgramModal}
             openBookingModal={handleOpenBooking}
           />
         );
       case 'programs/ai':
-        return <ProgramDeepDivePage slug="ai" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="ai" openBookingModal={handleOpenBooking} />;
       case 'programs/cybersecurity':
-        return <ProgramDeepDivePage slug="cybersecurity" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="cybersecurity" openBookingModal={handleOpenBooking} />;
       case 'programs/digital-skills':
-        return <ProgramDeepDivePage slug="digital-skills" setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="digital-skills" openBookingModal={handleOpenBooking} />;
       case 'vibe-coding':
-        return <VibeCodingPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <VibeCodingPage openBookingModal={handleOpenBooking} />;
       case 'devpad':
-        return <DevPadPage setCurrentRoute={setCurrentRoute} openBookingModal={handleOpenBooking} />;
+        return <DevPadPage openBookingModal={handleOpenBooking} />;
       case 'learning-formats':
         return <LearningFormatsPage openBookingModal={handleOpenBooking} />;
       case 'for-organizations':
@@ -166,17 +197,16 @@ export default function App() {
       case 'about':
         return <AboutPage openBookingModal={handleOpenBooking} />;
       case 'contact':
-        return <ContactPage openBookingModal={() => handleOpenBooking()} />;
+        return <ContactPage openBookingModal={handleOpenBooking} />;
       case 'privacy':
-        return <LegalPage kind="privacy" setCurrentRoute={setCurrentRoute} />;
+        return <LegalPage kind="privacy" />;
       case 'terms':
-        return <LegalPage kind="terms" setCurrentRoute={setCurrentRoute} />;
+        return <LegalPage kind="terms" />;
       case 'not-found':
-        return <NotFound setCurrentRoute={setCurrentRoute} />;
+        return <NotFound />;
       default:
         return (
           <HomePage
-            setCurrentRoute={setCurrentRoute}
             openBookingModal={handleOpenBooking}
             openProgramModal={handleOpenProgramModal}
             openTrainingDetailModal={handleOpenTrainingModal}
@@ -185,69 +215,43 @@ export default function App() {
           />
         );
     }
-  };
+  }, [currentRoute, handleOpenBooking, handleOpenProgramModal, handleOpenTrainingModal, handleOpenResourceModal, handleOpenBlogArticleModal]);
 
   return (
     <ErrorBoundary>
-      <div
-        className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth overflow-x-hidden ${
-          theme === 'dark'
-            ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white'
-            : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'
-        }`}
-      >
-        <a className="skip-link" href="#main-content">Skip to main content</a>
-
-        <Navbar
-          currentRoute={currentRoute}
-          setCurrentRoute={setCurrentRoute}
-          openBookingModal={() => handleOpenBooking()}
-        />
-
-        <div id="main-content" tabIndex={-1} className="flex-grow overflow-x-hidden pb-20 outline-none md:pb-0">
-          <div key={currentRoute} className="page-enter">
-            {renderCurrentPage()}
-          </div>
-        </div>
-
-        <Footer
-          setCurrentRoute={setCurrentRoute}
-          openBookingModal={() => handleOpenBooking()}
-        />
-
-        <BookingModal
+      <AppChrome theme={theme} currentRoute={currentRoute} openBookingModal={openBookingFromChrome} page={page} />
+      <Suspense fallback={null}>
+        {isBookingModalOpen && <BookingModal
           isOpen={isBookingModalOpen}
-          onClose={() => setIsBookingModalOpen(false)}
+          onClose={closeBookingModal}
           prefill={bookingPrefill}
-        />
+        />}
 
-        <ProgramDetailModal
+        {selectedProgram && <ProgramDetailModal
           program={selectedProgram}
-          onClose={() => setSelectedProgram(null)}
+          onClose={closeProgramModal}
           openBookingModal={handleOpenBooking}
-        />
+        />}
 
-        <TrainingDetailModal
+        {selectedTraining && <TrainingDetailModal
           training={selectedTraining}
-          onClose={() => setSelectedTraining(null)}
+          onClose={closeTrainingModal}
           openBookingModal={handleOpenBooking}
-        />
+        />}
 
-        <ResourceViewModal
+        {selectedResource && <ResourceViewModal
           resource={selectedResource}
-          onClose={() => setSelectedResource(null)}
-        />
+          onClose={closeResourceModal}
+        />}
 
-        <BlogArticleModal
+        {selectedBlogArticle && <BlogArticleModal
           post={selectedBlogArticle}
-          onClose={() => setSelectedBlogArticle(null)}
+          onClose={closeBlogModal}
           openBookingModal={handleOpenBooking}
-        />
+        />}
+      </Suspense>
 
-        <BackToTop />
-        <ScrollProgress />
-        <PriceStrip variant="sticky-mobile" openBookingModal={() => handleOpenBooking()} />
-      </div>
+        <PriceStrip variant="sticky-mobile" openBookingModal={openBookingFromChrome} />
     </ErrorBoundary>
   );
 }

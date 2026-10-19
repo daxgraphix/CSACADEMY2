@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/*
+ * Extra "xs" breakpoint (400px).
+ *
+ * A large share of this audience browses on small, low-end phones. `xs` lets
+ * dense UI (payment badges, price bars) reveal one step earlier than the
+ * default `sm` (640px) instead of staying hidden on most handsets.
+ *
+ * Theme blocks must sit at the top level, before any layer rules.
+ */
+@theme {
+  --breakpoint-xs: 25rem;
+}
+
 @layer base {
   :root {
     --bg-primary: #090909;
@@ -372,6 +385,15 @@
   }
 
   #main-content {
+    scroll-margin-top: 6rem;
+  }
+
+  /*
+   * Every in-page anchor target has to clear the fixed header when it is
+   * jumped to. `:where()` keeps the specificity at zero so a Tailwind
+   * `scroll-mt-*` utility on a specific element still wins.
+   */
+  :where([id]) {
     scroll-margin-top: 6rem;
   }
 
@@ -1135,6 +1157,11 @@
   --color-icon: var(--icon-color);
   --color-icon-muted: var(--icon-color-muted);
 }
+
+/*
+ * Extra "xs" breakpoint (400px) is declared at the top of this file so the
+ * theme block is processed before any layer rules.
+ */
 
 /* ─── Smooth theme transition wrapper ─── */
 .theme-transition,

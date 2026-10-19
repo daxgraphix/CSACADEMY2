@@ -1,15 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { ArrowLeft, ShieldCheck, FileText } from 'lucide-react';
-import { PageRoute } from '../types';
 import { useApp } from '../context/AppContext';
 
 interface LegalPageProps {
   kind: 'privacy' | 'terms';
-  setCurrentRoute: (route: PageRoute) => void;
 }
 
-export const LegalPage: React.FC<LegalPageProps> = ({ kind, setCurrentRoute }) => {
+export const LegalPage: React.FC<LegalPageProps> = ({ kind }) => {
+  const canonical = useCanonicalUrl();
   const { theme } = useApp();
   const isPrivacy = kind === 'privacy';
   const title = isPrivacy ? 'Privacy Policy' : 'Terms & Conditions';
@@ -22,18 +23,22 @@ export const LegalPage: React.FC<LegalPageProps> = ({ kind, setCurrentRoute }) =
       <Helmet>
         <title>{title} | CS Academy</title>
         <meta name="description" content={`${title} for CS Academy learners, customers, and training partners.`} />
+        <meta property="og:title" content={`${title} | CS Academy`} />
+        <meta property="og:description" content={`${title} for CS Academy learners, customers, and training partners.`} />
+        <meta property="og:url" content={canonical} />
+        <link rel="canonical" href={canonical} />
       </Helmet>
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <button
-          onClick={() => setCurrentRoute('home')}
+        <Link
+          to="/"
           className={`mb-8 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors ${
             theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-700 hover:text-neutral-950'
           }`}
         >
-          <ArrowLeft className="h-4 w-4" />
+          <ArrowLeft className="h-4 h-4" />
           Back to CS Academy
-        </button>
+        </Link>
 
         <article className={`rounded-3xl border p-5 sm:p-8 lg:p-12 shadow-xl ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-200'

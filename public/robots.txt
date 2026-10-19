@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://academy.cyberswahili.co.tz/sitemap.xml

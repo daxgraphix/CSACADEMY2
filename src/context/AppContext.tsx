@@ -36,7 +36,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     try {
       const root = document.documentElement;
-      root.lang = 'en';
       root.classList.add('notranslate');
       if (theme === 'dark') {
         root.classList.remove('light');
@@ -44,6 +43,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         root.classList.add('light');
       }
       localStorage.setItem('cs_academy_theme', theme);
+      const themeColor = document.querySelector('meta[name="theme-color"]');
+      if (themeColor) {
+        themeColor.setAttribute('content', theme === 'dark' ? '#090909' : '#f7f4ee');
+      }
     } catch (e) {
       // ignore
     }

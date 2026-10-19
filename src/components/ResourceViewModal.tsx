@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { ResourceItem } from '../types';
 import {
   X,
@@ -19,17 +20,9 @@ export const ResourceViewModal: React.FC<ResourceViewModalProps> = ({
   resource,
   onClose
 }) => {
-  const { t, theme } = useApp();
+  const { theme } = useApp();
   const [downloaded, setDownloaded] = useState(false);
-
-  useEffect(() => {
-    if (!resource) return;
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
-  }, [resource, onClose]);
+  useModalAccessibility(!!resource, onClose);
 
   if (!resource) return null;
 
@@ -67,6 +60,7 @@ export const ResourceViewModal: React.FC<ResourceViewModalProps> = ({
       } animate-in fade-in duration-200`}
       role="dialog"
       aria-modal="true"
+      tabIndex={-1}
       aria-labelledby="resource-modal-title"
       onClick={onClose}
     >

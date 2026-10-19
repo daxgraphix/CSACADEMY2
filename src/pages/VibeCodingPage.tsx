@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PageRoute } from '../types';
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import {
@@ -19,12 +19,10 @@ import {
   Users,
   FileText,
   Smartphone,
-  Star,
   Award
 } from 'lucide-react';
 
 interface VibeCodingPageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string; format?: string }) => void;
 }
 
@@ -137,29 +135,9 @@ const faqs = [
   }
 ];
 
-const testimonials = [
-  {
-    quote: 'I went from never writing a line of code to deploying a complete e-commerce product page in one afternoon. The local language prompt guide made everything click.',
-    name: 'Zawadi M',
-    role: 'Fashion Boutique Owner, Dar es Salaam',
-    initials: 'ZM'
-  },
-  {
-    quote: 'The Vibe Coding workflow our team uses now is completely different from a year ago. We ship features in days, not weeks. The CS Academy framework gave us the language to direct AI precisely.',
-    name: 'Chidi O',
-    role: 'CTO, Fintech Startup, Nairobi',
-    initials: 'CO'
-  },
-  {
-    quote: 'I used to be embarrassed about my coding speed. Now I am the fastest developer in my cohort because I understand how to prompt, review, and iterate. The AI handles the boilerplate.',
-    name: 'Lars N',
-    role: 'Junior Developer, Kampala',
-    initials: 'LN'
-  }
-];
+
 
 export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -203,11 +181,8 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
                 Start Vibe Coding
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
-              <button
-                onClick={() => {
-                  setCurrentRoute('programs/ai');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
+              <Link
+                to="/programs/ai"
                 className={`px-8 py-4 rounded-2xl font-bold text-sm border transition-all hover:-translate-y-0.5 ${
                   theme === 'dark'
                     ? 'text-white border-white/20 bg-white/5 hover:bg-white/10'
@@ -215,7 +190,7 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
                 }`}
               >
                 View Full AI Academy
-              </button>
+              </Link>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
@@ -428,48 +403,6 @@ export const VibeCodingPage: React.FC<VibeCodingPageProps> = ({
                   </div>
                 );
               })}
-            </div>
-          </section>
-
-          {/* TESTIMONIALS */}
-          <section className="space-y-8">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-red-subtle)]/10 border border-[var(--accent-red-subtle)]/20 text-[var(--accent-red-strong)] text-xs font-black uppercase tracking-wider mb-4">
-                <Star className="w-3.5 h-3.5" />
-                Student Stories
-              </div>
-              <h2 className={`text-3xl sm:text-4xl font-black tracking-tight ${
-                theme === 'dark' ? 'text-white' : 'text-neutral-950'
-              }`}>
-                From Zero to Shipped
-              </h2>
-            </div>
-            <div className="grid sm:grid-cols-3 gap-5">
-              {testimonials.map(t => (
-                <div key={t.name} className={`rounded-2xl p-6 border ${
-                  theme === 'dark'
-                    ? 'bg-[#111] border-neutral-800'
-                    : 'bg-white border-neutral-200'
-                }`}>
-                  <div className="flex gap-1 mb-3">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    ))}
-                  </div>
-                  <p className={`text-sm leading-relaxed mb-4 ${
-                    theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
-                  }`}>"{t.quote}"</p>
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-full bg-[var(--accent-red)] flex items-center justify-center text-white text-xs font-black" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}>
-                      {t.initials}
-                    </div>
-                    <div>
-                      <div className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{t.name}</div>
-                      <div className={`text-[10px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>{t.role}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </section>
 

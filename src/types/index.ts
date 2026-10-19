@@ -1,5 +1,6 @@
 export type PageRoute =
   | 'home'
+  | 'academy'
   | 'features'
   | 'pricing'
   | 'programs'

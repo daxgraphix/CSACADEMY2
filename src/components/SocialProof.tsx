@@ -1,204 +1,62 @@
-import React, { useState } from 'react';
-import { Quote, Award, Users, Star, CheckCircle2, ShieldCheck, TrendingUp, Filter } from 'lucide-react';
-import { siteConfig } from '../config/site';
+import React from 'react';
+import { ArrowRight, BookOpenCheck, Languages, MapPin, Smartphone } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { useReveal } from '../hooks/useReveal';
 
-export const SocialProof: React.FC = () => {
-  const { theme, t } = useApp();
-  const [selectedFilter, setSelectedFilter] = useState<string>('all');
-  const gridRef = useReveal<HTMLDivElement>();
+interface SocialProofProps {
+  openBookingModal: (prefill?: { program?: string }) => void;
+}
 
-  const filterOptions = [
-    { id: 'all', label: 'All Reviews'},
-    { id: 'web-coding', label: 'Web & Coding'},
-    { id: 'ai-vibe-coding', label: 'AI & Vibe Coding'},
-    { id: 'cybersecurity', label: 'Cybersecurity'},
-    { id: 'design-uiux', label: 'Design & UI/UX'},
+export const SocialProof: React.FC<SocialProofProps> = ({ openBookingModal }) => {
+  const { theme } = useApp();
+  const isDark = theme === 'dark';
+  const items = [
+    { icon: MapPin, title: 'Rooted in East Africa', body: 'Based in Dar es Salaam, with online training available across the region.' },
+    { icon: Languages, title: 'Language-aware teaching', body: 'English-first instruction with local-language support where the program allows.' },
+    { icon: Smartphone, title: 'Designed for local access', body: 'Mobile-friendly learning and local payment options are available on eligible plans.' },
+    { icon: BookOpenCheck, title: 'Practical from day one', body: 'Work through guided prompts, research, writing, and safe-use exercises.' }
   ];
 
-  const filteredTestimonials = siteConfig.testimonials.filter((item) => {
-    if (selectedFilter === 'all') return true;
-    if (selectedFilter === 'web-coding') return item.category === 'web-coding';
-    if (selectedFilter === 'ai-vibe-coding') return item.category === 'ai-vibe-coding';
-    if (selectedFilter === 'cybersecurity') return item.category === 'cybersecurity';
-    if (selectedFilter === 'design-uiux') return item.category === 'design-uiux';
-    return true;
-  });
-
   return (
-    <section 
-      id="social-proof-section" 
-      className={`relative py-24 overflow-hidden transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'
-      }`}
-    >
-      <div className="absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_top,_rgba(255,59,48,0.1),transparent_35%)]" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
-            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-neutral-300' : 'bg-white border-neutral-300 text-neutral-800 shadow-sm'
-          }`}>
-            <span>{t.socialProof.badge}</span>
-          </div>
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
-            theme === 'dark' ? 'text-white' : 'text-neutral-950'
-          }`}>
-            {t.socialProof.title}
-          </h2>
-          <p className={`text-base leading-relaxed ${
-            theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
-          }`}>
-            {t.socialProof.subtitle}
+    <section id="social-proof-section" aria-labelledby="local-fit-title" className={`py-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'}`}>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">Local delivery, practical learning</p>
+          <h2 id="local-fit-title" className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Built for learners and teams across East Africa</h2>
+          <p className={`mt-4 text-sm leading-relaxed sm:text-base ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
+            Compare the format, language support, and payment option with our team before you enroll. We can help match the training to your location and goals.
           </p>
         </div>
-
-        {/* Quick Social Proof Metrics Banner */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
-          <div className={`p-5 rounded-3xl border text-center space-y-1 ${
-            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
-          }`}>
-            <div className="flex items-center justify-center gap-1 text-amber-500 font-extrabold text-lg">
-              <Star className="w-4 h-4 fill-amber-500 text-amber-500" />
-              <span>4.9 / 5.0</span>
-            </div>
-            <p className={`text-xs font-medium ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              Average Student Rating
-            </p>
-          </div>
-
-          <div className={`p-5 rounded-3xl border text-center space-y-1 ${
-            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
-          }`}>
-            <div className={`text-lg font-black ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>1,200+</div>
-            <p className={`text-xs font-medium ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              East African Learners
-            </p>
-          </div>
-
-          <div className={`p-5 rounded-3xl border text-center space-y-1 ${
-            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
-          }`}>
-            <div className="text-lg font-black text-[var(--accent-red-strong)]">English + Local</div>
-            <p className={`text-xs font-medium ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              Accessible Tech Learning
-            </p>
-          </div>
-        </div>
-
-        <div className={`mb-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] font-bold uppercase tracking-[0.16em] ${
-          theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
-        }`}>
-          <span className="inline-flex items-center gap-2"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Project-based learning</span>
-          <span className="inline-flex items-center gap-2"><ShieldCheck className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" /> Verified certificates</span>
-          <span className="inline-flex items-center gap-2"><Users className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" /> East African community</span>
-        </div>
-
-        {/* Filter Tabs */}
-        <div className="flex items-center justify-center gap-2 flex-wrap mb-10">
-          <div className={`grid grid-cols-2 gap-1.5 p-1 rounded-2xl border sm:grid-cols-3 lg:inline-flex lg:flex-nowrap lg:gap-1.5 ${
-            theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
-          }`}>
-            {filterOptions.map((opt) => (
-              <button
-                key={opt.id}
-                onClick={() => setSelectedFilter(opt.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 hover:-translate-y-0.5 w-full text-center sm:w-auto ${
-                  selectedFilter === opt.id
-                    ? 'bg-[#B91C1C] text-white shadow-md'
-                    : theme === 'dark' ? 'text-neutral-400 hover:text-white' : 'text-neutral-800 hover:text-neutral-900'
-                }`}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Testimonials Grid */}
-        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 reveal-stagger">
-          {filteredTestimonials.map((item, idx) => (
-            <div
-              key={idx}
-              className={`border rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1 group ${
-                theme === 'dark' 
-                  ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' 
-                  : 'bg-white border-neutral-300 hover:border-red-400'
-              }`}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map(({ icon: Icon, title, body }) => (
+            <article 
+              key={title} 
+              className={`group relative rounded-2xl border p-5 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${isDark ? 'border-white/10 bg-white/[0.03] hover:border-[var(--accent-red)]/30' : 'border-neutral-200 bg-white shadow-sm hover:border-[var(--accent-red)]/30'}`}
             >
-              <div className="space-y-4">
-                {/* Top Badge Row */}
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {[...Array(item.rating || 5)].map((_, i) => (
-                      <Star key={i} className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                    ))}
-                  </div>
-                  {item.courseTag && (
-                    <span className={`text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full border ${
-                      theme === 'dark' ? 'bg-[#0B0B0B] text-neutral-300 border-[var(--border-color)]' : 'bg-neutral-100 text-neutral-700 border-neutral-300'
-                    }`}>
-                      {item.courseTag}
-                    </span>
-                  )}
-                </div>
-
-                {/* Testimonial Quote */}
-                <p className={`text-xs sm:text-sm italic leading-relaxed ${
-                  theme === 'dark' ? 'text-neutral-200' : 'text-neutral-700'
-                }`}>
-                  "{item.quote}"
-                </p>
-
-                {/* Outcome Ribbon */}
-                {item.outcome && (
-                  <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold ${
-                    theme === 'dark'
-                      ? 'bg-emerald-950/40 border border-emerald-800/40 text-emerald-300'
-                      : 'bg-emerald-50 border border-emerald-200 text-emerald-700'
-                  }`}>
-                    <TrendingUp className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                    <span className="truncate">{item.outcome}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Author Footer */}
-              <div className={`mt-6 pt-4 border-t flex items-center justify-between gap-3 ${
-                theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
-              }`}>
-                <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[var(--accent-red-hover)] to-neutral-800 p-0.5 shadow-md shrink-0">
-                    <div className={`w-full h-full rounded-[14px] flex items-center justify-center font-bold text-xs ${
-                      theme === 'dark' ? 'bg-[#0B0B0B] text-white' : 'bg-white text-neutral-900'
-                    }`} style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
-                      {item.initials}
-                    </div>
-                  </div>
-                  <div>
-                    <div className={`text-sm font-bold flex items-center gap-1.5 ${
-                      theme === 'dark' ? 'text-white' : 'text-neutral-900'
-                    }`}>
-                      <span>{item.name}</span>
-                      {item.verified && (
-                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" title="Verified Graduate" />
-                      )}
-                    </div>
-                    <div className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
-                      {item.role}
-                    </div>
-                    <div className={`text-[11px] font-mono ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-700'}`}>
-                      {item.location}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <Icon 
+                aria-hidden="true" 
+                className="h-5 w-5 text-[var(--accent-red-strong)] transition-transform group-hover:scale-110" 
+              />
+              <h3 className="mt-4 font-bold transition-colors group-hover:text-[var(--accent-red-strong)]">{title}</h3>
+              <p className={`mt-2 text-sm leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'} transition-colors group-hover:${isDark ? 'text-white' : 'text-neutral-900'}`}>{body}</p>
+              <div aria-hidden="true" className="absolute inset-0 rounded-2xl bg-gradient-to-br from-transparent to-[var(--accent-red)]/5 opacity-0 transition-opacity group-hover:opacity-100" />
+            </article>
           ))}
         </div>
-
+        <div className="mt-8 flex flex-col items-center gap-4 text-center">
+          <p className={`text-sm ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>Want to review the curriculum and schedule before deciding?</p>
+          <button
+            type="button"
+            onClick={() => openBookingModal({ program: 'AI for Everyone' })}
+            className="group inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--accent-red)] bg-[var(--accent-red-subtle)] px-6 py-3 text-sm font-bold text-[var(--accent-red-strong)] shadow-sm transition-all duration-300 hover:border-[var(--accent-red-hover)] hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
+            aria-label="Request the course outline and schedule details"
+          >
+            Request the course outline
+            <ArrowRight
+              aria-hidden="true"
+              className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </button>
+        </div>
       </div>
     </section>
   );

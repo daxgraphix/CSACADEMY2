@@ -1,7 +1,7 @@
 {
   "name": "CS Academy",
-  "description": "CS Academy - Empowering East Africa with English-language digital skills, video courses in web development, graphic design, AI, cybersecurity, and mobile money accessibility.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "short_name": "CS Academy",
+  "description": "CS Academy - Practical AI, cybersecurity, and digital skills training across East Africa, with hands-on projects and M-Pesa payments.",
+  "requestFramePermissions": []
 }
 

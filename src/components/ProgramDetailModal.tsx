@@ -1,4 +1,5 @@
 import React from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { ProgramPillar } from '../types';
 import { useApp } from '../context/AppContext';
 import {
@@ -24,11 +25,12 @@ export const ProgramDetailModal: React.FC<ProgramDetailModalProps> = ({
   openBookingModal
 }) => {
   const { theme } = useApp();
+  useModalAccessibility(!!program, onClose);
   
   if (!program) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-label={program?.title} tabIndex={-1}>
       <div 
         className={`border rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
           theme === 'dark' 

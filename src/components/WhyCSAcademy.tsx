@@ -1,6 +1,5 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
-import { siteConfig } from '../config/site';
 import { useReveal } from '../hooks/useReveal';
 import {
   Zap,
@@ -25,13 +24,6 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
 }) => {
   const { theme, t } = useApp();
   const benefitsRef = useReveal<HTMLDivElement>();
-
-  const stats = [
-    { value: siteConfig.stats.learnersTrained, label: 'Learners Trained'},
-    { value: siteConfig.stats.institutionsServed, label: 'Institutions Served'},
-    { value: siteConfig.stats.hoursDelivered, label: 'Hours Delivered'},
-    { value: siteConfig.stats.satisfactionRate, label: 'Satisfaction Rate'},
-  ];
 
   const benefits = [
     { 
@@ -115,25 +107,6 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
           }`}>
             {t.whyUs.subtitle}
           </p>
-        </div>
-
-        {/* Impact Stats Strip */}
-        <div className={`grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12 ${
-          theme === 'dark' ? 'text-white' : 'text-neutral-900'
-        }`}>
-          {stats.map((stat, i) => (
-            <div 
-              key={i}
-              className={`p-5 rounded-2xl border text-center ${
-                theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
-              }`}
-            >
-              <div className="text-2xl sm:text-3xl font-black tracking-tight text-[var(--accent-red-strong)]">{stat.value}</div>
-              <div className={`mt-1 text-[11px] font-semibold uppercase tracking-wider ${
-                theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
-              }`}>{stat.label}</div>
-            </div>
-          ))}
         </div>
 
         {/* 11 Benefits Bento Grid */}

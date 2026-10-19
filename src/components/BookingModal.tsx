@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { siteConfig } from '../config/site';
+import { BOOKING_ENDPOINT, submitForm } from '../utils/booking';
 import { useApp } from '../context/AppContext';
 import {
   X,
@@ -87,12 +89,6 @@ const copyToClipboard = async (text: string): Promise<boolean> => {
     return false;
   }
 };
-
-const BOOKING_ENDPOINT: string =
-  (typeof import.meta !== 'undefined' &&
-    (import.meta as ImportMeta & { env?: Record<string, string> }).env
-      ?.VITE_BOOKING_ENDPOINT) ||
-  '';
 
 const buildSubject = (program: string) => `Training Inquiry: ${program} | CS Academy`;
 
@@ -197,7 +193,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
   const [organization, setOrganization] = useState('');
   const [program, setProgram] = useState('AI Academy Flagship');
   const [format, setFormat] = useState('Live Online (Zoom/Google Meet)');
-  const [audienceType, setAudienceType] = useState('Individual Professional');
+  const [audienceType, setAudienceType] = useState('Individual Professional / Student');
   const [location, setLocation] = useState('Tanzania');
   const [notes, setNotes] = useState('');
   const [copied, setCopied] = useState(false);
@@ -230,7 +226,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setOrganization('');
       setProgram('AI Academy Flagship');
       setFormat('Live Online (Zoom/Google Meet)');
-      setAudienceType('Individual Professional');
+      setAudienceType('Individual Professional / Student');
       setLocation('Tanzania');
       setNotes('');
       setErrors({});
@@ -248,14 +244,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
+
 
   const validate = (): boolean => {
     const next: { name?: string; email?: string } = {};
@@ -270,6 +259,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     return Object.keys(next).length === 0;
   };
 
+  useModalAccessibility(isOpen, onClose);
+
   if (!isOpen) return null;
 
   const constructMessageText = () => {
@@ -283,89 +274,54 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     if (!BOOKING_ENDPOINT) return { ok: false, ref: '', failed: true, errorMessage: 'Booking endpoint is not configured.' };
     const ref = generateReference();
     setDispatchStep('contacting');
-    try {
-      setIsSubmitting(true);
-      setSubmitError(null);
-      const fullMessage = buildMessageWithRef(
-        { name, email, organization, program, format, audienceType, location, notes },
-        ref
-      );
+    setIsSubmitting(true);
+    setSubmitError(null);
 
-      const form = new URLSearchParams();
-      form.set('_subject', `[CS Academy] New inquiry — ${program} (ref ${ref})`);
-      if (name) form.set('name', name);
-      if (email) form.set('email', email);
-      form.set('organization', organization || '');
-      form.set('program', program);
-      form.set('format', format);
-      form.set('audienceType', audienceType);
-      form.set('location', location);
-      form.set('notes', notes || '');
-      form.set('reference', ref);
-      form.set('submittedAt', new Date().toISOString());
-      if (typeof window !== 'undefined') form.set('page', window.location.href);
-      form.set('message', fullMessage);
-      form.set('_honey', '');
+    const fullMessage = buildMessageWithRef(
+      { name, email, organization, program, format, audienceType, location, notes },
+      ref
+    );
 
-      let res: Response;
-      try {
-        res = await fetch(BOOKING_ENDPOINT, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            Accept: 'application/json'
-          },
-          body: form.toString()
-        });
-      } catch (networkErr) {
-        const raw = networkErr instanceof Error ? networkErr.message : '';
-        const lower = raw.toLowerCase();
-        let friendly = 'Could not reach the booking server. You can still send via the buttons below.';
-        if (lower.includes('failed to fetch') || lower.includes('networkerror') || lower.includes('network request failed')) {
-          friendly = 'It looks like you are offline or your browser blocked the request. Use WhatsApp or Email below to send your inquiry directly.';
-        } else if (lower.includes('timeout') || lower.includes('timed out')) {
-          friendly = 'The server took too long to respond. Use WhatsApp or Email below to send your inquiry directly.';
-        } else if (lower.includes('cors') || lower.includes('access-control')) {
-          friendly = 'Your browser blocked the request (CORS). Use WhatsApp or Email below — they always work.';
-        }
-        throw new Error(friendly);
-      }
+    const result = await submitForm({
+      _subject: `[CS Academy] New inquiry — ${program} (ref ${ref})`,
+      name,
+      email,
+      organization,
+      program,
+      format,
+      audienceType,
+      location,
+      notes,
+      reference: ref,
+      submittedAt: new Date().toISOString(),
+      page: typeof window !== 'undefined' ? window.location.href : '',
+      message: fullMessage,
+      _honey: ''
+    });
 
-      let data: { success?: string | boolean; message?: string } = {};
-      try {
-        const text = await res.text();
-        data = text ? JSON.parse(text) : {};
-      } catch {
-        data = {};
-      }
-
-      const okFlag = data.success === true || data.success === 'true';
-      if (!res.ok || !okFlag) {
-        const msg = (data.message || '').toLowerCase();
-        if (msg.includes('activation')) {
-          setSubmitError(
-            'Form activation required for this site. formsubmit.co has emailed support@cyberswahili.co.tz a one-time activation link. CS Academy must click it once to enable this origin, and your message will deliver automatically after that.'
-          );
-          setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, needsActivation: true });
-          return { ok: false, ref, needsActivation: true };
-        }
-        throw new Error(data.message || `Server returned status ${res.status}. Please try one of the buttons below.`);
-      }
-
+    if (result.ok) {
       setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: true });
       setDispatchStep('dispatched');
-      return { ok: true, ref };
-    } catch (err) {
-      const message = err instanceof Error
-        ? err.message
-        : 'Could not reach the server. Use WhatsApp or Email below.';
-      setSubmitError(message);
-      setDispatchStep('failed');
-      setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, failed: true, errorMessage: message });
-      return { ok: false, ref, failed: true, errorMessage: message };
-    } finally {
       setIsSubmitting(false);
+      return { ok: true, ref };
     }
+
+    if (result.needsActivation) {
+      setSubmitError(
+        'Form activation required for this site. formsubmit.co has emailed support@cyberswahili.co.tz a one-time activation link. CS Academy must click it once to enable this origin, and your message will deliver automatically after that.'
+      );
+      setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, needsActivation: true });
+      setDispatchStep('idle');
+      setIsSubmitting(false);
+      return { ok: false, ref, needsActivation: true };
+    }
+
+    const message = result.errorMessage || 'Could not reach the server. Use WhatsApp or Email below.';
+    setSubmitError(message);
+    setDispatchStep('failed');
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, failed: true, errorMessage: message });
+    setIsSubmitting(false);
+    return { ok: false, ref, failed: true, errorMessage: message };
   };
 
   const handleWhatsAppSend = async () => {
@@ -525,6 +481,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-label={'Book Training'}
+        tabIndex={-1}
       >
         {/* Mobile drag handle */}
         <div className="sm:hidden flex justify-center pt-2.5 pb-1" aria-hidden="true">
@@ -841,7 +798,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              placeholder="e.g. Training 25 team members on prompt engineering…"
+              placeholder="For teams: team size, skills gap, location, and target timing. For individuals: what you want to learn."
               className={`w-full px-3.5 sm:px-4 py-2.5 border rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-2 bg-[var(--bk-input-bg)] text-[var(--bk-input-text)] placeholder:text-[var(--bk-input-placeholder)] resize-none ${inputBaseClass('idle', theme)}`}
             />
           </div>
@@ -1389,7 +1346,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           </span>
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck className="w-3 h-3" />
-            1,200+ graduates
+            Practical training for East African learners and teams
           </span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">

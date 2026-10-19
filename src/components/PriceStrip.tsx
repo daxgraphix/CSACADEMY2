@@ -1,26 +1,36 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MessageCircle, Wallet, ShieldCheck, ArrowRight, Smartphone, Minimize2, Maximize2, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import type { Currency } from '../data/translations';
+import { pricingPlansData } from '../data/pricing';
 
 type Variant = 'inline' | 'sticky-mobile';
 
 interface PriceStripProps {
   openBookingModal: () => void;
   variant?: Variant;
-  onSeeFullPricing?: () => void;
 }
 
+/**
+ * The headline price shown in the strip is the live cohort plan (the plan the
+ * academy actively promotes). It is read from `pricingPlansData` so the strip
+ * can never drift away from the published pricing page.
+ */
+const FEATURED_PLAN_ID = 'zoom-live-cohort';
+
+const FEATURED_PLAN =
+  pricingPlansData.find((plan) => plan.id === FEATURED_PLAN_ID) ?? pricingPlansData[0];
+
 const PRICE_PER_MONTH: Record<Currency, { value: string; suffix: string; symbol: string }> = {
-  TSH: { value: '20,000', suffix: 'Tsh', symbol: 'TZS' },
-  KES: { value: '1,500', suffix: 'KSh', symbol: 'KES' },
-  USD: { value: '7', suffix: 'USD', symbol: 'USD' }
+  TSH: { value: FEATURED_PLAN.priceTsh, suffix: 'Tsh', symbol: 'TZS' },
+  KES: { value: FEATURED_PLAN.priceKes, suffix: 'KSh', symbol: 'KES' },
+  USD: { value: FEATURED_PLAN.priceUsd, suffix: 'USD', symbol: 'USD' }
 };
 
-export const PriceStrip: React.FC<PriceStripProps> = ({
+export const PriceStrip: React.FC<PriceStripProps> = React.memo(({
   openBookingModal,
-  variant = 'inline',
-  onSeeFullPricing
+  variant = 'inline'
 }) => {
   const { theme, currency, setCurrency } = useApp();
   const price = PRICE_PER_MONTH[currency];
@@ -39,6 +49,13 @@ export const PriceStrip: React.FC<PriceStripProps> = ({
       }`}
     >
       <span className="inline-flex items-baseline gap-1.5 font-medium">
+        <span
+          className={`hidden sm:inline text-[10px] font-bold uppercase tracking-wider ${
+            theme === 'dark' ? 'text-neutral-500' : 'text-neutral-500'
+          }`}
+        >
+          Live cohort
+        </span>
         <span className="text-xl font-extrabold tracking-tight" style={{ color: 'var(--bk-title-color)' }}>
           {price.symbol} {price.value}
         </span>
@@ -91,23 +108,18 @@ export const PriceStrip: React.FC<PriceStripProps> = ({
         <ArrowRight className="w-3.5 h-3.5" />
       </button>
 
-      {onSeeFullPricing && (
-        <>
-          <span className="opacity-40">·</span>
-          <button
-            type="button"
-            onClick={onSeeFullPricing}
-            className="inline-flex items-center gap-1.5 font-extrabold tracking-wider uppercase text-xs hover:underline"
-            style={{ color: 'var(--bk-title-color)' }}
-          >
-            See all plans
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </>
-      )}
+      <span className="opacity-40">·</span>
+      <Link
+        to="/pricing"
+        className="inline-flex items-center gap-1.5 font-extrabold tracking-wider uppercase text-xs hover:underline"
+        style={{ color: 'var(--bk-title-color)' }}
+      >
+        See all plans
+        <ArrowRight className="w-3.5 h-3.5" />
+      </Link>
     </div>
   );
-};
+});
 
 const STORAGE_KEY = 'cs_pricestrip_minimized_v1';
 
@@ -150,7 +162,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
         aria-label="Pricing summary (minimized)"
       >
         <span className="text-[11px] font-extrabold uppercase tracking-wider">
-          TZS {price.value}
+          {price.symbol} {price.value}
         </span>
         <button
           type="button"
@@ -198,7 +210,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
                 isDark ? 'text-neutral-500' : 'text-neutral-600'
               }`}
             >
-              From
+              Live cohort
             </span>
             <span
               className={`text-sm font-black tracking-tight ${

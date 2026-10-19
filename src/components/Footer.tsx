@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PageRoute } from '../types';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
+import { submitForm } from '../utils/booking';
+import { footerColumns, legalNav } from '../data/navigation';
+import { navHref } from '../utils/navigation';
 import {
   Linkedin,
   Youtube,
@@ -13,62 +17,29 @@ import {
   ShieldCheck,
   Bell,
   MapPin,
+  Phone,
   ArrowUpRight
 } from 'lucide-react';
 
 interface FooterProps {
-  setCurrentRoute: (route: PageRoute) => void;
+  currentRoute?: PageRoute;
   openBookingModal: () => void;
 }
-
-const footerNav: Array<{ title: string; items: Array<{ label: string; route?: PageRoute; action?: 'book'; highlight?: boolean; accent?: 'red' | 'green' }> }> = [
-  {
-    title: 'Programs',
-    items: [
-      { label: 'AI & Vibe Coding', route: 'programs/ai' },
-      { label: 'Cybersecurity', route: 'programs/cybersecurity' },
-      { label: 'Digital Skills', route: 'programs/digital-skills' },
-      { label: 'All Curricula', route: 'programs', highlight: true },
-    ],
-  },
-  {
-    title: 'Delivery',
-    items: [
-      { label: '6 Delivery Formats', route: 'learning-formats' },
-      { label: 'Pricing & Plans', route: 'pricing', accent: 'green' },
-      { label: 'WhatsApp Micro-Course', route: 'learning-formats' },
-      { label: 'Platform Features', route: 'features' },
-    ],
-  },
-  {
-    title: 'Organizations',
-    items: [
-      { label: 'Corporate Training', route: 'for-organizations' },
-      { label: 'University Programs', route: 'for-organizations' },
-      { label: 'NGOs & Government', route: 'for-organizations' },
-      { label: 'Request Proposal', action: 'book' },
-    ],
-  },
-  {
-    title: 'Company',
-    items: [
-      { label: 'About CS Academy', route: 'about' },
-      { label: 'Free Resources', route: 'resources' },
-      { label: 'Blog & Articles', route: 'blog' },
-      { label: 'Contact & Book', route: 'contact' },
-    ],
-  },
-];
 
 const socialLinks = [
   { href: siteConfig.socialLinks.youtube, label: 'YouTube', Icon: Youtube, hover: 'hover:text-[#FF0000]' },
   { href: siteConfig.socialLinks.linkedin, label: 'LinkedIn', Icon: Linkedin, hover: 'hover:text-[#0A66C2]' },
-  { href: siteConfig.socialLinks.whatsapp, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-emerald-500' },
-  { href: `mailto:${siteConfig.email}`, label: 'Email', Icon: Mail, hover: 'hover:text-[var(--accent-red)]' },
+  { href: `https://wa.me/${siteConfig.whatsapp}`, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-emerald-500' },
+  { href: `mailto:${siteConfig.email}`, label: 'Email', Icon: Mail, hover: 'hover:text-[var(--accent-red)]', internal: true }
+];
+
+const officeLocations = [
+  { city: 'Dar es Salaam', country: 'Tanzania' },
+  { city: 'Nairobi', country: 'Kenya' }
 ];
 
 export const Footer: React.FC<FooterProps> = ({
-  setCurrentRoute,
+  currentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -77,36 +48,44 @@ export const Footer: React.FC<FooterProps> = ({
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [emailError, setEmailError] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const contentRef = useReveal<HTMLDivElement>();
-
-  const navigate = (route: PageRoute) => {
-    setCurrentRoute(route);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleItemClick = (item: { route?: PageRoute; action?: 'book' }) => {
-    if (item.action === 'book') {
-      openBookingModal();
-    } else if (item.route) {
-      navigate(item.route);
-    }
-  };
 
   const emailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value.trim());
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!emailValid(email)) {
       setEmailError('Please enter a valid email address.');
       return;
     }
     setEmailError('');
+    setSubmitError('');
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
+
+    const topicLabel = topicOptions.find((opt) => opt.id === interest)?.label ?? 'All Updates';
+    const result = await submitForm({
+      _subject: `[CS Academy Dispatch] Newsletter signup — ${email}`,
+      email: email.trim(),
+      name: email.trim(),
+      interest: topicLabel,
+      page: typeof window !== 'undefined' ? window.location.href : '',
+      message: `Newsletter signup request.\n\nEmail: ${email.trim()}\nTopic: ${topicLabel}\nSigned up: ${new Date().toISOString()}`,
+      _honey: ''
+    });
+
+    setIsLoading(false);
+
+    if (result.ok) {
       setIsSubscribed(true);
       setEmail('');
-    }, 600);
+      return;
+    }
+
+    setSubmitError(
+      result.errorMessage ||
+        'We could not complete your signup just now. Please try again, or email us directly.'
+    );
   };
 
   const topicOptions = [
@@ -115,6 +94,17 @@ export const Footer: React.FC<FooterProps> = ({
     { id: 'cybersecurity', label: 'Cybersecurity' },
     { id: 'web', label: 'Web & Digital' },
   ] as const;
+
+  const badgeClasses = (tone: string | undefined, isDark: boolean) => {
+    if (tone === 'emerald') {
+      return isDark
+        ? 'bg-emerald-950 text-emerald-300 border-emerald-800/60'
+        : 'bg-emerald-50 text-emerald-700 border-emerald-200';
+    }
+    return isDark
+      ? 'bg-red-950 text-[var(--accent-red-strong)] border-red-800/60'
+      : 'bg-red-50 text-[var(--accent-red-hover)] border-red-200';
+  };
 
   return (
     <footer
@@ -165,12 +155,14 @@ export const Footer: React.FC<FooterProps> = ({
                     </div>
                     <div>
                       <div className={`text-sm font-bold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-800'}`}>
-                        Successfully Subscribed!
+                        You’re on the list
                       </div>
                       <p className={`mt-1 text-xs ${theme === 'dark' ? 'text-neutral-300' : 'text-emerald-900'}`}>
-                        Welcome aboard. Watch your inbox for the next tech dispatch and free masterclass alert.
+                        Your request reached CS Academy. Watch your inbox for the next tech dispatch
+                        and free masterclass alert.
                       </p>
                       <button
+                        type="button"
                         onClick={() => setIsSubscribed(false)}
                         className="mt-3 text-[11px] font-bold text-[var(--accent-red-strong)] hover:underline"
                       >
@@ -183,16 +175,20 @@ export const Footer: React.FC<FooterProps> = ({
                     <div className="flex flex-col sm:flex-row gap-2.5">
                       <div className="relative min-w-0 flex-1">
                         <Mail className={`absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 ${theme === 'dark' ? 'text-neutral-500' : 'text-neutral-700'}`} />
+                        <label htmlFor="footer-newsletter-email" className="sr-only">
+                          Email address for the CS Academy Dispatch newsletter
+                        </label>
                         <input
                           id="footer-newsletter-email"
                           type="email"
                           required
                           value={email}
-                          onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); }}
-                          aria-invalid={!!emailError}
+                          onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(''); if (submitError) setSubmitError(''); }}
+                          aria-invalid={!!(emailError || submitError)}
+                          aria-describedby={emailError ? 'footer-newsletter-error' : submitError ? 'footer-newsletter-submit-error' : undefined}
                           placeholder="Enter your email address..."
                           className={`w-full rounded-full border pl-10 pr-4 py-3.5 text-xs focus:outline-none focus:border-[var(--accent-red)] focus:ring-4 focus:ring-[var(--accent-red-subtle)] transition-all ${
-                            emailError
+                            emailError || submitError
                               ? 'border-red-500'
                               : theme === 'dark'
                                 ? 'bg-[var(--bg-primary)] border-white/10 text-white placeholder-neutral-500'
@@ -213,14 +209,20 @@ export const Footer: React.FC<FooterProps> = ({
                         ) : (
                           <>
                             <span>Subscribe Free</span>
-                            <Send className="w-3.5 h-3.5" />
+                            <Send className="w-3.5 w-3.5" />
                           </>
                         )}
                       </button>
                     </div>
 
                     {emailError && (
-                      <p className="text-[10px] font-semibold text-red-500 pl-2">{emailError}</p>
+                      <p id="footer-newsletter-error" role="alert" className="text-[10px] font-semibold text-red-500 pl-2">{emailError}</p>
+                    )}
+
+                    {submitError && (
+                      <p id="footer-newsletter-submit-error" role="alert" className="text-[10px] font-semibold text-red-500 pl-2">
+                        {submitError}
+                      </p>
                     )}
 
                     <div className="flex flex-wrap items-center gap-1.5 text-[10px]">
@@ -234,6 +236,7 @@ export const Footer: React.FC<FooterProps> = ({
                             type="button"
                             key={opt.id}
                             onClick={() => setInterest(opt.id)}
+                            aria-pressed={active}
                             className={`rounded-full border px-2.5 py-1 font-bold uppercase tracking-wider transition-all duration-150 ${
                               active
                                 ? 'border-[var(--accent-red)] bg-[var(--accent-red)] text-white shadow-sm'
@@ -250,7 +253,7 @@ export const Footer: React.FC<FooterProps> = ({
 
                     <div className={`flex items-center gap-1.5 text-[10px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                       <ShieldCheck className="h-3 w-3 text-[var(--accent-red-strong)]" />
-                      <span>Zero spam. Unsubscribe with 1-click at any time.</span>
+                      <span>One request, no spam. Reply to any dispatch to opt out.</span>
                     </div>
                   </form>
                 )}
@@ -263,8 +266,8 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-2 md:grid-cols-12 gap-10 lg:gap-12 pb-12">
           {/* Brand Column (4 cols) */}
           <div className="col-span-2 md:col-span-4 space-y-5">
-            <button
-              onClick={() => navigate('home')}
+            <Link
+              to="/"
               className="flex items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1 -ml-1"
             >
               <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-[var(--accent-red)] to-[var(--bg-card)] p-[1.5px] shadow-[0_12px_26px_rgba(255,59,48,0.3)] group-hover:scale-105 transition-transform">
@@ -280,7 +283,7 @@ export const Footer: React.FC<FooterProps> = ({
                   Tech Education
                 </p>
               </div>
-            </button>
+            </Link>
 
             <p className={`text-xs leading-relaxed max-w-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
               Practical training in Artificial Intelligence, Cybersecurity, and Digital Skills across East and Central Africa.
@@ -298,6 +301,15 @@ export const Footer: React.FC<FooterProps> = ({
                 <span className="truncate">{siteConfig.email}</span>
               </a>
               <a
+                href={`tel:${siteConfig.phone}`}
+                className="flex items-center gap-2.5 group hover:text-[var(--accent-red-strong)] transition-colors"
+              >
+                <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${theme === 'dark' ? 'bg-white/5' : 'bg-red-50'}`}>
+                  <Phone className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" />
+                </span>
+                <span>{siteConfig.phoneDisplay}</span>
+              </a>
+              <a
                 href={`https://wa.me/${siteConfig.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -306,24 +318,23 @@ export const Footer: React.FC<FooterProps> = ({
                 <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${theme === 'dark' ? 'bg-white/5' : 'bg-emerald-50'}`}>
                   <MessageCircle className="h-3.5 w-3.5 text-emerald-500" />
                 </span>
-                <span>{siteConfig.whatsappDisplay}</span>
+                <span>WhatsApp {siteConfig.whatsappDisplay}</span>
               </a>
               <div className={`flex items-center gap-2.5 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                 <span className={`flex h-7 w-7 items-center justify-center rounded-lg ${theme === 'dark' ? 'bg-white/5' : 'bg-neutral-100'}`}>
                   <MapPin className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" />
                 </span>
-                <span>East Africa Hub</span>
+                <span>{officeLocations.map((o) => o.city).join(' · ')}</span>
               </div>
             </div>
 
             {/* Social icons */}
             <div className="flex items-center gap-2 pt-1">
-              {socialLinks.map(({ href, label, Icon, hover }) => (
+              {socialLinks.map(({ href, label, Icon, hover, internal }) => (
                 <a
                   key={label}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(internal ? {} : { target: '_blank', rel: 'noopener noreferrer' })}
                   aria-label={label}
                   className={`flex h-9 w-9 items-center justify-center rounded-full border transition-all duration-200 hover:-translate-y-0.5 hover:scale-110 ${theme === 'dark' ? 'border-white/10 bg-white/5 text-neutral-300 hover:text-white' : 'border-neutral-200 bg-white text-neutral-700 hover:shadow-md'} ${hover}`}
                 >
@@ -334,40 +345,43 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Nav Columns (8 cols) */}
-          <div className="col-span-2 md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-            {footerNav.map((col) => (
-              <div key={col.title} className="space-y-3.5">
+          <nav aria-label="Footer" className="col-span-2 md:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            {footerColumns.map((col) => (
+              <div key={col.id}>
                 <h4 className={`text-[10px] font-black uppercase tracking-[0.2em] ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
                   {col.title}
                 </h4>
-                <ul className="space-y-2.5 text-xs">
+                <ul className="space-y-2.5 text-xs mt-3.5">
                   {col.items.map((item) => {
-                    const accentColor =
-                      item.accent === 'green'
+                    const isCurrent = !!currentRoute && currentRoute === item.route && !item.hash;
+                    const accentColor = isCurrent
+                      ? 'text-[var(--accent-red-strong)] font-bold'
+                      : item.badgeTone === 'emerald'
                         ? 'text-emerald-500 hover:text-emerald-400'
-                        : item.highlight
+                        : item.badgeTone === 'red'
                           ? 'text-[var(--accent-red-strong)] hover:text-[var(--accent-red-hover)] font-bold'
                           : theme === 'dark'
                             ? 'text-neutral-400 hover:text-white'
                             : 'text-neutral-700 hover:text-neutral-900';
                     return (
-                      <li key={item.label}>
-                        <button
-                          onClick={() => handleItemClick(item)}
-                          className={`hover-underline group inline-flex items-center gap-1 text-left transition-colors duration-150 ${accentColor}`}
+                      <li key={item.id}>
+                        <Link
+                          to={navHref(item)}
+                          aria-current={isCurrent ? 'page' : undefined}
+                          className={`hover:underline group inline-flex items-center gap-1 text-left transition-colors duration-150 ${accentColor}`}
                         >
                           <span>{item.label}</span>
-                          {item.highlight && (
+                          {item.badgeTone === 'red' && !isCurrent && (
                             <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                           )}
-                        </button>
+                        </Link>
                       </li>
                     );
                   })}
                 </ul>
               </div>
             ))}
-          </div>
+          </nav>
         </div>
 
         {/* ==================== Pillars Strip ==================== */}
@@ -391,14 +405,12 @@ export const Footer: React.FC<FooterProps> = ({
             <span>All rights reserved.</span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
-            <span>Tanzania</span>
-            <span className="opacity-30">|</span>
-            <span>Kenya</span>
-            <span className="opacity-30">|</span>
-            <span>Uganda</span>
-            <span className="opacity-30">|</span>
-            <span>Rwanda</span>
-            <span className="opacity-30">|</span>
+            {officeLocations.map((o) => (
+              <React.Fragment key={o.city}>
+                <span>{o.city}</span>
+                <span className="opacity-30">|</span>
+              </React.Fragment>
+            ))}
             <span>East Africa</span>
           </div>
         </div>
@@ -406,11 +418,26 @@ export const Footer: React.FC<FooterProps> = ({
         <div className={`flex flex-wrap items-center justify-center gap-x-4 gap-y-2 border-t pt-5 text-[10px] font-bold uppercase tracking-[0.14em] ${
           theme === 'dark' ? 'border-white/10 text-neutral-500' : 'border-neutral-200 text-neutral-600'
         }`}>
-          <button onClick={() => navigate('privacy')} className="transition-colors hover:text-[var(--accent-red-strong)]">Privacy Policy</button>
+          {legalNav.map((link, index) => (
+            <React.Fragment key={link.id}>
+              {index > 0 && <span className="opacity-30">|</span>}
+              <Link to={navHref(link)} className="transition-colors hover:text-[var(--accent-red-strong)]">
+                {link.label}
+              </Link>
+            </React.Fragment>
+          ))}
           <span className="opacity-30">|</span>
-          <button onClick={() => navigate('terms')} className="transition-colors hover:text-[var(--accent-red-strong)]">Terms &amp; Conditions</button>
+          <Link to="/contact" className="transition-colors hover:text-[var(--accent-red-strong)]">
+            Contact Support
+          </Link>
           <span className="opacity-30">|</span>
-          <button onClick={() => navigate('contact')} className="transition-colors hover:text-[var(--accent-red-strong)]">Contact Support</button>
+          <button
+            type="button"
+            onClick={openBookingModal}
+            className="transition-colors hover:text-[var(--accent-red-strong)]"
+          >
+            Book a Session
+          </button>
         </div>
       </div>
     </footer>

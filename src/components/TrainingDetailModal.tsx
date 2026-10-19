@@ -1,4 +1,5 @@
 import React from 'react';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { TrainingProgram } from '../types';
 import { useApp } from '../context/AppContext';
 import {
@@ -22,15 +23,17 @@ export const TrainingDetailModal: React.FC<TrainingDetailModalProps> = ({
   onClose,
   openBookingModal
 }) => {
-  if (!training) return null;
   const { theme } = useApp();
+  useModalAccessibility(!!training, onClose);
+  if (!training) return null;
 
   return (
     <div className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-colors duration-300 ${
       theme === 'dark' ? 'glass-surface' : 'bg-black/40'
-    } animate-in fade-in duration-200`}>
-      <div 
-        className={`border rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
+    } animate-in fade-in duration-200`}
+      role="dialog" aria-modal="true" aria-label={training.title} tabIndex={-1}
+    >
+      <div className={`border rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}

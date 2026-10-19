@@ -8,6 +8,7 @@ import {
 import { trainingPackagesData } from '../data/training';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { B2BLeadForm } from '../components/B2BLeadForm';
 import {
   Building2,
   ShieldCheck,
@@ -92,46 +93,109 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             Equip your entire workforce, academic faculty, or institutional leadership with tailored AI capability and cyber resilience.
           </p>
           <div className="pt-2">
-            <button
-              onClick={() => openBookingModal({ program: 'Institutional / Corporate Workforce Proposal' })}
+            <a
+              href="#proposal"
               className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
             >
               <span>REQUEST INSTITUTIONAL PROPOSAL</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
+          </div>
+          <div className={`mx-auto grid max-w-4xl gap-3 pt-4 text-left sm:grid-cols-3 ${body}`}>
+            <p className="rounded-xl border border-[var(--border-color)] p-4 text-xs leading-relaxed"><strong className="block text-sm">1. Share the need</strong>Tell us your team size, location, skills gap, and target timing in the inquiry.</p>
+            <p className="rounded-xl border border-[var(--border-color)] p-4 text-xs leading-relaxed"><strong className="block text-sm">2. Scope the training</strong>We’ll use your goals and preferred format to shape a relevant curriculum and delivery plan.</p>
+            <p className="rounded-xl border border-[var(--border-color)] p-4 text-xs leading-relaxed"><strong className="block text-sm">3. Review a proposal</strong>Get a tailored outline to discuss with your team before making a commitment.</p>
           </div>
         </div>
 
-        {/* Corporate Core Pillars */}
+        {/* Lead capture — scoped proposal request */}
+        <div id="proposal" className="grid gap-8 lg:grid-cols-2 lg:items-start scroll-mt-28">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${badge}`}>
+                <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                Proposals within 1 business day
+              </span>
+              <h2 className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${heading}`}>
+                Every proposal starts with <span className="text-[var(--accent-red-strong)]">your numbers</span>
+              </h2>
+              <p className={`text-sm leading-relaxed ${body}`}>
+                Tell us how many people need training and we will scope the curriculum, delivery format,
+                and a realistic schedule with a cost comparison against the cost of not training them.
+              </p>
+            </div>
+
+            <ul className="space-y-3">
+              {[
+                { title: 'Needs assessment snapshot', desc: 'Skill-gap analysis against your actual job roles, not a generic catalogue.' },
+                { title: 'Bespoke curriculum outline', desc: 'Modules mapped to your sector, with tools your team already uses.' },
+                { title: 'Delivery plan & format', desc: 'On-site, hybrid, or cohort-based scheduled around your operating hours.' },
+                { title: 'Cost-to-benefit summary', desc: 'Hours recovered, error reduction, and risk avoided, in one page.' }
+              ].map((item) => (
+                <li key={item.title} className="flex gap-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" aria-hidden="true" />
+                  <div>
+                    <p className={`text-sm font-bold ${heading}`}>{item.title}</p>
+                    <p className={`mt-0.5 text-xs leading-relaxed ${subtle}`}>{item.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className={`rounded-2xl border p-5 ${cardInnerBg}`}>
+              <div className="flex items-center gap-2 mb-3">
+                <Layers className="w-4 h-4 text-[var(--accent-red-strong)]" aria-hidden="true" />
+                <p className={`text-xs font-extrabold uppercase tracking-wider ${heading}`}>Where we deliver</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {['Dar es Salaam', 'Nairobi', 'Arusha', 'Mwanza', 'Dodoma', 'Remote across East Africa'].map((city) => (
+                  <span key={city} className={`rounded-full border px-3 py-1 text-[11px] font-semibold ${divider} ${subtle}`}>
+                    {city}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <B2BLeadForm />
+        </div>
+
+         {/* Corporate Core Pillars */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {corporateOfferingsData.map((item, idx) => (
             <div
               key={idx}
-              className={`p-6 rounded-2xl border space-y-4 flex flex-col justify-between shadow-xl ${cardBg}`}
+              className={`group relative p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col justify-between ${cardBg} ${isDark ? 'hover:border-[var(--accent-red)]/50' : 'hover:border-[var(--accent-red)]/30'}`}
             >
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
                   {item.badge}
                 </span>
-                <h3 className={`text-lg font-bold ${heading}`}>{item.title}</h3>
-                <p className={`text-xs leading-relaxed ${body}`}>{item.description}</p>
+                <h3 className={`text-lg font-bold transition-colors group-hover:text-[var(--accent-red-strong)] ${heading}`}>{item.title}</h3>
+                <p className={`text-xs leading-relaxed transition-colors group-hover:${isDark ? 'text-neutral-200' : 'text-neutral-900'}`}>{item.description}</p>
 
                 <div className="space-y-1.5 pt-2">
                   {item.points.map((pt, pIdx) => (
-                    <div key={pIdx} className={`flex items-center gap-2 text-xs ${body}`}>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0" />
+                    <div key={pIdx} className={`flex items-center gap-2 text-xs transition-colors group-hover:${isDark ? 'text-neutral-200' : 'text-neutral-900'} ${body}`}>
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 transition-transform group-hover:scale-110" />
                       <span>{pt}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className={`pt-4 border-t ${divider}`}>
+              <div className={`pt-4 border-t transition-colors duration-300 group-hover:${isDark ? 'border-[var(--accent-red)]/30' : 'border-[var(--accent-red)]/50'} ${divider}`}>
                 <button
                   onClick={() => openBookingModal({ program: item.title, organizationType: item.badge })}
-                  className={`w-full py-2.5 px-3 text-xs font-bold rounded-xl transition-colors uppercase tracking-wider ${ghostBtn}`}
+                  className="group relative w-full py-2.5 px-3 text-xs font-bold rounded-xl transition-all duration-300 hover:bg-[var(--accent-red)] hover:text-white ${ghostBtn}"
                 >
-                  Inquire This Track
+                  <span className="relative">
+                    Inquire This Track
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-[var(--accent-red)]/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </span>
                 </button>
               </div>
             </div>
@@ -139,7 +203,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         </div>
 
         {/* Industry-Specific Tailoring */}
-        <div className="space-y-8">
+        <div id="sector-solutions" className="space-y-8 scroll-mt-28">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${heading}`}>
               Solutions by Sector &amp; Industry
@@ -188,7 +252,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         </div>
 
         {/* Training Packages */}
-        <div className="space-y-8">
+        <div id="packages" className="space-y-8 scroll-mt-28">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${heading}`}>
               Corporate &amp; Institutional Package Tiers
@@ -240,7 +304,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         </div>
 
         {/* 5-Step How We Work */}
-        <div className="space-y-8">
+        <div id="lifecycle" className="space-y-8 scroll-mt-28">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <h2 className={`text-2xl sm:text-3xl font-extrabold ${heading}`}>
               Our 5-Step Delivery Lifecycle
@@ -272,12 +336,19 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <p className={`text-xs sm:text-sm max-w-xl mx-auto ${body}`}>
             Contact us for a formal training proposal, curriculum syllabus, and customized delivery schedule.
           </p>
-          <div className="pt-2">
-            <button
-              onClick={() => openBookingModal({ program: 'Institutional Consultation & Customized Training Proposal' })}
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg"
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a
+              href="#proposal"
+              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
             >
-              Schedule Institutional Consultation
+              <span>GET A SCOPED PROPOSAL</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => openBookingModal({ program: 'Custom Institutional Curriculum', organizationType: 'Company / Enterprise Team' })}
+              className="px-8 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all active:scale-[0.98] border ${ghostBtn}"
+            >
+              <span>BOOK A CALL</span>
             </button>
           </div>
         </div>

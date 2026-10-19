@@ -1,8 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from '../types';
+import { ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from '../types';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { Hero } from '../components/Hero';
+import { FeaturedOffer } from '../components/FeaturedOffer';
 import { AudienceStrip } from '../components/AudienceStrip';
 import { ProgramsOverview } from '../components/ProgramsOverview';
 import { SmartFramework } from '../components/SmartFramework';
@@ -15,6 +16,7 @@ import { TrainingPackages } from '../components/TrainingPackages';
 import { TrainingProcess } from '../components/TrainingProcess';
 import { WhyCSAcademy } from '../components/WhyCSAcademy';
 import { SocialProof } from '../components/SocialProof';
+import { TestimonialsSection } from '../components/TestimonialsSection';
 import { ResourcesSection } from '../components/ResourcesSection';
 import { BlogSection } from '../components/BlogSection';
 import { AboutSection } from '../components/AboutSection';
@@ -22,7 +24,6 @@ import { FAQSection } from '../components/FAQSection';
 import { ContactCTA } from '../components/ContactCTA';
 
 interface HomePageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string; format?: string; duration?: string; organizationType?: string }) => void;
   openProgramModal: (program: ProgramPillar) => void;
   openTrainingDetailModal: (training: TrainingProgram) => void;
@@ -31,7 +32,6 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
-  setCurrentRoute,
   openBookingModal,
   openProgramModal,
   openTrainingDetailModal,
@@ -42,10 +42,10 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <main className="w-full">
       <Helmet>
-        <title>CS Academy</title>
+        <title>Full Academy Overview | CS Academy</title>
         <meta name="description" content="Build career-ready AI, cybersecurity, web development, and digital skills through practical projects, flexible learning, local-language support, and M-Pesa payments." />
         <meta name="keywords" content="AI training Tanzania, cybersecurity courses Kenya, web development East Africa, digital skills training, vibe coding Africa, AI education, M-Pesa payment, practical tech skills" />
-        <meta property="og:title" content="CS Academy" />
+        <meta property="og:title" content="Full Academy Overview | CS Academy" />
         <meta property="og:description" content="Build career-ready AI, cybersecurity, web development, and digital skills through practical projects, flexible learning, local-language support, and M-Pesa payments." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
@@ -54,17 +54,15 @@ export const HomePage: React.FC<HomePageProps> = ({
       </Helmet>
 
       {/* 1. Hero Section */}
-      <Hero 
-        setCurrentRoute={setCurrentRoute} 
-        openBookingModal={() => openBookingModal()} 
-      />
+      <Hero openBookingModal={() => openBookingModal()} />
+
+      <FeaturedOffer openBookingModal={openBookingModal} />
 
       {/* 2. Trust / Audience Strip */}
       <AudienceStrip />
 
       {/* 3. Core Programs Section (3 Major Pillars) */}
-      <ProgramsOverview 
-        setCurrentRoute={setCurrentRoute}
+      <ProgramsOverview
         openProgramModal={openProgramModal}
         openBookingModal={openBookingModal}
       />
@@ -79,13 +77,13 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       {/* 5b. DevPad Community Tile */}
-      <DevPadTile
-        setCurrentRoute={setCurrentRoute}
-        openBookingModal={() => openBookingModal({ program: 'DevPad Developer Community' })}
-      />
+      <DevPadTile openBookingModal={() => openBookingModal({ program: 'DevPad Developer Community' })} />
 
       {/* 6. Social Proof / Decision Confidence */}
-      <SocialProof />
+      <SocialProof openBookingModal={openBookingModal} />
+
+      {/* 6b. Graduate Outcomes (credible local proof) */}
+      <TestimonialsSection />
 
       {/* 7. Platform Features (Everything You Need to Succeed) */}
       <PlatformFeaturesSection 

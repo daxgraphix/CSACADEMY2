@@ -159,7 +159,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
               suggestions={['AI safety', 'Phishing', 'M-Pesa', 'Prompting', 'Local language AI']}
               onSuggestionClick={(term) => setSearch(term)}
               title="No articles match your filters"
-              description="Try a different keyword, switch the category, or request a topic — we publish new essays every two weeks."
+              description="Try a different keyword, switch the category, or request a topic we publish new essays every two weeks."
             />
           ) : (
             filtered.map((post) => (

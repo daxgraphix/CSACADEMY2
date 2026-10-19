@@ -162,6 +162,12 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   <span>REQUEST PACKAGE DETAILS</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
+                <div className="mt-3 text-center">
+                  <div className="inline-flex items-baseline gap-1">
+                    <span className="text-base font-extrabold text-[var(--accent-red-strong)]">TZS 50,000</span>
+                    <span className="text-[10px] font-medium text-[var(--accent-red-strong)]">/ month</span>
+                  </div>
+                </div>
               </div>
 
             </div>

@@ -1,18 +1,16 @@
 import React, { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { PlatformFeaturesSection } from '../components/PlatformFeaturesSection';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
-import { PageRoute } from '../types';
 import { ArrowRight } from 'lucide-react';
 
 interface FeaturesPageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: (prefill?: { program?: string }) => void;
 }
 
 export const FeaturesPage: React.FC<FeaturesPageProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -55,15 +53,15 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
               Get started for free or upgrade to Premium for full course access, quizzes, certificates, and live sessions.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <button
-                onClick={() => setCurrentRoute('pricing')}
+              <Link
+                to="/pricing"
                 className="px-6 py-3 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all duration-200 hover:-translate-y-0.5"
               >
                 <span>View Pricing Plans</span>
                 <ArrowRight className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => setCurrentRoute('programs')}
+              </Link>
+              <Link
+                to="/programs"
                 className={`px-6 py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 flex items-center gap-2 ${
                   theme === 'dark'
                     ? 'text-neutral-300 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
@@ -71,7 +69,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
                 }`}
               >
                 <span>Browse All Courses</span>
-              </button>
+              </Link>
             </div>
           </div>
         </div>

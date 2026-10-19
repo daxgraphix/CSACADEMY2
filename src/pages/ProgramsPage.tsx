@@ -1,10 +1,12 @@
 import React, { useState, useMemo, Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PageRoute, ProgramPillar, TrainingProgram } from '../types';
+import { Link } from 'react-router-dom';
+import { ProgramPillar, TrainingProgram } from '../types';
 import { programsData } from '../data/programs';
 import { featuredTrainingData } from '../data/training';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { PageBreadcrumbs, SectionHeading } from '../components/LayoutPrimitives';
 import {
   ShieldCheck,
   Laptop,
@@ -17,7 +19,11 @@ import {
   BookOpen,
   Layers,
   Award,
-  Zap
+  Zap,
+  Sparkles,
+  Code2,
+  Palette,
+  X
 } from 'lucide-react';
 
 const ProgramCardSkeleton = () => (
@@ -63,13 +69,11 @@ const BlogCardSkeleton = () => (
 );
 
 interface ProgramsPageProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openProgramModal: (program: ProgramPillar) => void;
   openBookingModal: (prefill?: { program?: string; format?: string }) => void;
 }
 
 export const ProgramsPage: React.FC<ProgramsPageProps> = ({
-  setCurrentRoute,
   openProgramModal,
   openBookingModal
 }) => {
@@ -79,27 +83,22 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
 
   const categories = [
     { id: 'ALL', label: 'All Programs', icon: Layers },
-    { id: 'ai', label: 'AI Tracks', icon: Laptop },
+    { id: 'ai', label: 'AI Tracks', icon: Sparkles },
     { id: 'cybersecurity', label: 'Cybersecurity', icon: ShieldCheck },
     { id: 'digital-skills', label: 'Digital Skills', icon: Laptop },
-    { id: 'web-coding', label: 'Web & Coding', icon: Laptop },
-    { id: 'design-uiux', label: 'Design & UI/UX', icon: Laptop },
+    { id: 'web-coding', label: 'Web & Coding', icon: Code2 },
+    { id: 'design-uiux', label: 'Design & UI/UX', icon: Palette },
   ];
 
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'Sparkles':
-        return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
+        return <Sparkles className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       case 'ShieldCheck':
         return <ShieldCheck className="w-6 h-6 text-[var(--accent-red-strong)]" />;
       default:
         return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
     }
-  };
-
-  const navigateToPillar = (slug: string) => {
-    setCurrentRoute(`programs/${slug}` as PageRoute);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Filter Pillars
@@ -143,6 +142,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
   }, [selectedCategory, searchQuery]);
 
   const totalResultsCount = filteredPillars.length + filteredCourses.length;
+  const activeCategoryLabel = categories.find((c) => c.id === selectedCategory)?.label ?? 'All Programs';
 
   const canonical = useCanonicalUrl();
   return (
@@ -162,24 +162,25 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-neutral-50 text-neutral-900'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
-          <div className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full border text-xs font-mono font-bold uppercase tracking-wider ${
-            theme === 'dark' ? 'bg-red-950/60 border-red-900/60 text-[var(--accent-red-strong)]' : 'bg-red-50 border-red-200 text-[var(--accent-red-strong)]'
-          }`}>
-            <span>Comprehensive Curriculum Directory</span>
-          </div>
-          <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
-            theme === 'dark' ? 'text-white' : 'text-neutral-950'
-          }`}>
-            CS ACADEMY <span className="text-[var(--accent-red-strong)]">PROGRAMS</span>
-          </h1>
-          <p className={`text-base sm:text-lg leading-relaxed ${
-            theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
-          }`}>
-            Explore our comprehensive academies designed for practical skill mastery, ethical technology application, and career empowerment across Africa.
-          </p>
+          <PageBreadcrumbs
+            theme={theme}
+            items={[{ label: 'Home', route: '/' }, { label: 'Programs' }]}
+          />
+          <SectionHeading
+            theme={theme}
+            align="center"
+            as="h1"
+            eyebrow="Comprehensive Curriculum Directory"
+            title={
+              <>
+                CS Academy <span className="text-[var(--accent-red-strong)]">Programs</span>
+              </>
+            }
+            subtitle="Explore our comprehensive academies designed for practical skill mastery, ethical technology application, and career empowerment across Africa."
+          />
         </div>
 
         {/* SEARCH & FILTER BAR */}
@@ -206,10 +207,12 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
               />
               {searchQuery && (
                 <button
+                  type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-xs font-bold text-neutral-400 hover:text-[var(--accent-red-strong)] p-1"
+                  aria-label="Clear search"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-full text-xs font-bold text-neutral-400 hover:text-[var(--accent-red-strong)] hover:bg-black/5 transition-colors"
                 >
-                  -
+                  <X className="w-4 h-4" />
                 </button>
               )}
             </div>
@@ -240,6 +243,8 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                 <button
                   key={cat.id}
                   id={`program-filter-btn-${cat.id}`}
+                  type="button"
+                  aria-pressed={isSelected}
                   onClick={() => setSelectedCategory(cat.id)}
                   className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                     isSelected
@@ -257,18 +262,38 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
           </div>
 
           {/* Results Summary Bar */}
-          <div className="flex items-center justify-between text-xs pt-1 text-neutral-400">
-            <div>
+          <div
+            className="flex items-center justify-between gap-3 text-xs pt-1"
+            aria-live="polite"
+          >
+            <div className={theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}>
               {searchQuery ? (
                 <span>
-                  {`Showing results for "${searchQuery}": ${filteredPillars.length} academies & ${filteredCourses.length} modular courses`}
+                  {`Showing results for "${searchQuery}": ${filteredPillars.length} ${
+                    filteredPillars.length === 1 ? 'academy' : 'academies'
+                  } & ${filteredCourses.length} ${filteredCourses.length === 1 ? 'course' : 'courses'}`}
+                </span>
+              ) : selectedCategory !== 'ALL' ? (
+                <span>
+                  {`${activeCategoryLabel}: ${filteredPillars.length} ${
+                    filteredPillars.length === 1 ? 'academy' : 'academies'
+                  } & ${filteredCourses.length} ${filteredCourses.length === 1 ? 'course' : 'courses'}`}
                 </span>
               ) : (
                 <span>
-                  {`Displaying 3 comprehensive academies & specialized training courses`}
+                  {`Displaying ${filteredPillars.length} comprehensive ${
+                    filteredPillars.length === 1 ? 'academy' : 'academies'
+                  } & ${filteredCourses.length} specialized ${
+                    filteredCourses.length === 1 ? 'course' : 'courses'
+                  }`}
                 </span>
               )}
             </div>
+            {totalResultsCount > 0 && (
+              <span className="hidden sm:inline text-[10px] font-mono uppercase tracking-wider text-neutral-400">
+                {totalResultsCount} result{totalResultsCount === 1 ? '' : 's'}
+              </span>
+            )}
           </div>
         </div>
 
@@ -340,8 +365,8 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <button
-                      onClick={() => navigateToPillar(pillar.slug)}
+                    <Link
+                      to={`/programs/${pillar.slug}`}
                       className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-colors uppercase tracking-wider ${
                         theme === 'dark'
                           ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
@@ -349,7 +374,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                       }`}
                     >
                       View Academy Page
-                    </button>
+                    </Link>
                     <button
                       onClick={() => openBookingModal({ program: pillar.title })}
                       className="px-6 py-2.5 rounded-xl text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg transition-all"

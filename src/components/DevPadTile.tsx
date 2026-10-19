@@ -1,6 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { PageRoute } from '../types';
 import { siteConfig } from '../config/site';
 import {
   ArrowRight,
@@ -13,7 +13,6 @@ import {
 } from 'lucide-react';
 
 interface DevPadTileProps {
-  setCurrentRoute: (route: PageRoute) => void;
   openBookingModal: () => void;
 }
 
@@ -24,7 +23,6 @@ const highlights = [
 ];
 
 export const DevPadTile: React.FC<DevPadTileProps> = ({
-  setCurrentRoute,
   openBookingModal
 }) => {
   const { theme } = useApp();
@@ -115,15 +113,14 @@ export const DevPadTile: React.FC<DevPadTileProps> = ({
             </div>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => setCurrentRoute('devpad')}
+              <Link
+                to="/devpad"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[var(--accent-red)] text-white text-sm font-extrabold uppercase tracking-wider shadow-lg shadow-red-500/20 hover:bg-[var(--accent-red-hover)] hover:-translate-y-0.5 transition-all duration-200"
               >
                 <Rocket className="w-4 h-4" />
                 Launch DevPad
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </Link>
               <button
                 type="button"
                 onClick={openWhatsApp}

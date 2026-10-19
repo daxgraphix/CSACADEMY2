@@ -27,7 +27,6 @@ export interface Translations {
     bookTraining: string;
     exploreAcademy: string;
     tagline: string;
-    switchLang: string;
     switchTheme: string;
   };
   hero: {
@@ -148,7 +147,7 @@ export const translations: Translations = {
     aiDeepDive: "Artificial Intelligence & Prompt Engineering",
     cyberDeepDive: "Cybersecurity & Digital Trust",
     digitalDeepDive: "Digital Skills & Web Development",
-    allPrograms: "View All 30+ Modules",
+    allPrograms: "All Programs & Courses",
     smartFramework: "SMART Framework",
     formats: "Delivery Formats",
     organizations: "For Organizations",
@@ -160,7 +159,6 @@ export const translations: Translations = {
     bookTraining: "Enroll Now",
     exploreAcademy: "Explore Courses",
     tagline: "Empowering East Africa with Digital Skills",
-    switchLang: "Switch Language",
     switchTheme: "Toggle Theme"
   },
   hero: {
@@ -170,12 +168,12 @@ export const translations: Translations = {
     outcomeHighlight: "AI, cybersecurity & web development",
     outcomeTrailing: "with practical projects you can start from your phone.",
     primaryCta: "Get a free learning consultation",
-    proof1Value: "1,200+",
-    proof1Label: "Learners trained",
-    proof2Value: "8",
-    proof2Label: "Countries reached",
-    proof3Value: "4.9/5",
-    proof3Label: "Learner satisfaction",
+    proof1Value: "1–2 days",
+    proof1Label: "AI for Everyone intensive",
+    proof2Value: "Live",
+    proof2Label: "Instructor feedback",
+    proof3Value: "Mobile",
+    proof3Label: "Flexible access",
     trustLine: "Beginner-friendly, low-bandwidth learning with English tech terms and local-language support.",
     headlineMain: "BUILD SKILLS THAT CREATE",
     headlineHighlight: "BETTER OPPORTUNITIES",
@@ -183,15 +181,15 @@ export const translations: Translations = {
     ctaExplore: "Explore Learning Paths",
     ctaEnroll: "Join Live Cohort",
     ctaWatchTour: "Explore Platform Tour",
-    stat1Val: "1,200+",
-    stat1Label: "Learners trained",
-    stat2Val: "30+",
-    stat2Label: "Practical learning modules",
+    stat1Val: "1–2 days",
+    stat1Label: "AI for Everyone intensive",
+    stat2Val: "Live",
+    stat2Label: "Instructor-led cohort option",
     stat3Val: "EN + LOCAL",
     stat3Label: "Language support",
-    stat4Val: "4.9/5",
-    stat4Label: "Learner rating",
-    mobileMoneyNotice: "Instant Mobile Money Activation (M-Pesa, Tigo Pesa, Airtel Money & Card)"
+    stat4Val: "From TSh 50K",
+    stat4Label: "Live cohort plan per month",
+    mobileMoneyNotice: "Mobile-money options are available on selected plans; confirm details before enrollment."
   },
   common: {
     learnMore: "Learn More",
