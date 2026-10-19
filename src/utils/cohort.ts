@@ -62,6 +62,27 @@ function deadlineFor(start: Date): Date {
   return d;
 }
 
+function addDays(d: Date, days: number): Date {
+  const out = new Date(d);
+  out.setDate(out.getDate() + days);
+  return out;
+}
+
+/**
+ * The next cohort whose enrolment is still open.
+ *
+ * `nextMonday` can land on a cohort whose deadline has already passed (e.g.
+ * a Saturday after the Thursday deadline). In that case the schedule rolls
+ * to the following week automatically, so the countdown always points at a
+ * cohort you can still enrol in — never a dead "Enrolment closed" state.
+ */
+function nextEnrollableCohort(from: Date): Date {
+  const candidate = nextMonday(from);
+  return deadlineFor(candidate).getTime() > Date.now()
+    ? candidate
+    : nextMonday(addDays(candidate, 7));
+}
+
 function confirmedStart(): Date | null {
   const parsed = parseDate(adminStartRaw);
   return parsed && parsed.getTime() >= Date.now() ? parsed : null;
@@ -79,7 +100,7 @@ export function getCohortStart(): Date {
   if (confirmed && deadlineFor(confirmed).getTime() >= Date.now()) {
     return confirmed;
   }
-  return nextMonday(new Date());
+  return nextEnrollableCohort(new Date());
 }
 
 /** True when the admin has confirmed a specific start date. */

@@ -54,4 +54,31 @@ describe('admin-confirmed cohort', () => {
 
     vi.useRealTimers();
   });
+
+  it('always points at a cohort whose enrolment is still open', () => {
+    // The deadline for the current cohort has already passed — the site must
+    // roll forward instead of showing a dead "Enrolment closed" state.
+    vi.useFakeTimers({ now: new Date('2026-10-19T12:00:00Z').getTime() });
+    setNextCohortStart(undefined);
+
+    const start = getCohortStart();
+    expect(start.getDay()).toBe(1);
+    expect(getCohortEnrollmentDeadline().getTime()).toBeGreaterThan(Date.now());
+
+    vi.useRealTimers();
+  });
+
+  it('rolls forward week by week as the calendar advances', () => {
+    setNextCohortStart(undefined);
+
+    const week1 = getCohortStart().getTime();
+    // Advance a full week: the site must point at a later cohort, never backwards.
+    vi.useFakeTimers({ now: new Date(week1 + 7 * 24 * 60 * 60 * 1000).getTime() });
+    const week2 = getCohortStart();
+    expect(week2.getTime()).toBeGreaterThan(week1);
+    expect(week2.getDay()).toBe(1);
+    expect(getCohortEnrollmentDeadline().getTime()).toBeGreaterThan(Date.now());
+
+    vi.useRealTimers();
+  });
 });
