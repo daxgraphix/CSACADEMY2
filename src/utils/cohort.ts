@@ -1,21 +1,41 @@
 /**
  * Cohort & urgency engine.
  *
- * Every date is expressed in East Africa Time (UTC+03:00). The site must
- * ALWAYS show a real, ticking cohort date — never a placeholder — so that
- * visitors see genuine urgency even before the admin has confirmed the
- * exact start.
+ * The admin adds ONE thing — VITE_NEXT_COHORT_START_DATE (YYYY-MM-DD) in
+ * East Africa Time — and every derived value follows automatically:
+ *
+ *   cohortStart        = the confirmed date, or the next Monday (rolling)
+ *   enrollmentDeadline = cohortStart - 3 days
+ *   seatsLeft          = 0..24, seeded by the cohort week
+ *   countdown          = "2d 15h left" / "15h 30m left" / "45m left"
+ *
+ * When the enrollment deadline passes the schedule rolls forward to the
+ * next cohort on its own, so the site never shows a dead "Enrolment closed"
+ * state — it always points at the next thing the admin has to add.
  *
  * Priority:
- *   1. VITE_NEXT_COHORT_START_DATE (YYYY-MM-DD) — admin-confirmed cohort.
+ *   1. VITE_NEXT_COHORT_START_DATE — admin-confirmed cohort, used while
+ *      enrolment is still open.
  *   2. Otherwise the next Monday (rolling) — always valid, always ticking.
- *
- * Derived dates:
- *   - enrollmentDeadline  = cohortStart - 3 days (the "enroll by" date)
- *   - cohortStart        = the first day of the live cohort
  */
 
 const NAIROBI_OFFSET = '+03:00';
+const ENROLLMENT_LEADS_DAYS = 3;
+const COHORT_SEATS = 24;
+
+/**
+ * The admin's single input — the confirmed next cohort start date.
+ *
+ * Defaults to VITE_NEXT_COHORT_START_DATE at build time. Tests can override
+ * it at runtime via setNextCohortStart(); production code never needs to.
+ */
+let adminStartRaw: string | undefined = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env
+  ?.VITE_NEXT_COHORT_START_DATE;
+
+/** Override the admin's confirmed cohort date at runtime (tests only). */
+export function setNextCohortStart(raw: string | undefined): void {
+  adminStartRaw = raw;
+}
 
 function parseDate(raw: string | undefined): Date | null {
   if (!raw || !/^\d{4}-\d{2}-\d{2}$/.test(raw)) return null;
@@ -29,28 +49,48 @@ function nextMonday(from: Date): Date {
   const d = new Date(from);
   d.setHours(12, 0, 0, 0);
   const day = d.getDay(); // 0 = Sunday
-  const daysToAdd = (7 - day) % 7;
-  d.setDate(d.getDate() + (daysToAdd === 0 ? 7 : daysToAdd));
+  // (8 - day) % 7 gives the days until the next Monday; 0 (already Monday)
+  // becomes 7 so the cohort always rolls to the following week.
+  const daysToAdd = (8 - day) % 7 || 7;
+  d.setDate(d.getDate() + daysToAdd);
+  return d;
+}
+
+function deadlineFor(start: Date): Date {
+  const d = new Date(start);
+  d.setDate(d.getDate() - ENROLLMENT_LEADS_DAYS);
   return d;
 }
 
 function confirmedStart(): Date | null {
-  const raw = (import.meta as ImportMeta & { env?: Record<string, string | undefined> }).env
-    ?.VITE_NEXT_COHORT_START_DATE;
-  const parsed = parseDate(raw);
+  const parsed = parseDate(adminStartRaw);
   return parsed && parsed.getTime() >= Date.now() ? parsed : null;
 }
 
-/** Cohort start date (EAT). Always non-null. */
+/**
+ * Cohort start date (EAT). Always non-null.
+ *
+ * The admin-confirmed date wins while enrolment is still open; once the
+ * deadline passes the schedule rolls forward to the next cohort, so the
+ * site always advertises the next thing the admin has to add.
+ */
 export function getCohortStart(): Date {
-  return confirmedStart() ?? nextMonday(new Date());
+  const confirmed = confirmedStart();
+  if (confirmed && deadlineFor(confirmed).getTime() >= Date.now()) {
+    return confirmed;
+  }
+  return nextMonday(new Date());
+}
+
+/** True when the admin has confirmed a specific start date. */
+export function cohortStartIsAdminConfirmed(): boolean {
+  const confirmed = confirmedStart();
+  return !!confirmed && deadlineFor(confirmed).getTime() >= Date.now();
 }
 
 /** Enrollment deadline = cohort start - 3 days (EAT). */
 export function getCohortEnrollmentDeadline(): Date {
-  const d = getCohortStart();
-  d.setDate(d.getDate() - 3);
-  return d;
+  return deadlineFor(getCohortStart());
 }
 
 /** True when enrollment has already closed for the upcoming cohort. */
@@ -60,7 +100,7 @@ export function enrollmentClosed(): boolean {
 
 /** Seats remaining for the upcoming cohort (0-24). */
 export function getSeatsLeft(): number {
-  const total = 24;
+  const total = COHORT_SEATS;
   // Deterministic pseudo-randomness seeded by the cohort week so the number
   // is stable across renders for the same cohort, but varies week to week.
   const week = Math.floor(getCohortStart().getTime() / (7 * 24 * 60 * 60 * 1000));
