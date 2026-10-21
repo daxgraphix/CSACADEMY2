@@ -14,7 +14,7 @@ export const featuredTrainingData: TrainingProgram[] = [
       'Zero technical background required',
       'Hands-on prompting exercises with instant feedback',
       'Daily productivity workflows for research and writing',
-      'Offered in English & local African languages'
+      'English-language instruction and course materials'
     ],
     curriculum: [
       'Understanding generative AI vs search engines',
@@ -61,7 +61,7 @@ export const featuredTrainingData: TrainingProgram[] = [
     duration: '1 Day Intensive',
     description: 'Empower educators to leverage AI for lesson planning, differentiated student exercises, assessment generation, and teaching students how to use AI critically and ethically.',
     highlights: [
-      'Cut lesson prep and rubric creation time by 60%',
+      'Practise using AI to draft lesson plans and assessment rubrics, then review them for accuracy and fit',
       'Detecting AI-generated student submissions ethically',
       'Designing assignments that encourage critical thinking over copy-paste',
       'Inclusive teaching techniques for diverse learning paces'
@@ -71,7 +71,7 @@ export const featuredTrainingData: TrainingProgram[] = [
       'Generating tailored quizzes, tests, and active learning prompts',
       'Navigating academic integrity, plagiarism, and AI policies',
       'Teaching AI literacy and fact-checking to students',
-       'Developing bilingual educational aids in English & local African languages'
+       'Reviewing AI-assisted translations and adapting examples for local classroom contexts'
     ],
     idealFor: 'School headmasters, university faculty, high school teachers, and training institute facilitators.',
     isPopular: false
@@ -288,7 +288,7 @@ export const featuredTrainingData: TrainingProgram[] = [
     description: 'Go from frontend to backend with Node.js, Express, and databases. Build real APIs and connect them to dynamic web applications.',
     highlights: ['End-to-end JavaScript development', 'Build REST APIs with Express', 'Database design with MongoDB', 'Deploy full applications to the cloud'],
     curriculum: ['Advanced JavaScript and ES6+ features', 'Building REST APIs with Node.js and Express', 'MongoDB database design and queries', 'Authentication and security basics', 'Deploying with Vercel, Render, or Railway'],
-    idealFor: 'Learners ready to become job-ready full-stack developers.',
+    idealFor: 'Learners who want to practise full-stack development.',
     isPopular: true
   },
   {
@@ -330,7 +330,7 @@ export const featuredTrainingData: TrainingProgram[] = [
     description: 'Master React from components to state management. Build real single-page applications with hooks, context, routing, and modern frontend workflows.',
     highlights: ['React hooks and functional components', 'State management with Context and useReducer', 'React Router and SPA navigation', 'API integration and async data handling'],
     curriculum: ['React fundamentals: JSX, props, and state', 'Hooks: useState, useEffect, useMemo, useCallback', 'Custom hooks and component composition', 'Routing with React Router v6', 'Connecting to REST APIs and handling loading/error states'],
-    idealFor: 'Developers who know JavaScript basics and want to become job-ready frontend engineers.',
+    idealFor: 'Developers who know JavaScript basics and want to practise frontend engineering.',
     isPopular: false
   },
   {
@@ -428,7 +428,7 @@ export const featuredTrainingData: TrainingProgram[] = [
     description: 'An end-to-end product design journey from research to shipped product. Master UX research, interaction design, visual design, and design leadership in a structured cohort.',
     highlights: ['Full product design workflow from zero to handoff', 'Real-world projects with actual users', 'Portfolio-grade case studies', 'Mentor feedback and peer critique'],
     curriculum: ['Design thinking and user research methods', 'Information architecture and user flows', 'Wireframing, prototyping, and usability testing', 'Visual design systems and brand identity', 'Design portfolios, presentations, and career coaching'],
-    idealFor: 'Anyone who wants to become a professional product designer and build a job-ready portfolio.',
+    idealFor: 'Anyone who wants to practise product design and build a portfolio of work.',
     isPopular: false
   },
   {
@@ -440,7 +440,7 @@ export const featuredTrainingData: TrainingProgram[] = [
     format: 'Live Online / Physical',
     duration: '1 to 2 Days',
     description: 'A friendly, non-technical immersion into artificial intelligence. Learn what AI really is, how to use modern AI assistants for daily tasks, and how to write effective prompts without feeling overwhelmed.',
-    highlights: ['Zero technical background required', 'Hands-on prompting exercises with instant feedback', 'Daily productivity workflows for research and writing', 'Offered in English & local African languages'],
+    highlights: ['Zero technical background required', 'Hands-on prompting exercises with instant feedback', 'Daily productivity workflows for research and writing', 'English-language instruction and course materials'],
     curriculum: ['Understanding generative AI vs search engines', 'ChatGPT, Claude & Gemini: Setting up and navigating safely', 'The 4-part prompt formula that gets 10x better answers', 'Summarizing documents, books, and long meeting notes', 'Brainstorming ideas, outlines, and business proposals'],
     idealFor: 'Anyone wanting to understand the AI revolution and immediately apply it to their life, studies, or career.',
     isPopular: true
@@ -875,11 +875,11 @@ export const trainingPackagesData: TrainingPackage[] = [
   {
     id: 'pkg-inst-university-elective',
     title: 'University Elective & Certificate',
-    tagline: 'Embed a credit-bearing digital skills elective in your university.',
+    tagline: 'Discuss a digital skills elective or short course for your university.',
     durations: ['One Semester', '12-Week Module'],
     formats: ['Campus Lectures', 'Online Cohort'],
     targetAudience: 'Universities, deans, faculty, and student affairs teams',
-    keyOutcomes: ['Accredited curriculum', 'Faculty co-teaching', 'Student capstone projects', 'Certificate of completion'],
+    keyOutcomes: ['Curriculum scope agreed with the institution', 'Teaching roles agreed in advance', 'Student practice projects where included', 'Certificate terms confirmed for the course'],
     category: 'Institutional'
   },
   {
@@ -889,7 +889,7 @@ export const trainingPackagesData: TrainingPackage[] = [
     durations: ['1 Week', 'Multi-Week'],
     formats: ['In-Country Workshop', 'Remote Cohort'],
     targetAudience: 'NGOs, donor programmes, implementing partners',
-    keyOutcomes: ['Programme team enablement', 'Data quality practices', 'Reporting automation', 'Local trainer certification'],
+    keyOutcomes: ['Programme team practice', 'Data quality skills', 'Reporting workflows', 'Any train-the-trainer component agreed in the scope'],
     category: 'Institutional'
   },
   {

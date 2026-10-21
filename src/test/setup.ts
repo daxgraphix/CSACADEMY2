@@ -4,7 +4,7 @@ import { afterEach } from 'vitest';
 
 /**
  * jsdom does not implement scrolling, so every scroll call logs a noisy
- * "Not implemented" error. Stub it — the tests assert on structure, not on
+ * "Not implemented" error. Stub it. The tests assert on structure, not on
  * scroll offsets.
  */
 window.scrollTo = (() => {}) as typeof window.scrollTo;

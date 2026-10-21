@@ -6,37 +6,34 @@ export const pricingPlansData: PricingPlan[] = [
     name: 'WhatsApp Micro-Learning',
     deliveryChannel: 'WhatsApp Micro-Learning',
     deliveryType: 'mobile-first',
-    badge: 'DATA SAVER (2G/3G)',
-    tagline: 'Learn daily technology lessons directly in your WhatsApp inbox.',
+    badge: 'WHATSAPP LEARNING',
+    tagline: 'A mobile-first option for short lessons and learning materials through WhatsApp.',
     priceTsh: '20,000',
     priceKes: '1,050',
     priceUsd: '8',
     billingPeriod: 'per month',
-    bandwidthRequirement: 'Ultra-Low Data (~5MB / day)',
+    bandwidthRequirement: 'Data use depends on the materials shared and your connection.',
     popular: false,
     features: [
-      'Daily 5-minute English audio lessons & summaries',
-      'Downloadable PDF prompt cards & code cheat-sheets',
-      'Private WhatsApp study cohort group discussions',
-      'Weekly voice note Q&A with instructors',
-      'Eligible for Invite & Earn cash referrals'
+      'Short learning materials shared through WhatsApp',
+      'Practical prompts and reference materials where available',
+      'Enrollment and delivery details confirmed before payment'
     ],
     notIncluded: [
       'Full HD video streaming course library',
       'Interactive graded module quizzes',
-      'Verifiable QR PDF Certificate',
       'Live Zoom/Google Meet video screen-sharing'
     ],
     ctaText: 'Join WhatsApp Cohort',
-    highlightNote: 'Zero internet friction  |  Pay with M-Pesa / Tigo Pesa'
+    highlightNote: 'Low data lessons delivered through WhatsApp'
   },
   {
     id: 'self-paced-platform',
     name: 'Self-Paced Video Platform',
     deliveryChannel: 'On-Demand Web & Mobile App',
     deliveryType: 'self-paced',
-    badge: 'FLEXIBLE SCHEDULE',
-    tagline: 'Learn at your own pace with full access to all English video tracks.',
+    badge: 'SELF-PACED',
+    tagline: 'Study independently using the course materials included with your enrollment.',
     priceTsh: '30,000',
     priceKes: '1,600',
     priceUsd: '12',
@@ -44,27 +41,22 @@ export const pricingPlansData: PricingPlan[] = [
     bandwidthRequirement: 'Standard 3G/4G/WiFi',
     popular: false,
     features: [
-      'Unlimited access to ALL video tracks (Web, AI, Design, Cyber)',
-      'Scored quizzes & interactive module knowledge tests',
-      'Official PDF Certificate with tamper-proof QR verification',
-      'Full Digital Shop access (Ebooks, UI Kits & Prompt Packs)',
-      'Course project files, assets & source code downloads',
-      'Instant Mobile Money activation (M-Pesa, Tigo, Airtel)'
+      'Access to the course materials included with your selected enrollment',
+      'Self-paced study through the available video and written materials',
+      'Project files or downloadable resources where provided',
+      'Access instructions sent after enrollment details are confirmed'
     ],
-    notIncluded: [
-      'Weekly live interactive Zoom/Meet coaching',
-      '1-on-1 personalized portfolio review'
-    ],
+    notIncluded: ['Live instruction or individual coaching unless listed in your enrollment details'],
     ctaText: 'Start On-Demand Video',
-    highlightNote: 'Study anytime, anywhere on any device'
+    highlightNote: 'Study on your schedule during the confirmed access period'
   },
   {
     id: 'zoom-live-cohort',
     name: 'Zoom & Meet Live Cohorts',
     deliveryChannel: 'Zoom & Google Meet Live Virtual',
     deliveryType: 'virtual-live',
-    badge: 'MOST POPULAR  |  LIVE INTERACTION',
-    tagline: 'Live interactive classes with real-time screen sharing and Vibe Coding.',
+    badge: 'LIVE INTERACTION',
+    tagline: 'Live online instruction with opportunities to ask questions and practise together.',
     priceTsh: '50,000',
     priceKes: '2,700',
     priceUsd: '20',
@@ -72,40 +64,36 @@ export const pricingPlansData: PricingPlan[] = [
     bandwidthRequirement: 'Broadband / 4G Live Stream',
     popular: true,
     features: [
-      'Everything in Self-Paced Video Platform included',
-      '2x Weekly live interactive sessions on Zoom & Google Meet',
-      'Live screen sharing, live prompt critiques & Vibe Coding',
-      'Breakout rooms for hands-on collaborative exercises',
-      'Lifetime access to all HD session recordings',
-      'Direct WhatsApp Mentor line with instructor Alex Rweyemamu',
-      'Verifiable QR PDF Certificate upon cohort completion'
+      'Self-paced materials only where they are listed for the selected cohort',
+      'Live sessions on Zoom or Google Meet on the confirmed schedule',
+      'Instructor explanations and guided practice',
+      'Question time during scheduled sessions',
+      'Session recordings and messaging support only where confirmed for the cohort',
+      'Certificate availability and completion criteria confirmed for each course'
     ],
     ctaText: 'Enroll in Live Cohort',
-    highlightNote: 'Live Q&A and instant instructor feedback'
+    highlightNote: 'Live interaction on the published cohort schedule'
   },
   {
     id: 'annual-all-access',
-    name: 'VIP Annual Pass (All Channels)',
-    deliveryChannel: 'All Delivery Channels Included',
+    name: 'Annual Learning Plan',
+    deliveryChannel: 'Annual access; included formats confirmed before enrollment',
     deliveryType: 'self-paced',
-    badge: 'BEST VALUE (2 MONTHS FREE)',
-    tagline: 'The complete 360° technology immersion across all delivery formats.',
+    badge: 'ANNUAL ACCESS',
+    tagline: 'An annual option for the learning formats listed in this plan.',
     priceTsh: '135,000',
     priceKes: '7,200',
     priceUsd: '54',
     billingPeriod: 'per year',
-    bandwidthRequirement: 'Adaptive to any connection',
+    bandwidthRequirement: 'Depends on the selected materials and delivery format',
     popular: false,
     features: [
-      'Full 12-month access to Video Platform & WhatsApp Micro-learning',
-      'Free seat in all upcoming Zoom & Google Meet live cohorts',
-      'Priority 1-on-1 portfolio and CV review by lead instructors',
-      'VIP Digital Shop pass (all current and future templates free)',
-      'Early access to new courses before public release',
-      'Direct WhatsApp instructor mentor channel'
+      'Access for 12 months to the listed self-paced and WhatsApp materials',
+      'Ask which live sessions are included before enrolling',
+      'Any mentoring, portfolio review, or new course access must be confirmed separately'
     ],
-    ctaText: 'Get VIP 1-Year Pass',
-    highlightNote: 'Save 60,000 Tsh  |  Complete Career Transformation'
+    ctaText: 'Ask about annual access',
+    highlightNote: 'One annual plan for the included learning formats'
   },
   {
     id: 'workshops-delivery',
@@ -113,7 +101,7 @@ export const pricingPlansData: PricingPlan[] = [
     deliveryChannel: 'Workshops & Seminars (Half/Full Day)',
     deliveryType: 'in-person-workshop',
     badge: 'INSTITUTIONAL / HYBRID',
-    tagline: 'Action-oriented deep dives producing concrete deliverables for teams.',
+    tagline: 'Practical workshops for teams, with scope and deliverables agreed in advance.',
     priceTsh: '465,000',
     priceKes: '24,800',
     priceUsd: '186',
@@ -121,12 +109,12 @@ export const pricingPlansData: PricingPlan[] = [
     bandwidthRequirement: 'In-Person Venue or Hybrid Zoom/Meet',
     popular: false,
     features: [
-      'Half-day or full-day intensive hands-on practical workshop',
-      'Customized workbook and curated prompt library for participants',
-      'Tailored case studies solving client/institutional challenges',
-      'Printed and QR-verifiable Digital Certificate of Attendance',
-      'Post-workshop recorded recap and implementation roadmap',
-      'Invoice payment, LPO, or Mobile Money billing available'
+      'Workshop duration and format confirmed in the proposal',
+      'Practice materials and examples agreed for the session',
+      'Topics scoped to the organization’s stated needs',
+      'Certificate of attendance only if confirmed in the proposal',
+      'Any follow-up materials or recordings confirmed in the proposal',
+      'Request invoice or LPO details; payment instructions are confirmed in your proposal'
     ],
     ctaText: 'Book Team Workshop',
     highlightNote: 'Ideal for departments, teacher associations & incubators'
@@ -137,20 +125,20 @@ export const pricingPlansData: PricingPlan[] = [
     deliveryChannel: 'Physical On-Site Training',
     deliveryType: 'corporate-onsite',
     badge: 'ENTERPRISE IMMERSIVE',
-    tagline: 'On-site in-person training delivered directly at your venue or campus.',
+    tagline: 'Discuss in-person training at your organization’s venue or campus.',
     priceTsh: '1,215,000',
     priceKes: '64,800',
     priceUsd: '486',
     billingPeriod: 'per corporate cohort (multi-day package)',
-    bandwidthRequirement: 'Zero Internet Required (On-Site Face-to-Face)',
+    bandwidthRequirement: 'Venue, equipment, and connectivity needs agreed before delivery',
     popular: false,
     features: [
-      'Lead instructor on-site at your office, campus, or venue',
-      'Desk-by-desk coaching and practical hardware setup',
-      'Adapted to your corporate security policies and tool stack',
-      'Custom employee assessment and compliance progress reports',
+      'On-site delivery where agreed in the proposal',
+      'Training scope and any equipment needs agreed in advance',
+      'Examples and delivery adapted to the agreed scope',
+      'Any assessment or progress reporting agreed in the proposal',
       'Multi-day scheduling (weekdays or intensive weekend bootcamps)',
-      'Dedicated account coordinator and formal corporate invoicing'
+      'Invoicing documents confirmed for your location and engagement'
     ],
     ctaText: 'Request On-Site Quote',
     highlightNote: 'Maximum retention, deep team collaboration & focus'
@@ -172,43 +160,10 @@ export const pricingPlansData: PricingPlan[] = [
       'High-impact multimedia keynote by Alex Rweyemamu',
       'Context-rich insights on African technology landscape',
       'Engaging live on-stage technology and AI demonstrations',
-      'Available in fluent English, local languages, or bilingual delivery',
+      'English-language keynote; confirm other format requirements with our team',
       'Panel moderation and executive Q&A facilitation'
     ],
     ctaText: 'Inquire Keynote Availability',
     highlightNote: 'For Summits, AGMs, Tech Expos & Public Forums'
-  }
-];
-
-export const paymentMethods = [
-  {
-    name: 'M-Pesa',
-    country: 'Tanzania & Kenya',
-    provider: 'Vodacom / Safaricom',
-    badge: 'Instant Activation'
-  },
-  {
-    name: 'Tigo Pesa',
-    country: 'Tanzania',
-    provider: 'Yas / Tigo',
-    badge: 'Instant Activation'
-  },
-  {
-    name: 'Airtel Money',
-    country: 'East Africa',
-    provider: 'Airtel',
-    badge: 'Instant Activation'
-  },
-  {
-    name: 'HaloPesa',
-    country: 'Tanzania',
-    provider: 'Halotel',
-    badge: 'Instant Activation'
-  },
-  {
-    name: 'Debit / Credit Card',
-    country: 'International',
-    provider: 'Visa / MasterCard',
-    badge: 'Global Secure'
   }
 ];

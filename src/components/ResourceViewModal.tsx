@@ -65,7 +65,7 @@ export const ResourceViewModal: React.FC<ResourceViewModalProps> = ({
       onClick={onClose}
     >
       <div
-        className={`border rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
+        className={`responsive-modal-viewport border rounded-3xl w-full max-w-2xl overflow-y-auto shadow-2xl relative ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}

@@ -69,11 +69,11 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
   return (
     <>
       <Helmet>
-        <title>For Organizations | Corporate AI & Cybersecurity Training - CS Academy</title>
+        <title>For Organizations | Corporate AI & Cybersecurity Training | CS Academy</title>
         <meta name="description" content="CS Academy delivers customized AI, cybersecurity, and digital skills training for banks, governments, universities, NGOs, and enterprises across East Africa. Request a corporate proposal today." />
         <meta name="keywords" content="corporate training Tanzania, AI training for banks Africa, institutional tech education, enterprise cybersecurity East Africa, CS Academy organizations" />
         <meta property="og:title" content="For Organizations | CS Academy Corporate Training" />
-        <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs. Delivery in English and local languages across East Africa." />
+        <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs across East Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />
@@ -108,20 +108,20 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           </div>
         </div>
 
-        {/* Lead capture — scoped proposal request */}
+        {/* Lead capture for scoped proposal requests */}
         <div id="proposal" className="grid gap-8 lg:grid-cols-2 lg:items-start scroll-mt-28">
           <div className="space-y-6">
             <div className="space-y-3">
               <span className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-widest ${badge}`}>
                 <Clock className="w-3.5 h-3.5" aria-hidden="true" />
-                Proposals within 1 business day
+                Scope confirmed by email
               </span>
               <h2 className={`text-2xl sm:text-3xl font-extrabold tracking-tight ${heading}`}>
                 Every proposal starts with <span className="text-[var(--accent-red-strong)]">your numbers</span>
               </h2>
               <p className={`text-sm leading-relaxed ${body}`}>
-                Tell us how many people need training and we will scope the curriculum, delivery format,
-                and a realistic schedule with a cost comparison against the cost of not training them.
+                Tell us your team size, training goals, and preferred timing. We’ll discuss a suitable curriculum,
+                delivery format, schedule, and organizational price with you.
               </p>
             </div>
 
@@ -130,7 +130,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                 { title: 'Needs assessment snapshot', desc: 'Skill-gap analysis against your actual job roles, not a generic catalogue.' },
                 { title: 'Bespoke curriculum outline', desc: 'Modules mapped to your sector, with tools your team already uses.' },
                 { title: 'Delivery plan & format', desc: 'On-site, hybrid, or cohort-based scheduled around your operating hours.' },
-                { title: 'Cost-to-benefit summary', desc: 'Hours recovered, error reduction, and risk avoided, in one page.' }
+                { title: 'Budget and delivery outline', desc: 'A clear scope, schedule, delivery format, and pricing proposal for your team.' }
               ].map((item) => (
                 <li key={item.title} className="flex gap-3">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" aria-hidden="true" />
@@ -314,7 +314,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {trainingProcessSteps.map((step, idx) => (
               <div key={idx} className={`p-5 rounded-2xl border space-y-2 ${cardBg}`}>
                 <div className="flex items-center justify-between">

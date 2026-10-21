@@ -1,17 +1,20 @@
 import React, { Suspense, lazy, useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { PageRoute, ProgramPillar, TrainingProgram, ResourceItem, BlogPost } from './types';
+import { PageRoute, ProgramPillar, ResourceItem, BlogPost } from './types';
 import { resolveRoute } from './utils/routes';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { BackToTop } from './components/BackToTop';
 import { ScrollProgress } from './components/ScrollProgress';
 import { ScrollToHash } from './components/ScrollToHash';
+import { TextSizeControl } from './components/TextSizeControl';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { NotFound } from './components/NotFound';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MarketingHomePage = lazy(() => import('./pages/MarketingHomePage').then(m => ({ default: m.MarketingHomePage })));
+const EditorialDetailPage = lazy(() => import('./pages/EditorialDetailPage').then(m => ({ default: m.EditorialDetailPage })));
+const InstructorsPage = lazy(() => import('./pages/InstructorsPage').then(m => ({ default: m.InstructorsPage })));
 const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
 const ProgramsPage = lazy(() => import('./pages/ProgramsPage').then(m => ({ default: m.ProgramsPage })));
@@ -22,13 +25,13 @@ const ResourcesPage = lazy(() => import('./pages/ResourcesPage').then(m => ({ de
 const BlogPage = lazy(() => import('./pages/BlogPage').then(m => ({ default: m.BlogPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const ContactPage = lazy(() => import('./pages/ContactPage').then(m => ({ default: m.ContactPage })));
+const IndividualRequestPage = lazy(() => import('./pages/IndividualRequestPage').then(m => ({ default: m.IndividualRequestPage })));
 const VibeCodingPage = lazy(() => import('./pages/VibeCodingPage').then(m => ({ default: m.VibeCodingPage })));
 const DevPadPage = lazy(() => import('./pages/DevPadPage').then(m => ({ default: m.DevPadPage })));
 const LegalPage = lazy(() => import('./pages/LegalPage').then(m => ({ default: m.LegalPage })));
 
 import { PriceStrip } from './components/PriceStrip';
 import { useApp } from './context/AppContext';
-import { blogPostsData } from './data/blog';
 import { siteConfig } from './config/site';
 import { buildOrganizationSchema } from './utils/schema';
 
@@ -54,7 +57,6 @@ const organizationSchema = buildOrganizationSchema({
 
 const BookingModal = React.memo(lazy(() => import('./components/BookingModal').then(m => ({ default: m.BookingModal }))));
 const ProgramDetailModal = React.memo(lazy(() => import('./components/ProgramDetailModal').then(m => ({ default: m.ProgramDetailModal }))));
-const TrainingDetailModal = React.memo(lazy(() => import('./components/TrainingDetailModal').then(m => ({ default: m.TrainingDetailModal }))));
 const ResourceViewModal = React.memo(lazy(() => import('./components/ResourceViewModal').then(m => ({ default: m.ResourceViewModal }))));
 const BlogArticleModal = React.memo(lazy(() => import('./components/BlogArticleModal').then(m => ({ default: m.BlogArticleModal }))));
 
@@ -74,13 +76,14 @@ const AppChrome = React.memo(function AppChrome({ theme, currentRoute, openBooki
       />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Navbar currentRoute={currentRoute} openBookingModal={openBookingModal} />
-      <div id="main-content" tabIndex={-1} className="flex-grow overflow-x-hidden pb-20 outline-none md:pb-0">
+      <div id="main-content" tabIndex={-1} className="flex-grow min-w-0 overflow-x-hidden pb-[calc(5rem+env(safe-area-inset-bottom))] outline-none md:pb-0">
         <div key={currentRoute} className="page-enter">
           <ErrorBoundary key={currentRoute}><Suspense fallback={<div className="min-h-[40vh]" aria-busy="true" aria-label="Loading page" />}>{page}</Suspense></ErrorBoundary>
         </div>
       </div>
       <Footer currentRoute={currentRoute} openBookingModal={openBookingModal} />
       <BackToTop />
+      <TextSizeControl />
       <ScrollProgress />
       <ScrollToHash />
     </div>
@@ -105,24 +108,34 @@ export default function App() {
   } | undefined>(undefined);
 
   const [selectedProgram, setSelectedProgram] = useState<ProgramPillar | null>(null);
-  const [selectedTraining, setSelectedTraining] = useState<TrainingProgram | null>(null);
   const [selectedResource, setSelectedResource] = useState<ResourceItem | null>(null);
   const [selectedBlogArticle, setSelectedBlogArticle] = useState<BlogPost | null>(null);
 
   const anyModalOpen =
-    isBookingModalOpen || !!selectedProgram || !!selectedTraining || !!selectedResource || !!selectedBlogArticle;
+    isBookingModalOpen || !!selectedProgram || !!selectedResource || !!selectedBlogArticle;
 
   useEffect(() => {
-    const handler = (e: Event) => {
+    let disposed = false;
+    const handler = async (e: Event) => {
       const detail = (e as CustomEvent<{ id: string }>).detail;
-      const target = blogPostsData.find((p) => p.id === detail.id);
+      let posts: typeof import('./data/blog').blogPostsData;
+      try {
+        ({ blogPostsData: posts } = await import('./data/blog'));
+      } catch {
+        return;
+      }
+      if (disposed) return;
+      const target = posts.find((p) => p.id === detail.id);
       if (target) {
         setSelectedBlogArticle(target);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     };
     window.addEventListener('cs:open-blog', handler as EventListener);
-    return () => window.removeEventListener('cs:open-blog', handler as EventListener);
+    return () => {
+      disposed = true;
+      window.removeEventListener('cs:open-blog', handler as EventListener);
+    };
   }, []);
 
   useEffect(() => {
@@ -141,13 +154,11 @@ export default function App() {
   }, []);
 
   const handleOpenProgramModal = useCallback((program: ProgramPillar) => setSelectedProgram(program), []);
-  const handleOpenTrainingModal = useCallback((training: TrainingProgram) => setSelectedTraining(training), []);
   const handleOpenResourceModal = useCallback((resource: ResourceItem) => setSelectedResource(resource), []);
   const handleOpenBlogArticleModal = useCallback((post: BlogPost) => setSelectedBlogArticle(post), []);
   const openBookingFromChrome = useCallback(() => handleOpenBooking(), [handleOpenBooking]);
   const closeBookingModal = useCallback(() => setIsBookingModalOpen(false), []);
   const closeProgramModal = useCallback(() => setSelectedProgram(null), []);
-  const closeTrainingModal = useCallback(() => setSelectedTraining(null), []);
   const closeResourceModal = useCallback(() => setSelectedResource(null), []);
   const closeBlogModal = useCallback(() => setSelectedBlogArticle(null), []);
 
@@ -156,15 +167,13 @@ export default function App() {
       case 'home':
         return <MarketingHomePage openBookingModal={handleOpenBooking} />;
       case 'academy':
-        return (
-          <HomePage
-            openBookingModal={handleOpenBooking}
-            openProgramModal={handleOpenProgramModal}
-            openTrainingDetailModal={handleOpenTrainingModal}
-            openResourceModal={handleOpenResourceModal}
-            openBlogArticleModal={handleOpenBlogArticleModal}
-          />
-        );
+        return <HomePage />;
+      case 'blog-article':
+        return <EditorialDetailPage kind="blog" slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
+      case 'resource-detail':
+        return <EditorialDetailPage kind="resource" slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
+      case 'instructors':
+        return <InstructorsPage />;
       case 'features':
         return <FeaturesPage openBookingModal={handleOpenBooking} />;
       case 'pricing':
@@ -177,17 +186,17 @@ export default function App() {
           />
         );
       case 'programs/ai':
-        return <ProgramDeepDivePage slug="ai" openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="ai" />;
       case 'programs/cybersecurity':
-        return <ProgramDeepDivePage slug="cybersecurity" openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="cybersecurity" />;
       case 'programs/digital-skills':
-        return <ProgramDeepDivePage slug="digital-skills" openBookingModal={handleOpenBooking} />;
+        return <ProgramDeepDivePage slug="digital-skills" />;
       case 'vibe-coding':
-        return <VibeCodingPage openBookingModal={handleOpenBooking} />;
+        return <VibeCodingPage />;
       case 'devpad':
-        return <DevPadPage openBookingModal={handleOpenBooking} />;
+        return <DevPadPage />;
       case 'learning-formats':
-        return <LearningFormatsPage openBookingModal={handleOpenBooking} />;
+        return <LearningFormatsPage />;
       case 'for-organizations':
         return <ForOrganizationsPage openBookingModal={handleOpenBooking} />;
       case 'resources':
@@ -195,9 +204,11 @@ export default function App() {
       case 'blog':
         return <BlogPage openBlogArticleModal={handleOpenBlogArticleModal} />;
       case 'about':
-        return <AboutPage openBookingModal={handleOpenBooking} />;
+        return <AboutPage />;
       case 'contact':
         return <ContactPage openBookingModal={handleOpenBooking} />;
+      case 'individual-request':
+        return <IndividualRequestPage />;
       case 'privacy':
         return <LegalPage kind="privacy" />;
       case 'terms':
@@ -205,17 +216,9 @@ export default function App() {
       case 'not-found':
         return <NotFound />;
       default:
-        return (
-          <HomePage
-            openBookingModal={handleOpenBooking}
-            openProgramModal={handleOpenProgramModal}
-            openTrainingDetailModal={handleOpenTrainingModal}
-            openResourceModal={handleOpenResourceModal}
-            openBlogArticleModal={handleOpenBlogArticleModal}
-          />
-        );
+        return <NotFound />;
     }
-  }, [currentRoute, handleOpenBooking, handleOpenProgramModal, handleOpenTrainingModal, handleOpenResourceModal, handleOpenBlogArticleModal]);
+  }, [currentRoute, location.pathname, handleOpenBooking, handleOpenProgramModal, handleOpenResourceModal, handleOpenBlogArticleModal]);
 
   return (
     <ErrorBoundary>
@@ -230,12 +233,6 @@ export default function App() {
         {selectedProgram && <ProgramDetailModal
           program={selectedProgram}
           onClose={closeProgramModal}
-          openBookingModal={handleOpenBooking}
-        />}
-
-        {selectedTraining && <TrainingDetailModal
-          training={selectedTraining}
-          onClose={closeTrainingModal}
           openBookingModal={handleOpenBooking}
         />}
 

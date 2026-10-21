@@ -5,7 +5,7 @@ import { getCohortStartLabel, getEnrollmentDeadlineLabel, getCohortEnrollmentDea
  * Live urgency state for the upcoming cohort.
  *
  * Ticks every 60 seconds so the countdown and the "seats left" number stay
- * fresh without hammering the DOM — a 1-minute cadence is enough for a
+ * fresh without hammering the DOM. A 1-minute cadence is enough for a
  * countdown that only matters when it is close to expiring.
  */
 export interface CohortUrgency {

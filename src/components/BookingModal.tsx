@@ -15,7 +15,6 @@ import {
   Clock,
   ArrowRight,
   Copy,
-  Sparkles,
   ShieldCheck,
   Loader2,
   Wifi,
@@ -125,7 +124,7 @@ Submitted via CS Academy website.`;
 };
 
 /* ------------------------------------------------------------------ */
-/* Theme-aware class helpers — single source of truth for the modal    */
+/* Theme-aware class helpers are the single source of truth for the modal. */
 /* ------------------------------------------------------------------ */
 
 const surfaceClass = (theme: string) =>
@@ -270,9 +269,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     );
   };
 
-  const submitToServer = async (): Promise<{ ok: boolean; ref: string; needsActivation?: boolean; failed?: boolean; errorMessage?: string }> => {
+  const submitToServer = async (reference?: string): Promise<{ ok: boolean; ref: string; needsActivation?: boolean; failed?: boolean; errorMessage?: string }> => {
     if (!BOOKING_ENDPOINT) return { ok: false, ref: '', failed: true, errorMessage: 'Booking endpoint is not configured.' };
-    const ref = generateReference();
+    const ref = reference ?? generateReference();
     setDispatchStep('contacting');
     setIsSubmitting(true);
     setSubmitError(null);
@@ -283,7 +282,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     );
 
     const result = await submitForm({
-      _subject: `[CS Academy] New inquiry — ${program} (ref ${ref})`,
+      _subject: `[CS Academy] New inquiry: ${program} (ref ${ref})`,
       name,
       email,
       organization,
@@ -316,7 +315,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       return { ok: false, ref, needsActivation: true };
     }
 
-    const message = result.errorMessage || 'Could not reach the server. Use WhatsApp or Email below.';
+    const message = result.errorMessage || 'Could not reach FormSubmit. Use WhatsApp or Email below.';
     setSubmitError(message);
     setDispatchStep('failed');
     setReceipt({ reference: ref, submittedAt: new Date(), via: 'server', delivered: false, failed: true, errorMessage: message });
@@ -331,21 +330,6 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       setDispatchChannel(null);
       return;
     }
-    setDispatchStep('contacting');
-    if (BOOKING_ENDPOINT) {
-      const { ok, ref, needsActivation, failed } = await submitToServer();
-      if (needsActivation || failed) return;
-      if (ok) {
-        const text = encodeURIComponent(
-          buildMessageWithRef(
-            { name, email, organization, program, format, audienceType, location, notes },
-            ref
-          )
-        );
-        window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
-        return;
-      }
-    }
     const ref = generateReference();
     const text = encodeURIComponent(
       buildMessageWithRef(
@@ -353,7 +337,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         ref
       )
     );
-    setReceipt({ reference: ref, submittedAt: new Date(), via: 'whatsapp', delivered: true });
+    setReceipt({ reference: ref, submittedAt: new Date(), via: 'whatsapp', delivered: false });
     setDispatchStep('dispatched');
     window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
@@ -475,7 +459,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       onClick={onClose}
     >
       <div
-        className={`transition-colors duration-300 border rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl max-h-[95vh] sm:max-h-[90vh] overflow-y-auto shadow-2xl relative overscroll-contain ${surfaceClass(theme)}`}
+        className={`booking-modal-viewport transition-colors duration-300 border rounded-t-3xl sm:rounded-3xl w-full sm:max-w-2xl overflow-y-auto shadow-2xl relative overscroll-contain ${surfaceClass(theme)}`}
         style={{ background: 'var(--bk-surface-solid)' }}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
@@ -518,8 +502,10 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 </h3>
                 <p className="text-[11px] sm:text-xs truncate" style={{ color: 'var(--bk-subtitle-color)' }}>
                   {receipt
-                    ? 'Saved and dispatched — here is everything you need next.'
-                    : 'Connect with CS Academy instructors. We reply within 24 hours.'}
+                    ? receipt.via === 'whatsapp' && !receipt.delivered
+                      ? 'WhatsApp is open. Press send there to deliver your inquiry.'
+                      : 'Your inquiry details are ready below.'
+                    : 'Send an inquiry by WhatsApp, email, or FormSubmit. We’ll follow up with next steps.'}
                 </p>
               </div>
             </div>
@@ -532,7 +518,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                   border: '1px solid var(--bk-trust-border)'
                 }}
               >
-                <ShieldCheck className="w-3 h-3" /> Secure · 24h Reply
+                <ShieldCheck className="w-3 h-3" /> FormSubmit · Email follow-up
               </span>
               <button
                 onClick={onClose}
@@ -718,7 +704,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {/* Program Select */}
           <div className="space-y-1.5">
             <label htmlFor="bk-program" className={labelCls}>
-              <Sparkles className="w-3 h-3" style={{ color: 'var(--bk-icon-color)' }} /> Selected Training Program
+              Selected Training Program
             </label>
             <select
               id="bk-program"
@@ -790,7 +776,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           {/* Notes / Special requirements */}
           <div className="space-y-1.5">
             <label htmlFor="bk-notes" className={labelCls}>
-              <Sparkles className="w-3 h-3" style={{ color: 'var(--bk-icon-color)' }} /> Specific Objectives or Team Size
+              Specific Objectives or Team Size
               <span className={`text-[10px] font-normal normal-case ${hintCls}`}>(optional)</span>
             </label>
             <textarea
@@ -804,7 +790,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
           </div>
 
           {/* Message Preview Box */}
-          <div className="rounded-xl border p-3 sm:p-3.5 space-y-1.5 text-xs bg-[var(--bk-section-bg)] border-[var(--bk-section-border)]">
+          <details className="rounded-xl border text-xs bg-[var(--bk-section-bg)] border-[var(--bk-section-border)]">
+            <summary className="cursor-pointer select-none px-3 py-2.5 text-[10px] font-bold uppercase tracking-wider text-[var(--bk-section-muted)]">Preview inquiry message</summary>
+            <div className="px-3 pb-3 space-y-1.5">
             <div className="flex items-center justify-between text-[10px] font-mono uppercase text-[var(--bk-section-muted)] gap-2">
               <span className="inline-flex items-center gap-1.5 min-w-0">
                 <Mail className="w-3 h-3 shrink-0" /> <span className="truncate">Message that will be sent</span>
@@ -826,16 +814,17 @@ export const BookingModal: React.FC<BookingModalProps> = ({
             <p className="line-clamp-3 text-[10.5px] sm:text-[11px] font-mono text-[var(--bk-mono-text)] break-words">
               {constructMessageText()}
             </p>
-          </div>
+            </div>
+          </details>
 
-          {/* What happens next — 3-step timeline */}
+          {/* What happens next, shown as a three-step timeline */}
           <Section isDark={isDark}>
             <SectionTitle isDark={isDark} tone="brand">What happens after you submit</SectionTitle>
             <ol className="space-y-1.5">
               {[
-                { n: 1, title: 'We receive your inquiry instantly', desc: 'Auto-routed to the CS Academy advisory team with your reference number.' },
-                { n: 2, title: 'An advisor reviews within 1 hour (business hours)', desc: 'We read every inquiry personally and match you to the right program.' },
-                { n: 3, title: 'You get curriculum, schedule, and payment options within 24h', desc: 'Reply to support@cyberswahili.co.tz quoting your reference number.' }
+                { n: 1, title: 'Your inquiry goes through your chosen channel', desc: 'WhatsApp opens a message for you to review and send; email opens a draft; FormSubmit sends it to our support inbox.' },
+                { n: 2, title: 'We review your request', desc: 'We use your goals and preferred format to identify a suitable training option.' },
+                { n: 3, title: 'We follow up by email', desc: 'We can share relevant curriculum, schedule options, and confirmed payment instructions.' }
               ].map((s) => (
                 <li key={s.n} className="flex items-start gap-2.5">
                   <span
@@ -869,7 +858,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               {dispatchStep === 'failed' ? (
                 <>
                   <Wifi className="w-3.5 h-3.5" />
-                  Couldn't reach server — use a button below to continue.
+                  Couldn't reach FormSubmit. Use a button below to continue.
                 </>
               ) : (
                 <>
@@ -877,19 +866,19 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                     className="w-2 h-2 rounded-full animate-pulse"
                     style={{ background: 'var(--bk-status-online)' }}
                   />
-                  {dispatchStep === 'contacting' ? 'Contacting the booking server…' : 'Dispatching your inquiry…'}
+                  {dispatchStep === 'contacting' ? 'Sending your inquiry through FormSubmit…' : 'Dispatching your inquiry…'}
                 </>
               )}
             </div>
           )}
 
           {/* Dispatch CTA Buttons */}
-          <div className="pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+          <div className="pt-1 space-y-2.5">
             <button
               id="modal-send-whatsapp"
               onClick={handleWhatsAppSend}
               disabled={isSubmitting}
-              className="group relative w-full py-3.5 px-4 rounded-xl font-extrabold text-xs text-white flex flex-col items-center justify-center gap-0.5 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
+              className="group relative w-full py-4 px-4 rounded-xl font-extrabold text-sm text-white flex flex-col items-center justify-center gap-0.5 uppercase tracking-wider transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0"
               style={{
                 background: 'var(--bk-whatsapp-bg)',
                 boxShadow: 'var(--bk-whatsapp-shadow)'
@@ -920,6 +909,8 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               )}
             </button>
 
+            <details className="rounded-xl border border-[var(--bk-section-border)] bg-[var(--bk-section-bg)]">
+            <summary className="cursor-pointer select-none px-3 py-2.5 text-center text-[10px] font-bold uppercase tracking-wider text-[var(--bk-section-muted)]">Other option: email / form delivery</summary>
             <button
               id="modal-send-email"
               onClick={handleEmailSend}
@@ -949,12 +940,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({
                 <>
                   <span className="inline-flex items-center gap-2">
                     <Mail className="w-4 h-4" />
-                    Send via Email
+                    Send by email / form
                   </span>
                   <span className="text-[9px] font-medium opacity-80 normal-case tracking-normal">Auto-delivered to support@cyberswahili.co.tz</span>
                 </>
               )}
             </button>
+            </details>
           </div>
 
           {submitError && (
@@ -1090,12 +1082,12 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           : 'Inquiry Ready To Send';
 
   const subtitle = isFailed
-    ? `${receipt.errorMessage || 'The booking server could not be reached.'} Your reference is saved below — use one of the buttons to deliver your inquiry manually.`
+    ? `${receipt.errorMessage || 'FormSubmit could not be reached.'} Your reference is saved below. Use one of the buttons to deliver your inquiry manually.`
     : isActivation
-      ? 'formsubmit.co requires a one-time activation for this site. CS Academy has been emailed an activation link — once it is clicked, your inquiry (and every future one from this site) will deliver automatically to support@cyberswahili.co.tz. Until then, use the WhatsApp or Email buttons below to reach us directly.'
+      ? 'formsubmit.co requires a one-time activation for this site. CS Academy has been emailed an activation link. Once it is clicked, your inquiry and every future one from this site will deliver automatically to support@cyberswahili.co.tz. Until then, use the WhatsApp or Email buttons below to reach us directly.'
       : receipt.delivered
         ? `Your request has been delivered to support@cyberswahili.co.tz${
-            receipt.via === 'server' ? ' via our secure server' : ' via WhatsApp'
+            receipt.via === 'server' ? ' via FormSubmit' : ' via WhatsApp'
           }. Keep this reference handy.`
         : receipt.via === 'email'
           ? 'Press Send in your mail app to deliver the inquiry to support@cyberswahili.co.tz. The reference is already in the email body.'
@@ -1112,7 +1104,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
       ? 'Awaiting form activation'
       : receipt.delivered
         ? receipt.via === 'server'
-          ? 'Delivered via secure server'
+          ? 'Delivered via FormSubmit'
           : receipt.via === 'whatsapp'
             ? 'Delivered via WhatsApp'
             : 'Delivered'
@@ -1307,8 +1299,8 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           <SectionTitle isDark={isDark}>What happens next</SectionTitle>
           <ol className="space-y-1.5">
             {[
-              { n: 1, title: 'We read your inquiry', desc: 'An advisor at CS Academy reads it personally within 1 hour during business hours.' },
-              { n: 2, title: 'You receive a reply within 24 hours', desc: 'With curriculum outline, schedule options, and payment methods (M-Pesa, bank, card).' },
+              { n: 1, title: 'We receive your inquiry', desc: 'FormSubmit sends your form details to CS Academy support.' },
+              { n: 2, title: 'We follow up by email', desc: 'We’ll share relevant curriculum, schedule options, and confirmed payment instructions.' },
               { n: 3, title: 'You confirm and we schedule', desc: 'Reply to support@cyberswahili.co.tz quoting your reference number.' }
             ].map((s) => (
               <li key={s.n} className="flex items-start gap-2.5">
@@ -1331,18 +1323,18 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <div className="text-[10px] font-black uppercase tracking-wider text-[var(--bk-section-muted)]">
-            {isFailed ? 'Continue manually — pick a channel' : 'Re-send or forward to another channel'}
+            {isFailed ? 'Continue manually. Pick a channel' : 'Resend or forward to another channel'}
           </div>
         </div>
         {/* Trust strip */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[10px] font-bold uppercase tracking-wider text-[var(--bk-section-muted)]">
           <span className="inline-flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--bk-status-online)' }} />
-            M-Pesa accepted
+            Local payment options available on request
           </span>
           <span className="inline-flex items-center gap-1.5">
             <Clock className="w-3 h-3" />
-            Reply within 24h
+            Follow-up by email
           </span>
           <span className="inline-flex items-center gap-1.5">
             <ShieldCheck className="w-3 h-3" />
@@ -1425,7 +1417,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
           )}
         </div>
 
-        {/* Webmail compose — cross-desktop fallback */}
+        {/* Webmail compose fallback for desktop browsers */}
         <div
           className="mt-2 rounded-xl border"
           style={{
@@ -1577,7 +1569,7 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
             <div><strong className="text-[var(--bk-title-color)]">Browser security or extension.</strong> An ad-blocker, privacy extension, or corporate firewall blocked the request.</div>
             <div><strong className="text-[var(--bk-title-color)]">Form needs one-time activation.</strong> The recipient must click a one-time activation link formsubmit emailed to them.</div>
             <div className="pt-1 italic text-[var(--bk-hint-color)]">
-              No problem — use the WhatsApp or Email buttons below. Your reference is saved.
+              No problem. Use the WhatsApp or Email buttons below. Your reference is saved.
             </div>
           </div>
         </details>
@@ -1602,7 +1594,6 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
               (e.currentTarget as HTMLElement).style.background = 'var(--bk-cta-secondary-bg)';
             }}
           >
-            <Sparkles className="w-3.5 h-3.5" />
             Try sending again
           </button>
         </div>
@@ -1613,7 +1604,6 @@ const BookingSuccess: React.FC<BookingSuccessProps> = ({
         style={{ borderColor: 'var(--bk-divider)' }}
       >
         <div className="inline-flex items-center gap-1.5 text-[10px] font-mono uppercase tracking-wider text-[var(--bk-section-muted)]">
-          <Sparkles className="w-3 h-3" />
           <span className="truncate">Save reference: {receipt.reference}</span>
         </div>
         <div className="flex items-center gap-3">

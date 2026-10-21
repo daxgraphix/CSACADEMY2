@@ -35,7 +35,7 @@ export const ForOrganizationsSection: React.FC<ForOrganizationsSectionProps> = (
     { 
       title: 'Executive AI Briefings', 
       icon: Award, 
-      desc: 'Strategic 90-minute briefings for C-Suite, Boards, and Permanent Secretaries.'},
+      desc: 'Briefings for senior leaders, with duration and topics agreed for each engagement.'},
     { 
       title: 'University Capacity Building', 
       icon: GraduationCap, 

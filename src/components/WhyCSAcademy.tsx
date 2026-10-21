@@ -37,8 +37,8 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
       icon: Globe2 
     },
     { 
-      title: 'English & Local Languages',
-      desc: 'Bilingual accessibility ensuring language is never an obstacle to mastering high-impact technologies.', 
+      title: 'Clear English Instruction',
+      desc: 'Learn through structured English-language lessons, guided practice, and practical projects.',
       icon: Languages 
     },
     { 
@@ -63,7 +63,7 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
     },
     { 
       title: 'Flexible Formats', 
-      desc: 'From 90-minute executive briefings to multi-week cohort intensives that fit your demanding schedule.', 
+      desc: 'Discuss the session length, delivery format, and schedule with our team before confirming a booking.',
       icon: Sliders 
     },
     { 
@@ -77,8 +77,8 @@ export const WhyCSAcademy: React.FC<WhyCSAcademyProps> = ({
       icon: Users 
     },
     { 
-      title: 'Recognized Certificates', 
-      desc: 'QR-verifiable digital certificates trusted by East African employers and institutions.', 
+      title: 'Clear completion details',
+      desc: 'Certificate availability and requirements are confirmed for each course before enrollment.',
       icon: BadgeCheck 
     }
   ];

@@ -3,19 +3,10 @@ import { siteConfig } from '../config/site';
 /**
  * Single source of truth for the endpoint that receives form submissions.
  *
- * Priority:
- *  1. VITE_BOOKING_ENDPOINT — a real backend (or a custom formsubmit URL).
- *  2. formsubmit.co ajax fallback — serverless form-to-email, no account needed.
- *
- * The first submission from a new origin triggers a one-time activation email
- * to the recipient address, so both the booking and newsletter flows surface
- * that state instead of silently failing.
+ * FormSubmit provides serverless form-to-email delivery. It may require a
+ * one-time activation email before accepting the first inquiry.
  */
-export const BOOKING_ENDPOINT: string =
-  (typeof import.meta !== 'undefined' &&
-    (import.meta as ImportMeta & { env?: Record<string, string> }).env
-      ?.VITE_BOOKING_ENDPOINT) ||
-  `https://formsubmit.co/ajax/${siteConfig.email}`;
+export const BOOKING_ENDPOINT = `https://formsubmit.co/ajax/${siteConfig.email}`;
 
 export interface SubmitResult {
   ok: boolean;
@@ -25,7 +16,7 @@ export interface SubmitResult {
 
 /**
  * POST a form-encoded payload to BOOKING_ENDPOINT.
- * Never throws — callers get a structured result they can render.
+ * Never throws. Callers get a structured result they can render.
  */
 export const submitForm = async (fields: Record<string, string>): Promise<SubmitResult> => {
   if (!BOOKING_ENDPOINT) {
@@ -49,11 +40,11 @@ export const submitForm = async (fields: Record<string, string>): Promise<Submit
     });
   } catch (networkErr) {
     const raw = networkErr instanceof Error ? networkErr.message.toLowerCase() : '';
-    let friendly = 'Could not reach the server. Please try again in a moment.';
+    let friendly = 'Could not reach FormSubmit. Please try again in a moment.';
     if (raw.includes('failed to fetch') || raw.includes('networkerror') || raw.includes('network request failed')) {
       friendly = 'You appear to be offline, or your browser blocked the request. Check your connection and try again.';
     } else if (raw.includes('timeout') || raw.includes('timed out')) {
-      friendly = 'The server took too long to respond. Please try again.';
+      friendly = 'FormSubmit took too long to respond. Please try again.';
     } else if (raw.includes('cors') || raw.includes('access-control')) {
       friendly = 'Your browser blocked the request. Please try again, or contact us on WhatsApp.';
     }
@@ -76,12 +67,12 @@ export const submitForm = async (fields: Record<string, string>): Promise<Submit
         ok: false,
         needsActivation: true,
         errorMessage:
-          'This site still needs a one-time form activation. CS Academy has been emailed an activation link — once it is clicked, submissions deliver automatically.'
+          'This site still needs a one-time form activation. CS Academy has been emailed an activation link. Once it is clicked, submissions deliver automatically.'
       };
     }
     return {
       ok: false,
-      errorMessage: data.message || `Server returned status ${res.status}. Please try again.`
+      errorMessage: data.message || `FormSubmit returned status ${res.status}. Please try again.`
     };
   }
 

@@ -1,5 +1,6 @@
 import React, { useState, Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { blogPostsData } from '../data/blog';
 import { BlogPost } from '../types';
 import { useApp } from '../context/AppContext';
@@ -63,7 +64,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   return (
     <>
       <Helmet>
-        <title>Blog | AI, Cybersecurity & Digital Skills Insights - CS Academy</title>
+        <title>Blog | AI, Cybersecurity & Digital Skills Insights | CS Academy</title>
         <meta name="description" content="Read expert perspectives on AI literacy, cybersecurity, and digital transformation in East Africa. Practical guides, tutorials, and ethical analysis from CS Academy instructors." />
         <meta name="keywords" content="AI blog Tanzania, cybersecurity insights Africa, digital skills Africa, local language AI, tech education East Africa" />
         <meta property="og:title" content="CS Academy Blog | AI, Cybersecurity & Digital Skills" />
@@ -79,7 +80,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-red-950/40 border border-red-800/40 text-[var(--accent-red-strong)] text-xs font-mono font-bold uppercase tracking-wider">
+          <div className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider ${theme === 'dark' ? 'border-red-800/40 bg-red-950/40 text-red-300' : 'border-red-200 bg-red-50 text-red-800'}`}>
             <span>Essays, Insights & Practical Analysis</span>
           </div>
           <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${
@@ -165,8 +166,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             filtered.map((post) => (
             <article
               key={post.id}
-              onClick={() => openBlogArticleModal(post)}
-              className={`border rounded-3xl p-6 flex flex-col justify-between cursor-pointer transition-all duration-200 hover:-translate-y-1 shadow-sm group ${
+              className={`border rounded-3xl p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-sm group ${
                 theme === 'dark'
                   ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700'
                   : 'bg-neutral-50 border-neutral-300 hover:border-red-400 hover:shadow-lg'
@@ -191,7 +191,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                   <h3 className={`text-xl font-bold tracking-tight group-hover:text-[var(--accent-red-strong)] transition-colors leading-snug ${
                     theme === 'dark' ? 'text-white' : 'text-neutral-900'
                   }`}>
-                    {post.title}
+                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                   </h3>
                   <p className={`text-xs mt-2 line-clamp-3 leading-relaxed ${
                     theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
@@ -219,11 +219,11 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                     <User className="w-4 h-4 text-[var(--accent-red-strong)]" />
                     <span className="font-semibold">{post.author}</span>
                   </div>
-                  <div className="flex items-center gap-1 font-bold text-[var(--accent-red-strong)] group-hover:translate-x-1 transition-transform">
-                    <span>Read Article</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
+                  <Link to={`/blog/${post.slug}`} className="flex items-center gap-1 font-bold text-[var(--accent-red-strong)] group-hover:translate-x-1 transition-transform">
+                    <span>Read Article</span><ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                 </div>
+                <button type="button" onClick={() => openBlogArticleModal(post)} className="text-left text-xs font-semibold text-[var(--accent-red-strong)] underline underline-offset-4">Quick preview</button>
 
                 {/* Social Share Buttons */}
                 <div className="pt-2 border-t border-dashed border-[var(--border-color)]/40 dark:border-[var(--border-color)]/80 flex items-center justify-between">

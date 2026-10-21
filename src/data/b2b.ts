@@ -16,3 +16,9 @@ export const b2bSectorOptions = [
   'Healthcare',
   'Other'
 ] as const;
+export const b2bTrainingFocusOptions = [
+  'Artificial intelligence and productivity',
+  'Cybersecurity and digital safety',
+  'Digital skills and web development',
+  'A mix of topics / not sure yet'
+] as const;

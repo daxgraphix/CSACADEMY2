@@ -60,23 +60,27 @@ export const programsNav: NavLink[] = [
 export const moreNav: NavLink[] = [
   { id: 'nav-more-features', label: 'Platform Features', route: 'features' },
   { id: 'nav-more-formats', label: '6 Delivery Formats', route: 'learning-formats' },
+  { id: 'nav-more-individual-request', label: 'Individual Training Request', route: 'individual-request', badge: 'Start here', badgeTone: 'red' },
   { id: 'nav-more-resources', label: 'Free Resources', route: 'resources' },
   { id: 'nav-more-blog', label: 'Blog & Articles', route: 'blog' },
   { id: 'nav-more-about', label: 'About CS Academy', route: 'about' },
+  { id: 'nav-more-instructors', label: 'Instructors', route: 'instructors' },
   { id: 'nav-more-contact', label: 'Contact & Support', route: 'contact' }
 ];
 
-/** Mobile drawer order — the full site, top to bottom. */
+/** Mobile drawer order from the top to the bottom of the full site. */
 export const mobileNav: NavLink[] = [
   { id: 'mobile-home', label: 'Home', route: 'home' },
-  { id: 'mobile-academy', label: 'Full Academy', route: 'academy' },
+  { id: 'mobile-academy', label: 'Academy Overview', route: 'academy' },
   { id: 'mobile-features', label: 'Platform Features', route: 'features', badge: 'New' },
-  { id: 'mobile-pricing', label: 'Pricing & Plans', route: 'pricing', badge: 'M-Pesa' },
+  { id: 'mobile-pricing', label: 'Pricing & Plans', route: 'pricing' },
+  { id: 'mobile-individual-request', label: 'Individual Training Request', route: 'individual-request', badge: 'Start here', badgeTone: 'red' },
   { id: 'mobile-formats', label: 'Delivery Formats', route: 'learning-formats' },
   { id: 'mobile-teams', label: 'For Organizations', route: 'for-organizations', badge: 'Corporate' },
   { id: 'mobile-resources', label: 'Free Resources', route: 'resources' },
   { id: 'mobile-blog', label: 'Blog & Articles', route: 'blog' },
   { id: 'mobile-about', label: 'About CS Academy', route: 'about' },
+  { id: 'mobile-instructors', label: 'Instructors', route: 'instructors' },
   { id: 'mobile-contact', label: 'Contact & Support', route: 'contact' }
 ];
 
@@ -100,7 +104,7 @@ export const footerColumns: FooterColumn[] = [
     items: [
       { id: 'footer-delivery-formats', label: '6 Delivery Formats', route: 'learning-formats' },
       { id: 'footer-delivery-features', label: 'Platform Features', route: 'features' },
-      { id: 'footer-delivery-pricing', label: 'Pricing & Plans', route: 'pricing', badge: 'M-Pesa', badgeTone: 'emerald' },
+      { id: 'footer-delivery-pricing', label: 'Pricing & Plans', route: 'pricing' },
       { id: 'footer-delivery-faq', label: 'Pricing Questions', route: 'pricing', hash: 'pricing-faq' }
     ]
   },
@@ -120,9 +124,11 @@ export const footerColumns: FooterColumn[] = [
     items: [
       { id: 'footer-company-academy', label: 'Full Academy Overview', route: 'academy' },
       { id: 'footer-company-about', label: 'About CS Academy', route: 'about' },
+      { id: 'footer-company-instructors', label: 'Instructors', route: 'instructors' },
       { id: 'footer-company-resources', label: 'Free Resources', route: 'resources' },
       { id: 'footer-company-blog', label: 'Blog & Articles', route: 'blog' },
-      { id: 'footer-company-contact', label: 'Contact & Book', route: 'contact' }
+      { id: 'footer-company-contact', label: 'Contact & Book', route: 'contact' },
+      { id: 'footer-company-request', label: 'Individual Training Request', route: 'individual-request' }
     ]
   }
 ];

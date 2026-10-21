@@ -1,8 +1,7 @@
 import React from 'react';
-import { ArrowRight, CalendarDays, CheckCircle2, Clock, Flame, MapPin, Smartphone } from 'lucide-react';
+import { ArrowRight, CalendarDays, CheckCircle2, MapPin, Smartphone } from 'lucide-react';
 import { useApp } from '../context/AppContext';
-import { useCohortUrgency } from '../hooks/useCohortUrgency';
-import { getNextCohortDate } from '../utils/cohort';
+import { cohortStartIsAdminConfirmed, getNextCohortDate } from '../utils/cohort';
 import { pricingPlansData } from '../data/pricing';
 
 interface FeaturedOfferProps {
@@ -12,9 +11,8 @@ interface FeaturedOfferProps {
 export const FeaturedOffer: React.FC<FeaturedOfferProps> = ({ openBookingModal }) => {
   const { theme } = useApp();
   const isDark = theme === 'dark';
-  const startDate = getNextCohortDate();
+  const startDate = cohortStartIsAdminConfirmed() ? getNextCohortDate() : null;
   const livePlan = pricingPlansData.find((plan) => plan.id === 'zoom-live-cohort');
-  const urgency = useCohortUrgency();
   const panel = isDark ? 'border-white/10 bg-white/[0.04]' : 'border-neutral-200 bg-white';
   const muted = isDark ? 'text-neutral-300' : 'text-neutral-700';
 
@@ -29,7 +27,7 @@ export const FeaturedOffer: React.FC<FeaturedOfferProps> = ({ openBookingModal }
             <li className="flex items-start gap-2 group-hover:translate-x-1 transition-transform"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500 transition-transform group-hover:scale-110" /> <span>No technical background required</span></li>
             <li className="flex items-start gap-2 group-hover:translate-x-1 transition-transform"><CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500 transition-transform group-hover:scale-110" /> <span>Live online or in-person delivery</span></li>
             <li className="flex items-start gap-2 group-hover:translate-x-1 transition-transform"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)] transition-transform group-hover:scale-110" /> <span>East Africa-focused examples</span></li>
-            <li className="flex items-start gap-2 group-hover:translate-x-1 transition-transform"><Smartphone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)] transition-transform group-hover:scale-110" /> <span>English with local-language support</span></li>
+            <li className="flex items-start gap-2 group-hover:translate-x-1 transition-transform"><Smartphone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)] transition-transform group-hover:scale-110" /> <span>English-language instruction</span></li>
           </ul>
         </div>
 
@@ -44,21 +42,15 @@ export const FeaturedOffer: React.FC<FeaturedOfferProps> = ({ openBookingModal }
           </div>
           <div className={`border-t pt-4 ${isDark ? 'border-white/10' : 'border-neutral-200'}`}>
             <p className="text-sm font-bold">
-              Live cohort plan from TSh {livePlan?.priceTsh ?? '50,000'} / month
+              Live cohort plan from TSh {livePlan?.priceTsh ?? 'price to confirm'} / month
             </p>
             <p className={`mt-1 text-xs ${muted}`}>
-              KES {livePlan?.priceKes ?? '2,700'} or USD {livePlan?.priceUsd ?? '20'} per month. Confirm availability and payment details with our team.
+              KES {livePlan?.priceKes ?? 'price to confirm'} or USD {livePlan?.priceUsd ?? 'price to confirm'} per month. Confirm availability and payment details with our team.
             </p>
           </div>
-          <div className={`flex flex-wrap items-center gap-2 border-t pt-4 text-[11px] font-bold uppercase tracking-wider ${isDark ? 'border-white/10' : 'border-neutral-200'}`}>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[var(--accent-red-strong)]">
-              <Flame aria-hidden="true" className="h-3.5 w-3.5" />
-              {urgency.seatsLeft > 0 ? `${urgency.seatsLeft} seats left` : 'Nearly full'}
-            </span>
-            <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 ${isDark ? 'bg-white/5 text-neutral-300' : 'bg-neutral-100 text-neutral-700'}`}>
-              <Clock aria-hidden="true" className="h-3.5 w-3.5" />
-              {urgency.closed ? 'Enrolment closed' : `Enrol by ${urgency.deadlineLabel} · ${urgency.countdown}`}
-            </span>
+          <div className={`flex items-center gap-2 border-t pt-4 text-[11px] font-semibold ${muted}`}>
+            <CheckCircle2 aria-hidden="true" className="h-4 w-4 shrink-0 text-emerald-500" />
+            Schedule and availability confirmed with you before enrollment.
           </div>
           <button
             type="button"

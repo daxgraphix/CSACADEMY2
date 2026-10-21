@@ -9,8 +9,7 @@ import {
   BookOpen,
   User,
   Search,
-  ArrowUpDown,
-  Star
+  ArrowUpDown
 } from 'lucide-react';
 
 interface BlogSectionProps {
@@ -145,7 +144,6 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
             <div className="sm:w-2/3 space-y-4">
               <div className="flex items-center justify-between gap-3 text-xs">
                 <span className="inline-flex items-center gap-1.5 font-mono text-[10px] font-bold px-2.5 py-0.5 rounded border border-[var(--accent-red)]/40 bg-red-50 text-[var(--accent-red-strong)]">
-                  <Star className="w-3 h-3" />
                   FEATURED ESSAY
                 </span>
                 <div className={`flex items-center gap-1.5 font-mono text-[11px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>

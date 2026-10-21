@@ -17,42 +17,42 @@ export const pricingFaqData: PricingFaqItem[] = [
     id: 'which-plan-should-i-choose',
     question: 'Which plan is right for me?',
     answer:
-      'Start with the format you want. WhatsApp Micro-Learning (TSh 20,000/month) suits people who want short lessons on a phone. Self-Paced Video Platform (TSh 30,000/month) gives you the full library on demand. Live Cohorts (TSh 50,000/month) adds scheduled live sessions with an instructor and feedback on your work. If you want every channel plus the annual pass, that is TSh 135,000/year. Tell us your goal and current skill level and we will recommend a plan before you pay anything.'
+      'Choose based on how you prefer to learn. WhatsApp Micro-Learning is TSh 20,000/month for short materials shared by WhatsApp. Self-Paced Video Platform is TSh 30,000/month for the materials included with that enrollment. Live Cohorts are TSh 50,000/month for scheduled instructor-led sessions. Annual Learning Plan is TSh 135,000/year; ask us which formats and courses are included before enrolling. We can confirm access duration, support, and payment details before you pay.'
   },
   {
     id: 'how-much-is-a-live-cohort',
     question: 'How much does the live cohort cost?',
     answer:
-      'The live cohort plan is TSh 50,000 per month, or KES 2,700 / USD 20 for learners outside Tanzania. Enrollment closes three days before each cohort starts, and cohort seats are limited so that every learner gets instructor feedback.'
+      'The live cohort plan is TSh 50,000 per month, KES 2,700 per month, or USD 20 per month. Ask us to confirm the next schedule and availability before enrollment.'
   },
   {
     id: 'which-payment-methods-do-you-accept',
     question: 'Which payment methods can I use?',
     answer:
-      'We accept M-Pesa, Tigo Pesa, Airtel Money, and HaloPesa for East African mobile money, plus Visa, Mastercard, and bank transfer. Mobile money payments are confirmed by SMS and email, and we issue a receipt for every payment.'
+      'Payment options depend on your country and the training plan. Send an enrollment inquiry first; our team will confirm available methods, the exact amount, and payment instructions before you pay. This website does not collect payment details or take payment.'
   },
   {
     id: 'can-i-pay-in-installments',
     question: 'Can I pay in installments?',
     answer:
-      'Yes. For multi-week bootcamps and masterclass tracks we offer a two-part plan: 50% at registration and the remaining 50% midway through the cohort. Message us on WhatsApp and we will set it up with a proforma invoice.'
+      'Payment arrangements depend on the course and plan. Ask us before paying; we will confirm whether an installment option is available and provide the agreed terms in writing.'
   },
   {
     id: 'do-organizations-get-custom-pricing',
-    question: 'We are a company or institution — do we get custom pricing?',
+    question: 'We are a company or institution. Do we get custom pricing?',
     answer:
-      'Yes. On-site physical training starts at TSh 1,215,000, and workshops and seminars start at TSh 465,000, but both are scoped to your team size, location, and curriculum. Request a proposal and an advisor will come back within one business day with a costed outline.'
+      'Yes. Published starting prices are TSh 1,215,000 for on-site training and TSh 465,000 for workshops and seminars. Final scope and price depend on your team size, location, and curriculum. Request a proposal and we will follow up by email with next steps.'
   },
   {
     id: 'is-there-a-refund-policy',
     question: 'What happens if I cannot make it to a live session?',
     answer:
-      'Live cohort sessions are recorded and posted to the course area, so you can catch up without losing the fee. If you cancel more than seven days before a cohort starts, we move you to the next cohort at no extra cost. Direct any cancellation or refund request to support and we will confirm in writing.'
+      'Please ask about rescheduling and cancellation terms before paying. The terms for your selected course or plan will be confirmed with your enrollment details.'
   },
   {
     id: 'what-do-i-need-to-start',
     question: 'What do I need to start?',
     answer:
-      'A phone or laptop with a modern browser and a WhatsApp account is enough. There is no technical background required, no heavy software to install, and no high-spec hardware. Lessons are available in English with local-language support where the program allows.'
+      'A phone or laptop with a modern browser and a WhatsApp account is enough. There is no technical background required, no heavy software to install, and no high-spec hardware. Course materials and instruction are in English.'
   }
 ];

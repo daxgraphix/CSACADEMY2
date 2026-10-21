@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
@@ -10,6 +11,7 @@ import {
   Phone,
   MapPin,
   Calendar,
+  ArrowRight,
   Send,
   CheckCircle2,
   Loader2
@@ -64,18 +66,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
       return;
     }
 
-    // The endpoint could not take the enquiry. Fall back to the user's mail
-    // client so the message is never silently lost, and say so plainly.
     setSubmitError(
-      `${result.errorMessage ?? 'We could not send your inquiry just now.'} Opening your email app so you can send it directly.`
+      `${result.errorMessage ?? 'We could not send your inquiry just now.'} Your details are still in this form. Choose email or WhatsApp below to continue.`
     );
-    try {
-      window.location.href = buildMailtoUrl();
-    } catch {
-      // Some browsers and test environments cannot navigate to a mailto URL.
-      // The message is already recorded above, so the form still reports the
-      // failure instead of silently swallowing it.
-    }
   };
 
   const whatsappDirect = `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(
@@ -86,7 +79,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
   return (
     <>
       <Helmet>
-        <title>Contact Us | CS Academy - AI & Cybersecurity Training</title>
+        <title>Contact Us | CS Academy | AI & Cybersecurity Training</title>
         <meta name="description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa. Get in touch for enrollment, corporate training, or partnership inquiries." />
         <meta name="keywords" content="contact CS Academy, AI training inquiry, cybersecurity course enrollment, digital skills training East Africa, booking a training session" />
         <meta property="og:title" content="Contact Us | CS Academy" />
@@ -119,6 +112,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
           }`}>
             Reach out for individual enrollment, customized organizational workshops, or executive speaking engagements.
           </p>
+          <Link to="/request-training" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[var(--accent-red)] px-5 py-3 text-xs font-extrabold uppercase tracking-wider text-white shadow-md transition hover:bg-[var(--accent-red-hover)]">
+            Make an individual learning request <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
 
         {/* 2-Column Contact & Interactive Form */}
@@ -240,7 +236,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 Send a Training Inquiry
               </h2>
               <p className={`text-xs mt-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
-                Our training coordinators respond within 24 business hours.
+                Your request is sent to our support email through FormSubmit. We’ll follow up by email with next steps.
               </p>
             </div>
 
@@ -258,13 +254,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   <div>
                     <p className="text-sm font-bold">Inquiry sent</p>
                     <p className="mt-1 text-xs leading-relaxed">
-                      Thanks {name.trim() || 'for reaching out'} — our training coordinators reply within
-                      24 business hours. A copy is on its way to {email.trim() || 'your inbox'}.
+                      Thanks {name.trim() || 'for reaching out'}. FormSubmit sent your inquiry to CS Academy support. We’ll follow up at {email.trim() || 'the email you provided'} with next steps.
                     </p>
                     <button
                       type="button"
                       onClick={() => {
                         setSubmitted(false);
+                        setSubmitError(null);
                         setName('');
                         setEmail('');
                         setOrg('');
@@ -403,9 +399,17 @@ export const ContactPage: React.FC<ContactPageProps> = ({
               </div>
 
               {submitError && (
-                <p role="alert" className="text-xs font-semibold text-red-500">
-                  {submitError}
-                </p>
+                <div role="alert" className={`space-y-3 rounded-xl border p-4 text-xs ${theme === 'dark' ? 'border-red-400/30 bg-red-950/20 text-red-200' : 'border-red-200 bg-red-50 text-red-800'}`}>
+                  <p className="font-semibold">{submitError}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <a href={buildMailtoUrl()} className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-current px-3 py-2 font-bold hover:bg-black/5">
+                      <Mail className="h-3.5 w-3.5" aria-hidden="true" /> Continue by email
+                    </a>
+                    <a href={whatsappDirect} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-current px-3 py-2 font-bold hover:bg-black/5">
+                      <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" /> Continue on WhatsApp
+                    </a>
+                  </div>
+                </div>
               )}
 
               <div className="pt-2">

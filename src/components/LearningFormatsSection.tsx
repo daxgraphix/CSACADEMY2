@@ -109,7 +109,7 @@ export const LearningFormatsSection: React.FC<LearningFormatsSectionProps> = ({
               theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
             }`}>
               <Smartphone className="w-3.5 h-3.5 text-emerald-500" />
-              <span>M-Pesa, Airtel Money, Cards accepted</span>
+              <span>Payment options confirmed before enrollment</span>
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ export const ScrollToHash: React.FC = () => {
         return;
       }
 
-      // The lazy page has not painted its content yet — try again briefly.
+      // The lazy page has not painted its content yet. Try again briefly.
       if (tries < 20) {
         setTimeout(() => attempt(tries + 1), 50);
       }

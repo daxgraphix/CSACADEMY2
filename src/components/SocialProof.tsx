@@ -11,8 +11,8 @@ export const SocialProof: React.FC<SocialProofProps> = ({ openBookingModal }) =>
   const isDark = theme === 'dark';
   const items = [
     { icon: MapPin, title: 'Rooted in East Africa', body: 'Based in Dar es Salaam, with online training available across the region.' },
-    { icon: Languages, title: 'Language-aware teaching', body: 'English-first instruction with local-language support where the program allows.' },
-    { icon: Smartphone, title: 'Designed for local access', body: 'Mobile-friendly learning and local payment options are available on eligible plans.' },
+    { icon: Languages, title: 'Clear instruction', body: 'Course instruction and materials are provided in English.' },
+    { icon: Smartphone, title: 'Designed for local access', body: 'Mobile-friendly learning with payment details confirmed directly before enrollment.' },
     { icon: BookOpenCheck, title: 'Practical from day one', body: 'Work through guided prompts, research, writing, and safe-use exercises.' }
   ];
 
@@ -23,7 +23,7 @@ export const SocialProof: React.FC<SocialProofProps> = ({ openBookingModal }) =>
           <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">Local delivery, practical learning</p>
           <h2 id="local-fit-title" className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">Built for learners and teams across East Africa</h2>
           <p className={`mt-4 text-sm leading-relaxed sm:text-base ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
-            Compare the format, language support, and payment option with our team before you enroll. We can help match the training to your location and goals.
+            Instruction and course materials are in English. Ask our team to confirm the format, payment option, and course requirements before you enroll.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

@@ -17,7 +17,7 @@ export const corporateOfferingsData: CorporateOffering[] = [
   {
     badge: 'Academic & Higher Ed',
     title: 'University & Youth Programmes',
-    description: 'Empower faculty with AI pedagogy and equip students with job-ready digital capabilities and assessment integrity.',
+    description: 'Support faculty in exploring AI for teaching and help students practise digital skills and assessment integrity.',
     points: ['Ethical AI curriculum guidelines', 'Classroom assessment tools', 'Career-ready digital portfolios']
   },
   {
@@ -30,7 +30,7 @@ export const corporateOfferingsData: CorporateOffering[] = [
     badge: 'Custom Institutional',
     title: 'Customized Organizational Syllabi',
     description: 'Bespoke multi-module training programs co-designed with your L&D leads for NGOs, government ministries, and banks.',
-    points: ['Tailored to your software stack', 'Bilingual English & Local Languages', 'Pre/post impact evaluation reports']
+    points: ['Tailored to your software stack', 'English-language training materials', 'Pre/post impact evaluation reports']
   }
 ];
 

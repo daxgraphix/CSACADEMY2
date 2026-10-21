@@ -2,7 +2,7 @@ export const siteConfig = {
   academyName: "CS ACADEMY",
   shortName: "CS Academy",
   parentOrg: "Cyber Academy",
-  tagline: "Bridging Digital Skills Through Practical English & Local-Language Tech Education",
+  tagline: "Practical Technology Education for East Africa",
   establishedYear: 2026,
   email: "support@cyberswahili.co.tz",
   phone: "+255753969379",
@@ -40,18 +40,18 @@ export const siteConfig = {
     {
       id: "digital-skills",
       name: "Modern Digital Skills & Code",
-      badge: "Job Ready",
+      badge: "Practical Skills",
       desc: "Modern web development (React, Tailwind), UI/UX design in Figma, digital marketing, and data analytics.",
       icon: "Laptop"
     }
   ],
 
-  vision: "To empower 100,000+ Africans with practical, safe, and language-accessible AI, coding, and cybersecurity competencies that unlock digital employment and business transformation.",
+  vision: "To make practical, responsible AI, coding, and cybersecurity learning accessible to people and organizations across Africa.",
   
   values: [
     {
       title: "Accessibility",
-       description: "Making digital education accessible through English-first curricula, mobile money payments, and low-bandwidth channels.",
+       description: "Making digital education accessible through English-first curricula and low-bandwidth channels.",
       icon: "Globe"
     },
     {
@@ -80,7 +80,7 @@ export const siteConfig = {
       "Digital Safety Specialist"
     ],
      bio: "Alex Rweyemamu is a technology educator and cybersecurity professional dedicated to demystifying artificial intelligence, digital design, and coding for African youth, educators, and enterprise workforces. Through CS Academy, he leads practical training programs that bridge complex modern technologies with accessible, culturally relevant learning experiences.",
-    quote: "Language should never be a barrier to learning technology. We empower East African youth with practical, accessible digital skills that turn curiosity into real opportunity and lasting economic impact."
+    quote: "Clear, practical instruction should make technology easier to approach. We help learners build useful digital skills through guided practice."
   },
 
   socialLinks: {

@@ -1,24 +1,40 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
 export const BackToTop: React.FC = () => {
   const { theme } = useApp();
-  const [scrollY, setScrollY] = useState(0);
   const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
+  const progressCircleRef = useRef<SVGCircleElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      setScrollY(y);
-      setVisible(y > 200);
+    let frame = 0;
+    const updateVisibility = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+        const circumference = 2 * Math.PI * 20;
+        if (progressCircleRef.current) {
+          progressCircleRef.current.style.strokeDashoffset = String(circumference * (1 - progress));
+        }
+        const nextVisible = scrollTop > 200;
+        if (nextVisible !== visibleRef.current) {
+          visibleRef.current = nextVisible;
+          setVisible(nextVisible);
+        }
+      });
     };
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    updateVisibility();
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    window.addEventListener('resize', updateVisibility, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', updateVisibility);
+      window.removeEventListener('resize', updateVisibility);
     };
   }, []);
 
@@ -26,27 +42,6 @@ export const BackToTop: React.FC = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   }, []);
-
-  const [docHeight, setDocHeight] = useState(0);
-  const [winHeight, setWinHeight] = useState(0);
-
-  useEffect(() => {
-    const update = () => {
-      setDocHeight(Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      ));
-      setWinHeight(window.innerHeight || document.documentElement.clientHeight);
-    };
-    update();
-    window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
-  }, []);
-
-  const maxScroll = Math.max(1, docHeight - winHeight);
-  const progress = Math.min(1, Math.max(0, scrollY / maxScroll));
-  const circumference = 2 * Math.PI * 20;
-  const dashOffset = circumference * (1 - progress);
 
   return (
     <button
@@ -73,7 +68,7 @@ export const BackToTop: React.FC = () => {
       }`}
     >
       <svg
-        className="absolute inset-0 w-full h-full -rotate-90 pointer-events-none"
+        className="absolute inset-0 h-full w-full -rotate-90 pointer-events-none"
         viewBox="0 0 44 44"
         aria-hidden="true"
       >
@@ -86,6 +81,7 @@ export const BackToTop: React.FC = () => {
           strokeWidth="2"
         />
         <circle
+          ref={progressCircleRef}
           cx="22"
           cy="22"
           r="20"
@@ -93,12 +89,11 @@ export const BackToTop: React.FC = () => {
           stroke={theme === 'dark' ? '#ff3b30' : '#dc2626'}
           strokeWidth="2.5"
           strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={visible ? dashOffset : circumference}
+          strokeDasharray={2 * Math.PI * 20}
+          strokeDashoffset={2 * Math.PI * 20}
           style={{ transition: 'stroke-dashoffset 120ms linear' }}
         />
       </svg>
-
       <ArrowUp
         className="relative w-5 h-5 sm:w-6 sm:h-6 text-[var(--accent-red-strong)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5"
         strokeWidth={2.5}

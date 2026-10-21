@@ -7,7 +7,6 @@ import {
   MessageCircle,
   Users,
   Trophy,
-  Sparkles,
   Hammer,
   Rocket
 } from 'lucide-react';
@@ -57,7 +56,6 @@ export const DevPadTile: React.FC<DevPadTileProps> = ({
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           <div className="lg:col-span-7 space-y-5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-500 text-[10px] font-black uppercase tracking-[0.18em]">
-              <Sparkles className="w-3 h-3" />
               Free WhatsApp Community
             </div>
 

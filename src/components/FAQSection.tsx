@@ -111,7 +111,7 @@ export const FAQSection: React.FC = () => {
           <p className={`max-w-2xl mx-auto text-base leading-relaxed ${
             theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'
           }`}>
-            Direct answers regarding course access, mobile money payments (M-Pesa, Tigo Pesa, Airtel Money), technical support, and QR certification.
+            Direct answers about course access, enrollment, payment instructions, technical support, and certification.
           </p>
 
           {/* FAQ Search Bar */}

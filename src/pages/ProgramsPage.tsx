@@ -1,11 +1,12 @@
-import React, { useState, useMemo, Suspense, lazy } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ProgramPillar, TrainingProgram } from '../types';
+import { ProgramPillar } from '../types';
 import { programsData } from '../data/programs';
 import { featuredTrainingData } from '../data/training';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
+import { getProgramAccent } from '../utils/programAccent';
 import { PageBreadcrumbs, SectionHeading } from '../components/LayoutPrimitives';
 import {
   ShieldCheck,
@@ -15,58 +16,13 @@ import {
   Clock,
   Search,
   Filter,
-  Users,
   BookOpen,
   Layers,
-  Award,
-  Zap,
   Sparkles,
   Code2,
   Palette,
   X
 } from 'lucide-react';
-
-const ProgramCardSkeleton = () => (
-  <div className="animate-pulse border rounded-3xl p-8 bg-neutral-200 dark:bg-neutral-800 space-y-6">
-    <div className="flex items-center gap-4">
-      <div className="w-14 h-14 rounded-2xl bg-neutral-300 dark:bg-neutral-700" />
-      <div className="space-y-2">
-        <div className="h-4 w-32 bg-neutral-300 dark:bg-neutral-700 rounded" />
-        <div className="h-6 w-48 bg-neutral-300 dark:bg-neutral-700 rounded" />
-      </div>
-    </div>
-    <div className="space-y-2">
-      <div className="h-4 w-full bg-neutral-300 dark:bg-neutral-700 rounded" />
-      <div className="h-4 w-5/6 bg-neutral-300 dark:bg-neutral-700 rounded" />
-    </div>
-    <div className="grid grid-cols-2 gap-3">
-      {[1,2,3,4].map(i => (
-        <div key={i} className="h-16 bg-neutral-300 dark:bg-neutral-700 rounded-xl" />
-      ))}
-    </div>
-  </div>
-);
-
-const BlogCardSkeleton = () => (
-  <div className="animate-pulse border rounded-3xl p-6 bg-neutral-200 dark:bg-neutral-800 space-y-4">
-    <div className="flex justify-between">
-      <div className="h-5 w-20 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
-      <div className="h-5 w-16 bg-neutral-300 dark:bg-neutral-700 rounded" />
-    </div>
-    <div className="space-y-2">
-      <div className="h-6 w-3/4 bg-neutral-300 dark:bg-neutral-700 rounded" />
-      <div className="h-4 w-full bg-neutral-300 dark:bg-neutral-700 rounded" />
-      <div className="h-4 w-5/6 bg-neutral-300 dark:bg-neutral-700 rounded" />
-    </div>
-    <div className="flex gap-2">
-      <div className="h-5 w-12 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
-      <div className="h-5 w-16 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
-    </div>
-    <div className="pt-4 border-t space-y-2">
-      <div className="h-4 w-1/2 bg-neutral-300 dark:bg-neutral-700 rounded" />
-    </div>
-  </div>
-);
 
 interface ProgramsPageProps {
   openProgramModal: (program: ProgramPillar) => void;
@@ -89,17 +45,6 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
     { id: 'web-coding', label: 'Web & Coding', icon: Code2 },
     { id: 'design-uiux', label: 'Design & UI/UX', icon: Palette },
   ];
-
-  const getIcon = (iconName: string) => {
-    switch (iconName) {
-      case 'Sparkles':
-        return <Sparkles className="w-6 h-6 text-[var(--accent-red-strong)]" />;
-      case 'ShieldCheck':
-        return <ShieldCheck className="w-6 h-6 text-[var(--accent-red-strong)]" />;
-      default:
-        return <Laptop className="w-6 h-6 text-[var(--accent-red-strong)]" />;
-    }
-  };
 
   // Filter Pillars
   const filteredPillars = useMemo(() => {
@@ -148,11 +93,11 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
   return (
     <>
       <Helmet>
-        <title>Programs & Courses | AI, Cybersecurity & Web Development - CS Academy Tanzania</title>
+        <title>Programs & Courses | AI, Cybersecurity & Web Development | CS Academy Tanzania</title>
         <meta name="description" content="Browse CS Academy's full curriculum: AI & Vibe Coding, Cybersecurity & Defense, and Digital Skills & Web Development. Expert-led courses in Tanzania and East Africa." />
         <meta name="keywords" content="AI courses Tanzania, cybersecurity training Kenya, web development course East Africa, vibe coding Africa, CS Academy programs" />
         <meta property="og:title" content="CS Academy Programs | AI, Cybersecurity & Web Development" />
-        <meta property="og:description" content="Explore 30+ hands-on modules in AI, Cybersecurity, and Digital Skills. Taught in English & local languages. Mobile money enrollment." />
+        <meta property="og:description" content="Explore hands-on modules in AI, Cybersecurity, and Digital Skills. Instruction and course materials are in English; contact us for enrollment and payment details." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />
@@ -161,7 +106,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
     <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
       theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-neutral-50 text-neutral-900'
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 pt-4">
@@ -184,10 +129,10 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
         </div>
 
         {/* SEARCH & FILTER BAR */}
-        <div className={`p-6 sm:p-8 rounded-3xl border shadow-xl space-y-6 ${
+        <div className={`p-4 sm:p-5 rounded-2xl border shadow-md space-y-4 ${
           theme === 'dark' ? 'bg-[#141414] border-[var(--border-color)]' : 'bg-white border-neutral-300'
         }`}>
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-col md:flex-row items-stretch gap-3">
             {/* Search Input */}
             <div className="relative flex-1 w-full">
               <Search className={`w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 ${
@@ -198,8 +143,8 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder={'Search courses by title or skill category (e.g. Prompt Engineering, React, Cybersecurity, Phishing)...'}
-                className={`w-full pl-12 pr-10 py-3.5 text-sm rounded-2xl border transition-colors duration-200 focus:outline-none focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
+                placeholder="Search by course, skill, or topic…"
+                className={`w-full min-h-12 pl-12 pr-10 py-3 text-sm rounded-xl border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] ${
                   theme === 'dark'
                     ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white placeholder-neutral-500'
                     : 'bg-neutral-50 border-neutral-300 text-neutral-900 placeholder-neutral-500 shadow-inner'
@@ -229,7 +174,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
           </div>
 
           {/* Category Filter Pills */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-[var(--border-color)]/40">
+          <div className="flex items-center gap-2 overflow-x-auto border-t border-[var(--border-color)]/40 pt-3 pb-1">
             <span className={`text-xs font-bold uppercase tracking-wider mr-2 ${
               theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'
             }`}>
@@ -246,7 +191,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                   type="button"
                   aria-pressed={isSelected}
                   onClick={() => setSelectedCategory(cat.id)}
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
+                  className={`inline-flex shrink-0 items-center gap-1.5 px-3 py-2 rounded-full text-[11px] font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                     isSelected
                       ? 'bg-[var(--accent-red)] text-white shadow-lg shadow-red-900/40 scale-[1.02]'
                       : theme === 'dark'
@@ -318,201 +263,80 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
           </div>
         )}
 
-        {/* 1. MAJOR ACADEMY DEEP DIVE CARDS */}
+        {/* Core learning paths */}
         {filteredPillars.length > 0 && (
-          <div className="space-y-12">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-red)]" />
-              <h2 className={`text-xl sm:text-2xl font-black uppercase tracking-tight ${
-                theme === 'dark' ? 'text-white' : 'text-neutral-900'
-              }`}>
-                Core Academy Tracks
-              </h2>
+          <section aria-labelledby="core-tracks-title" className="space-y-5">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">Choose a learning path</p>
+                <h2 id="core-tracks-title" className={`mt-1 text-xl font-black tracking-tight sm:text-2xl ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>Core academy tracks</h2>
+              </div>
+              <span className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>Explore the syllabus and practical outcomes</span>
             </div>
-
-            <Suspense fallback={
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1,2,3].map(i => <ProgramCardSkeleton key={i} />)}
-              </div>
-            }>
-            {filteredPillars.map((pillar) => (
-              <div
-                key={pillar.id}
-                id={`programs-page-${pillar.id}`}
-                className={`border rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8 transition-all ${
-                  theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300'
-                }`}
-              >
-                <div className={`flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b ${
-                  theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
-                }`}>
-                  <div className="flex items-center gap-4">
-                    <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center ${
-                      theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-100 border-neutral-300'
-                    }`}>
-                      {getIcon(pillar.icon)}
-                    </div>
-                    <div>
-                      <span className="text-xs font-mono font-bold text-[var(--accent-red-strong)] uppercase">
-                        {pillar.badge}
-                      </span>
-                      <h2 className={`text-2xl sm:text-3xl font-extrabold ${
-                        theme === 'dark' ? 'text-white' : 'text-neutral-900'
-                      }`}>
-                        {pillar.title}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <Link
-                      to={`/programs/${pillar.slug}`}
-                      className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-colors uppercase tracking-wider ${
-                        theme === 'dark'
-                          ? 'text-neutral-200 hover:text-white bg-[var(--bg-primary)] hover:bg-neutral-800 border border-[var(--border-color)]'
-                          : 'text-neutral-800 hover:text-black bg-neutral-100 hover:bg-neutral-200 transition-colors duration-200 border border-neutral-300'
-                      }`}
-                    >
-                      View Academy Page
-                    </Link>
-                    <button
-                      onClick={() => openBookingModal({ program: pillar.title })}
-                      className="px-6 py-2.5 rounded-xl text-xs font-extrabold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg transition-all"
-                    >
-                      Book Training
-                    </button>
-                  </div>
-                </div>
-
-                {/* Descriptions & Topics */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                  <div className="grid-cols-1 lg:col-span-6 space-y-4">
-                    <h3 className={`text-lg font-bold ${
-                      theme === 'dark' ? 'text-white' : 'text-neutral-900'
-                    }`}>{pillar.tagline}</h3>
-                    <p className={`text-sm leading-relaxed ${
-                      theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
-                    }`}>
-                      {pillar.extendedDescription}
-                    </p>
-
-                    <div className="space-y-2 pt-2">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                        Target Audiences:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {pillar.audience.map((aud, aIdx) => (
-                          <span 
-                            key={aIdx} 
-                            className={`text-xs px-2.5 py-1 rounded border ${
-                              theme === 'dark'
-                                ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-neutral-300'
-                                : 'bg-neutral-100 border-neutral-300 text-neutral-700'
-                            }`}
-                          >
-                            {aud}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="grid-cols-1 lg:col-span-6 space-y-4">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
-                      Core Curriculum Modules & Hands-on Skills:
-                    </h4>
-                    <div className="space-y-3">
-                      {pillar.modules.map((mod, mIdx) => (
-                        <div 
-                          key={mIdx} 
-                          className={`p-3.5 rounded-xl border space-y-1 ${
-                            theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-300'
-                          }`}
-                        >
-                          <div className={`text-xs font-bold ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
-                            {mod.title}
-                          </div>
-                          <div className="text-[11px] text-neutral-400">{mod.description}</div>
-                          <div className="text-[10px] text-[var(--accent-red-strong)] font-mono font-bold mt-1">
-                            ✓ {mod.practicalSkill}
-                          </div>
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {filteredPillars.map((pillar) => {
+                const accent = getProgramAccent(pillar.slug);
+                const Icon = pillar.icon === 'Sparkles' ? Sparkles : pillar.icon === 'ShieldCheck' ? ShieldCheck : Laptop;
+                return (
+                  <article key={pillar.id} id={`programs-page-${pillar.id}`} className={`group flex min-w-0 flex-col overflow-hidden rounded-2xl border transition duration-200 hover:-translate-y-1 hover:shadow-xl ${theme === 'dark' ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white shadow-sm'}`}>
+                    <div className="h-1.5" style={{ backgroundColor: accent }} />
+                    <div className="flex flex-1 flex-col p-5 sm:p-6">
+                      <div className="flex items-start gap-3">
+                        <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${theme === 'dark' ? 'bg-[var(--bg-primary)]' : 'bg-neutral-100'}`} style={{ color: accent }}>
+                          <Icon className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                        <div className="min-w-0">
+                          <span className="text-[9px] font-extrabold uppercase tracking-[0.16em]" style={{ color: accent }}>{pillar.badge}</span>
+                          <h3 className={`mt-1 text-lg font-black tracking-tight ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>{pillar.title.replace(' ACADEMY', '')}</h3>
                         </div>
-                      ))}
+                      </div>
+                      <p className={`mt-4 text-sm font-semibold leading-relaxed ${theme === 'dark' ? 'text-neutral-200' : 'text-neutral-800'}`}>{pillar.tagline}</p>
+                      <p className={`mt-2 line-clamp-3 text-xs leading-relaxed ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>{pillar.description}</p>
+                      <div className="mt-4">
+                        <p className={`mb-2 text-[9px] font-extrabold uppercase tracking-[0.14em] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>What you can practise</p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {pillar.topics.slice(0, 3).map((topic) => <span key={topic} className={`rounded-full border px-2.5 py-1 text-[10px] ${theme === 'dark' ? 'border-[var(--border-color)] bg-white/[0.03] text-neutral-300' : 'border-neutral-200 bg-neutral-50 text-neutral-700'}`}>{topic}</span>)}
+                          {pillar.topics.length > 3 && <span className={`rounded-full px-2.5 py-1 text-[10px] font-bold ${theme === 'dark' ? 'bg-white/[0.06] text-neutral-300' : 'bg-neutral-100 text-neutral-700'}`}>+{pillar.topics.length - 3} topics</span>}
+                        </div>
+                      </div>
+                      <div className={`mt-5 rounded-xl p-3 text-xs leading-relaxed ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-neutral-300' : 'bg-neutral-50 text-neutral-700'}`}>
+                        <span className="font-bold">Practical outcome: </span>{pillar.outcomes[0]}
+                      </div>
+                      <div className="mt-auto grid grid-cols-2 gap-2 pt-5">
+                        <Link to={`/programs/${pillar.slug}`} className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[var(--accent-red)] px-3 py-2.5 text-center text-[11px] font-extrabold text-white transition hover:bg-[var(--accent-red-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)]">
+                          Explore track <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                        </Link>
+                        <button type="button" onClick={() => openProgramModal(pillar)} className={`min-h-11 rounded-xl border px-3 py-2.5 text-[11px] font-bold transition ${theme === 'dark' ? 'border-[var(--border-color)] text-neutral-200 hover:bg-white/[0.05]' : 'border-neutral-300 text-neutral-800 hover:bg-neutral-50'}`}>View syllabus</button>
+                      </div>
+                      <button type="button" onClick={() => openBookingModal({ program: pillar.title })} className="mt-2 min-h-10 text-xs font-bold text-[var(--accent-red-strong)] hover:underline">Ask about this track</button>
                     </div>
-                  </div>
-                </div>
-
-                {/* Bottom Outcomes & Formats */}
-                <div className={`grid sm:grid-cols-2 gap-4 p-5 rounded-2xl border text-xs ${
-                  theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-100 border-neutral-300'
-                }`}>
-                  <div>
-                    <div className={`font-bold uppercase tracking-wider mb-2 ${
-                      theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
-                    }`}>
-                      Verified Outcomes:
-                    </div>
-                    <ul className="space-y-1.5 text-neutral-400">
-                      {pillar.outcomes.map((out, oIdx) => (
-                        <li key={oIdx} className="flex items-start gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent-red-strong)] shrink-0 mt-0.5" />
-                          <span className={theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}>{out}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className={`font-bold uppercase tracking-wider mb-2 ${
-                      theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'
-                    }`}>
-                      Delivery & Duration:
-                    </div>
-                    <div className={`space-y-1 ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-                      <p>Formats: {pillar.deliveryFormats.join(', ')}</p>
-                      <p>Duration: {pillar.durationOptions.join(', ')}</p>
-                      <p className="text-[var(--accent-red-strong)] pt-1 font-semibold">
-                        ✓ Instructed in English & local languages
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            ))}
-            </Suspense>
-          </div>
+                  </article>
+                );
+              })}
+            </div>
+          </section>
         )}
-
         {/* 2. SPECIFIC FEATURED COURSES & MASTERCLASSES */}
         {filteredCourses.length > 0 && (
           <div className="space-y-8 pt-8">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-[var(--accent-red)]" />
-              <h2 className={`text-xl sm:text-2xl font-black uppercase tracking-tight ${
-                theme === 'dark' ? 'text-white' : 'text-neutral-900'
-              }`}>
-                Specialized Cohort Bootcamps & Masterclasses
+            <div>
+              <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">Focused, instructor-led options</p>
+              <h2 className={`mt-1 text-xl font-black tracking-tight sm:text-2xl ${theme === 'dark' ? 'text-white' : 'text-neutral-900'}`}>
+                Bootcamps & masterclasses
               </h2>
             </div>
-
-            <Suspense fallback={
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1,2,3,4,5,6].map(i => <BlogCardSkeleton key={i} />)}
-              </div>
-            }>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredCourses.map((course) => (
                 <div
                   key={course.id}
                   id={`course-card-${course.id}`}
-                  className={`border rounded-3xl p-6 flex flex-col justify-between space-y-5 shadow-lg transition-all hover:scale-[1.01] ${
+                  className={`border rounded-2xl p-5 flex flex-col justify-between space-y-4 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg ${
                     theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] hover:border-neutral-700' : 'bg-white border-neutral-300 hover:border-red-400'
                   }`}
                 >
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--accent-red-strong)] px-2.5 py-0.5 rounded-full bg-red-950/40 border border-red-900/40">
+                      <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border ${theme === 'dark' ? 'text-red-300 bg-red-950/40 border-red-900/40' : 'text-red-800 bg-red-50 border-red-200'}`}>
                         {course.category.toUpperCase()} | {course.level}
                       </span>
                       <span className={`text-[11px] font-mono flex items-center gap-1 ${
@@ -567,7 +391,7 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
                 </div>
               ))}
             </div>
-            </Suspense>
+
           </div>
         )}
 

@@ -19,82 +19,77 @@ export const platformFeaturesData: PlatformFeature[] = [
   {
     id: 'pdf-certificates',
     title: 'PDF Certificates',
-    shortDescription: 'Earn professional PDF certificates with QR code verification upon completing any course.',
-    fullDescription: 'Share your achievements with employers, clients, and your professional network on LinkedIn. Each certificate contains a tamper-proof QR code that instantly validates your graduation status and coursework authenticity.',
+    shortDescription: 'Certificate availability and requirements depend on the course.',
+    fullDescription: 'Some courses may offer a certificate of completion. Confirm its availability, completion requirements, and format with CS Academy before enrolling.',
     icon: 'Award',
-    badge: 'QR Code Verifiable',
+    badge: 'Course dependent',
     points: [
-      'Official downloadable high-resolution PDF certificate',
-      'Tamper-proof QR code linking to your online verification page',
-      'Instant 1-click sharing to LinkedIn, CVs, and client proposals',
-      'Recognized credential across East African tech employers'
+      'Certificate type depends on the course',
+      'Completion requirements are shared with course details',
+      'Ask us what documentation is available before enrolling'
     ],
-    note: 'Official digital certificate with QR code that employers can verify anywhere.'
+    note: 'Availability and format should be confirmed for your selected course.'
   },
   {
     id: 'digital-shop',
     title: 'Digital Shop',
-    shortDescription: 'Download premium ebooks, templates, and ready to use skills from the shop.',
-    fullDescription: 'Unlock products with Premium, or invite friends to unlock more. Access our curated library of prompt packs, web templates, design assets, and cheat sheets designed to give you an unfair advantage in your projects.',
+    shortDescription: 'Explore downloadable learning resources where available.',
+    fullDescription: 'Some courses include downloadable learning materials. Ask which files are available with your selected enrollment.',
     icon: 'ShoppingBag',
-    badge: 'Templates & Ebooks',
+    badge: 'Course materials',
     points: [
-      'Curated library of tech ebooks, UI kits, and starter templates',
-      'AI Prompt Starter Packs and business workflow blueprints',
-      'Included FREE for Premium members',
-      'Unlock individual products or the entire shop via friend invites'
+      'Course related reference materials where provided',
+      'Availability depends on the course and enrollment plan'
     ],
-    note: 'Download ebooks, website templates, and ready-to-use systems.'
+    note: 'Ask which downloadable materials are included before enrolling.'
   },
   {
     id: 'live-meetings',
     title: 'Live Meetings',
-    shortDescription: 'Join live sessions like Vibe Coding. Learn in real time with the host, ask questions, and book your seat inside the app.',
-    fullDescription: 'Experience collaborative real-time learning. Attend weekly "Vibe Coding" live streams, ask questions during interactive Q&As, review real projects with mentors, and easily reserve your seat directly inside the web app.',
+    shortDescription: 'Some plans include scheduled live online instruction and time for questions.',
+    fullDescription: 'Live session schedules and activities are confirmed for each cohort. Contact us to check what is included with your selected plan.',
     icon: 'Radio',
     badge: 'Live Interactive Sessions',
     points: [
-      'Weekly live "Vibe Coding" sessions and live build challenges',
-      'Real-time Q&A with experienced lead tech instructors',
-      'Live code reviews and portfolio critique clinics',
-      '1-click seat booking with calendar reminders inside the platform'
+      'Scheduled sessions where included in the selected plan',
+      'Question time during confirmed sessions',
+      'Guided practice based on the course',
+      'Session access details shared after enrollment is confirmed'
     ],
     note: 'Real-time live sessions to learn together and ask questions.'
   },
   {
     id: 'invite-and-earn',
-    title: 'Invite and Earn',
-    shortDescription: 'Share your referral code with friends. Unlock shop items, lifetime access, and earn 3,000 Tsh cash per friend.',
-    fullDescription: 'Share your personal referral code with friends. Invite 1 friend to open 1 digital product, 5 friends to unlock the entire digital shop, 10 friends for full Lifetime Access, then earn 3,000 Tsh cash directly via mobile money for every friend after that once they join Premium.',
+    title: 'Invite and Unlock',
+    shortDescription: 'Ask CS Academy whether a referral offer is currently available.',
+    fullDescription: 'Referral offers, if available, depend on current terms. Confirm eligibility and any reward with CS Academy before sharing or relying on an offer.',
     icon: 'Gift',
-    badge: 'Cash Rewards & Unlocks',
+    badge: 'Referral Unlocks',
     points: [
-      '1 Friend: Unlock 1 Premium Digital Product from the shop',
-      '5 Friends: Unlock the ENTIRE Digital Shop library forever',
-      '10 Friends: Get 100% FREE Lifetime Access to all courses',
-      '11+ Friends: Earn 3,000 Tsh cash reward per friend paid via Mobile Money'
+      'Check with CS Academy for current referral terms',
+      'Eligibility and any reward must be confirmed before participation'
     ],
-    note: 'Refer friends: unlock products, get lifetime membership, and earn 3,000 Tsh cash!'
+    note: 'Referral requirements and rewards are subject to the current terms in your learner account.'
   },
   {
     id: 'mentor-support',
     title: 'Mentor Support',
-    shortDescription: 'Get practical guidance from instructors and teaching assistants throughout your learning journey.',
-    fullDescription: 'Ask focused questions, share your work, and receive guidance that helps you move past real blockers. Support is available through agreed WhatsApp groups, live sessions, and programme check-ins.',
+    shortDescription: 'Instructor guidance may be available depending on your course and plan.',
+    fullDescription: 'Ask us whether your selected course includes instructor questions, group support, or feedback on exercises.',
     icon: 'Users',
     badge: 'Human Guidance',
-    points: ['Instructor and teaching assistant guidance', 'Practical feedback on exercises and projects', 'Clear escalation for difficult blockers', 'Support designed for beginner confidence'],
-    note: 'Get step-by-step guidance from instructors and teaching assistants.'
+    points: ['Support options vary by course and plan', 'Confirm included feedback and response channels before enrolling'],
+    note: 'Ask what support is included with your selected course.'
   },
   {
     id: 'low-bandwidth-learning',
     title: 'Low-Bandwidth Learning',
-    shortDescription: 'Practical materials and delivery options designed for real East African connectivity.',
-    fullDescription: 'Choose learning formats that work with your connection, device, and schedule. We prioritize lightweight resources, clear downloads, and communication channels that keep learning accessible.',
+    shortDescription: 'Ask about delivery formats that fit your device and connection.',
+    fullDescription: 'Connection requirements vary by course. Ask about available text, audio, download, WhatsApp, or live options before enrolling.',
     icon: 'Video',
     badge: 'Mobile Ready',
-    points: ['Lightweight reading and audio resources', 'Mobile-friendly lesson materials', 'Flexible WhatsApp learning options', 'Downloadable references for later use'],
-    note: 'Learn using minimal data on the device you already have.'
+    points: ['Some courses offer mobile-friendly materials', 'Download availability varies', 'Live video requires a reliable connection'],
+    note: 'Confirm data and device requirements for your selected course.'
   },
   {
     id: 'project-briefs',
@@ -128,13 +123,13 @@ export const platformFeaturesData: PlatformFeature[] = [
   },
   {
     id: 'bilingual-teaching',
-    title: 'Bilingual Teaching',
-    shortDescription: 'Understand complex technology in clear local language with the English terms used at work.',
+    title: 'Clear, Practical Teaching',
+    shortDescription: 'Understand complex technology through clear English explanations and practical examples.',
     fullDescription: 'Our language approach makes advanced ideas easier to grasp without isolating learners from global technology practice. Key terms are explained in context and connected to practical use.',
     icon: 'Sparkles',
-    badge: 'English with Local Support',
-    points: ['Clear local language explanations', 'English industry vocabulary in context', 'Examples adapted for local audiences', 'Better confidence asking technical questions'],
-    note: 'Understand technology in your local language while building English industry terminology.'
+    badge: 'English-language instruction',
+    points: ['Clear English explanations', 'Industry vocabulary in context', 'Examples adapted for East African audiences', 'Guided practice and learner questions'],
+    note: 'Build practical technology skills through clear explanations and guided practice.'
   },
   {
     id: 'career-pathways',
@@ -180,27 +175,9 @@ export const platformFeaturesData: PlatformFeature[] = [
 
 export const inviteTiers = [
   {
-    invites: '1 Friend',
-    title: 'Unlock 1 Product',
-    reward: 'Unlock 1 premium digital ebook or template from the Digital Shop.',
-    statusBadge: 'Tier 1'
-  },
-  {
-    invites: '5 Friends',
-    title: 'Unlock Entire Shop',
-    reward: 'Get complete, permanent access to every item in the Digital Shop.',
-    statusBadge: 'Tier 2'
-  },
-  {
-    invites: '10 Friends',
-    title: 'Lifetime Premium Access',
-    reward: '100% Free Lifetime Premium membership across all courses & future updates.',
-    statusBadge: 'Tier 3 (VIP)'
-  },
-  {
-    invites: '11+ Friends',
-    title: '3,000 TSH Cash Payout',
-    reward: 'Earn 3,000 Tsh cash per friend directly paid out to your M-Pesa / Tigo Pesa!',
-    statusBadge: 'Cash Machine'
+    invites: 'Referral programme',
+    title: 'Check Current Terms',
+    reward: 'See current referral requirements and eligible rewards in your learner account.',
+    statusBadge: 'Terms apply'
   }
 ];

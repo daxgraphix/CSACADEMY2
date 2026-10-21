@@ -94,7 +94,7 @@ export const PriceStrip: React.FC<PriceStripProps> = React.memo(({
 
       <span className="opacity-40">·</span>
 
-      <span className="font-medium">M-Pesa · Card</span>
+      <span className="font-medium">Payment details on request</span>
 
       <span className="opacity-40">·</span>
 
@@ -153,7 +153,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
   if (minimized) {
     return (
       <div
-        className={`md:hidden fixed bottom-3 right-3 z-40 inline-flex items-center gap-1 rounded-full pl-2 pr-1 py-1 shadow-lg border ${
+        className={`md:hidden fixed bottom-[calc(0.75rem+env(safe-area-inset-bottom))] right-3 z-40 inline-flex items-center gap-1 rounded-full pl-2 pr-1 py-1 shadow-lg border ${
           isDark
             ? 'bg-[var(--accent-red)]/95 border-[var(--accent-red-border)] text-white backdrop-blur-md'
             : 'bg-[var(--accent-red)] border-red-700 text-white backdrop-blur-md'
@@ -198,7 +198,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
         <div
           className={`shrink-0 flex h-8 w-8 items-center justify-center rounded-lg ${
             isDark ? 'bg-white/5' : 'bg-emerald-50'
-          }`}
+          } max-[399px]:hidden`}
           aria-hidden="true"
         >
           <Wallet className="h-4 w-4 text-emerald-500" />
@@ -206,7 +206,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
         <div className="min-w-0">
           <div className="flex items-baseline gap-1 flex-wrap">
             <span
-              className={`text-[9px] font-bold uppercase tracking-wider ${
+              className={`text-[9px] font-bold uppercase tracking-wider max-[399px]:hidden ${
                 isDark ? 'text-neutral-500' : 'text-neutral-600'
               }`}
             >
@@ -220,7 +220,7 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
               {price.symbol} {price.value}
             </span>
             <span
-              className={`text-[9px] font-semibold ${
+              className={`text-[9px] font-semibold max-[399px]:hidden ${
                 isDark ? 'text-neutral-400' : 'text-neutral-700'
               }`}
             >
@@ -233,14 +233,14 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
             }`}
           >
             <ShieldCheck className="h-2.5 w-2.5 text-emerald-500 shrink-0" />
-            <span>M-Pesa, Tigo Pesa, Airtel, card</span>
+            <span>Ask us about local payment options</span>
           </div>
         </div>
       </div>
 
       <div className="flex items-center gap-1.5 shrink-0">
         <div
-          className={`price-bar-currency inline-flex items-center p-0.5 rounded-full border ${
+          className={`price-bar-currency hidden xs:inline-flex items-center p-0.5 rounded-full border ${
             isDark ? 'border-white/10 bg-white/5' : 'border-neutral-300 bg-neutral-100'
           }`}
           role="radiogroup"
@@ -254,9 +254,10 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
                 key={curr}
                 type="button"
                 role="radio"
+                aria-label={`Use ${curr}`}
                 aria-checked={active}
                 onClick={() => setCurrency(curr)}
-                className={`px-1.5 py-0.5 rounded-full text-[9px] font-bold tracking-wider transition-colors ${
+                className={`inline-flex min-h-8 min-w-8 items-center justify-center rounded-full px-1 text-[9px] font-bold tracking-wider transition-colors ${
                   active
                     ? 'bg-[var(--accent-red)] text-white shadow'
                     : isDark
@@ -269,20 +270,32 @@ const StickyPriceBar: React.FC<StickyPriceBarProps> = ({ openBookingModal }) => 
             );
           })}
         </div>
+        <select
+          value={currency}
+          onChange={(event) => setCurrency(event.target.value as typeof currency)}
+          aria-label="Select currency"
+          className={`price-bar-currency-select xs:hidden min-h-9 max-w-16 rounded-full border px-2 text-[10px] font-bold ${
+            isDark ? 'border-white/10 bg-white/5 text-white' : 'border-neutral-300 bg-neutral-100 text-neutral-900'
+          }`}
+        >
+          <option value="TSH">TSH</option>
+          <option value="KES">KES</option>
+          <option value="USD">USD</option>
+        </select>
         <button
           type="button"
           onClick={openBookingModal}
-          className="inline-flex items-center gap-1 px-2 py-1.5 rounded-full bg-[var(--accent-red)] text-white text-[10px] font-extrabold uppercase tracking-wider shadow hover:bg-[var(--accent-red-hover)] transition-colors"
+          className="inline-flex min-h-9 items-center justify-center gap-1 rounded-full bg-[var(--accent-red)] px-2.5 py-1.5 text-[10px] font-extrabold uppercase tracking-wider text-white shadow hover:bg-[var(--accent-red-hover)] transition-colors"
         >
           <MessageCircle className="w-3 h-3" />
-          <span>Book</span>
+          <span className="max-[359px]:hidden">Book</span>
         </button>
         <button
           type="button"
           onClick={() => setMinimized(true)}
           aria-label="Minimize price bar"
           title="Minimize"
-          className={`p-1.5 rounded-full transition-colors ${
+          className={`inline-flex min-h-8 min-w-8 items-center justify-center rounded-full transition-colors ${
             isDark
               ? 'text-neutral-400 hover:text-white hover:bg-white/5'
               : 'text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100'

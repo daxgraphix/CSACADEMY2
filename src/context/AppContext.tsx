@@ -5,12 +5,16 @@ interface AppContextType {
   theme: Theme;
   setTheme: (theme: Theme) => void;
   toggleTheme: () => void;
+  textSize: TextSize;
+  setTextSize: (size: TextSize) => void;
   currency: Currency;
   setCurrency: (currency: Currency) => void;
   t: Translations;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
+
+export type TextSize = 'normal' | 'large' | 'larger';
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -33,6 +37,16 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     return 'TSH';
   });
 
+  const [textSize, setTextSizeState] = useState<TextSize>(() => {
+    try {
+      const savedSize = localStorage.getItem('cs_academy_text_size');
+      if (savedSize === 'large' || savedSize === 'larger') return savedSize;
+    } catch (e) {
+      // ignore
+    }
+    return 'normal';
+  });
+
   useEffect(() => {
     try {
       const root = document.documentElement;
@@ -51,6 +65,17 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       // ignore
     }
   }, [theme]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle('text-size-large', textSize === 'large');
+    root.classList.toggle('text-size-larger', textSize === 'larger');
+    try {
+      localStorage.setItem('cs_academy_text_size', textSize);
+    } catch (e) {
+      // Keep the in-session control working when storage is unavailable.
+    }
+  }, [textSize]);
 
   const setTheme = (nextTheme: Theme) => {
     try {
@@ -87,6 +112,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         theme,
         setTheme,
         toggleTheme,
+        textSize,
+        setTextSize: setTextSizeState,
         currency,
         setCurrency,
         t,

@@ -1,6 +1,6 @@
 # CS Academy — Digital Skills Platform for East Africa
 
-> Practical, accessible, and locally relevant AI, cybersecurity, web development, and digital-skills training for the East African workforce. English-first instruction with local-language support and mobile-money payments.
+> Practical, accessible, and locally relevant AI, cybersecurity, web development, and digital-skills training for the East African workforce. Instruction and course materials are in English; payment instructions are confirmed with learners before payment.
 
 ---
 
@@ -43,12 +43,12 @@ The platform is fully **data-driven**: every piece of visible content (courses, 
 
 Key characteristics:
 
-- **English-first, language-aware** pedagogy with local contextual examples.
-- **Mobile-money-first** payments (M-Pesa, Tigo Pesa, Airtel Money, HaloPesa).
+- **English-language instruction** with practical examples drawn from East African contexts.
+- **Enrollment-first payment process**: payment methods and instructions are confirmed with learners before payment; the website does not take payment.
 - **Low-bandwidth** friendly delivery (WhatsApp micro-learning, text-first PWA).
 - **Dark/Light** theme with full CSS-variable theming and smooth transitions.
 - **Multi-currency** pricing (TZS / KES / USD).
-- **No backend required** for the static build — content is bundled at build time. (Optional backend dependencies for AI features, e.g. DevPad, are present in `package.json` but the production `vite build` is a pure SPA.)
+- **WhatsApp, email, and FormSubmit** handle learner inquiries and newsletter requests; the application content remains bundled at build time.
 
 ---
 
@@ -95,18 +95,14 @@ The framework content is defined in `src/data/smartFramework.ts` and rendered by
 Every certificate includes a unique QR code linking to a live verification page (`academy.cyberswahili.co.tz/verify`) showing the learner's name, assessed skills, completion dates, peer-review scores, and a timestamped serial number. Certificates are append-only and tamper-resistant.
 
 ### The Digital Shop
-A micro-credential marketplace where learners purchase verified skill badges, redeem Invite & Earn credits, access premium toolkits (PDF guides, template libraries), and subscribe to monthly plans. Accepts M-Pesa, Tigo Pesa, Airtel Money, Visa, and Mastercard. Prices displayed in TZS, KES, and UGX/RWF where applicable.
+A catalog of practical resources, templates, and toolkits. Access and any payment arrangements are confirmed with the learner before purchase; the website does not collect payment details or take payment.
 
 ### Vibe Coding
 CS Academy's flagship applied-AI programming track — building working software by describing what you want in plain language, then iteratively refining output. Available as a 6-week intensive cohort, a self-paced track, and an enterprise team workshop.
 
 ### Invite & Earn Referral System
 
-| Action | Reward |
-|---|---|
-| Invite a friend who enrolls in a free track | Earn 500 CS Points |
-| Invite a friend who purchases a professional track | Earn 2,000 CS Points + 10% commission on first purchase |
-| Your invited friend completes a professional track | Earn 5,000 CS Points + TZS 15,000 mobile money bonus |
+Referral requirements and any available rewards are subject to the current terms shown in the learner account.
 
 ### DevPad (Interactive Playground)
 `DevPadPage` is an in-app, AI-assisted coding playground where learners prototype, test, and share small applications with mentor feedback. Backed by the optional `@google/genai` integration declared in `package.json`.
@@ -154,7 +150,7 @@ Defined in `src/data/pricing.ts` and rendered by `PricingSection.tsx`. All TZS p
 | **Physical Training (On-Site)** | 1,215,000 | 64,800 | 486 | per corporate cohort (multi-day) |
 | **Conferences & Keynotes** | Custom | Custom | Custom | per keynote address |
 
-Accepted payment methods (`paymentMethods` in `pricing.ts`): M-Pesa, Tigo Pesa, Airtel Money, HaloPesa, Debit/Credit Card.
+Payment options vary by learner location and plan. CS Academy confirms the available method and instructions during enrollment; the website does not collect payment details or take payment.
 
 ---
 
@@ -234,7 +230,7 @@ CSACADEMY2/
     │   ├── smartFramework.ts   # SMART methodology steps
     │   ├── resources.ts        # Downloadable toolkits/guides
     │   ├── programs.ts         # Program pillars & deep-dive content
-    │   ├── pricing.ts          # Membership/pricing plans + payment methods
+    │   ├── pricing.ts          # Published membership and pricing plans
     │   ├── platformFeatures.ts # Feature cards (certificates, shop, etc.)
     │   ├── organizationIndustries.ts # Industry-specific solutions
     │   ├── learningFormats.ts  # Delivery-channel definitions
@@ -348,13 +344,13 @@ All content is typed and centralized:
 | `data/translations.ts` | `translations`, `Theme`, `Currency` types | AppContext, all section components |
 | `data/training.ts` | `featuredTrainingData`, `trainingPackagesData` | FeaturedTraining, TrainingPackages, TrainingDetailModal |
 | `data/programs.ts` | Program pillars & deep-dive content | ProgramsPage, ProgramDeepDivePage, ProgramsOverview |
-| `data/pricing.ts` | `pricingPlansData`, `paymentMethods` | PricingSection, PricingPage |
+| `data/pricing.ts` | `pricingPlansData` | PricingSection, PricingPage |
 | `data/learningFormats.ts` | `learningFormatsData` | LearningFormatsSection/Page |
 | `data/platformFeatures.ts` | `platformFeaturesData` | PlatformFeaturesSection |
 | `data/resources.ts` | `resourcesData` | ResourcesSection, ResourcesPage, ResourceViewModal |
 | `data/blog.ts` | `blogPosts` | BlogSection, BlogPage, BlogArticleModal |
 | `data/faq.ts` | `faqData` | FAQSection |
-| `data/instructors.ts` | `instructorsData` | AboutPage |
+| `data/instructors.ts` | `instructorsData` | InstructorsPage, AboutPage |
 | `data/smartFramework.ts` | SMART steps | SmartFramework |
 | `data/organizationIndustries.ts` | Industry solutions | ForOrganizationsSection/Page |
 
@@ -496,7 +492,7 @@ CS Academy targets **WCAG 2.1 AA**:
 | Cumulative Layout Shift (CLS) | < 0.1 |
 | Time to Interactive (TTI) | < 5s on 3G |
 
-Optimizations in place: text-first content, aggressive CSS caching, IntersectionObserver-based lazy reveals, and theme variables that avoid per-component prop drilling. (The current bundle is a single chunk; consider `manualChunks` / route-level code-splitting to reduce initial payload if needed.)
+Optimizations in place: route-level lazy loading, text-first content, IntersectionObserver-based lazy reveals, and theme variables that avoid per-component prop drilling. The `/academy` route is a lightweight navigation hub; the `/` route is the campaign homepage. Resources, blog articles, pricing, and program content each have their own route.
 
 ---
 
@@ -530,6 +526,10 @@ Optimizations in place: text-first content, aggressive CSS caching, Intersection
 # Type check
   npm run lint
 ```
+
+### Newsletter requests
+
+The Dispatch form emails each request to the CS Academy support address through FormSubmit. Requests are managed by email; the form does not create an automated subscriber record or send a confirmation email. People can email support at any time to stop receiving updates. FormSubmit may require a one-time activation from the support inbox before it accepts the first submission.
 
 ---
 

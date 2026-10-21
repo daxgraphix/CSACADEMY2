@@ -75,7 +75,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
           </div>
         </div>
 
-        {/* Packages Grid — 1 column on mobile, 2 on small tablet, 3 on desktop */}
+        {/* Packages grid with one column on mobile, two on small tablets, and three on desktop */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
           {filteredPackages.map((pkg) => (
             <div
@@ -163,10 +163,7 @@ export const TrainingPackages: React.FC<TrainingPackagesProps> = ({
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
                 <div className="mt-3 text-center">
-                  <div className="inline-flex items-baseline gap-1">
-                    <span className="text-base font-extrabold text-[var(--accent-red-strong)]">TZS 50,000</span>
-                    <span className="text-[10px] font-medium text-[var(--accent-red-strong)]">/ month</span>
-                  </div>
+                  <span className="text-xs font-bold text-[var(--accent-red-strong)]">Scope and price confirmed in a proposal</span>
                 </div>
               </div>
 

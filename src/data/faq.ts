@@ -5,39 +5,39 @@ export const faqData: FAQItem[] = [
   {
     id: 'how-to-access-courses',
     question: 'How do I access my course materials after enrolling?',
-    answer: 'Immediately upon enrolling and confirming payment, you receive instant access credentials via email and WhatsApp. You can stream HD video lessons via our web platform, join dedicated WhatsApp micro-learning study groups, or download PDF handbooks, starter prompt cheat sheets, and source code repositories directly to your device.',
+    answer: 'After your enrollment and payment or another agreed arrangement are confirmed, our team sends the access instructions for your selected plan. Available materials and delivery channels depend on the plan.',
     category: 'Course Access'
   },
   {
     id: 'lifetime-access',
-    question: 'Do I get lifetime access to the courses and updates?',
-    answer: 'Yes! All self-paced and cohort courses come with lifetime access to recorded video lectures, lesson notes, and future curriculum updates. You can revisit the material anytime at your own pace from your computer, tablet, or smartphone.',
+    question: 'How long can I access course materials?',
+    answer: 'Access duration depends on the plan and course. Ask us to confirm the materials, access period, and any recording availability before you enroll.',
     category: 'Course Access'
   },
   {
     id: 'mobile-learning-access',
     question: 'Can I study using just a smartphone without a computer?',
-    answer: 'Absolutely! Our mobile-first delivery tier and WhatsApp micro-learning channels are specially optimized for smartphones. You can listen to high-yield audio lessons, view code slides, copy prompt templates, and participate in community discussions directly on your phone with zero heavy software installation.',
+    answer: 'Many learning materials and enquiry options are designed to work on a smartphone. Requirements vary by course; live classes and some practical exercises may work best on a computer.',
     category: 'Course Access'
   },
   {
     id: 'offline-download-materials',
-    question: 'Can I download lessons for offline study when I have no internet?',
-    answer: 'Yes. All course PDF workbooks, prompt toolkits, audio summaries, and cheatsheets are downloadable for offline reading. Video lessons can also be cached or accessed via our bandwidth-friendly audio-first WhatsApp track to save mobile data.',
+    question: 'Can I download lessons for offline study?',
+    answer: 'Download availability depends on the course materials and plan. Contact us before enrolling if offline access is important to you.',
     category: 'Course Access'
   },
 
   // 2. Payment Methods
   {
     id: 'mobile-money-payments',
-    question: 'What payment methods do you accept? Can I pay via M-Pesa or Tigo Pesa?',
-    answer: 'We support all major East African Mobile Money services including Vodacom M-Pesa, Tigo Pesa, Airtel Money, and Halopesa. We also accept Visa, Mastercard, and direct bank wire transfers. Mobile money payments are activated instantly with automated SMS/email confirmation.',
+    question: 'How do I get payment instructions?',
+    answer: 'Payment options depend on your country and training plan. Contact us before paying and we will confirm the available method, exact amount, and instructions. This website does not collect payment details or take payment.',
     category: 'Payment & Mobile Money'
   },
   {
     id: 'installment-payments',
     question: 'Are installment or split-payment plans available for bootcamps?',
-    answer: 'Yes, for multi-week bootcamps and comprehensive masterclasses, we offer flexible two-part installment plans (50% deposit upon registration, and the remaining 50% midway through the cohort) to ensure financial accessibility for all dedicated learners.',
+    answer: 'Installment options depend on the course and enrollment arrangement. Confirm whether installments are available and agree on the schedule with our team before paying.',
     category: 'Payment & Mobile Money'
   },
   {
@@ -49,7 +49,7 @@ export const faqData: FAQItem[] = [
   {
     id: 'corporate-invoicing',
     question: 'Can my company receive an official invoice and tax receipt (EFD/TRA)?',
-    answer: 'Yes. For corporate sponsorships, institutional bulk enrollments, and NGO trainings, we generate formal proforma invoices, stamped tax receipts (TRA/EFD compliant in Tanzania, KRA compliant in Kenya), and structured vendor onboarding documentation.',
+    answer: 'Contact us with your organization’s invoicing requirements. We will confirm which documents we can provide for your location and training arrangement before you proceed.',
     category: 'Payment & Mobile Money'
   },
 
@@ -57,7 +57,7 @@ export const faqData: FAQItem[] = [
   {
     id: 'learner-support-helpdesk',
     question: 'What technical support is provided if I get stuck on a coding or AI exercise?',
-    answer: 'You are never on your own at CS Academy. Every student gets access to our active WhatsApp learner community and weekly live Q&A office hours where Alex and senior teaching assistants provide hands-on debugging, prompt review, and personalized guidance.',
+    answer: 'Support depends on the course and plan. Check the plan details or ask us whether instructor Q&A, peer discussion, or technical help is included.',
     category: 'Technical Support'
   },
   {
@@ -69,7 +69,7 @@ export const faqData: FAQItem[] = [
   {
     id: 'low-bandwidth-support',
     question: 'What if I have slow or intermittent internet connection?',
-    answer: 'CS Academy is engineered specifically for African network realities. Our platform features an ultra-low data mode with compressed video streams, downloadable text-based workbooks, and audio-first WhatsApp modules that consume less than 10MB per lesson.',
+    answer: 'Connection needs depend on your course and delivery format. Live video needs a reliable connection; ask us about lower-bandwidth materials or WhatsApp options before enrolling.',
     category: 'Technical Support'
   },
 
@@ -82,20 +82,20 @@ export const faqData: FAQItem[] = [
   },
   {
     id: 'certificates-qr',
-    question: 'Do you provide verified certificates with QR code verification?',
-    answer: 'Yes! Upon completing any bootcamp or masterclass track, you receive a tamper-proof digital certificate embedded with a verifiable QR code and unique credential ID that employers, universities, and LinkedIn connections can instantly authenticate online.',
+    question: 'Are certificates available?',
+    answer: 'Certificate availability and requirements depend on the course. Please confirm the certificate type and completion criteria with us before enrolling.',
     category: 'General'
   },
   {
     id: 'teach-in-english',
     question: 'Do you teach in English or local languages?',
-    answer: 'We primarily teach in English! Our instructors explain foundational concepts in clear, natural English while using culturally relevant local language references where helpful, ensuring you gain both conceptual mastery and global workplace fluency.',
+    answer: 'Instruction and course materials are in English. Some examples may reference local contexts, but we do not currently promise instruction or support in a local language.',
     category: 'General'
   },
   {
     id: 'customized-training',
     question: 'Can organizations request customized private on-site training?',
-    answer: 'Yes, customized institutional training is one of our primary specialties. We collaborate closely with banks, universities, NGOs, financial institutions, and government agencies to design tailored curricula matching your internal software stack, security policies, and team skill levels.',
+    answer: 'Organizations can contact us to discuss a tailored session. We will confirm the scope, delivery format, schedule, participant count, and price in writing before an engagement is agreed.',
     category: 'Organizations'
   }
 ];

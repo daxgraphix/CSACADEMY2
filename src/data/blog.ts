@@ -49,7 +49,7 @@ export const blogPostsData: BlogPost[] = [
     readingTime: '6 min read',
     publishedDate: '2026',
     author: 'Alex Rweyemamu',
-    excerpt: 'Banning AI in schools is impossible and counterproductive. Discover how teachers across Africa can use AI to save hours of prep time while teaching students critical thinking.',
+    excerpt: 'Explore practical ways educators can use AI to draft lesson materials while teaching students to check and question generated answers.',
     content: {
       intro: 'The emergence of generative artificial intelligence has sent shockwaves through academic institutions. From primary schools to universities, educators are caught between fears of widespread plagiarism and the exciting potential for personalized learning.',
       sections: [
@@ -61,7 +61,7 @@ export const blogPostsData: BlogPost[] = [
           ]
         },
         {
-          heading: '2. Reclaiming 5+ Hours of Weekly Prep Time',
+          heading: '2. Use AI to Reduce Repetitive Prep Work',
           body: [
             'Teachers are overworked. Generative AI can act as a tireless assistant: creating differentiated reading passages for students at different literacy levels, generating rubrics, formatting exam questions, and proposing creative classroom debate topics.',
             'With AI taking care of routine administrative drafting, teachers can focus on what matters most: human connection, mentorship, and inspiring curiosity.'
@@ -225,38 +225,38 @@ export const blogPostsData: BlogPost[] = [
   {
     id: 'ai-in-local-languages',
     slug: 'ai-in-local-languages',
-    title: 'AI in Local Languages: Why Local-Language AI Education Matters for Africa',
+    title: 'Using AI Across Languages: What Learners Should Check',
     category: 'Productivity',
     readingTime: '6 min read',
     publishedDate: '2026',
     author: 'Alex Rweyemamu',
-    excerpt: 'With over 200 million speakers of local African languages across East and Central Africa, AI education cannot remain an English-only domain. Discover why cultural context and language inclusion are vital.',
+    excerpt: 'AI tools vary in how well they handle different languages. Learn how to check translated or multilingual output for accuracy and local context.',
     content: {
-      intro: 'Artificial intelligence is reshaping global economies, yet the vast majority of tutorials, documentation, and prompt guides are published exclusively in English. For millions of vibrant entrepreneurs, teachers, and students across Tanzania, Kenya, Uganda, Rwanda, Burundi, and the DRC, this language barrier slows down practical adoption.',
+      intro: 'AI tools can accept requests in more than one language, but their quality varies by tool, language, and task. Treat the output as a draft and review it with someone who knows the language and context.',
       sections: [
         {
-                     heading: '1. Demystifying Tech Through Native Language',
+                     heading: '1. Check meaning, not just fluency',
           body: [
-            'When complex technical concepts like "Prompt Engineering", "Large Language Models", and "Data Privacy" are explained using familiar cultural analogies in local languages, comprehension increases exponentially.',
-            'Learners transition from feeling intimidated by technology to realizing that AI is simply a tool that responds to clear human logic.'
+            'A fluent-sounding translation can still change a technical meaning. Compare key terms with a trusted reference and ask a fluent speaker to review important material.',
+            'Keep the original text alongside the translation so readers can spot ambiguity and correct it.'
           ]
         },
         {
-           heading: '2. Empowering Local Small Businesses & Grassroots Innovation',
+           heading: '2. Give the tool useful context',
           body: [
-            'A market vendor in Kariakoo or an agricultural cooperative in Morogoro does not need academic jargon; they need to know how to write a prompt in their local language to draft a customer message, calculate livestock feed schedules, or understand weather forecasts.',
-            'Local-language AI training democratizes productivity across all socio-economic strata.'
+            'When drafting a customer message or explaining a local process, specify the audience, region, tone, and terms that should remain unchanged.',
+            'For health, legal, financial, or safety information, verify the answer against reliable sources before sharing it.'
           ],
           keyTip: 'Did you know? Modern LLMs understand local languages remarkably well when prompted with clear, context-rich sentences.'
         },
         {
-          heading: '3. CS Academy\'s Language-Inclusive Commitment',
+          heading: '3. Confirm language support before you rely on it',
           body: [
-            'CS Academy is proud to pioneer practical AI literacy delivered in English alongside local languages. We believe that true digital sovereignty begins when people can learn, innovate, and defend their digital rights in their own language.'
+            'CS Academy instruction and course materials are in English. AI language capabilities depend on the external tool, and we do not promise instruction or support in a local language.'
           ]
         }
       ],
-      conclusion: 'The future of African technology is inclusive, accessible, and grounded in our community\'s languages. CS Academy is leading that charge every day.'
+      conclusion: 'Use multilingual AI output as a draft. Check important details with trusted references and fluent speakers before acting on or publishing it.'
     },
     tags: ['Local Languages', 'Digital Inclusion', 'African Tech']
   },

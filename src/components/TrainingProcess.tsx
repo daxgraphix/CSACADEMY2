@@ -59,7 +59,7 @@ export const TrainingProcess: React.FC = () => {
         </div>
 
         {/* 5-Step Process Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {trainingProcessSteps.map((step, idx) => (
             <div
               key={idx}

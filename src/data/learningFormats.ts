@@ -1,4 +1,8 @@
 import { LearningFormat } from '../types';
+import { pricingPlansData } from './pricing';
+
+const planForFormat = (id: string) =>
+  pricingPlansData.find((plan) => plan.id === id) ?? pricingPlansData[0];
 
 export const learningFormatsData: LearningFormat[] = [
   {
@@ -7,113 +11,132 @@ export const learningFormatsData: LearningFormat[] = [
     title: 'WHATSAPP LEARNING',
     channelName: 'WhatsApp Micro-Learning & Audio Notes',
     category: 'mobile',
-    description: 'Micro-learning communities, daily prompt challenges, audio voice notes, downloadable cheat-sheets, and ongoing peer support on low data bundles.',
-    bestFor: 'Mobile-first learners, university students, and busy professionals needing bite-sized daily knowledge.',
-    priceStartingTsh: '5,000',
-    priceStartingKes: '250',
-    priceStartingUsd: '2',
-    pricingLabel: 'per month  |  Data Saver',
-    bandwidthLevel: 'Ultra-Low Data (Works on 2G/3G/4G)',
+    description: 'A mobile-first format for short learning materials and practical prompts shared through WhatsApp. Materials and group support vary by course.',
+    bestFor: 'Learners who prefer short materials and enquiries through WhatsApp.',
+    priceStartingTsh: planForFormat('whatsapp-tier').priceTsh,
+    priceStartingKes: planForFormat('whatsapp-tier').priceKes,
+    priceStartingUsd: planForFormat('whatsapp-tier').priceUsd,
+    pricingLabel: 'per month',
+    bandwidthLevel: 'Data use varies by material and connection',
     features: [
-      'Zero-barrier mobile access via WhatsApp',
-      'Daily 5-minute practical challenges in English',
-      'Voice note explanations & downloadable PDFs',
-      'Active peer study group & instant instructor feedback'
+      'Short learning materials designed for mobile use through WhatsApp',
+      'Short practical learning materials',
+      'Prompt examples and downloadable files where provided',
+      'Group discussion or instructor support where included in the course'
     ],
     icon: 'MessageSquare'
   },
   {
-    id: 'zoom-live',
+    id: 'self-paced-learning',
     number: '02',
+    title: 'SELF-PACED ONLINE LEARNING',
+    channelName: 'On-demand course materials',
+    category: 'self-paced',
+    description: 'Study independently using the video and written materials included with your selected course. Access period and downloads are confirmed before enrollment.',
+    bestFor: 'Learners who want to study around their own schedule.',
+    priceStartingTsh: planForFormat('self-paced-platform').priceTsh,
+    priceStartingKes: planForFormat('self-paced-platform').priceKes,
+    priceStartingUsd: planForFormat('self-paced-platform').priceUsd,
+    pricingLabel: 'per month',
+    bandwidthLevel: 'Standard 3G / 4G / Wi-Fi; usage varies by materials',
+    features: [
+      'Study at your own pace during the confirmed access period',
+      'Video and written materials included with the selected course',
+      'Project files or downloads where provided'
+    ],
+    icon: 'MonitorPlay'
+  },
+  {
+    id: 'zoom-live',
+    number: '03',
     title: 'ZOOM LIVE CLASSES',
     channelName: 'Interactive Zoom Live Virtual Cohorts',
     category: 'virtual',
-    description: 'Interactive instructor-led virtual classrooms with live screensharing, real-time code critiques, Vibe Coding, and interactive Q&A.',
-    bestFor: 'Individual learners, distributed tech teams, and evening cohort participants across African time zones.',
-    priceStartingTsh: '35,000',
-    priceStartingKes: '1,900',
-    priceStartingUsd: '14',
+    description: 'Instructor-led online classes on the schedule confirmed for each cohort, with time for questions and guided practice.',
+    bestFor: 'Learners who prefer instructor-led online sessions.',
+    priceStartingTsh: planForFormat('zoom-live-cohort').priceTsh,
+    priceStartingKes: planForFormat('zoom-live-cohort').priceKes,
+    priceStartingUsd: planForFormat('zoom-live-cohort').priceUsd,
     pricingLabel: 'per month  |  Live Interactive',
-    bandwidthLevel: 'Standard Broadband / 4G (HD Live)',
+    bandwidthLevel: 'Reliable internet connection for live video',
     features: [
-      'HD live video walkthroughs & coding demonstrations',
-      'Breakout rooms for hands-on team exercises',
-      'Lifetime session recordings provided for revision',
-      'Real-time Q&A, chat polls & code reviews'
+      'Live online instruction and guided practice',
+      'Questions during scheduled sessions',
+      'Recordings only where confirmed for the cohort',
+      'Class schedule and access details shared after enrollment is confirmed'
     ],
     icon: 'Video'
   },
   {
     id: 'google-meet',
-    number: '03',
+    number: '04',
     title: 'GOOGLE MEET TRAINING',
     channelName: 'Google Meet Executive & Team Sessions',
     category: 'virtual',
-    description: 'Frictionless, lightweight online training and 1-on-1 or small-team executive coaching with direct calendar integration and Google Workspace collaboration.',
-    bestFor: 'Corporate departments, executive briefings, and institutional committee training.',
-    priceStartingTsh: '45,000',
-    priceStartingKes: '2,400',
-    priceStartingUsd: '18',
+    description: 'Google Meet may be used for online training when agreed. Availability, session scope, and delivery details are confirmed with the cohort or organization.',
+    bestFor: 'Teams using Google Meet for agreed online sessions.',
+    priceStartingTsh: planForFormat('zoom-live-cohort').priceTsh,
+    priceStartingKes: planForFormat('zoom-live-cohort').priceKes,
+    priceStartingUsd: planForFormat('zoom-live-cohort').priceUsd,
     pricingLabel: 'per month / cohort access',
-    bandwidthLevel: 'Lightweight Browser (Low-Bandwidth Adaptive)',
+    bandwidthLevel: 'Reliable internet connection for live video',
     features: [
-      'No software installation required (Browser-ready)',
-      'High accessibility on low-bandwidth networks',
-      'Integrated Google Workspace live document editing',
-      'Direct calendar scheduling & 1-on-1 coaching'
+      'Session schedule and access details confirmed in advance',
+      'Question time during scheduled sessions where included',
+      'Course scope and practice activities agreed with the cohort'
     ],
     icon: 'MonitorPlay'
   },
   {
     id: 'workshops-seminars',
-    number: '04',
+    number: '05',
     title: 'WORKSHOPS & SEMINARS',
     channelName: 'Hands-On Intensive Workshops & Seminars',
     category: 'in-person',
-    description: 'Action-oriented half-day, full-day, and multi-day deep dives focused on producing concrete deliverables and immediate practical skills.',
+    description: 'Practical sessions for teams, with duration, materials, and deliverables agreed in the proposal.',
     bestFor: 'Departmental staff, teacher associations, youth incubators, and professional member associations.',
-    priceStartingTsh: '450,000',
-    priceStartingKes: '24,000',
-    priceStartingUsd: '180',
-    pricingLabel: 'per workshop session (Up to 30 Seats)',
+    priceStartingTsh: planForFormat('workshops-delivery').priceTsh,
+    priceStartingKes: planForFormat('workshops-delivery').priceKes,
+    priceStartingUsd: planForFormat('workshops-delivery').priceUsd,
+    pricingLabel: 'per workshop session (up to 30 participants)',
     bandwidthLevel: 'In-Person / Hybrid Delivery',
     features: [
       'Intensive hands-on practice & group project drills',
-      'Customized workbook and prompt library for participants',
-      'Real-world problem solving on client data',
-      'Printed & Digital Certificate of Attendance provided'
+      'Practice materials agreed for the session',
+      'Examples scoped with the organization',
+      'Attendance certificate only if confirmed in the proposal'
     ],
     icon: 'Calendar'
   },
   {
     id: 'physical-training',
-    number: '05',
+    number: '06',
     title: 'PHYSICAL TRAINING',
     channelName: 'On-Site Corporate & Campus Immersion',
     category: 'in-person',
-    description: 'On-site, immersive in-person training delivered directly at your company offices, university campuses, school halls, or hotel venues across East Africa.',
-    bestFor: 'Organizations wanting maximum focus, deep collaboration, and high-retention face-to-face instruction.',
-    priceStartingTsh: '1,200,000',
-    priceStartingKes: '64,000',
-    priceStartingUsd: '480',
+    description: 'Discuss on-site training at your organization’s venue; scope and delivery details are agreed before booking.',
+    bestFor: 'Organizations that prefer an in-person session.',
+    priceStartingTsh: planForFormat('corporate-physical').priceTsh,
+    priceStartingKes: planForFormat('corporate-physical').priceKes,
+    priceStartingUsd: planForFormat('corporate-physical').priceUsd,
     pricingLabel: 'per corporate cohort (Multi-Day Deep Dive)',
-    bandwidthLevel: 'Zero Bandwidth Needed (Local / On-Site)',
+    bandwidthLevel: 'Venue and connectivity requirements confirmed before delivery',
     features: [
-      'In-person lead trainer presence & desk-by-desk support',
-      'Adapted to your local IT environment and hardware',
-      'High-energy team building and collaborative drills',
-      'Flexible scheduling (weekdays or intensive weekends)'
+      'On-site instructor-led delivery where agreed in the proposal',
+      'Training scope and equipment needs agreed in advance',
+      'Practice activities based on the agreed scope',
+      'Schedule confirmed before booking'
     ],
     icon: 'Building2'
   },
   {
     id: 'conferences-keynotes',
-    number: '06',
+    number: '07',
     title: 'CONFERENCES & KEYNOTES',
     channelName: 'Keynotes, Tech Summits & Public Forums',
     category: 'in-person',
-    description: 'Inspiring, authoritative keynote speeches on AI trends, cybersecurity resilience, digital trust, and technology leadership across Africa.',
-    bestFor: 'Industry summits, technology conferences, annual general meetings, and public forums.',
+    description: 'Discuss a keynote or speaking engagement on AI, cybersecurity, or digital skills.',
+    bestFor: 'Events seeking a speaker on practical AI, cybersecurity, or digital skills.',
     priceStartingTsh: 'Custom',
     priceStartingKes: 'Custom',
     priceStartingUsd: 'Custom',

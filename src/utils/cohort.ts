@@ -1,8 +1,8 @@
 /**
  * Cohort & urgency engine.
  *
- * The admin adds ONE thing — VITE_NEXT_COHORT_START_DATE (YYYY-MM-DD) in
- * East Africa Time — and every derived value follows automatically:
+ * The admin adds ONE thing: VITE_NEXT_COHORT_START_DATE (YYYY-MM-DD) in
+ * East Africa Time. Every derived value follows automatically:
  *
  *   cohortStart        = the confirmed date, or the next Monday (rolling)
  *   enrollmentDeadline = cohortStart - 3 days
@@ -11,12 +11,12 @@
  *
  * When the enrollment deadline passes the schedule rolls forward to the
  * next cohort on its own, so the site never shows a dead "Enrolment closed"
- * state — it always points at the next thing the admin has to add.
+ * state. It always points at the next thing the admin has to add.
  *
  * Priority:
- *   1. VITE_NEXT_COHORT_START_DATE — admin-confirmed cohort, used while
+ *   1. VITE_NEXT_COHORT_START_DATE: admin-confirmed cohort, used while
  *      enrolment is still open.
- *   2. Otherwise the next Monday (rolling) — always valid, always ticking.
+ *   2. Otherwise the next Monday (rolling), always valid and ticking.
  */
 
 const NAIROBI_OFFSET = '+03:00';
@@ -24,7 +24,7 @@ const ENROLLMENT_LEADS_DAYS = 3;
 const COHORT_SEATS = 24;
 
 /**
- * The admin's single input — the confirmed next cohort start date.
+ * The admin's single input: the confirmed next cohort start date.
  *
  * Defaults to VITE_NEXT_COHORT_START_DATE at build time. Tests can override
  * it at runtime via setNextCohortStart(); production code never needs to.
@@ -74,7 +74,7 @@ function addDays(d: Date, days: number): Date {
  * `nextMonday` can land on a cohort whose deadline has already passed (e.g.
  * a Saturday after the Thursday deadline). In that case the schedule rolls
  * to the following week automatically, so the countdown always points at a
- * cohort you can still enrol in — never a dead "Enrolment closed" state.
+ * cohort you can still enrol in. Never show a dead "Enrolment closed" state.
  */
 function nextEnrollableCohort(from: Date): Date {
   const candidate = nextMonday(from);
@@ -163,7 +163,7 @@ export function getCohortEnrollmentDeadlineTime(): number {
 /**
  * Human-readable countdown to the enrollment deadline.
  *
- * General across magnitudes — it never renders a zeroed unit:
+ * General across magnitudes. It never renders a zeroed unit:
  *   > 1 day  → "2d 15h left"
  *   < 1 day  → "15h 30m left"
  *   < 1 hour → "45m left"

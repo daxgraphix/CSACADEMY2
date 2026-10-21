@@ -56,11 +56,11 @@ export const LegalPage: React.FC<LegalPageProps> = ({ kind }) => {
 
           {isPrivacy ? (
             <div className="prose-content mt-8 space-y-7 text-sm leading-relaxed">
-              <section><h2>What this policy covers</h2><p>CS Academy collects only the information needed to respond to enquiries, arrange training, provide learning resources, process payments, and improve the learner experience.</p></section>
+              <section><h2>What this policy covers</h2><p>CS Academy collects only the information needed to respond to enquiries, arrange training, provide learning resources, coordinate enrollment and payment arrangements, and improve the learner experience.</p></section>
               <section><h2>Information you provide</h2><p>This may include your name, email address, phone number, organization, learning interests, preferred format, and messages submitted through our booking or contact forms.</p></section>
-              <section><h2>How we use information</h2><p>We use submitted details to communicate with you, prepare training recommendations, deliver requested services, support payments, and send updates when you choose to subscribe. We do not sell personal information.</p></section>
-              <section><h2>Sharing and security</h2><p>We share information only with service providers needed to deliver the requested service, such as communication, payment, hosting, or form-processing providers. We use reasonable safeguards, but no online service can guarantee absolute security.</p></section>
-              <section><h2>Your choices</h2><p>You can request access, correction, or deletion of your information, or unsubscribe from optional updates. Contact us through the details in the footer to make a request.</p></section>
+              <section><h2>How we use information</h2><p>We use submitted details to communicate with you, prepare training recommendations, deliver requested services, coordinate enrollment and payment arrangements, and send updates when you choose to subscribe. We do not sell personal information.</p></section>
+              <section><h2>Sharing and security</h2><p>We share information only with service providers needed to deliver the requested service, including hosting and form processing through FormSubmit. Newsletter requests are sent to our support email for manual handling. We use reasonable safeguards, but no online service can guarantee absolute security.</p></section>
+              <section><h2>Your choices</h2><p>You can request access, correction, or deletion of your information. To stop receiving newsletter updates, email us using the contact details in the footer. Contact us through the same details for other requests.</p></section>
             </div>
           ) : (
             <div className="prose-content mt-8 space-y-7 text-sm leading-relaxed">

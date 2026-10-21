@@ -1,6 +1,9 @@
 export type PageRoute =
   | 'home'
   | 'academy'
+  | 'instructors'
+  | 'blog-article'
+  | 'resource-detail'
   | 'features'
   | 'pricing'
   | 'programs'
@@ -15,6 +18,7 @@ export type PageRoute =
   | 'blog'
   | 'about'
   | 'contact'
+  | 'individual-request'
   | 'privacy'
   | 'terms'
   | 'not-found';
@@ -91,7 +95,7 @@ export interface LearningFormat {
   number: string;
   title: string;
   channelName: string;
-  category: 'mobile' | 'virtual' | 'in-person';
+  category: 'mobile' | 'self-paced' | 'virtual' | 'in-person';
   description: string;
   bestFor: string;
   priceStartingTsh: string;
@@ -169,15 +173,15 @@ export interface Instructor {
   id: string;
   name: string;
   role: string;
-  specialtyBadge: string;
-  experience: string;
+  specialtyBadge?: string;
+  experience?: string;
   bio: string;
   avatarInitials: string;
   avatarGradient?: string;
   avatarImage?: string;
   expertise: string[];
-  coursesCount: number;
-  featuredCourses: string[];
+  coursesCount?: number;
+  featuredCourses?: string[];
   socialLinks?: {
     linkedin?: string;
     twitter?: string;

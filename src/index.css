@@ -15,6 +15,7 @@
 
 @layer base {
   :root {
+    color-scheme: dark;
     --bg-primary: #090909;
     --bg-secondary: #111111;
     --bg-tertiary: #161616;
@@ -34,6 +35,13 @@
     --text-faint: #6b7280;
     --text-inverted: #090909;
 
+    --control-bg: #111111;
+    --control-bg-disabled: #161616;
+    --control-border: #3a3a3a;
+    --control-border-hover: #525252;
+    --control-placeholder: #a3a3a3;
+    --control-selection-bg: rgba(255, 59, 48, 0.28);
+
     --accent-red: #ff3b30;
     --accent-red-bright: #ff5240;
     --accent-red-hover: #ff564d;
@@ -47,6 +55,7 @@
     --accent-green-strong: #22c55e;
     --accent-green-subtle: rgba(34, 197, 94, 0.12);
     --accent-amber: #f59e0b;
+    --accent-amber-strong: #fbbf24;
     --accent-amber-subtle: rgba(245, 158, 11, 0.12);
     --accent-blue: #3b82f6;
     --accent-purple: #a855f7;
@@ -72,7 +81,7 @@
     --bk-input-border: #2a2a2a;
     --bk-input-border-hover: #3a3a3a;
     --bk-input-text: #f8f8f8;
-    --bk-input-placeholder: #6b7280;
+    --bk-input-placeholder: #a3a3a3;
     --bk-input-focus-ring: rgba(255, 59, 48, 0.35);
     --bk-input-success-border: rgba(34, 197, 94, 0.6);
     --bk-input-success-ring: rgba(34, 197, 94, 0.18);
@@ -80,7 +89,7 @@
     --bk-input-error-ring: rgba(239, 68, 68, 0.3);
 
     --bk-label-color: #d4d4d4;
-    --bk-hint-color: #6b7280;
+    --bk-hint-color: #9ca3af;
     --bk-section-bg: #0a0a0a;
     --bk-section-border: #2a2a2a;
     --bk-section-text: #d4d4d4;
@@ -154,9 +163,12 @@
     --transition-fast: 150ms ease;
     --transition-base: 250ms ease;
     --transition-slow: 400ms ease;
+    --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --motion-interaction: 220ms;
   }
 
   html.light {
+    color-scheme: light;
     --bg-primary: #f7f4ee;
     --bg-secondary: #ffffff;
     --bg-tertiary: #f1efe9;
@@ -176,6 +188,13 @@
     --text-faint: #71717a;
     --text-inverted: #ffffff;
 
+    --control-bg: #ffffff;
+    --control-bg-disabled: #f1efe9;
+    --control-border: #c2b8a4;
+    --control-border-hover: #8f8575;
+    --control-placeholder: #626262;
+    --control-selection-bg: rgba(220, 38, 38, 0.16);
+
     --accent-red: #dc2626;
     --accent-red-bright: #ef4444;
     --accent-red-hover: #b91c1c;
@@ -189,6 +208,7 @@
     --accent-green-strong: #15803d;
     --accent-green-subtle: rgba(22, 163, 74, 0.1);
     --accent-amber: #d97706;
+    --accent-amber-strong: #b45309;
     --accent-amber-subtle: rgba(217, 119, 6, 0.1);
     --accent-blue: #2563eb;
     --accent-purple: #7e22ce;
@@ -214,7 +234,7 @@
     --bk-input-border: #d4ccbe;
     --bk-input-border-hover: #b8ad97;
     --bk-input-text: #1a1a1a;
-    --bk-input-placeholder: #9ca3af;
+    --bk-input-placeholder: #626262;
     --bk-input-focus-ring: rgba(220, 38, 38, 0.22);
     --bk-input-success-border: #16a34a;
     --bk-input-success-ring: rgba(22, 163, 74, 0.16);
@@ -222,7 +242,7 @@
     --bk-input-error-ring: rgba(220, 38, 38, 0.18);
 
     --bk-label-color: #1f2937;
-    --bk-hint-color: #6b7280;
+    --bk-hint-color: #52525b;
     --bk-section-bg: #faf7f1;
     --bk-section-border: #e6dfd2;
     --bk-section-text: #1f2937;
@@ -292,12 +312,31 @@
     --shadow-lg: 0 16px 48px rgba(17, 17, 17, 0.16);
     --shadow-red: 0 8px 32px rgba(220, 38, 38, 0.2);
     --shadow-red-lg: 0 16px 56px rgba(220, 38, 38, 0.28);
+    --motion-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --motion-interaction: 220ms;
   }
 
   html {
     scroll-behavior: smooth;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
+
+  /* Text size controls scale the page's rem typography and layout together. */
+  html.text-size-large {
+    font-size: 112.5%;
+  }
+
+  html.text-size-larger {
+    font-size: 125%;
+  }
+
+  /* Keep small labels, many of which use fixed pixel utilities, scalable too. */
+  html:is(.text-size-large, .text-size-larger) [class~="text-[8px]"] { font-size: 0.5rem !important; }
+  html:is(.text-size-large, .text-size-larger) [class~="text-[9px]"] { font-size: 0.5625rem !important; }
+  html:is(.text-size-large, .text-size-larger) [class~="text-[10px]"] { font-size: 0.625rem !important; }
+  html:is(.text-size-large, .text-size-larger) [class~="text-[11px]"] { font-size: 0.6875rem !important; }
+  html:is(.text-size-large, .text-size-larger) [class~="text-[13px]"] { font-size: 0.8125rem !important; }
+  html:is(.text-size-large, .text-size-larger) [class~="text-[15px]"] { font-size: 0.9375rem !important; }
 
   body {
     background: var(--bg-primary);
@@ -306,7 +345,7 @@
       background-color var(--transition-base),
       color var(--transition-base);
     font-family: Inter, "Segoe UI", system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    letter-spacing: normal;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -333,6 +372,39 @@
     -webkit-tap-highlight-color: transparent;
   }
 
+  input,
+  textarea,
+  select {
+    color: var(--text-primary);
+    background-color: var(--control-bg);
+    border-color: var(--control-border);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--control-placeholder);
+    opacity: 1;
+  }
+
+  input:disabled,
+  textarea:disabled,
+  select:disabled {
+    color: var(--text-muted);
+    background-color: var(--control-bg-disabled);
+    cursor: not-allowed;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    border-color: var(--accent-red);
+  }
+
+  option {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
   :focus-visible {
     outline: 3px solid var(--accent-red);
     outline-offset: 4px;
@@ -346,9 +418,111 @@
     color: #b6becb !important;
   }
 
+  /* Neutral 600/700 are too close to the dark surface for supporting copy. */
+  html:not(.light) .text-neutral-600,
+  html:not(.light) .text-neutral-700 {
+    color: #d1d5db !important;
+  }
+
   html.light .text-neutral-500,
   html.light .text-neutral-400 {
     color: #52525b !important;
+  }
+
+  /* Accent utility colors are designed for saturated surfaces by default.
+     Deepen their light-theme foreground shades so labels and icons remain
+     visible on the cream and white surfaces used throughout the site. */
+  html.light .text-red-300,
+  html.light .text-red-400,
+  html.light .text-red-500,
+  html.light .text-rose-300,
+  html.light .text-rose-400,
+  html.light .text-rose-500 {
+    color: #b91c1c !important;
+  }
+
+  html.light .text-orange-300,
+  html.light .text-orange-400,
+  html.light .text-orange-500 {
+    color: #c2410c !important;
+  }
+
+  html.light .text-amber-300,
+  html.light .text-amber-400,
+  html.light .text-amber-500,
+  html.light .text-yellow-300,
+  html.light .text-yellow-400,
+  html.light .text-yellow-500 {
+    color: #92400e !important;
+  }
+
+  html.light .text-lime-300,
+  html.light .text-lime-400,
+  html.light .text-lime-500,
+  html.light .text-green-300,
+  html.light .text-green-400,
+  html.light .text-green-500 {
+    color: #166534 !important;
+  }
+
+  html.light .text-emerald-300,
+  html.light .text-emerald-500,
+  html.light .text-teal-300,
+  html.light .text-teal-400,
+  html.light .text-teal-500 {
+    color: #047857 !important;
+  }
+
+  html.light .text-cyan-300,
+  html.light .text-cyan-400,
+  html.light .text-cyan-500,
+  html.light .text-sky-300,
+  html.light .text-sky-400,
+  html.light .text-sky-500 {
+    color: #0369a1 !important;
+  }
+
+  html.light .text-blue-300,
+  html.light .text-blue-400,
+  html.light .text-blue-500,
+  html.light .text-indigo-300,
+  html.light .text-indigo-400,
+  html.light .text-indigo-500 {
+    color: #1d4ed8 !important;
+  }
+
+  html.light .text-violet-300,
+  html.light .text-violet-400,
+  html.light .text-violet-500,
+  html.light .text-purple-300,
+  html.light .text-purple-400,
+  html.light .text-purple-500 {
+    color: #6d28d9 !important;
+  }
+
+  html.light .text-fuchsia-300,
+  html.light .text-fuchsia-400,
+  html.light .text-fuchsia-500,
+  html.light .text-pink-300,
+  html.light .text-pink-400,
+  html.light .text-pink-500 {
+    color: #a21caf !important;
+  }
+
+  /* Preserve bright foregrounds on the few intentionally dark green chips. */
+  html.light .bg-emerald-950\/40.text-emerald-400,
+  html.light .bg-emerald-950\/40 .text-emerald-400 {
+    color: #34d399 !important;
+  }
+
+  html.light .bg-emerald-950\/40.text-emerald-500,
+  html.light .bg-emerald-950\/40 .text-emerald-500 {
+    color: #10b981 !important;
+  }
+
+  html.light .bg-emerald-950\/60 .text-emerald-400,
+  html.light .bg-emerald-950\/60.text-emerald-300 {
+    color: #6ee7b7 !important;
   }
 
   html:not(.light) .border-white\/10 {
@@ -547,7 +721,11 @@
   }
 
   .motion-card {
-    transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 240ms ease, border-color 240ms ease;
+    transition:
+      transform var(--motion-interaction) var(--motion-ease-out),
+      box-shadow var(--motion-interaction) ease,
+      border-color var(--motion-interaction) ease,
+      background-color var(--motion-interaction) ease;
   }
 
   .motion-card:hover,
@@ -806,10 +984,10 @@
     border-radius: 1rem;
     padding: 1.5rem;
     transition:
-      transform var(--transition-base),
-      box-shadow var(--transition-base),
-      border-color var(--transition-base),
-      background var(--transition-base);
+      transform var(--motion-interaction) var(--motion-ease-out),
+      box-shadow var(--motion-interaction) ease,
+      border-color var(--motion-interaction) ease,
+      background-color var(--motion-interaction) ease;
   }
 
   .theme-card:hover {
@@ -946,7 +1124,11 @@
 
 /* Content card enhancements */
 .content-card {
-  transition: all var(--transition-base);
+  transition:
+    transform var(--motion-interaction) var(--motion-ease-out),
+    box-shadow var(--motion-interaction) ease,
+    border-color var(--motion-interaction) ease,
+    background-color var(--motion-interaction) ease;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg, 0.75rem);
   overflow: hidden;
@@ -1095,13 +1277,8 @@
   /* ─── Selection ─── */
 
   ::selection {
-    background: rgba(255, 59, 48, 0.85);
-    color: #ffffff;
-  }
-
-  html.light ::selection {
-    background: rgba(220, 38, 38, 0.8);
-    color: #ffffff;
+    background: var(--control-selection-bg);
+    color: var(--text-primary);
   }
 
   /* ─── Scrollbar ─── */
@@ -1191,7 +1368,7 @@ canvas {
 
 /* Long unbreakable strings (emails, URLs) wrap only when truly necessary */
 body {
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   word-break: normal;
 }
 
@@ -1216,6 +1393,23 @@ p, li, blockquote, dd, dt {
   .text-xs {
     font-size: 0.75rem;
     line-height: 1.25rem;
+  }
+}
+
+.responsive-modal-viewport {
+  max-height: 90vh;
+  max-height: 90dvh;
+}
+
+.booking-modal-viewport {
+  max-height: 95vh;
+  max-height: calc(100dvh - env(safe-area-inset-top));
+}
+
+@media (min-width: 640px) {
+  .booking-modal-viewport {
+    max-height: 90vh;
+    max-height: 90dvh;
   }
 }
 
@@ -1256,6 +1450,6 @@ p, li, blockquote, dd, dt {
   input,
   select,
   textarea {
-    min-height: 42px;
+    min-height: 44px;
   }
 }

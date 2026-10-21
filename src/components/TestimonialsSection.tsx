@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Quote, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Quote, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { testimonials, graduateCities, totalGraduates } from '../data/testimonials';
 
@@ -8,11 +8,6 @@ const TestimonialCard: React.FC<{ t: any; isDark: boolean }> = ({ t, isDark }) =
     isDark ? 'border-white/10 bg-white/[0.03]' : 'border-neutral-200 bg-white shadow-sm'
   }`}>
     <Quote className="absolute right-5 top-5 h-8 w-8 text-[var(--accent-red-strong)]/20" aria-hidden="true" />
-    <div className="flex items-center gap-1 mb-4">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden="true" />
-      ))}
-    </div>
     <blockquote className={`text-sm sm:text-base leading-relaxed font-medium ${isDark ? 'text-neutral-200' : 'text-neutral-800'}`}>
       “{t.quote}”
     </blockquote>
@@ -36,6 +31,7 @@ const TestimonialCard: React.FC<{ t: any; isDark: boolean }> = ({ t, isDark }) =
 
 export const TestimonialsSection: React.FC = () => {
   const { theme } = useApp();
+  if (testimonials.length === 0) return null;
   const isDark = theme === 'dark';
 
   return (
@@ -44,14 +40,14 @@ export const TestimonialsSection: React.FC = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-800/40 text-emerald-400 text-xs font-mono font-bold uppercase tracking-wider">
-            <Star className="w-3.5 h-3.5" /> Real Graduate Outcomes
+          <div className={`inline-flex items-center gap-2 rounded-full border px-3.5 py-1 text-xs font-mono font-bold uppercase tracking-wider ${isDark ? 'border-emerald-800/40 bg-emerald-950/40 text-emerald-300' : 'border-emerald-200 bg-emerald-50 text-emerald-800'}`}>
+            Real Graduate Outcomes
           </div>
           <h2 id="testimonials-title" className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight ${isDark ? 'text-white' : 'text-neutral-950'}`}>
             Learners who shipped real work
           </h2>
           <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-700'}`}>
-            Every graduate below shipped a concrete outcome — not just a certificate. That is the standard we hold.
+            Every graduate below shipped a concrete outcome, not just a certificate. That is the standard we hold.
           </p>
         </div>
 

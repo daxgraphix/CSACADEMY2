@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';
-import { totalGraduates } from '../data/testimonials';
 import { PriceStrip } from './PriceStrip';
 import {
   ArrowRight,
@@ -11,7 +10,7 @@ import {
   Sparkles,
   ShieldCheck,
   GraduationCap,
-  Star,
+  Wallet,
   MessageCircle
 } from 'lucide-react';
 
@@ -46,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div ref={contentRef} className="lg:col-span-7 xl:col-span-7 reveal reveal-delay-200">
               <div className="space-y-5 lg:space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-[var(--accent-red)]/30 bg-[var(--accent-red)]/10 text-[var(--accent-red-strong)] text-xs font-semibold uppercase tracking-wider">
-                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" /> Institution Accredited & Registered
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" /> Practical, instructor-led training
                 </div>
 
                 <h1
@@ -59,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({
                   {t.hero.outcomeTrailing}
                 </h1>
 
-                <p className={`max-w-2xl text-lg sm:text-xl leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'} font-medium`}>CS Academy is East Africa&#x27;s premier institution for practical AI and digital skills training. Join {totalGraduates.toLocaleString()}+ graduates and master technology that matters.</p>
+                <p className={`max-w-2xl text-lg sm:text-xl leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'} font-medium`}>Build practical skills in AI, cybersecurity, and digital work through guided training designed for learners and teams across East Africa.</p>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <button
@@ -142,7 +141,7 @@ export const Hero: React.FC<HeroProps> = ({
                 {[
                   { value: t.hero.proof1Value, label: t.hero.proof1Label, icon: GraduationCap, accent: 'text-emerald-500' },
                   { value: t.hero.proof2Value, label: t.hero.proof2Label, icon: Sparkles, accent: 'text-[var(--accent-red-strong)]' },
-                  { value: t.hero.proof3Value, label: t.hero.proof3Label, icon: Star, accent: 'text-amber-400' }
+                  { value: t.hero.proof3Value, label: t.hero.proof3Label, icon: Smartphone, accent: 'text-amber-400' }
                 ].map((item) => {
                   const Icon = item.icon;
                   return (
@@ -168,13 +167,13 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            <div className="hidden sm:block">
+            <div className="hidden md:block">
               <PriceStrip openBookingModal={openBookingModal} />
             </div>
           </div>
         </div>
 
-        {/* Supporting copy + full stat row — compressed into a single band on desktop */}
+        {/* Supporting copy and full stat row, compressed into one band on desktop */}
         <div className="mt-8 sm:mt-14 lg:mt-6 space-y-4 sm:space-y-6">
           <div className={`pt-5 lg:pt-4 border-t space-y-2 ${
             isDark ? 'border-white/10' : 'border-neutral-200'
@@ -184,7 +183,7 @@ export const Hero: React.FC<HeroProps> = ({
             }`}>
               {t.hero.headlineMain}
               <span className="text-[var(--accent-red-strong)]"> {t.hero.headlineHighlight}</span>{' '}
-              from beginner to job-ready.
+              from beginner concepts to practical projects.
             </h2>
             <p className={`max-w-3xl text-xs sm:text-sm lg:text-[13px] leading-relaxed reading-text ${
               isDark ? 'text-neutral-400' : 'text-neutral-700'
@@ -206,7 +205,7 @@ export const Hero: React.FC<HeroProps> = ({
               { value: t.hero.stat1Val, label: t.hero.stat1Label, icon: GraduationCap, accent: 'text-emerald-500' },
               { value: t.hero.stat2Val, label: t.hero.stat2Label, icon: Sparkles, accent: 'text-[var(--accent-red-strong)]' },
               { value: t.hero.stat3Val, label: t.hero.stat3Label, icon: ShieldCheck, accent: 'text-blue-500' },
-              { value: t.hero.stat4Val, label: t.hero.stat4Label, icon: Star, accent: 'text-amber-400' }
+              { value: t.hero.stat4Val, label: t.hero.stat4Label, icon: Wallet, accent: 'text-amber-400' }
             ].map((item) => {
               const Icon = item.icon;
               return (
@@ -233,7 +232,7 @@ export const Hero: React.FC<HeroProps> = ({
             {[
               { icon: CheckCircle2, text: 'Learn through guided projects that turn new concepts into usable skills.' },
               { icon: Smartphone, text: 'Build apps, automations, and portfolio evidence you can show to employers or clients.' },
-              { icon: Sparkles, text: 'Start from your phone with flexible formats and familiar mobile-money payments.' }
+              { icon: Wallet, text: 'Start from your phone with flexible formats and familiar mobile-money payments.' }
             ].map(({ icon: Icon, text }) => (
               <div key={text} className={`flex items-start gap-2.5 rounded-2xl border px-3.5 py-3 ${
                 isDark ? 'border-white/10 bg-white/5' : 'border-neutral-200 bg-white/80'

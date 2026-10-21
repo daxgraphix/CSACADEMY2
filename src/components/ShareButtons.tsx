@@ -22,7 +22,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
 
   const shareUrl = url || (typeof window !== 'undefined' ? window.location.href : 'https://csacademy.africa');
   const encodedUrl = encodeURIComponent(shareUrl);
-  const shareText = `${title}${description ? ` - ${description}` : ''}`;
+  const shareText = `${title}${description ? `: ${description}` : ''}`;
   const encodedText = encodeURIComponent(shareText);
 
   const handleWhatsApp = (e: React.MouseEvent) => {
@@ -72,7 +72,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           onClick={handleWhatsApp}
           title={'Share on WhatsApp'}
           aria-label="Share on WhatsApp"
-          className="p-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 transition-colors"
+          className={`p-1.5 rounded-lg transition-colors ${theme === 'dark' ? 'bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300' : 'bg-emerald-100 hover:bg-emerald-200 text-emerald-800'}`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
         </button>
@@ -96,7 +96,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           onClick={handleLinkedIn}
           title={'Share on LinkedIn'}
           aria-label="Share on LinkedIn"
-          className="p-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 transition-colors"
+          className={`p-1.5 rounded-lg transition-colors ${theme === 'dark' ? 'bg-sky-500/10 hover:bg-sky-500/20 text-sky-300' : 'bg-sky-100 hover:bg-sky-200 text-sky-800'}`}
         >
           <Linkedin className="w-3.5 h-3.5" />
         </button>
@@ -108,7 +108,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
           aria-label="Copy link"
           className={`p-1.5 rounded-lg transition-colors ${
             copied
-              ? 'bg-emerald-500/20 text-emerald-400'
+              ? theme === 'dark' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-emerald-100 text-emerald-800'
               : theme === 'dark' 
                 ? 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300' 
                 : 'bg-neutral-200 hover:bg-neutral-300 text-neutral-700'

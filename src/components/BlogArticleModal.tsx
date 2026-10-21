@@ -6,6 +6,7 @@ import { ShareButtons } from './ShareButtons';
 import { getAuthor } from '../data/authors';
 import { blogPostsData } from '../data/blog';
 import { getCanonicalUrl } from '../utils/seo';
+import { siteConfig } from '../config/site';
 import { formatPublishedDate, toIsoDate } from '../utils/dates';
 import {
   X,
@@ -20,8 +21,7 @@ import {
   Linkedin,
   Twitter,
   ArrowRight,
-  Mail,
-  Sparkles
+  Mail
 } from 'lucide-react';
 
 interface BlogArticleModalProps {
@@ -107,7 +107,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-label={post?.title} tabIndex={-1}>
       <div
-        className={`border rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl relative transition-colors ${
+        className={`responsive-modal-viewport border rounded-3xl w-full max-w-3xl overflow-y-auto shadow-2xl relative transition-colors ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' : 'bg-white border-neutral-200 text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -322,37 +322,32 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <h3 className={`text-sm sm:text-base font-extrabold ${theme === 'dark' ? 'text-white' : 'text-neutral-950'}`}>
-                    Get one practical lesson every Friday
+                    Request practical learning updates
                   </h3>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
                 </div>
                 <p className={`text-xs sm:text-sm leading-relaxed mt-1 ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'}`}>
-                  Short, ad-free lessons on AI, cybersecurity, and digital skills. Free. Unsubscribe in one tap.
+                  Ask to receive practical lessons on AI, cybersecurity, and digital skills. We manage requests by email; contact support whenever you want updates to stop.
                 </p>
                 <div className="mt-3 flex flex-col sm:flex-row gap-2">
                   <a
-                    href="https://wa.me/255753969379?text=Hello%20CS%20Academy%2C%20please%20add%20me%20to%20the%20Friday%20lessons%20newsletter."
+                    href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent('Hello CS Academy, I would like to request learning updates by WhatsApp. Please let me know how often you send them and how I can stop them.')}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full bg-[var(--accent-red)] text-white text-xs font-extrabold uppercase tracking-wider shadow hover:bg-[var(--accent-red-hover)] transition-colors"
                   >
-                    Join on WhatsApp
+                    Request via WhatsApp
                     <ArrowRight className="w-3.5 h-3.5" />
                   </a>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      onClose();
-                      openBookingModal({ program: 'Friday Lessons Newsletter' });
-                    }}
+                  <a
+                    href={`mailto:${siteConfig.email}?subject=${encodeURIComponent('CS Academy learning updates')}&body=${encodeURIComponent('Hello CS Academy, I would like to request learning updates by email. Please let me know how often you send them and how I can stop them.')}`}
                     className={`inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
                       theme === 'dark'
                         ? 'bg-white/5 text-neutral-200 hover:bg-white/10 border border-white/10'
                         : 'bg-white text-neutral-800 hover:bg-neutral-100 border border-neutral-200'
                     }`}
                   >
-                    Email me instead
-                  </button>
+                    Request by email
+                  </a>
                 </div>
               </div>
             </div>

@@ -32,7 +32,7 @@ export const ProgramDetailModal: React.FC<ProgramDetailModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 glass-surface animate-in fade-in duration-200" role="dialog" aria-modal="true" aria-label={program?.title} tabIndex={-1}>
       <div 
-        className={`border rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
+        className={`responsive-modal-viewport border rounded-3xl w-full max-w-3xl overflow-y-auto shadow-2xl relative ${
           theme === 'dark' 
             ? 'bg-[var(--bg-secondary)] border-[var(--border-color)] text-white' 
             : 'bg-white border-neutral-300 text-neutral-900'
@@ -190,7 +190,7 @@ export const ProgramDetailModal: React.FC<ProgramDetailModalProps> = ({
             theme === 'dark' ? 'border-[var(--border-color)]' : 'border-neutral-300'
           }`}>
             <span className={`text-xs italic ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`}>
-              Taught in English & local languages
+              Instruction and materials in English
             </span>
             <button
               onClick={() => {

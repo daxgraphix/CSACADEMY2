@@ -6,9 +6,9 @@ export const programsData: ProgramPillar[] = [
     slug: 'ai',
     title: 'AI ACADEMY',
     badge: 'Flagship Pillar',
-    tagline: 'Learn AI from beginner to professional level.',
+    tagline: 'Build practical AI skills, from core concepts to workplace applications.',
     description: 'Master practical artificial intelligence concepts, modern LLM workflows, prompt engineering, AI safety, and automated productivity tools tailored for African professionals and institutions.',
-    extendedDescription: 'The AI Academy equips learners to transition from passive consumers of artificial intelligence to active, discerning creators and power users. We strip away academic jargon and teach hands-on, ethically sound AI workflows that immediately enhance daily work, academic research, teaching, and business operations.',
+    extendedDescription: 'The AI Academy introduces core AI concepts and guided workflows for work, study, teaching, and business. Learners practise evaluating AI output, protecting sensitive information, and deciding where human review is needed.',
     audience: [
       'Students & University Graduates',
       'Teachers, Lecturers & Educators',
@@ -25,7 +25,7 @@ export const programsData: ProgramPillar[] = [
       'AI Safety & Deepfake Detection',
       'Responsible AI & Ethical Governance',
       'AI Automation & Daily Workflow Optimization',
-      'AI in Local Languages & African Language Contexts',
+      'Multilingual AI tools and output review (tool support varies)',
       'AI Research & Data Synthesis'
     ],
     modules: [
@@ -42,7 +42,7 @@ export const programsData: ProgramPillar[] = [
       {
         title: 'Module 3: Enterprise AI Productivity & Workplace Workflows',
         description: 'Integrate generative tools into spreadsheets, document summarization, customer communication, and executive decision memos.',
-        practicalSkill: 'Automate 5+ hours of weekly repetitive tasks with AI assistants.'
+        practicalSkill: 'Map a repetitive task and practise improving it with an AI assistant.'
       },
       {
         title: 'Module 4: AI Safety, Verification & Deepfake Awareness',
@@ -51,8 +51,8 @@ export const programsData: ProgramPillar[] = [
       },
       {
         title: 'Module 5: Localized AI & Multi-lingual Applications',
-         description: 'Utilize AI effectively in English and regional African languages for community outreach, education, and translation.',
-        practicalSkill: 'Construct bilingual prompt workflows and cross-lingual educational materials.'
+         description: 'Explore multilingual AI tools for outreach, education, and translation, while reviewing output for accuracy and local context.',
+        practicalSkill: 'Adapt prompts to local examples and review translations for accuracy.'
       },
       {
         title: 'Module 6: AI Research & Reliable Information',
@@ -109,7 +109,7 @@ export const programsData: ProgramPillar[] = [
       'Master prompt engineering to produce precise, high-grade professional outputs',
       'Safely integrate AI into business, academic, or institutional workflows',
       'Critically verify AI outputs and detect misinformation or synthetic deepfakes',
-      'Apply AI in both English and local language contexts seamlessly'
+      'Explore how AI tools respond to English and selected regional-language prompts'
     ],
     deliveryFormats: [
       'Zoom / Google Meet Live Online',

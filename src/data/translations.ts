@@ -162,31 +162,31 @@ export const translations: Translations = {
     switchTheme: "Toggle Theme"
   },
   hero: {
-    badge: "AFRICA PREMIER TECH LEARNING PLATFORM",
+    badge: "PRACTICAL TECH LEARNING",
     badgeHighlight: "NEW: Vibe Coding & AI",
     outcome: "Build career-ready skills in",
     outcomeHighlight: "AI, cybersecurity & web development",
     outcomeTrailing: "with practical projects you can start from your phone.",
     primaryCta: "Get a free learning consultation",
-    proof1Value: "1–2 days",
+    proof1Value: "1 to 2 days",
     proof1Label: "AI for Everyone intensive",
     proof2Value: "Live",
     proof2Label: "Instructor feedback",
     proof3Value: "Mobile",
     proof3Label: "Flexible access",
-    trustLine: "Beginner-friendly, low-bandwidth learning with English tech terms and local-language support.",
+    trustLine: "Beginner-friendly, low-bandwidth learning with clear English instruction.",
     headlineMain: "BUILD SKILLS THAT CREATE",
     headlineHighlight: "BETTER OPPORTUNITIES",
     subheadline: "Choose a focused learning path, build portfolio-ready projects, and get practical guidance for work, study, or business.",
     ctaExplore: "Explore Learning Paths",
     ctaEnroll: "Join Live Cohort",
     ctaWatchTour: "Explore Platform Tour",
-    stat1Val: "1–2 days",
+    stat1Val: "1 to 2 days",
     stat1Label: "AI for Everyone intensive",
     stat2Val: "Live",
     stat2Label: "Instructor-led cohort option",
-    stat3Val: "EN + LOCAL",
-    stat3Label: "Language support",
+    stat3Val: "English",
+    stat3Label: "Course instruction",
     stat4Val: "From TSh 50K",
     stat4Label: "Live cohort plan per month",
     mobileMoneyNotice: "Mobile-money options are available on selected plans; confirm details before enrollment."
@@ -209,10 +209,10 @@ export const translations: Translations = {
     free: "Free",
     customQuote: "Custom Quote",
     verifiedLearner: "Verified Learner",
-    qrVerification: "Tamper-Proof QR PDF Certificate",
-    localInstruction: "Local Language Instruction",
+    qrVerification: "Course-dependent completion certificate",
+    localInstruction: "English Instruction",
     englishInstruction: "English Tech Terms & Glossary",
-    bilingual: "English & Local Languages",
+    bilingual: "English-language instruction",
     close: "Close",
     backToHome: "Back to Home",
     contactInstructor: "Contact Instructor"
@@ -243,7 +243,7 @@ export const translations: Translations = {
   localAi: {
     badge: "AI IN PRACTICE",
     title: "BUILD WITH AI IN YOUR LANGUAGE",
-    subtitle: "Learn AI in a clear English-first context with local language support, use it safely, and turn everyday ideas into useful work, reports, and digital products.",
+    subtitle: "Learn AI through clear English-language instruction, use it safely, and turn everyday ideas into useful work, reports, and digital products.",
     vibeCodingTitle: "What is Vibe Coding?",
     vibeCodingDesc: "The modern paradigm of building full-stack web applications and software using natural language prompts and AI agents rather than manual boilerplate coding.",
     ctaMasterclass: "Reserve Vibe Coding Masterclass Seat"
@@ -267,7 +267,7 @@ export const translations: Translations = {
   process: {
     badge: "LEARNING ROADMAP",
     title: "YOUR STEP-BY-STEP PATH TO MASTERY",
-    subtitle: "4 structured phases from enrollment and hands-on practice to QR verification and career readiness."
+    subtitle: "Explore the course, practise with guided exercises, and confirm access and completion details before you enroll."
   },
   whyUs: {
     badge: "WHY CS ACADEMY?",
@@ -292,20 +292,20 @@ export const translations: Translations = {
   about: {
     badge: "ABOUT CS ACADEMY",
     title: "EMPOWERING EAST AFRICA WITH DIGITAL MASTERY",
-    subtitle: "Our mission is to eliminate language and cost barriers so everyone can participate in the digital economy."
+    subtitle: "Our mission is to make practical technology education more accessible to learners across East Africa."
   },
   faq: {
     badge: "FREQUENTLY ASKED QUESTIONS",
     title: "HAVE QUESTIONS? WE HAVE ANSWERS",
-    subtitle: "Clear explanations regarding course formats, mobile money payment, certification, and team onboarding."
+    subtitle: "Clear explanations regarding course formats, enrollment and payment details, certification, and team onboarding."
   },
   pricing: {
     badge: "PRICING & MEMBERSHIP PLANS",
     title: "TRANSPARENT TUITION FOR EVERY LEARNER",
-    subtitle: "Simple, flexible plans with zero hidden fees. Pay seamlessly with M-Pesa, Tigo Pesa, Airtel Money, or credit card."
+    subtitle: "Compare flexible plans and request confirmed enrollment and payment details from our team."
   },
   footer: {
-    about: "CS Academy is East Africa's leading platform delivering practical technology education and cybersecurity resilience.",
+    about: "CS Academy provides practical technology education in AI, cybersecurity, and digital skills, with English-language instruction and regional context.",
     quickLinks: "Quick Links",
     programs: "Our Programs",
     delivery: "Delivery Channels",

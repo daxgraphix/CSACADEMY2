@@ -1,21 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let frame = 0;
     const updateProgress = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight =
-        document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const pct = docHeight > 0 ? Math.min(100, Math.max(0, (scrollTop / docHeight) * 100)) : 0;
-      setProgress(pct);
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        const progressBar = progressRef.current;
+        if (!progressBar) return;
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const docHeight =
+          document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+        progressBar.style.transform = `scaleX(${progress})`;
+      });
     };
 
     updateProgress();
     window.addEventListener('scroll', updateProgress, { passive: true });
     window.addEventListener('resize', updateProgress);
     return () => {
+      if (frame) window.cancelAnimationFrame(frame);
       window.removeEventListener('scroll', updateProgress);
       window.removeEventListener('resize', updateProgress);
     };
@@ -27,8 +35,9 @@ export function ScrollProgress() {
       className="fixed top-0 left-0 right-0 z-[60] h-[3px] bg-transparent pointer-events-none"
     >
       <div
-        className="h-full bg-[var(--accent-red)] transition-[width] duration-150 ease-out"
-        style={{ width: `${progress}%` }}
+        ref={progressRef}
+        className="h-full w-full bg-[var(--accent-red)] transition-transform duration-150 ease-out"
+        style={{ transform: 'scaleX(0)', transformOrigin: 'left', willChange: 'transform' }}
       />
     </div>
   );

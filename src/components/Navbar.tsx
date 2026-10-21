@@ -26,7 +26,8 @@ import {
   Phone,
   CreditCard,
   Building2,
-  Wallet
+  Wallet,
+  UserRound
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -37,7 +38,7 @@ interface NavbarProps {
 type IconType = React.ComponentType<{ className?: string }>;
 
 /* ------------------------------------------------------------------ */
-/* Shared link styling — one active/inactive language for every link */
+/* Shared link styling with one active and inactive language for every link */
 /* ------------------------------------------------------------------ */
 
 const navLinkBase =
@@ -84,7 +85,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Close when the pointer leaves the whole dropdown region — but never while
+  // Close when the pointer leaves the whole dropdown region, but never while
   // the keyboard focus is still inside it, or a keyboard user would lose the
   // menu the moment the mouse happened to drift past.
   const handleMouseLeave = () => {
@@ -323,7 +324,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               ? Bot
               : index === 3
                 ? ShieldCheck
-                : index === 4
+                    : index === 7
+                      ? UserRound
+                      : index === 4
                   ? Code2
                   : index === 5
                     ? Users
@@ -334,22 +337,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const moreEntries: MenuEntry[] = useMemo(
     () =>
-      moreNav.map((link, index) => ({
+      moreNav.map((link) => ({
         id: link.id,
         title: link.label,
         href: navHref(link),
         Icon:
-          index === 0
+          link.route === 'features'
             ? Layers
-            : index === 1
-              ? BookOpen
-              : index === 2
-                ? BookOpen
-                : index === 3
-                  ? BookOpen
-                  : index === 4
-                    ? Info
-                    : Phone
+            : link.route === 'about'
+              ? Info
+              : link.route === 'contact'
+                ? Phone
+                : link.route === 'individual-request'
+                  ? UserRound
+                  : BookOpen
       })),
     []
   );
@@ -398,11 +399,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? isDark
-            ? 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-2 sm:py-3'
-            : 'bg-[var(--bg-primary)]/90 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-2 sm:py-3'
-          : isDark
-            ? 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
-            : 'bg-[var(--bg-primary)]/70 backdrop-blur-md border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
+            ? 'bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-2 sm:py-3'
+            : 'bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-2 sm:py-3'
+          : 'bg-[var(--bg-primary)]/92 backdrop-blur-xl border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -411,14 +410,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           <Link
             id="brand-logo-btn"
             to="/"
-            className="flex min-w-0 items-center gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
+            aria-label={`${siteConfig.academyName} home`}
+            className="flex min-w-0 items-center gap-2 sm:gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[var(--shadow-red)] group-hover:scale-105 transition-transform shrink-0 relative">
-              <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-[-0.08em] text-base bg-[var(--bg-card)] ${isDark ? 'text-white' : 'text-neutral-900'}`}>
-                <span className="text-[var(--accent-red)] drop-shadow-[0_0_8px_var(--accent-red-glow)]">C</span>S
+              <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-wide text-sm bg-[var(--bg-card)] ${isDark ? 'text-white' : 'text-neutral-900'}`} aria-hidden="true">
+                C<span className="mx-0.5 text-[var(--accent-red)]">/</span>S
               </div>
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span
                   className={`max-w-[10rem] truncate text-lg sm:max-w-none sm:text-xl font-black tracking-[-0.06em] transition-colors duration-200 uppercase ${
@@ -427,7 +427,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   {siteConfig.academyName}
                 </span>
-                <span className="w-2 h-2 rounded-full bg-[var(--accent-red)] shadow-[0_0_8px_var(--accent-red-glow)] animate-[pulse-glow_2.5s_ease-in-out_infinite]" />
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[var(--accent-red)] ring-2 ring-[var(--accent-red-subtle)]" />
               </div>
               <p className={`hidden sm:block text-[9px] font-bold tracking-[0.14em] uppercase text-[var(--text-muted)]`}>
                 Tech Education
@@ -436,7 +436,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </Link>
 
           {/* Desktop Navigation */}
-          <nav aria-label="Primary" className="hidden lg:flex items-center gap-0.5">
+          <nav aria-label="Primary" className="hidden xl:flex items-center gap-0.5">
             {primaryNav.map((link) => {
               const active = isRouteActive(currentRoute, link.route);
               return (
@@ -475,7 +475,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <Dropdown
               id="nav-link-more-dropdown"
               label="More"
-              isActive={['features', 'learning-formats', 'resources', 'blog', 'about', 'contact'].includes(currentRoute)}
+              isActive={['features', 'learning-formats', 'resources', 'blog', 'about', 'contact', 'individual-request'].includes(currentRoute)}
               open={moreDropdownOpen}
               onOpen={() => {
                 setMoreDropdownOpen(true);
@@ -493,7 +493,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Desktop Right Controls */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden xl:flex items-center gap-2">
             <a
               id="header-whatsapp-link"
               href={whatsappHref}
@@ -534,13 +534,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Mobile Menu & Quick Controls */}
-          <div className="flex items-center gap-2 lg:hidden">
+          <div className="flex items-center gap-2 xl:hidden">
             <button
               id="theme-toggle-mobile"
               type="button"
               onClick={toggleTheme}
               aria-label={t.nav.switchTheme}
-              className={`p-2 rounded-xl border transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border p-2 transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 isDark
                   ? 'bg-[var(--bg-elevated)] text-amber-400 border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
                   : 'bg-[var(--bg-tertiary)] text-[var(--accent-amber)] border-[var(--border-color)] hover:border-[var(--accent-red-border)]'
@@ -561,7 +561,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="mobile-menu-toggle-btn"
               type="button"
               onClick={() => setMobileMenuOpen((v) => !v)}
-              className={`p-2 rounded-lg border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
+              className={`inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2 ${
                 isDark ? 'bg-neutral-900 text-neutral-300 border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-neutral-200'
               }`}
               aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
@@ -582,7 +582,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className={`lg:hidden border-b pt-3 pb-6 max-h-[85vh] overflow-y-auto overscroll-contain fade-in ${
+          className={`xl:hidden border-b pt-3 pb-6 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain fade-in ${
             isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
           }`}
         >
@@ -606,7 +606,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                               ? BookOpen
                               : link.route === 'blog'
                                 ? BookOpen
-                                : link.route === 'about'
+                                  : link.route === 'individual-request'
+                                    ? UserRound
+                                    : link.route === 'about'
                                   ? Info
                                   : Phone;
               return (
@@ -642,7 +644,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               );
             })}
 
-            {/* PROGRAMS — collapsible group for quick access without a long scroll */}
+            {/* Programs collapsible group for quick access without a long scroll */}
             <div
               className={`mt-4 rounded-2xl border ${
                 isDark ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-neutral-50 border-[var(--border-subtle)]'

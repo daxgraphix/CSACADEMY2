@@ -11,7 +11,7 @@ afterEach(() => {
 });
 
 /**
- * The admin adds exactly one value — VITE_NEXT_COHORT_START_DATE — and the
+ * The admin adds exactly one value, VITE_NEXT_COHORT_START_DATE, and the
  * schedule adjusts itself. These tests prove that the derived values follow
  * automatically and that a passed deadline rolls forward.
  */
@@ -36,7 +36,7 @@ describe('admin-confirmed cohort', () => {
 
     const start = getCohortStart();
     // The confirmed date's deadline (17 Oct) has passed, so the schedule
-    // rolls forward — the admin date is no longer the active cohort.
+    // rolls forward, so the admin date is no longer the active cohort.
     expect(cohortStartIsAdminConfirmed()).toBe(false);
     expect(start.toISOString()).not.toContain('2026-10-20');
     // A rolling cohort always lands on a Monday.
@@ -56,7 +56,7 @@ describe('admin-confirmed cohort', () => {
   });
 
   it('always points at a cohort whose enrolment is still open', () => {
-    // The deadline for the current cohort has already passed — the site must
+    // The deadline for the current cohort has already passed, so the site must
     // roll forward instead of showing a dead "Enrolment closed" state.
     vi.useFakeTimers({ now: new Date('2026-10-19T12:00:00Z').getTime() });
     setNextCohortStart(undefined);

@@ -63,15 +63,15 @@ export const Footer: React.FC<FooterProps> = ({
     setSubmitError('');
     setIsLoading(true);
 
-    const topicLabel = topicOptions.find((opt) => opt.id === interest)?.label ?? 'All Updates';
+    const selectedTopic = topicOptions.find((topic) => topic.id === interest)?.label ?? 'All Updates';
     const result = await submitForm({
-      _subject: `[CS Academy Dispatch] Newsletter signup — ${email}`,
-      email: email.trim(),
+      _subject: `[CS Academy Dispatch] Newsletter request: ${email.trim()}`,
+      _honey: '',
       name: email.trim(),
-      interest: topicLabel,
-      page: typeof window !== 'undefined' ? window.location.href : '',
-      message: `Newsletter signup request.\n\nEmail: ${email.trim()}\nTopic: ${topicLabel}\nSigned up: ${new Date().toISOString()}`,
-      _honey: ''
+      email: email.trim(),
+      source: 'newsletter',
+      interest: selectedTopic,
+      message: `Newsletter request for ${selectedTopic}. Please manage this contact by email.`
     });
 
     setIsLoading(false);
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({
   return (
     <footer
       id="main-footer"
-      className={`relative border-t pt-20 pb-8 transition-colors duration-300 ${
+      className={`relative border-t pt-20 pb-[calc(6rem+env(safe-area-inset-bottom))] transition-colors duration-300 md:pb-8 ${
         theme === 'dark'
           ? 'bg-[var(--bg-primary)] text-white border-[var(--border-subtle)]'
           : 'bg-[var(--bg-primary)] text-neutral-900 border-[var(--border-subtle)]'
@@ -137,11 +137,11 @@ export const Footer: React.FC<FooterProps> = ({
                 <h3 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-[-0.05em] leading-[1.1] ${
                   theme === 'dark' ? 'text-white' : 'text-neutral-900'
                 }`}>
-                  STAY AHEAD IN{' '}
-                  <span className="text-[var(--accent-red-strong)]">TECH, AI &amp; SECURITY</span>
+                  PRACTICAL UPDATES FOR{' '}
+                  <span className="text-[var(--accent-red-strong)]">YOUR NEXT SKILL</span>
                 </h3>
                 <p className={`text-sm leading-relaxed max-w-md ${theme === 'dark' ? 'text-neutral-300' : 'text-neutral-800'}`}>
-                  Weekly practical guides, free prompt cheat sheets, live cohort announcements, and East African cybersecurity insights delivered straight to your inbox.
+                  Request occasional course updates, practical guides, and new cohort announcements by email.
                 </p>
               </div>
 
@@ -155,11 +155,10 @@ export const Footer: React.FC<FooterProps> = ({
                     </div>
                     <div>
                       <div className={`text-sm font-bold ${theme === 'dark' ? 'text-emerald-400' : 'text-emerald-800'}`}>
-                        You’re on the list
+                        Request sent
                       </div>
                       <p className={`mt-1 text-xs ${theme === 'dark' ? 'text-neutral-300' : 'text-emerald-900'}`}>
-                        Your request reached CS Academy. Watch your inbox for the next tech dispatch
-                        and free masterclass alert.
+                        Your request was sent to CS Academy support. To stop future updates at any time, email {siteConfig.email} with “Unsubscribe” in the subject.
                       </p>
                       <button
                         type="button"
@@ -204,11 +203,11 @@ export const Footer: React.FC<FooterProps> = ({
                         {isLoading ? (
                           <span className="inline-flex items-center gap-2">
                             <span className="h-3 w-3 rounded-full border-2 border-white border-t-transparent animate-spin" />
-                            <span>Subscribing</span>
+                            <span>Sending request</span>
                           </span>
                         ) : (
                           <>
-                            <span>Subscribe Free</span>
+                            <span>Request by email</span>
                             <Send className="w-3.5 w-3.5" />
                           </>
                         )}
@@ -253,7 +252,7 @@ export const Footer: React.FC<FooterProps> = ({
 
                     <div className={`flex items-center gap-1.5 text-[10px] ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
                       <ShieldCheck className="h-3 w-3 text-[var(--accent-red-strong)]" />
-                      <span>One request, no spam. Reply to any dispatch to opt out.</span>
+                        <span>This sends an email request to support; it does not instantly subscribe you. Email {siteConfig.email} with “Unsubscribe” to stop future updates.</span>
                     </div>
                   </form>
                 )}
@@ -272,7 +271,7 @@ export const Footer: React.FC<FooterProps> = ({
             >
               <div className="h-11 w-11 rounded-2xl bg-gradient-to-br from-[var(--accent-red)] to-[var(--bg-card)] p-[1.5px] shadow-[0_12px_26px_rgba(255,59,48,0.3)] group-hover:scale-105 transition-transform">
                 <div className={`flex h-full w-full items-center justify-center rounded-[14px] text-base font-black tracking-[-0.08em] ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-neutral-900 text-white'}`}>
-                  <span className="text-[var(--accent-red-strong)]">C</span>S
+                  C<span className="mx-0.5 text-[var(--accent-red-strong)]">/</span>S
                 </div>
               </div>
               <div>
@@ -286,7 +285,7 @@ export const Footer: React.FC<FooterProps> = ({
             </Link>
 
             <p className={`text-xs leading-relaxed max-w-sm ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-800'}`}>
-              Practical training in Artificial Intelligence, Cybersecurity, and Digital Skills across East and Central Africa.
+              Practical training in AI, cybersecurity, and digital skills for learners and teams across East Africa.
             </p>
 
             {/* Contact quick links */}
@@ -400,7 +399,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* ==================== Bottom Bar ==================== */}
         <div className={`flex flex-col-reverse sm:flex-row items-center justify-between gap-4 text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-700'}`}>
           <div className="flex items-center gap-2">
-            <span>© 2026 {siteConfig.academyName}.</span>
+            <span>© {new Date().getFullYear()} {siteConfig.academyName}.</span>
             <span className="hidden sm:inline">Cyber Academy Tech Ecosystem.</span>
             <span>All rights reserved.</span>
           </div>

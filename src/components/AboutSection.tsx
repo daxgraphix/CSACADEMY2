@@ -136,7 +136,7 @@ theme === 'dark' ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-w
             }`}>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />
-                <span>Curricula taught in clear English with local language support</span>
+                <span>Curricula taught through clear English-language instruction</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-[var(--accent-red-strong)] shrink-0" />

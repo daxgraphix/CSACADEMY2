@@ -38,7 +38,7 @@ export const NotFound: React.FC = () => {
           <p className={`text-lg leading-relaxed mb-10 max-w-md mx-auto ${
             theme === 'dark' ? 'text-neutral-300' : 'text-neutral-700'
           }`}>
-            The page you're looking for has been moved, removed, or never existed. Don't worry - you can find everything you need from our homepage.
+            The page you're looking for has been moved, removed, or never existed. Don't worry, you can find everything you need from our homepage.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

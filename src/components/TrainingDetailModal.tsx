@@ -33,7 +33,7 @@ export const TrainingDetailModal: React.FC<TrainingDetailModalProps> = ({
     } animate-in fade-in duration-200`}
       role="dialog" aria-modal="true" aria-label={training.title} tabIndex={-1}
     >
-      <div className={`border rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl relative ${
+      <div className={`responsive-modal-viewport border rounded-3xl w-full max-w-2xl overflow-y-auto shadow-2xl relative ${
           theme === 'dark' ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-900'
         }`}
         onClick={(e) => e.stopPropagation()}
@@ -143,7 +143,7 @@ export const TrainingDetailModal: React.FC<TrainingDetailModalProps> = ({
           }`}>
             <span className={`text-xs italic ${
               theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
-            }`}>Available in English & local languages</span>
+            }`}>Instruction and materials in English</span>
             <button
               onClick={() => {
                 onClose();

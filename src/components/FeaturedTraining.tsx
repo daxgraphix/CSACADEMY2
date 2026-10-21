@@ -83,7 +83,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
             </p>
           </div>
 
-          {/* Filter Tabs — 2-col grid on mobile, 3-col on small tablet, horizontal row on desktop */}
+          {/* Filter tabs use two columns on mobile, three on small tablets, and a row on desktop */}
           <div className={`grid grid-cols-2 gap-1.5 p-1.5 border rounded-2xl self-start md:self-auto sm:grid-cols-3 lg:flex lg:flex-nowrap lg:gap-1.5 ${
             theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm'
           }`}>
@@ -150,7 +150,7 @@ export const FeaturedTraining: React.FC<FeaturedTrainingProps> = ({
           </div>
         </div>
 
-        {/* Training Cards Grid — 1 column on mobile, 2 on small tablet, 3 on desktop */}
+        {/* Training cards use one column on mobile, two on small tablets, and three on desktop */}
         <div key={filter} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 animate-[fadeIn_0.3s_ease-out]">
           {filteredTrainings.map((course) => {
             return (
