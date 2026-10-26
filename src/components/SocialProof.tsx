@@ -17,7 +17,7 @@ export const SocialProof: React.FC<SocialProofProps> = ({ openBookingModal }) =>
   ];
 
   return (
-    <section id="social-proof-section" aria-labelledby="local-fit-title" className={`py-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'}`}>
+    <section id="social-proof-section" aria-labelledby="local-fit-title" className={`py-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">Local delivery, practical learning</p>

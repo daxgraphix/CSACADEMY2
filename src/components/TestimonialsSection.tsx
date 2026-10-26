@@ -36,7 +36,7 @@ export const TestimonialsSection: React.FC = () => {
 
   return (
     <section id="testimonials-section" aria-labelledby="testimonials-title" className={`py-24 border-y transition-colors duration-300 ${
-      isDark ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-[#FAFAFA] text-neutral-900 border-neutral-300'
+      isDark ? 'bg-[var(--bg-primary)] text-white border-[var(--border-color)]' : 'bg-white text-neutral-900 border-neutral-300'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">

@@ -40,7 +40,7 @@ export const ProgramsOverview: React.FC<ProgramsOverviewProps> = ({
     <section 
       id="programs-section" 
       className={`py-16 sm:py-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

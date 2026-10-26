@@ -61,7 +61,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       localStorage.setItem('cs_academy_theme', theme);
       const themeColor = document.querySelector('meta[name="theme-color"]');
       if (themeColor) {
-        themeColor.setAttribute('content', theme === 'dark' ? '#090909' : '#f7f4ee');
+        themeColor.setAttribute('content', theme === 'dark' ? '#090909' : '#ffffff');
       }
     } catch (e) {
       // ignore

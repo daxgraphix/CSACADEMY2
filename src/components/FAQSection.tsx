@@ -89,7 +89,7 @@ export const FAQSection: React.FC = () => {
     <section 
       id="faq-section" 
       className={`relative py-24 overflow-hidden transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}
     >
       <FaqJsonLd items={faqData} />

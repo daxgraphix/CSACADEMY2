@@ -14,7 +14,7 @@ export const InstructorsPage: React.FC = () => {
   const instructor = instructorsData[0];
 
   return (
-    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <Helmet>
         <title>Meet Your Instructor | CS Academy</title>
         <meta name="description" content="Meet Alex Rweyemamu, CS Academy founder and lead instructor for practical AI, cybersecurity, and digital skills education." />
@@ -55,11 +55,11 @@ export const InstructorsPage: React.FC = () => {
             <h2 className={`mt-3 text-2xl font-black tracking-tight sm:text-3xl ${isDark ? 'text-white' : 'text-neutral-950'}`}>Technology should feel useful and within reach.</h2>
             <p className={`mt-4 text-sm leading-7 ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>{instructor.bio}</p>
 
-            <div className={`mt-6 rounded-2xl border p-4 sm:p-5 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-[#f7f4ee]'}`}>
+            <div className={`mt-6 rounded-2xl border p-4 sm:p-5 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-white'}`}>
               <div className="text-xs font-extrabold">Teaching focus</div>
               <p className={`mt-2 text-xs leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>Make complex ideas understandable, connect them to practical tasks, and help learners use technology with care.</p>
               <div className={`mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t pt-3 text-[11px] ${isDark ? 'border-[var(--border-color)] text-neutral-300' : 'border-neutral-200 text-neutral-700'}`}>
-                {instructor.featuredCourses.map((course) => <span key={course} className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />{course}</span>)}
+                {instructor.featuredCourses.map((course) => <span key={course} className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-[var(--accent-red-strong)]" aria-hidden="true" />{course}</span>)}
               </div>
             </div>
 

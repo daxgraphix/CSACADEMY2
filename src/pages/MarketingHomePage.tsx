@@ -301,15 +301,12 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 <Check aria-hidden="true" className="h-4 w-4 text-[var(--accent-red-strong)]" /> 1 to 2 day intensive
               </span>
             </div>
-                <Check aria-hidden="true" className="h-4 w-4 text-emerald-500" /> 1 to 2 day intensive
-              </span>
-            </div>
           </div>
 
           {/* Interactive Workflow Sandbox */}
           <div className={`relative mx-auto w-full max-w-xl rounded-[2rem] border p-4 sm:p-6 ${cardBg}`}>
             <div aria-hidden="true" className="absolute -right-5 -top-5 h-24 w-24 rounded-full bg-[var(--accent-red)]/15 blur-2xl" />
-            <div className={`relative overflow-hidden rounded-[1.4rem] border ${isDark ? 'border-white/10 bg-[#101114]' : 'border-neutral-200 bg-white'}`}>
+            <div className={`relative overflow-hidden rounded-[1.4rem] border ${isDark ? 'border-white/10 bg-[#000000]' : 'border-neutral-200 bg-white'}`}>
               {/* Tab Selector */}
               <div
                 role="tablist"

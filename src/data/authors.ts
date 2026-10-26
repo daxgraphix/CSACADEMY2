@@ -17,7 +17,7 @@ export const authors: Record<string, AuthorProfile> = {
     role: 'Founder & Lead Instructor, CS Academy',
     bio: 'AI, cybersecurity, and digital-skills educator focused on practical, locally-relevant training for East African professionals, students, and organizations.',
     initials: 'AR',
-    avatarGradient: 'linear-gradient(135deg, #dc2626 0%, #7c3aed 100%)',
+    avatarGradient: 'linear-gradient(135deg, #dc2626 0%, #000000 100%)',
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/alexrweyemamu',
       twitter: 'https://x.com/Cyberswahili'
@@ -38,7 +38,7 @@ export const getAuthor = (name: string): AuthorProfile => {
         .slice(0, 2)
         .join('')
         .toUpperCase(),
-      avatarGradient: 'linear-gradient(135deg, #dc2626 0%, #7c3aed 100%)'
+      avatarGradient: 'linear-gradient(135deg, #dc2626 0%, #000000 100%)'
     }
   );
 };

@@ -18,7 +18,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ kind }) => {
 
   return (
     <main className={`min-h-screen pt-28 pb-20 transition-colors ${
-      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
+      theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
     }`}>
       <Helmet>
         <title>{title} | CS Academy</title>

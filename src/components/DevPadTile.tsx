@@ -137,7 +137,7 @@ export const DevPadTile: React.FC<DevPadTileProps> = ({
           <div className="lg:col-span-5">
             <div
               className={`relative rounded-3xl border overflow-hidden shadow-2xl ${
-                isDark ? 'border-white/10 bg-[#0a0a0a]' : 'border-neutral-200 bg-white'
+                isDark ? 'border-white/10 bg-[#000000]' : 'border-neutral-200 bg-white'
               }`}
             >
               <div
@@ -162,11 +162,11 @@ export const DevPadTile: React.FC<DevPadTileProps> = ({
                 </div>
               </div>
 
-              <div className={`p-4 space-y-3 ${isDark ? 'bg-[#0f0f0f]' : 'bg-neutral-50'}`}>
+              <div className={`p-4 space-y-3 ${isDark ? 'bg-[#000000]' : 'bg-neutral-50'}`}>
                 {[
-                  { author: 'Kenji W', initials: 'KW', time: '9:12 AM', color: '#10b981', msg: 'Pushed build 0.7 today. Looking for testers to stress the new onboarding flow.' },
-                  { author: 'Priya R', initials: 'PR', time: '9:14 AM', color: '#3b82f6', msg: 'Installing now. Will run it through three scenarios and drop feedback tonight.' },
-                  { author: 'Sven L', initials: 'SL', time: '9:21 AM', color: '#ec4899', msg: 'Testathon kicks off Friday. Bring a product to be tested, leave with three peer reviews.' }
+                  { author: 'Kenji W', initials: 'KW', time: '9:12 AM', color: '#dc2626', msg: 'Pushed build 0.7 today. Looking for testers to stress the new onboarding flow.' },
+                  { author: 'Priya R', initials: 'PR', time: '9:14 AM', color: '#dc2626', msg: 'Installing now. Will run it through three scenarios and drop feedback tonight.' },
+                  { author: 'Sven L', initials: 'SL', time: '9:21 AM', color: '#dc2626', msg: 'Testathon kicks off Friday. Bring a product to be tested, leave with three peer reviews.' }
                 ].map((m) => (
                   <div key={m.author} className="flex items-start gap-2.5">
                     <div

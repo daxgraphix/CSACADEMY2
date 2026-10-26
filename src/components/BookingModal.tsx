@@ -469,7 +469,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
       >
         {/* Mobile drag handle */}
         <div className="sm:hidden flex justify-center pt-2.5 pb-1" aria-hidden="true">
-          <span className="block h-1 w-10 rounded-full" style={{ background: isDark ? '#3a3a3a' : '#d4ccbe' }} />
+          <span className="block h-1 w-10 rounded-full" style={{ background: isDark ? '#3a3a3a' : '#000000' }} />
         </div>
 
         {/* Accent top bar */}
@@ -954,7 +954,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
               className="text-[11px] font-semibold text-center px-3 py-2 rounded-lg"
               style={{
                 color: 'var(--bk-status-warning)',
-                background: isDark ? 'rgba(245, 158, 11, 0.08)' : '#fffbeb',
+                background: isDark ? 'rgba(255, 59, 48, 0.08)' : '#ffffff',
                 border: '1px solid var(--bk-pill-pending-border)'
               }}
             >
@@ -1030,10 +1030,10 @@ const webmailComposeUrl = (
 };
 
 const providerAccent: Record<'gmail' | 'outlook' | 'yahoo' | 'proton', { fg: string; bg: string }> = {
-  gmail: { fg: '#ea4335', bg: 'rgba(234, 67, 53, 0.1)' },
-  outlook: { fg: '#0078d4', bg: 'rgba(0, 120, 212, 0.1)' },
-  yahoo: { fg: '#6001d2', bg: 'rgba(96, 1, 210, 0.1)' },
-  proton: { fg: '#6d4aff', bg: 'rgba(109, 74, 255, 0.1)' }
+  gmail: { fg: '#dc2626', bg: 'rgba(220, 38, 38, 0.1)' },
+  outlook: { fg: '#dc2626', bg: 'rgba(220, 38, 38, 0.1)' },
+  yahoo: { fg: '#dc2626', bg: 'rgba(220, 38, 38, 0.1)' },
+  proton: { fg: '#dc2626', bg: 'rgba(220, 38, 38, 0.1)' }
 };
 
 const BookingSuccess: React.FC<BookingSuccessProps> = ({

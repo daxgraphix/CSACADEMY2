@@ -27,9 +27,9 @@ interface FooterProps {
 }
 
 const socialLinks = [
-  { href: siteConfig.socialLinks.youtube, label: 'YouTube', Icon: Youtube, hover: 'hover:text-[#FF0000]' },
-  { href: siteConfig.socialLinks.linkedin, label: 'LinkedIn', Icon: Linkedin, hover: 'hover:text-[#0A66C2]' },
-  { href: `https://wa.me/${siteConfig.whatsapp}`, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-emerald-500' },
+  { href: siteConfig.socialLinks.youtube, label: 'YouTube', Icon: Youtube, hover: 'hover:text-[var(--accent-red)]' },
+  { href: siteConfig.socialLinks.linkedin, label: 'LinkedIn', Icon: Linkedin, hover: 'hover:text-[var(--accent-red)]' },
+  { href: `https://wa.me/${siteConfig.whatsapp}`, label: 'WhatsApp', Icon: MessageCircle, hover: 'hover:text-[var(--accent-red)]' },
   { href: `mailto:${siteConfig.email}`, label: 'Email', Icon: Mail, hover: 'hover:text-[var(--accent-red)]', internal: true }
 ];
 

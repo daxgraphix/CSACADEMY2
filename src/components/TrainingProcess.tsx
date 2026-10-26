@@ -34,7 +34,7 @@ export const TrainingProcess: React.FC = () => {
     <section 
       id="training-process-section" 
       className={`py-24 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -14,6 +14,41 @@
 }
 
 @layer base {
+  /* The site palette is limited to red, white, and black. Keep legacy
+     component utilities inside that palette while they are being migrated. */
+  :root,
+  html.light {
+    --accent-green: var(--accent-red);
+    --accent-green-strong: var(--accent-red-strong);
+    --accent-green-subtle: var(--accent-red-subtle);
+    --accent-blue: var(--accent-red);
+    --accent-purple: var(--accent-red);
+  }
+
+  [class*="text-blue-"], [class*="text-sky-"], [class*="text-cyan-"],
+  [class*="text-teal-"], [class*="text-green-"], [class*="text-emerald-"],
+  [class*="text-lime-"], [class*="text-yellow-"], [class*="text-amber-"],
+  [class*="text-orange-"], [class*="text-purple-"], [class*="text-violet-"],
+  [class*="text-pink-"], [class*="text-fuchsia-"], [class*="text-indigo-"] {
+    color: var(--accent-red) !important;
+  }
+
+  [class*="bg-blue-"], [class*="bg-sky-"], [class*="bg-cyan-"],
+  [class*="bg-teal-"], [class*="bg-green-"], [class*="bg-emerald-"],
+  [class*="bg-lime-"], [class*="bg-yellow-"], [class*="bg-amber-"],
+  [class*="bg-orange-"], [class*="bg-purple-"], [class*="bg-violet-"],
+  [class*="bg-pink-"], [class*="bg-fuchsia-"], [class*="bg-indigo-"] {
+    background-color: var(--accent-red-subtle) !important;
+  }
+
+  [class*="border-blue-"], [class*="border-sky-"], [class*="border-cyan-"],
+  [class*="border-teal-"], [class*="border-green-"], [class*="border-emerald-"],
+  [class*="border-lime-"], [class*="border-yellow-"], [class*="border-amber-"],
+  [class*="border-orange-"], [class*="border-purple-"], [class*="border-violet-"],
+  [class*="border-pink-"], [class*="border-fuchsia-"], [class*="border-indigo-"] {
+    border-color: var(--accent-red-border) !important;
+  }
+
   :root {
     color-scheme: dark;
     --bg-primary: #090909;
@@ -171,28 +206,28 @@
     color-scheme: light;
     --bg-primary: #ffffff;
     --bg-secondary: #ffffff;
-    --bg-tertiary: #f5f5f5;
+    --bg-tertiary: #ffffff;
     --bg-card: #ffffff;
-    --bg-elevated: #fafafa;
-    --bg-overlay: rgba(255, 255, 255, 0.9);
+    --bg-elevated: #ffffff;
+    --bg-overlay: #ffffff;
 
-    --border-color: #e5e5e5;
-    --border-subtle: #f2f2f2;
-    --border-strong: #d4d4d4;
+    --border-color: rgba(0, 0, 0, 0.16);
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-strong: rgba(0, 0, 0, 0.28);
     --border-active: #dc2626;
 
-    --text-primary: #0a0a0a;
-    --text-secondary: #171717;
-    --text-tertiary: #262626;
-    --text-muted: #525252;
-    --text-faint: #737373;
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-tertiary: #000000;
+    --text-muted: #000000;
+    --text-faint: #000000;
     --text-inverted: #ffffff;
 
     --control-bg: #ffffff;
-    --control-bg-disabled: #f5f5f5;
-    --control-border: #d4d4d4;
-    --control-border-hover: #737373;
-    --control-placeholder: #737373;
+    --control-bg-disabled: #ffffff;
+    --control-border: rgba(0, 0, 0, 0.24);
+    --control-border-hover: #000000;
+    --control-placeholder: #000000;
     --control-selection-bg: rgba(220, 38, 38, 0.16);
 
     --accent-red: #dc2626;
@@ -214,97 +249,97 @@
     --accent-purple: var(--accent-red);
 
     /* Booking modal design tokens (light) */
-    --bk-surface: linear-gradient(160deg, #ffffff 0%, #fafafa 55%, #fff5f5 100%);
+    --bk-surface: linear-gradient(160deg, #ffffff 0%, #ffffff 100%);
     --bk-surface-solid: #ffffff;
     --bk-header-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.02) 50%, transparent 100%);
     --bk-header-border: rgba(220, 38, 38, 0.18);
-    --bk-icon-bg: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-    --bk-icon-color: #b91c1c;
-    --bk-title-color: #0a0a0a;
-    --bk-subtitle-color: #525252;
-    --bk-trust-bg: #fef2f2;
-    --bk-trust-text: #b91c1c;
-    --bk-trust-border: #fecaca;
-    --bk-close-bg: #f5f5f5;
-    --bk-close-text: #525252;
-    --bk-close-hover-bg: #e5e5e5;
-    --bk-close-hover-text: #0a0a0a;
+    --bk-icon-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.18) 0%, rgba(220, 38, 38, 0.08) 100%);
+    --bk-icon-color: #dc2626;
+    --bk-title-color: #000000;
+    --bk-subtitle-color: #000000;
+    --bk-trust-bg: rgba(220, 38, 38, 0.12);
+    --bk-trust-text: #dc2626;
+    --bk-trust-border: rgba(220, 38, 38, 0.32);
+    --bk-close-bg: #ffffff;
+    --bk-close-text: #000000;
+    --bk-close-hover-bg: #ffffff;
+    --bk-close-hover-text: #000000;
 
     --bk-input-bg: #ffffff;
-    --bk-input-border: #e5e5e5;
-    --bk-input-border-hover: #a3a3a3;
-    --bk-input-text: #0a0a0a;
-    --bk-input-placeholder: #737373;
+    --bk-input-border: rgba(0, 0, 0, 0.24);
+    --bk-input-border-hover: #000000;
+    --bk-input-text: #000000;
+    --bk-input-placeholder: #000000;
     --bk-input-focus-ring: rgba(220, 38, 38, 0.22);
     --bk-input-success-border: #dc2626;
     --bk-input-success-ring: rgba(220, 38, 38, 0.16);
     --bk-input-error-border: #dc2626;
     --bk-input-error-ring: rgba(220, 38, 38, 0.18);
 
-    --bk-label-color: #171717;
-    --bk-hint-color: #525252;
-    --bk-section-bg: #fafafa;
-    --bk-section-border: #e5e5e5;
-    --bk-section-text: #171717;
-    --bk-section-muted: #525252;
-    --bk-mono-text: #171717;
+    --bk-label-color: #000000;
+    --bk-hint-color: #000000;
+    --bk-section-bg: #ffffff;
+    --bk-section-border: rgba(0, 0, 0, 0.16);
+    --bk-section-text: #000000;
+    --bk-section-muted: #000000;
+    --bk-mono-text: #000000;
 
-    --bk-timeline-num-bg: #fee2e2;
-    --bk-timeline-num-text: #b91c1c;
+    --bk-timeline-num-bg: rgba(220, 38, 38, 0.16);
+    --bk-timeline-num-text: #dc2626;
 
-    --bk-whatsapp-bg: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-    --bk-whatsapp-hover: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+    --bk-whatsapp-bg: linear-gradient(135deg, #dc2626 0%, #dc2626 100%);
+    --bk-whatsapp-hover: linear-gradient(135deg, #b91c1c 0%, #b91c1c 100%);
     --bk-whatsapp-shadow: 0 8px 24px rgba(220, 38, 38, 0.28);
 
     --bk-email-bg: #ffffff;
-    --bk-email-hover: #fafafa;
-    --bk-email-border: #e5e5e5;
-    --bk-email-text: #171717;
+    --bk-email-hover: #ffffff;
+    --bk-email-border: rgba(0, 0, 0, 0.16);
+    --bk-email-text: #000000;
 
-    --bk-hero-success: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+    --bk-hero-success: linear-gradient(135deg, #dc2626 0%, #dc2626 100%);
     --bk-hero-success-glow: rgba(220, 38, 38, 0.35);
-    --bk-hero-pending: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+    --bk-hero-pending: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
     --bk-hero-pending-glow: rgba(0, 0, 0, 0.1);
-    --bk-hero-failed: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    --bk-hero-failed: linear-gradient(135deg, #dc2626 0%, #dc2626 100%);
     --bk-hero-failed-glow: rgba(220, 38, 38, 0.35);
 
     --bk-ref-bg: linear-gradient(135deg, rgba(220, 38, 38, 0.08) 0%, rgba(220, 38, 38, 0.02) 100%);
     --bk-ref-border: rgba(220, 38, 38, 0.2);
-    --bk-ref-text: #0a0a0a;
-    --bk-ref-label: #b91c1c;
-    --bk-ref-meta: rgba(10, 10, 10, 0.7);
+    --bk-ref-text: #000000;
+    --bk-ref-label: #dc2626;
+    --bk-ref-meta: rgba(0, 0, 0, 0.7);
     --bk-ref-copy-bg: rgba(220, 38, 38, 0.08);
     --bk-ref-copy-bg-hover: rgba(220, 38, 38, 0.16);
-    --bk-ref-copy-text: #b91c1c;
+    --bk-ref-copy-text: #dc2626;
 
     --bk-wa-strip-bg: rgba(220, 38, 38, 0.08);
-    --bk-wa-strip-text: #b91c1c;
-    --bk-wa-strip-border: rgba(220, 38, 38, 0.2);
-    --bk-wa-strip-hover: rgba(220, 38, 38, 0.14);
+    --bk-wa-strip-text: #dc2626;
+    --bk-wa-strip-border: rgba(220, 38, 38, 0.24);
+    --bk-wa-strip-hover: rgba(220, 38, 38, 0.16);
 
     --bk-status-online: #dc2626;
-    --bk-status-warning: #b91c1c;
+    --bk-status-warning: #dc2626;
 
     --bk-copy-success-bg: rgba(220, 38, 38, 0.12);
-    --bk-copy-success-text: #b91c1c;
-    --bk-copy-success-border: rgba(220, 38, 38, 0.3);
+    --bk-copy-success-text: #dc2626;
+    --bk-copy-success-border: rgba(220, 38, 38, 0.32);
 
     --bk-pill-success-bg: rgba(220, 38, 38, 0.08);
-    --bk-pill-success-text: #b91c1c;
-    --bk-pill-success-border: rgba(220, 38, 38, 0.25);
-    --bk-pill-pending-bg: rgba(0, 0, 0, 0.05);
-    --bk-pill-pending-text: #171717;
-    --bk-pill-pending-border: rgba(0, 0, 0, 0.15);
+    --bk-pill-success-text: #dc2626;
+    --bk-pill-success-border: rgba(220, 38, 38, 0.28);
+    --bk-pill-pending-bg: rgba(0, 0, 0, 0.04);
+    --bk-pill-pending-text: #000000;
+    --bk-pill-pending-border: rgba(0, 0, 0, 0.24);
 
-    --bk-cta-secondary-bg: #f5f5f5;
-    --bk-cta-secondary-hover: #e5e5e5;
-    --bk-cta-secondary-border: #d4d4d4;
-    --bk-cta-secondary-text: #0a0a0a;
+    --bk-cta-secondary-bg: #ffffff;
+    --bk-cta-secondary-hover: #ffffff;
+    --bk-cta-secondary-border: rgba(0, 0, 0, 0.24);
+    --bk-cta-secondary-text: #000000;
 
-    --bk-divider: #e5e5e5;
+    --bk-divider: rgba(0, 0, 0, 0.16);
 
-    --icon-color: #1f2937;
-    --icon-color-muted: #4b5563;
+    --icon-color: #000000;
+    --icon-color-muted: #000000;
     --icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 
     --shadow-sm: 0 2px 8px rgba(17, 17, 17, 0.08);
@@ -439,99 +474,75 @@
   }
 
   /* Accent utility colors are designed for saturated surfaces by default.
-     Deepen their light-theme foreground shades so labels and icons remain
-     visible on the cream and white surfaces used throughout the site. */
+     The whole site is red/white/black only, so every chromatic accent
+     collapses onto the shared red token in both themes. */
   html.light .text-red-300,
   html.light .text-red-400,
   html.light .text-red-500,
   html.light .text-rose-300,
   html.light .text-rose-400,
-  html.light .text-rose-500 {
-    color: #b91c1c !important;
-  }
-
+  html.light .text-rose-500,
   html.light .text-orange-300,
   html.light .text-orange-400,
-  html.light .text-orange-500 {
-    color: #c2410c !important;
-  }
-
+  html.light .text-orange-500,
   html.light .text-amber-300,
   html.light .text-amber-400,
   html.light .text-amber-500,
   html.light .text-yellow-300,
   html.light .text-yellow-400,
-  html.light .text-yellow-500 {
-    color: #92400e !important;
-  }
-
+  html.light .text-yellow-500,
   html.light .text-lime-300,
   html.light .text-lime-400,
   html.light .text-lime-500,
   html.light .text-green-300,
   html.light .text-green-400,
-  html.light .text-green-500 {
-    color: #166534 !important;
-  }
-
+  html.light .text-green-500,
   html.light .text-emerald-300,
   html.light .text-emerald-500,
   html.light .text-teal-300,
   html.light .text-teal-400,
-  html.light .text-teal-500 {
-    color: #047857 !important;
-  }
-
+  html.light .text-teal-500,
   html.light .text-cyan-300,
   html.light .text-cyan-400,
   html.light .text-cyan-500,
   html.light .text-sky-300,
   html.light .text-sky-400,
-  html.light .text-sky-500 {
-    color: #0369a1 !important;
-  }
-
+  html.light .text-sky-500,
   html.light .text-blue-300,
   html.light .text-blue-400,
   html.light .text-blue-500,
   html.light .text-indigo-300,
   html.light .text-indigo-400,
-  html.light .text-indigo-500 {
-    color: #1d4ed8 !important;
-  }
-
+  html.light .text-indigo-500,
   html.light .text-violet-300,
   html.light .text-violet-400,
   html.light .text-violet-500,
   html.light .text-purple-300,
   html.light .text-purple-400,
-  html.light .text-purple-500 {
-    color: #6d28d9 !important;
-  }
-
+  html.light .text-purple-500,
   html.light .text-fuchsia-300,
   html.light .text-fuchsia-400,
   html.light .text-fuchsia-500,
   html.light .text-pink-300,
   html.light .text-pink-400,
   html.light .text-pink-500 {
-    color: #a21caf !important;
+    color: var(--accent-red-strong) !important;
   }
 
-  /* Preserve bright foregrounds on the few intentionally dark green chips. */
+  /* Preserve bright foregrounds on the few intentionally dark accent chips. */
   html.light .bg-emerald-950\/40.text-emerald-400,
   html.light .bg-emerald-950\/40 .text-emerald-400 {
-    color: #34d399 !important;
+    color: var(--accent-red-bright) !important;
   }
 
   html.light .bg-emerald-950\/40.text-emerald-500,
   html.light .bg-emerald-950\/40 .text-emerald-500 {
-    color: #10b981 !important;
+    color: var(--accent-red) !important;
   }
 
   html.light .bg-emerald-950\/60 .text-emerald-400,
   html.light .bg-emerald-950\/60.text-emerald-300 {
-    color: #6ee7b7 !important;
+    color: var(--accent-red-bright) !important;
   }
 
   html:not(.light) .border-white\/10 {

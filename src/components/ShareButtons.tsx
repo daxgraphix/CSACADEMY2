@@ -162,7 +162,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
         <button
           id="btn-share-linkedin"
           onClick={handleLinkedIn}
-          className="inline-flex items-center gap-1 px-2 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold text-white bg-[#0A66C2] hover:bg-[#004182] active:scale-95 transition-all shadow-sm"
+          className="inline-flex items-center gap-1 px-2 py-1.5 rounded-xl text-[10px] sm:text-xs font-bold text-white bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] active:scale-95 transition-all shadow-sm"
         >
           <Linkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
           <span>LinkedIn</span>

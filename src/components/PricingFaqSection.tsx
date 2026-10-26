@@ -18,7 +18,7 @@ export const PricingFaqSection: React.FC<PricingFaqSectionProps> = ({ openBookin
     <section
       id="pricing-faq"
       aria-labelledby="pricing-faq-title"
-      className={`py-20 transition-colors duration-300 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#FAFAFA] text-neutral-900'}`}
+      className={`py-20 transition-colors duration-300 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}
     >
       <FaqJsonLd items={pricingFaqData} />
 

@@ -65,8 +65,8 @@ export const PriceStrip: React.FC<PriceStripProps> = React.memo(({
       <span className="opacity-40">·</span>
 
       <span role="radiogroup" aria-label="Currency" className="inline-flex items-center p-1 rounded-full border" style={{
-        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : '#d4ccbe',
-        background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#faf7f1'
+        borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : '#000000',
+        background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#ffffff'
       }}>
         {(['TSH', 'KES', 'USD'] as const).map((curr) => {
           const active = currency === curr;

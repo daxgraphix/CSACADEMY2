@@ -28,7 +28,7 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
       </Helmet>
 
       <main className={`min-h-screen pt-20 transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}>
         <PlatformFeaturesSection openBookingModal={openBookingModal} />
       </main>

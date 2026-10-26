@@ -24,7 +24,7 @@ const buildHtml = (r: ResourceItem): string => `
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 11pt;
       line-height: 1.65;
-      color: #1a1a1a;
+      color: #000000;
       background: #ffffff;
       padding: 0;
     }
@@ -46,7 +46,7 @@ const buildHtml = (r: ResourceItem): string => `
 
     /* ── HEADER BANNER ── */
     .header {
-      background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 55%, #dc2626 100%);
+      background: linear-gradient(135deg, #dc2626 0%, #dc2626 100%);
       color: #ffffff;
       padding: 22mm 0 16mm 0;
       margin: -18mm -20mm 0 -20mm;
@@ -76,13 +76,13 @@ const buildHtml = (r: ResourceItem): string => `
       width: 18pt;
       height: 18pt;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ffffff, #fca5a5);
+      background: linear-gradient(135deg, #ffffff, #ffffff);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 9pt;
       font-weight: 900;
-      color: #b91c1c;
+      color: #dc2626;
       flex-shrink: 0;
     }
     .brand-text {
@@ -136,7 +136,7 @@ const buildHtml = (r: ResourceItem): string => `
       line-height: 1.55;
       opacity: 0.92;
       max-width: 148mm;
-      color: #fce4e4;
+      color: #ffffff;
     }
     .header-divider {
       height: 2pt;
@@ -182,7 +182,7 @@ const buildHtml = (r: ResourceItem): string => `
       margin: 16pt 0 8pt 0;
     }
     .section-pill {
-      background: #b91c1c;
+      background: #dc2626;
       color: #ffffff;
       font-size: 6.5pt;
       font-weight: 800;
@@ -201,10 +201,10 @@ const buildHtml = (r: ResourceItem): string => `
     .body-text {
       font-size: 9.5pt;
       line-height: 1.7;
-      color: #333333;
+      color: #000000;
       margin-bottom: 10pt;
     }
-    .body-text strong { color: #111111; font-weight: 700; }
+    .body-text strong { color: #000000; font-weight: 700; }
 
     /* ── HIGHLIGHTS GRID ── */
     .highlights-grid {
@@ -217,15 +217,15 @@ const buildHtml = (r: ResourceItem): string => `
       align-items: flex-start;
       gap: 6pt;
       padding: 7pt 9pt;
-      background: #fef2f2;
+      background: #ffffff;
       border-left: 2.5pt solid #dc2626;
       border-radius: 0 4pt 4pt 0;
     }
     .highlight-num {
       font-size: 7pt;
       font-weight: 800;
-      color: #b91c1c;
-      background: #fee2e2;
+      color: #dc2626;
+      background: #ffffff;
       width: 14pt;
       height: 14pt;
       border-radius: 50%;
@@ -238,7 +238,7 @@ const buildHtml = (r: ResourceItem): string => `
     .highlight-text {
       font-size: 8.5pt;
       font-weight: 600;
-      color: #1a1a1a;
+      color: #000000;
       line-height: 1.45;
     }
 
@@ -251,10 +251,10 @@ const buildHtml = (r: ResourceItem): string => `
     }
     .use-cases-list li {
       font-size: 8.5pt;
-      color: #374151;
+      color: #000000;
       padding: 4pt 0 4pt 16pt;
       position: relative;
-      border-bottom: 0.5pt solid #f3f4f6;
+      border-bottom: 0.5pt solid rgba(0, 0, 0, 0.12);
       line-height: 1.45;
     }
     .use-cases-list li::before {
@@ -267,7 +267,7 @@ const buildHtml = (r: ResourceItem): string => `
 
     /* ── MAIN CONTENT BLOCK ── */
     .content-block {
-      background: #fafafa;
+      background: #ffffff;
       border: 0.75pt solid #e5e7eb;
       border-radius: 6pt;
       padding: 12pt 14pt;
@@ -278,7 +278,7 @@ const buildHtml = (r: ResourceItem): string => `
       font-weight: 800;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #b91c1c;
+      color: #dc2626;
       margin-bottom: 8pt;
       padding-bottom: 6pt;
       border-bottom: 0.75pt solid #e5e7eb;
@@ -296,21 +296,21 @@ const buildHtml = (r: ResourceItem): string => `
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #9ca3af;
+      color: #dc2626;
       margin-bottom: 3pt;
     }
     .content-entry-text {
       font-size: 8.5pt;
       line-height: 1.65;
-      color: #1a1a1a;
+      color: #000000;
     }
     .content-entry-text code {
       font-family: 'JetBrains Mono', monospace;
       font-size: 7.5pt;
-      background: #f3f4f6;
+      background: #ffffff;
       padding: 0.5pt 3pt;
       border-radius: 2pt;
-      color: #b91c1c;
+      color: #dc2626;
     }
 
     /* ── FOOTER ── */
@@ -323,20 +323,20 @@ const buildHtml = (r: ResourceItem): string => `
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 0.5pt solid #e5e7eb;
+      border-top: 0.5pt solid rgba(0, 0, 0, 0.12);
       margin: 0 -20mm -18mm -20mm;
-      background: #fafafa;
+      background: #ffffff;
     }
     .footer-brand {
       font-size: 7pt;
       font-weight: 800;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #b91c1c;
+      color: #dc2626;
     }
     .footer-tagline {
       font-size: 6pt;
-      color: #6b7280;
+      color: #000000;
       font-style: italic;
       margin-top: 1pt;
     }
@@ -346,7 +346,7 @@ const buildHtml = (r: ResourceItem): string => `
     .footer-contact a {
       font-size: 7pt;
       font-weight: 700;
-      color: #1a1a1a;
+      color: #000000;
       text-decoration: none;
     }
     .footer-contact-divider {

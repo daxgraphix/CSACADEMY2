@@ -10,7 +10,7 @@ export const instructorsData: Instructor[] = [
     specialtyBadge: 'Practical AI, cybersecurity & digital skills',
     bio: siteConfig.founder.bio,
     avatarInitials: 'AR',
-    avatarGradient: 'from-[#DC2626] to-[#7F1D1D]',
+    avatarGradient: 'from-[#DC2626] to-[#000000]',
     expertise: ['Practical AI', 'Cybersecurity and digital safety', 'Digital skills'],
     featuredCourses: ['AI literacy', 'Cybersecurity and digital safety', 'Digital skills'],
     socialLinks: { linkedin: siteConfig.socialLinks.linkedin }

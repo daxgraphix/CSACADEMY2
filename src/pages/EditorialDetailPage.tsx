@@ -53,7 +53,7 @@ export const EditorialDetailPage: React.FC<EditorialDetailPageProps> = ({ kind, 
   };
 
   return (
-    <main className={`min-h-screen px-4 pb-20 pt-28 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+    <main className={`min-h-screen px-4 pb-20 pt-28 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <Helmet>
         <title>{title} | CS Academy</title>
         <meta name="description" content={description.slice(0, 160)} />

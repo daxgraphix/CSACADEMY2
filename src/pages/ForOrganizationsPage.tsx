@@ -51,7 +51,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
   };
 
   const isDark = theme === 'dark';
-  const pageBg = isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900';
+  const pageBg = isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900';
   const cardBg = isDark ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300 shadow-sm';
   const cardInnerBg = isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)]' : 'bg-neutral-50 border-neutral-200';
   const heading = isDark ? 'text-white' : 'text-neutral-950';

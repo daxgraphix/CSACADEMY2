@@ -89,7 +89,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         <link rel="canonical" href={canonical} />
       </Helmet>
       <div className={`pt-28 pb-20 min-h-screen transition-colors duration-300 ${
-        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'
+        theme === 'dark' ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
 

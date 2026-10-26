@@ -35,23 +35,22 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({ slug }
   const isDark = theme === 'dark';
   const program = programsData.find((item) => item.slug === slug);
   const canonical = useCanonicalUrl();
-  // Use deeper foreground colors in light mode; the shared accent tokens are
-  // intentionally brighter for dark surfaces and can lose contrast as text.
-  const accent = isDark
-    ? ({ ai: '#c4b5fd', cybersecurity: '#6ee7b7', 'digital-skills': '#fcd34d' }[slug] ?? '#fecaca')
-    : ({ ai: '#6d28d9', cybersecurity: '#047857', 'digital-skills': '#92400e' }[slug] ?? '#b91c1c');
+  // The whole site is red/white/black only, so every program accent
+  // collapses onto the shared red token instead of a per-track hue.
+  const accent = 'var(--accent-red)';
+  const accentSoft = 'var(--accent-red-subtle)';
   const surface = isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white';
   const body = isDark ? 'text-neutral-300' : 'text-neutral-700';
 
   if (!program) {
-    return <main className={`grid min-h-screen place-items-center px-4 pt-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}><div className="max-w-lg text-center"><h1 className="text-3xl font-black">Program not found</h1><p className={`mt-3 text-sm ${body}`}>Browse the catalog to find a current CS Academy learning path.</p><Link to="/programs" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--accent-red)] px-4 py-3 text-xs font-bold text-white">Browse programs <ArrowRight className="h-4 w-4" /></Link></div></main>;
+    return <main className={`grid min-h-screen place-items-center px-4 pt-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}><div className="max-w-lg text-center"><h1 className="text-3xl font-black">Program not found</h1><p className={`mt-3 text-sm ${body}`}>Browse the catalog to find a current CS Academy learning path.</p><Link to="/programs" className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[var(--accent-red)] px-4 py-3 text-xs font-bold text-white">Browse programs <ArrowRight className="h-4 w-4" /></Link></div></main>;
   }
 
   const title = displayTitle(slug, program.title);
   const requestUrl = `/request-training?track=${encodeURIComponent(trackForSlug[slug] ?? 'I am not sure yet')}&format=Help%20me%20choose`;
 
   return (
-    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <Helmet>
         <title>{title} | Programs &amp; Curriculum | CS Academy</title>
         <meta name="description" content={`${program.extendedDescription} Explore course topics, practical outcomes, and delivery options. Contact CS Academy to confirm current availability, schedule, and pricing.`} />
@@ -83,7 +82,7 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({ slug }
               </div>
             </div>
             <div className={`flex items-center gap-4 rounded-2xl border p-4 sm:p-5 lg:min-w-64 lg:flex-col lg:items-start ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-neutral-50'}`}>
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: `${accent}18`, color: accent }}><ProgramIcon name={program.icon} /></span>
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl" style={{ backgroundColor: accentSoft, color: accent }}><ProgramIcon name={program.icon} /></span>
               <div><p className={`text-sm font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>{program.modules.length} curriculum modules</p><p className={`mt-1 text-xs ${body}`}>{program.topics.length} focus areas · guided practice</p></div>
             </div>
           </div>
@@ -91,9 +90,9 @@ export const ProgramDeepDivePage: React.FC<ProgramDeepDivePageProps> = ({ slug }
 
         <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
           <div className={`rounded-2xl border p-5 sm:p-7 ${surface}`}>
-            <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-600" aria-hidden="true" /><p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-[var(--accent-red-strong)]">Learning outcomes</p></div>
+            <div className="flex items-center gap-2"><Check className="h-4 w-4 text-[var(--accent-red-strong)]" aria-hidden="true" /><p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-[var(--accent-red-strong)]">Learning outcomes</p></div>
             <h2 className={`mt-2 text-xl font-black ${isDark ? 'text-white' : 'text-neutral-900'}`}>What you can practise</h2>
-            <ul className="mt-4 grid gap-2 sm:grid-cols-2">{program.outcomes.map((outcome) => <li key={outcome} className={`flex items-start gap-2 rounded-xl p-3 text-xs leading-relaxed ${isDark ? 'bg-[var(--bg-primary)] text-neutral-300' : 'bg-neutral-50 text-neutral-700'}`}><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden="true" />{outcome}</li>)}</ul>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">{program.outcomes.map((outcome) => <li key={outcome} className={`flex items-start gap-2 rounded-xl p-3 text-xs leading-relaxed ${isDark ? 'bg-[var(--bg-primary)] text-neutral-300' : 'bg-neutral-50 text-neutral-700'}`}><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent-red-strong)]" aria-hidden="true" />{outcome}</li>)}</ul>
           </div>
           <div className={`rounded-2xl border p-5 sm:p-7 ${surface}`}>
             <div className="flex items-center gap-2"><Users className="h-4 w-4 text-[var(--accent-red-strong)]" aria-hidden="true" /><p className="text-[10px] font-extrabold uppercase tracking-[0.15em] text-[var(--accent-red-strong)]">Who it may suit</p></div>
