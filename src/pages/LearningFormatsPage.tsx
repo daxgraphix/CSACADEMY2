@@ -18,11 +18,11 @@ const iconByName = {
   Building2
 } as const;
 
-const formatAccent = (category: string) => {
-  if (category === 'mobile') return { icon: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300', line: 'bg-emerald-500' };
-  if (category === 'self-paced') return { icon: 'bg-sky-500/10 text-sky-700 dark:text-sky-300', line: 'bg-sky-500' };
-  if (category === 'virtual') return { icon: 'bg-violet-500/10 text-violet-700 dark:text-violet-300', line: 'bg-violet-500' };
-  return { icon: 'bg-amber-500/10 text-amber-700 dark:text-amber-300', line: 'bg-amber-500' };
+const formatAccent = (category: string, isDark: boolean) => {
+  if (category === 'mobile') return { icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700', line: 'bg-emerald-500' };
+  if (category === 'self-paced') return { icon: isDark ? 'bg-sky-500/10 text-sky-300' : 'bg-sky-500/10 text-sky-700', line: 'bg-sky-500' };
+  if (category === 'virtual') return { icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700', line: 'bg-violet-500' };
+  return { icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700', line: 'bg-amber-500' };
 };
 
 export const LearningFormatsPage: React.FC = () => {
@@ -91,7 +91,7 @@ export const LearningFormatsPage: React.FC = () => {
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {learningFormatsData.map((format) => {
               const Icon = iconByName[format.icon as keyof typeof iconByName] ?? Video;
-              const accent = formatAccent(format.category);
+              const accent = formatAccent(format.category, isDark);
               const isTeamOption = format.category === 'in-person';
               const actionText = format.id === 'conferences-keynotes'
                 ? 'Discuss an event'

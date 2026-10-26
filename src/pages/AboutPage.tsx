@@ -13,11 +13,20 @@ const pillarThemes = [
   { icon: ShieldCheck, color: 'emerald' },
   { icon: Laptop, color: 'amber' }
 ];
-const colorClasses = {
-  violet: { icon: 'bg-violet-500/10 text-violet-700 dark:text-violet-300', badge: 'text-violet-800 bg-violet-50 border-violet-200 dark:text-violet-200 dark:bg-violet-400/10 dark:border-violet-400/20' },
-  emerald: { icon: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300', badge: 'text-emerald-800 bg-emerald-50 border-emerald-200 dark:text-emerald-200 dark:bg-emerald-400/10 dark:border-emerald-400/20' },
-  amber: { icon: 'bg-amber-500/10 text-amber-700 dark:text-amber-300', badge: 'text-amber-800 bg-amber-50 border-amber-200 dark:text-amber-200 dark:bg-amber-400/10 dark:border-amber-400/20' }
-} as const;
+const colorClasses = (isDark: boolean) => ({
+  violet: {
+    icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700',
+    badge: isDark ? 'text-violet-200 bg-violet-400/10 border-violet-400/20' : 'text-violet-800 bg-violet-50 border-violet-200'
+  },
+  emerald: {
+    icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700',
+    badge: isDark ? 'text-emerald-200 bg-emerald-400/10 border-emerald-400/20' : 'text-emerald-800 bg-emerald-50 border-emerald-200'
+  },
+  amber: {
+    icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700',
+    badge: isDark ? 'text-amber-200 bg-amber-400/10 border-amber-400/20' : 'text-amber-800 bg-amber-50 border-amber-200'
+  }
+} as const);
 
 export const AboutPage: React.FC = () => {
   const { theme, t } = useApp();
@@ -79,9 +88,9 @@ export const AboutPage: React.FC = () => {
           </div>
           <div className="grid gap-3 md:grid-cols-3">
             {siteConfig.pillars.map((pillar, index) => {
-              const theme = pillarThemes[index] ?? pillarThemes[0];
-              const Icon = theme.icon;
-              const colors = colorClasses[theme.color];
+              const pillarTheme = pillarThemes[index] ?? pillarThemes[0];
+              const Icon = pillarTheme.icon;
+              const colors = colorClasses(isDark)[pillarTheme.color];
               return <Link key={pillar.id} to={`/programs/${pillar.id === 'ai-literacy' ? 'ai' : pillar.id}`} className={`group rounded-2xl border p-5 transition hover:-translate-y-1 hover:shadow-lg ${surface}`}>
                 <div className="flex items-center justify-between gap-3"><span className={`flex h-10 w-10 items-center justify-center rounded-xl ${colors.icon}`}><Icon className="h-5 w-5" aria-hidden="true" /></span><span className={`rounded-full border px-2.5 py-1 text-[9px] font-bold ${colors.badge}`}>{pillar.badge}</span></div>
                 <h3 className={`mt-4 text-base font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>{pillar.name}</h3>

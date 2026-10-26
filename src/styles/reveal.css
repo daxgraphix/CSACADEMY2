@@ -7,6 +7,33 @@
   opacity: 1;
   transform: translateY(0);
 }
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 540ms var(--motion-ease-out), transform 540ms var(--motion-ease-out);
+}
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-18px);
+  transition: opacity 540ms var(--motion-ease-out), transform 540ms var(--motion-ease-out);
+}
+.reveal-left.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(18px);
+  transition: opacity 540ms var(--motion-ease-out), transform 540ms var(--motion-ease-out);
+}
+.reveal-right.is-revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
 .reveal-stagger > * {
   opacity: 0;
   transform: translateY(12px);
@@ -18,12 +45,29 @@
 .reveal-stagger.is-revealed > *:nth-child(4) { transition-delay: 165ms; }
 .reveal-stagger.is-revealed > *:nth-child(5) { transition-delay: 220ms; }
 .reveal-stagger.is-revealed > *:nth-child(6) { transition-delay: 275ms; }
+.reveal-stagger.is-revealed > *:nth-child(7) { transition-delay: 330ms; }
+.reveal-stagger.is-revealed > *:nth-child(8) { transition-delay: 385ms; }
 .reveal-stagger.is-revealed > * {
   opacity: 1;
   transform: translateY(0);
 }
+.reveal-stagger-fast > * {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 340ms var(--motion-ease-out), transform 340ms var(--motion-ease-out);
+}
+.reveal-stagger-fast.is-revealed > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger-fast.is-revealed > *:nth-child(2) { transition-delay: 35ms; }
+.reveal-stagger-fast.is-revealed > *:nth-child(3) { transition-delay: 70ms; }
+.reveal-stagger-fast.is-revealed > *:nth-child(4) { transition-delay: 105ms; }
+.reveal-stagger-fast.is-revealed > *:nth-child(5) { transition-delay: 140ms; }
+.reveal-stagger-fast.is-revealed > *:nth-child(6) { transition-delay: 175ms; }
+.reveal-stagger-fast.is-revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-stagger > *, .hover-underline, .keyword-chip, .motion-card {
+  .reveal, .reveal-scale, .reveal-left, .reveal-right, .reveal-stagger > *, .reveal-stagger-fast > *, .hover-underline, .keyword-chip, .motion-card {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

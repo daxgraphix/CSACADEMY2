@@ -42,7 +42,7 @@ type IconType = React.ComponentType<{ className?: string }>;
 /* ------------------------------------------------------------------ */
 
 const navLinkBase =
-  'relative inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-[11px] font-bold uppercase tracking-wider transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2';
+  'relative inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-[11px] font-bold uppercase tracking-wider transition-all duration-200 hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2';
 
 const navLinkTone = (isDark: boolean, active: boolean) => {
   if (active) {
@@ -399,9 +399,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? isDark
-            ? 'bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28)] py-2 sm:py-3'
-            : 'bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06)] py-2 sm:py-3'
-          : 'bg-[var(--bg-primary)]/92 backdrop-blur-xl border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
+            ? 'bg-[var(--bg-primary)]/95 backdrop-blur-2xl border-b border-[var(--border-color)] shadow-[0_10px_40px_rgba(0,0,0,0.28),0_1px_0_rgba(255,255,255,0.04)_inset] py-2 sm:py-3'
+            : 'bg-[var(--bg-primary)]/95 backdrop-blur-2xl border-b border-[var(--border-subtle)] shadow-[0_10px_30px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.6)_inset] py-2 sm:py-3'
+          : 'bg-[var(--bg-primary)]/92 backdrop-blur-2xl border-b border-[var(--border-subtle)] py-2.5 sm:py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -413,7 +413,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label={`${siteConfig.academyName} home`}
             className="flex min-w-0 items-center gap-2 sm:gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[var(--shadow-red)] group-hover:scale-105 transition-transform shrink-0 relative">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[0_8px_24px_rgba(255,59,48,0.4)] group-hover:scale-110 transition-transform shrink-0 relative">
               <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-wide text-sm bg-[var(--bg-card)] ${isDark ? 'text-white' : 'text-neutral-900'}`} aria-hidden="true">
                 C<span className="mx-0.5 text-[var(--accent-red)]">/</span>S
               </div>
@@ -421,7 +421,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span
-                  className={`max-w-[10rem] truncate text-lg sm:max-w-none sm:text-xl font-black tracking-[-0.06em] transition-colors duration-200 uppercase ${
+                  className={`max-w-[8.5rem] xs:max-w-[11rem] truncate text-base xs:text-lg sm:max-w-none sm:text-xl font-black tracking-[-0.06em] transition-colors duration-200 uppercase ${
                     isDark ? 'text-white group-hover:text-[var(--accent-red)]' : 'text-neutral-900 group-hover:text-[var(--accent-red-hover)]'
                   }`}
                 >
@@ -526,7 +526,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="header-book-training-btn"
               type="button"
               onClick={() => openBookingModal()}
-              className="inline-flex items-center gap-2 px-4 py-2 text-[11px] font-black text-white bg-[var(--accent-red)] hover:bg-[var(--accent-red-hover)] active:scale-[0.97] rounded-full shadow-[var(--shadow-red)] transition-all duration-200 uppercase tracking-[0.18em] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
+              className="inline-flex items-center gap-2 px-4 py-2 text-[11px] font-black text-white bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] active:scale-[0.97] rounded-full shadow-[var(--shadow-red)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(255,59,48,0.45)] transition-all duration-200 uppercase tracking-[0.18em] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-offset-2"
             >
               <span>{t.nav.bookTraining}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -582,8 +582,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
-          className={`xl:hidden border-b pt-3 pb-6 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain fade-in ${
-            isDark ? 'bg-[var(--bg-primary)] border-[var(--border-color)] text-white' : 'bg-white border-[var(--border-subtle)] text-neutral-900'
+          className={`xl:hidden border-b pt-3 pb-6 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain backdrop-blur-lg animate-[fadeInUp_0.3s_ease-out] ${
+            isDark ? 'bg-[var(--bg-primary)]/95 border-[var(--border-color)] text-white' : 'bg-white/95 border-[var(--border-subtle)] text-neutral-900'
           }`}
         >
           <div className="px-4 space-y-1.5">

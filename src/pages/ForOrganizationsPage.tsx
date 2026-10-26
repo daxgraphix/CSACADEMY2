@@ -95,7 +95,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <div className="pt-2">
             <a
               href="#proposal"
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
+              className="px-8 py-3.5 rounded-full font-extrabold text-xs text-white bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all duration-300"
             >
               <span>REQUEST INSTITUTIONAL PROPOSAL</span>
               <ArrowRight className="w-4 h-4" />
@@ -293,7 +293,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
                 <div className={`pt-4 border-t ${divider}`}>
                   <button
                     onClick={() => openBookingModal({ program: pkg.title, duration: pkg.durations[0] })}
-                    className="w-full py-2.5 px-3 text-xs font-bold text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] rounded-xl transition-colors uppercase tracking-wider"
+                    className="w-full py-2.5 px-3 text-xs font-bold text-white bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] active:scale-[0.98] rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md uppercase tracking-wider"
                   >
                     Select This Tier
                   </button>
@@ -339,14 +339,14 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="#proposal"
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs text-white bg-[var(--accent-red-hover)] hover:bg-[var(--accent-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all"
+              className="px-8 py-3.5 rounded-full font-extrabold text-xs text-white bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-red)] active:scale-[0.98] uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all duration-300"
             >
               <span>GET A SCOPED PROPOSAL</span>
               <ArrowRight className="w-4 h-4" />
             </a>
             <button
               onClick={() => openBookingModal({ program: 'Custom Institutional Curriculum', organizationType: 'Company / Enterprise Team' })}
-              className="px-8 py-3.5 rounded-xl font-extrabold text-xs uppercase tracking-wider shadow-lg inline-flex items-center gap-2 transition-all active:scale-[0.98] border ${ghostBtn}"
+              className={`px-8 py-3.5 rounded-full font-extrabold text-xs uppercase tracking-wider shadow-md inline-flex items-center gap-2 transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] border ${ghostBtn}`}
             >
               <span>BOOK A CALL</span>
             </button>

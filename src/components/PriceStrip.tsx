@@ -51,7 +51,7 @@ export const PriceStrip: React.FC<PriceStripProps> = React.memo(({
       <span className="inline-flex items-baseline gap-1.5 font-medium">
         <span
           className={`hidden sm:inline text-[10px] font-bold uppercase tracking-wider ${
-            theme === 'dark' ? 'text-neutral-500' : 'text-neutral-500'
+            theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'
           }`}
         >
           Live cohort
@@ -64,7 +64,7 @@ export const PriceStrip: React.FC<PriceStripProps> = React.memo(({
 
       <span className="opacity-40">·</span>
 
-      <span className="inline-flex items-center p-1 rounded-full border" style={{
+      <span role="radiogroup" aria-label="Currency" className="inline-flex items-center p-1 rounded-full border" style={{
         borderColor: theme === 'dark' ? 'rgba(255,255,255,0.1)' : '#d4ccbe',
         background: theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#faf7f1'
       }}>

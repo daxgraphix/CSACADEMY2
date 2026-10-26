@@ -8,10 +8,25 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { error: E
 
   render() {
     if (this.state.error) return (
-      <section className="min-h-[40vh] flex flex-col items-center justify-center gap-4 p-8 text-center" role="alert">
+      <section className="min-h-[40vh] flex flex-col items-center justify-center gap-5 p-8 text-center" role="alert">
         <h2 className="text-xl font-bold">This page could not be displayed.</h2>
-        <p>Please refresh the page or return to the home page.</p>
-        <button className="rounded-lg bg-[var(--accent-red)] px-4 py-2 text-white" onClick={() => this.setState({ error: null })}>Try again</button>
+        <p className="text-sm max-w-md" style={{ color: 'var(--text-muted)' }}>
+          Something went wrong loading this content. You can try reloading the page or return to the home page.
+        </p>
+        <div className="flex items-center gap-3">
+          <button
+            className="rounded-full bg-[var(--accent-red)] px-5 py-2.5 text-sm font-bold text-white transition hover:bg-[var(--accent-red-hover)]"
+            onClick={() => window.location.reload()}
+          >
+            Reload page
+          </button>
+          <button
+            className="rounded-full border border-[var(--border-strong)] px-5 py-2.5 text-sm font-bold transition hover:border-[var(--accent-red)]"
+            onClick={() => { this.setState({ error: null }); window.location.href = '/'; }}
+          >
+            Go home
+          </button>
+        </div>
       </section>
     );
     return this.props.children;

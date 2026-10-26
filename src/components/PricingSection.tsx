@@ -122,7 +122,7 @@ export const PricingSection: React.FC = () => {
                 : 'Request a team proposal';
 
             return (
-              <article key={plan.id} className={`relative flex min-w-0 flex-col overflow-hidden rounded-2xl border p-5 transition duration-200 hover:-translate-y-1 hover:shadow-lg sm:p-6 ${highlighted ? isDark ? 'border-[var(--accent-red)] bg-[var(--bg-secondary)] shadow-[0_18px_50px_rgba(255,59,48,0.12)]' : 'border-[var(--accent-red)] bg-white shadow-[0_18px_50px_rgba(220,38,38,0.12)]' : isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white shadow-sm'}`}>
+              <article key={plan.id} className={`relative flex min-w-0 flex-col overflow-hidden rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl sm:p-6 ${highlighted ? isDark ? 'border-[var(--accent-red)] bg-[var(--bg-secondary)] shadow-[0_18px_50px_rgba(255,59,48,0.12)]' : 'border-[var(--accent-red)] bg-white shadow-[0_18px_50px_rgba(220,38,38,0.12)]' : isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white shadow-sm'}`}>
                 {highlighted && <div className="absolute right-4 top-4 rounded-full bg-[var(--accent-red-subtle)] px-2.5 py-1 text-[9px] font-black uppercase tracking-wider text-[var(--accent-red-strong)]">Popular</div>}
                 <div className="flex items-center gap-2 pr-16">
                   <span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${highlighted ? 'bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)]' : isDark ? 'bg-white/5 text-neutral-200' : 'bg-neutral-100 text-neutral-700'}`}>

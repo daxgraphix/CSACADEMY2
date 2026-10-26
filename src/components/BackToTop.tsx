@@ -52,7 +52,7 @@ export const BackToTop: React.FC = () => {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
       data-visible={visible}
-      className={`group fixed right-5 sm:right-6 z-[60] flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full transition-[bottom,opacity] duration-300 ${
+      className={`group fixed right-5 sm:right-6 z-[60] flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full backdrop-blur-md transition-[bottom,opacity,transform,box-shadow] duration-300 hover:-translate-y-0.5 ${
         visible
           ? 'opacity-100 pointer-events-auto'
           : 'opacity-0 pointer-events-none'

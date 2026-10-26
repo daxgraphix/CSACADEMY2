@@ -115,15 +115,16 @@ export const Footer: React.FC<FooterProps> = ({
           : 'bg-[var(--bg-primary)] text-neutral-900 border-[var(--border-subtle)]'
       }`}
     >
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--accent-red)]/40 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent via-[var(--accent-red)]/50 to-transparent" />
+      <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-[var(--accent-red)]/[0.06] to-transparent pointer-events-none" />
 
       <div ref={contentRef} className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 reveal">
         {/* ==================== Newsletter Card ==================== */}
         <div className="relative">
           <div className={`relative overflow-hidden rounded-2xl sm:rounded-[2rem] border p-5 sm:p-10 lg:p-12 ${
             theme === 'dark'
-              ? 'bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-secondary)] to-[var(--bg-primary)] border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.4)]'
-              : 'bg-gradient-to-br from-white via-[var(--bg-primary)] to-[var(--bg-primary)] border-[var(--border-subtle)] shadow-[0_25px_70px_rgba(17,17,17,0.07)]'
+              ? 'bg-gradient-to-br from-[var(--bg-card)] via-[var(--bg-secondary)] to-[var(--bg-primary)] border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]'
+              : 'bg-gradient-to-br from-white via-[var(--bg-primary)] to-[var(--bg-primary)] border-[var(--border-subtle)] shadow-[0_25px_70px_rgba(17,17,17,0.07),inset_0_1px_0_rgba(255,255,255,0.8)]'
           }`}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_0%,_rgba(255,59,48,0.18),transparent_45%)]" />
             <div className="absolute -right-10 -bottom-10 w-64 h-64 rounded-full bg-[var(--accent-red-subtle)] blur-3xl pointer-events-none" />
@@ -367,7 +368,7 @@ export const Footer: React.FC<FooterProps> = ({
                         <Link
                           to={navHref(item)}
                           aria-current={isCurrent ? 'page' : undefined}
-                          className={`hover:underline group inline-flex items-center gap-1 text-left transition-colors duration-150 ${accentColor}`}
+                          className={`hover:underline group inline-flex items-center gap-1 text-left transition-all duration-150 hover:translate-x-0.5 ${accentColor}`}
                         >
                           <span>{item.label}</span>
                           {item.badgeTone === 'red' && !isCurrent && (
@@ -384,7 +385,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* ==================== Pillars Strip ==================== */}
-        <div className={`flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-5 border-y text-[10px] font-black uppercase tracking-[0.18em] ${theme === 'dark' ? 'border-white/10 text-neutral-400' : 'border-neutral-200 text-neutral-700'}`}>
+        <div className={`flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-6 border-y text-[10px] font-black uppercase tracking-[0.22em] ${theme === 'dark' ? 'border-white/10 text-neutral-400' : 'border-neutral-200 text-neutral-700'}`}>
           <span>AI Literacy</span>
           <span className="opacity-30">|</span>
           <span>Cybersecurity</span>

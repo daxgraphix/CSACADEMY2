@@ -36,7 +36,7 @@ export function ScrollProgress() {
     >
       <div
         ref={progressRef}
-        className="h-full w-full bg-[var(--accent-red)] transition-transform duration-150 ease-out"
+        className="h-full w-full bg-gradient-to-r from-[var(--accent-red)] via-[var(--accent-red-bright)] to-[var(--accent-red)] shadow-[0_0_8px_var(--accent-red-glow)] transition-transform duration-150 ease-out"
         style={{ transform: 'scaleX(0)', transformOrigin: 'left', willChange: 'transform' }}
       />
     </div>
