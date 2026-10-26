@@ -71,7 +71,7 @@ export const moreNav: NavLink[] = [
 /** Mobile drawer order from the top to the bottom of the full site. */
 export const mobileNav: NavLink[] = [
   { id: 'mobile-home', label: 'Home', route: 'home' },
-  { id: 'mobile-academy', label: 'Academy Overview', route: 'academy' },
+  { id: 'mobile-academy', label: 'Full Academy Overview', route: 'academy' },
   { id: 'mobile-features', label: 'Platform Features', route: 'features', badge: 'New' },
   { id: 'mobile-pricing', label: 'Pricing & Plans', route: 'pricing' },
   { id: 'mobile-individual-request', label: 'Individual Training Request', route: 'individual-request', badge: 'Start here', badgeTone: 'red' },

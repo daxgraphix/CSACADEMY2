@@ -62,7 +62,9 @@ describe('navigation model', () => {
     );
 
     // 'not-found' is a fallback, not a destination, so it is excluded.
-    for (const route of ALL_ROUTES.filter((r) => r !== 'not-found')) {
+    // Detail pages are reached from their listing pages and need a content
+    // slug, so they are not direct navigation destinations.
+    for (const route of ALL_ROUTES.filter((r) => r !== 'not-found' && !routeToPath[r as keyof typeof routeToPath].includes(':'))) {
       expect(reachable).toContain(route);
     }
   });

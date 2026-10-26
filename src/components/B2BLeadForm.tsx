@@ -47,18 +47,19 @@ export const B2BLeadForm: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!organization.trim() || !name.trim() || !email.trim()) {
+    if (!name.trim() || !email.trim()) {
       setStatus('error');
-      setError('Enter your organization, name, and email address to continue.');
+      setError('Enter your name and email address to continue.');
       return;
     }
+    const organizationName = organization.trim() || 'Organization not provided';
     setStatus('sending');
     setError(null);
     const result = await submitForm({
-      _subject: `Team training proposal request | ${organization.trim()}`,
+      _subject: `Team training proposal request | ${organizationName}`,
       name: name.trim(),
       email: email.trim(),
-      organization: organization.trim(),
+      organization: organizationName,
       organizationType: sector,
       trainingFocus,
       teamSize: String(teamSize),
@@ -71,7 +72,7 @@ export const B2BLeadForm: React.FC = () => {
       program: 'Team training proposal',
       source: 'b2b-lead-form',
       submittedAt: new Date().toISOString(),
-      message: `Team training proposal request for ${organization.trim()}\nSector: ${sector}\nTraining focus: ${trainingFocus}\nTeam size: ${teamSize}\nReference plan: ${referencePlan.name} (${referencePlan.billingPeriod})\nPublished individual rate: ${currencyLabel} ${formattedPerLearner} per learner / month\nIllustrative individual-rate total: ${currencyLabel} ${formattedEstimate} per month for ${teamSize} people\nPreferred timeline: ${timeline}\nNote: this comparison is not a team quote.`
+      message: `Team training proposal request for ${organizationName}\nSector: ${sector}\nTraining focus: ${trainingFocus}\nTeam size: ${teamSize}\nReference plan: ${referencePlan.name} (${referencePlan.billingPeriod})\nPublished individual rate: ${currencyLabel} ${formattedPerLearner} per learner / month\nIllustrative individual-rate total: ${currencyLabel} ${formattedEstimate} per month for ${teamSize} people\nPreferred timeline: ${timeline}\nNote: this comparison is not a team quote.`
     });
     if (result.ok) {
       setStatus('done');
@@ -85,7 +86,7 @@ export const B2BLeadForm: React.FC = () => {
     return (
       <div className={`rounded-3xl border p-8 sm:p-10 text-center ${isDark ? 'border-[var(--accent-red-border)] bg-red-950/20' : 'border-red-200 bg-red-50/50'}`}>
         <CheckCircle2 className="mx-auto h-12 w-12 text-[var(--accent-red-strong)]" aria-hidden="true" />
-        <h3 className={`mt-4 text-xl font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>Request sent to CS Academy</h3>
+        <h3 className={`mt-4 text-xl font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>Proposal request received</h3>
         <p className={`mt-2 text-sm ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
           Your details were sent to our support email. We’ll review your team’s needs and follow up at {email} with next steps. The estimate is a planning reference, not a team quote.
         </p>
@@ -106,7 +107,7 @@ export const B2BLeadForm: React.FC = () => {
 
       <div>
         <label htmlFor="b2b-organization" className={`block text-[11px] font-bold uppercase tracking-wider mb-1.5 ${isDark ? 'text-neutral-400' : 'text-neutral-700'}`}>Organization</label>
-        <input id="b2b-organization" type="text" required value={organization} onChange={(e) => setOrganization(e.target.value)}
+        <input id="b2b-organization" type="text" value={organization} onChange={(e) => setOrganization(e.target.value)}
           className={`w-full rounded-xl border px-3.5 py-2.5 text-sm outline-none focus:ring-2 focus:ring-[var(--accent-red)] ${isDark ? 'border-white/10 bg-black/30 text-white' : 'border-neutral-300 bg-white text-neutral-900'}`}
           placeholder="Organization name" />
       </div>
@@ -155,7 +156,7 @@ export const B2BLeadForm: React.FC = () => {
       <div>
         <div className="flex items-baseline justify-between mb-1">
           <label htmlFor="b2b-team" className={`text-[11px] font-bold uppercase tracking-wider ${isDark ? 'text-neutral-400' : 'text-neutral-700'}`}>Team size</label>
-          <output htmlFor="b2b-team" className="text-sm font-extrabold text-[var(--accent-red-strong)]">{teamSize} people</output>
+          <output htmlFor="b2b-team" className="text-sm font-extrabold text-[var(--accent-red-strong)]">{teamSize} staff</output>
         </div>
         <input id="b2b-team" type="range" min={1} max={1000} step={1} value={teamSize} aria-valuetext={`${teamSize} people`}
           onChange={(e) => updateTeamSize(Number(e.target.value))}
