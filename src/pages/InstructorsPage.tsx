@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Linkedin, ShieldCheck } from 'lucide-react';
@@ -19,7 +19,9 @@ export const InstructorsPage: React.FC = () => {
         <title>Meet Your Instructor | CS Academy</title>
         <meta name="description" content="Meet Alex Rweyemamu, CS Academy founder and lead instructor for practical AI, cybersecurity, and digital skills education." />
         <meta property="og:title" content="Meet Your Instructor | CS Academy" />
+        <meta name="twitter:title" content="Meet Your Instructor | CS Academy" />
         <meta property="og:description" content="Learn about CS Academy founder and lead instructor Alex Rweyemamu and his teaching approach." />
+        <meta name="twitter:description" content="Learn about CS Academy founder and lead instructor Alex Rweyemamu and his teaching approach." />
         <meta property="og:type" content="profile" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

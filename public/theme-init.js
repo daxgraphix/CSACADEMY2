@@ -6,7 +6,7 @@ try {
   html.classList.toggle('light', theme === 'light');
   html.classList.toggle('dark', theme === 'dark');
   var meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#090909' : '#f7f4ee');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#090909' : '#ffffff');
 } catch (error) {
   document.documentElement.classList.add('light');
 }

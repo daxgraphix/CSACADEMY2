@@ -388,11 +388,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label={`${siteConfig.academyName} home`}
             className="flex min-w-0 items-center gap-2 sm:gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-red)] to-neutral-800 p-[1.5px] shadow-[0_8px_24px_rgba(255,59,48,0.4)] group-hover:scale-110 transition-transform shrink-0 relative">
-              <div className={`w-full h-full rounded-[10px] flex items-center justify-center font-black tracking-wide text-sm bg-[var(--bg-card)] ${isDark ? 'text-white' : 'text-neutral-900'}`} aria-hidden="true">
-                C<span className="mx-0.5 text-[var(--accent-red)]">/</span>S
-              </div>
-            </div>
+            <img src="/brand-mark.svg" alt="" width="40" height="40" decoding="async" className="h-10 w-10 shrink-0 rounded-xl shadow-[0_8px_24px_rgba(239,41,41,0.3)] transition-transform group-hover:scale-110" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span

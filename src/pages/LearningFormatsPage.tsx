@@ -56,7 +56,9 @@ export const LearningFormatsPage: React.FC = () => {
         <meta name="description" content="Compare CS Academy delivery options, including WhatsApp learning, live online classes, workshops, and on-site training. Check connection needs and published starting prices." />
         <meta name="keywords" content="WhatsApp learning Tanzania, live online cohort, self-paced training, corporate workshops, on-site training East Africa, CS Academy" />
         <meta property="og:title" content="Learning Formats | CS Academy" />
+        <meta name="twitter:title" content="Learning Formats | CS Academy" />
         <meta property="og:description" content="Choose a delivery format that fits your learning goals, schedule, device, and connection." />
+        <meta name="twitter:description" content="Choose a delivery format that fits your learning goals, schedule, device, and connection." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

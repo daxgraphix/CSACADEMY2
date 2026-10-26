@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PricingSection } from '../components/PricingSection';
 import { useApp } from '../context/AppContext';
@@ -23,7 +23,9 @@ export const PricingPage: React.FC<PricingPageProps> = ({
         <meta name="description" content="Compare CS Academy monthly and annual learning plans, workshops, and team training in TZS, KES, and USD. Confirm availability, scope, and payment details with our team." />
         <meta name="keywords" content="CS Academy pricing, TZS pricing, AI course cost Tanzania, cybersecurity training fees, digital skills subscription, affordable tech training East Africa" />
         <meta property="og:title" content="Pricing & Plans | CS Academy" />
+        <meta name="twitter:title" content="Pricing & Plans | CS Academy" />
         <meta property="og:description" content="Compare monthly and annual learning plans, workshops, and team training in TZS, KES, and USD." />
+        <meta name="twitter:description" content="Compare monthly and annual learning plans, workshops, and team training in TZS, KES, and USD." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

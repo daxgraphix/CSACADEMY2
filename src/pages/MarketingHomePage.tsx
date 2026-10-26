@@ -203,6 +203,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
           content="Learn practical AI, cybersecurity defense, and digital skills. Live cohorts, WhatsApp micro-learning, and organizational workshops across Tanzania and East Africa."
         />
         <meta property="og:title" content="Put Technology to Work | CS Academy" />
+        <meta name="twitter:title" content="Put Technology to Work | CS Academy" />
         <meta
           property="og:description"
           content="Beginner-friendly, rigorous AI and tech education with local context and practical application."

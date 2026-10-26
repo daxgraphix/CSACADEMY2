@@ -1,5 +1,6 @@
 ﻿import React, { Suspense, lazy, useEffect, useState, useCallback, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { PageRoute, ProgramPillar, ResourceItem, BlogPost } from './types';
 import { resolveRoute } from './utils/routes';
 import { Navbar } from './components/Navbar';
@@ -13,7 +14,8 @@ import { NotFound } from './components/NotFound';
 
 const HomePage = lazy(() => import('./pages/HomePage').then(m => ({ default: m.HomePage })));
 const MarketingHomePage = lazy(() => import('./pages/MarketingHomePage').then(m => ({ default: m.MarketingHomePage })));
-const EditorialDetailPage = lazy(() => import('./pages/EditorialDetailPage').then(m => ({ default: m.EditorialDetailPage })));
+const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage').then(m => ({ default: m.BlogArticlePage })));
+const ResourceDetailPage = lazy(() => import('./pages/ResourceDetailPage').then(m => ({ default: m.ResourceDetailPage })));
 const InstructorsPage = lazy(() => import('./pages/InstructorsPage').then(m => ({ default: m.InstructorsPage })));
 const FeaturesPage = lazy(() => import('./pages/FeaturesPage').then(m => ({ default: m.FeaturesPage })));
 const PricingPage = lazy(() => import('./pages/PricingPage').then(m => ({ default: m.PricingPage })));
@@ -34,6 +36,7 @@ import { PriceStrip } from './components/PriceStrip';
 import { useApp } from './context/AppContext';
 import { siteConfig } from './config/site';
 import { buildOrganizationSchema } from './utils/schema';
+import { getCanonicalUrl } from './utils/seo';
 
 const organizationSchema = buildOrganizationSchema({
   name: siteConfig.academyName,
@@ -42,7 +45,7 @@ const organizationSchema = buildOrganizationSchema({
   telephone: siteConfig.phone,
   foundingDate: String(siteConfig.establishedYear),
   alternateName: siteConfig.parentOrg,
-  logo: 'https://academy.cyberswahili.co.tz/favicon.svg',
+  logo: 'https://academy.cyberswahili.co.tz/icon-512.png',
   areaServed: ['Tanzania', 'Kenya', 'Uganda', 'Rwanda', 'Burundi', 'DRC'],
   address: {
     addressLocality: 'Dar es Salaam',
@@ -68,8 +71,24 @@ interface AppChromeProps {
 }
 
 const AppChrome = React.memo(function AppChrome({ theme, currentRoute, openBookingModal, page }: AppChromeProps) {
+  const { pathname } = useLocation();
+  const canonical = getCanonicalUrl(pathname);
   return (
     <div className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth overflow-x-hidden ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white' : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'}`}>
+      <Helmet defaultTitle="CS Academy | Practical AI, Cybersecurity & Digital Skills Training">
+        <meta name="description" content="Build practical AI, cybersecurity, and digital skills with CS Academy. Explore hands-on courses and team training in Tanzania and across East Africa." />
+        <link rel="canonical" href={canonical} />
+        <meta property="og:site_name" content="CS Academy" />
+        <meta property="og:image" content="https://academy.cyberswahili.co.tz/og-image.jpg" />
+        <meta property="og:image:secure_url" content="https://academy.cyberswahili.co.tz/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="CS Academy practical technology training in AI, cybersecurity, and digital skills across East Africa" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://academy.cyberswahili.co.tz/og-image.jpg" />
+        <meta name="twitter:image:alt" content="CS Academy practical technology training across East Africa" />
+      </Helmet>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -169,9 +188,9 @@ export default function App() {
       case 'academy':
         return <HomePage />;
       case 'blog-article':
-        return <EditorialDetailPage kind="blog" slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
+        return <BlogArticlePage slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
       case 'resource-detail':
-        return <EditorialDetailPage kind="resource" slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
+        return <ResourceDetailPage slug={decodeURIComponent(location.pathname.split('/').filter(Boolean).at(-1) ?? '')} openBookingModal={handleOpenBooking} />;
       case 'instructors':
         return <InstructorsPage />;
       case 'features':

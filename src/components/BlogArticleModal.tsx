@@ -78,7 +78,7 @@ export const BlogArticleModal: React.FC<BlogArticleModalProps> = ({
         url: 'https://academy.cyberswahili.co.tz',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://academy.cyberswahili.co.tz/og-image.jpg'
+          url: 'https://academy.cyberswahili.co.tz/icon-512.png'
         }
       },
       mainEntityOfPage: {

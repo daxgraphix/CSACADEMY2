@@ -1,4 +1,4 @@
-﻿import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet-async';
 import {
   corporateOfferingsData,
@@ -73,7 +73,9 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         <meta name="description" content="CS Academy delivers customized AI, cybersecurity, and digital skills training for banks, governments, universities, NGOs, and enterprises across East Africa. Request a corporate proposal today." />
         <meta name="keywords" content="corporate training Tanzania, AI training for banks Africa, institutional tech education, enterprise cybersecurity East Africa, CS Academy organizations" />
         <meta property="og:title" content="For Organizations | CS Academy Corporate Training" />
+        <meta name="twitter:title" content="For Organizations | CS Academy Corporate Training" />
         <meta property="og:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs across East Africa." />
+        <meta name="twitter:description" content="Tailored AI and cybersecurity upskilling for banks, government ministries, universities, and NGOs across East Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

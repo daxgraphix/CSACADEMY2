@@ -1,101 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://academy.cyberswahili.co.tz/</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/academy</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/features</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/pricing</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/programs</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/programs/ai</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/programs/cybersecurity</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/programs/digital-skills</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/vibe-coding</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/devpad</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/learning-formats</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/for-organizations</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/about</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/contact</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/request-training</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/privacy</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/terms</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/instructors</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/how-to-use-ai-safely-at-work</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-literacy-for-educators</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/recognize-ai-deepfakes</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/10-ai-skills-students</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/small-business-ai</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/cybersecurity-mistakes</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-in-local-languages</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/prompt-engineering-fundamentals</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/phishing-attacks-how-to-spot</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/teaching-kids-digital-safety</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-for-customer-service</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/building-first-website</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/two-factor-authentication-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-tools-for-teachers</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/securing-home-wifi-network</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/social-media-personal-branding</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/data-backup-rule-of-three</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/building-first-ai-agent-for-daily-work</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/comparing-chatgpt-claude-gemini</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-hallucinations-catch-them</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/using-ai-to-analyze-spreadsheets</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/writing-email-drafts-with-ai</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ai-for-research-summarizing-papers</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/building-a-personal-prompt-library</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/public-wifi-risks-and-vpn</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/social-engineering-beyond-phishing</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/securing-your-social-media-accounts</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/check-if-email-in-data-breach</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/ransomware-101-prevention-and-response</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/building-study-schedule-that-works</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/note-taking-methods-compared</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/choosing-an-online-course-and-finishing</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/teaching-coding-to-absolute-beginners</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/group-projects-collaboration-tools</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/critical-thinking-in-age-of-ai</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/how-to-write-a-cv-that-gets-interviews</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/pricing-your-services-as-a-freelancer</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/how-to-write-a-winning-grant-proposal</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/simple-monthly-budget-for-small-business</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/linkedin-outreach-that-gets-responses</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/negotiation-basics-salary-and-contracts</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/email-marketing-for-small-lists</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/building-sops-for-your-team</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/time-blocking-vs-time-boxing</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/inbox-zero-method-explained</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/choosing-a-password-manager-and-migrating-safely</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/note-taking-apps-compared</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/calendar-hygiene-weekly-planning</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/automating-repetitive-tasks-with-simple-tools</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/blog/deep-work-focus-when-everything-demands-attention</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-prompt-starter-pack</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/deepfake-awareness-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/cyber-hygiene-checklist</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-tools-for-students</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-safety-checklist</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/digital-privacy-checklist</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-for-educators-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-productivity-starter-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/mpesa-business-safety</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/remote-work-security</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-presentation-toolkit</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/data-privacy-ngos</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-research-synthesis-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/social-media-scam-protection</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/child-online-safety-guide</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/digital-footprint-cleanup</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/small-business-security-audit</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/phishing-defense-drill</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-literacy-curriculum</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/stem-education-ai-tools</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/corporate-ai-ethics-policy</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/ai-procurement-checklist</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/responsible-ai-principles</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/browser-privacy-hardening</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/identity-theft-recovery</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/digital-entrepreneur-security</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/fintech-privacy-standards</loc></url>
-  <url><loc>https://academy.cyberswahili.co.tz/resources/customer-trust-blueprint</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/academy</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/features</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/pricing</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/programs</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/programs/ai</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/programs/cybersecurity</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/programs/digital-skills</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/vibe-coding</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/devpad</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/learning-formats</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/for-organizations</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/about</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/contact</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/request-training</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/privacy</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/terms</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/instructors</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/how-to-use-ai-safely-at-work</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-literacy-for-educators</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/recognize-ai-deepfakes</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/10-ai-skills-students</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/small-business-ai</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/cybersecurity-mistakes</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-in-local-languages</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/prompt-engineering-fundamentals</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/phishing-attacks-how-to-spot</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/teaching-kids-digital-safety</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-for-customer-service</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/building-first-website</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/two-factor-authentication-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-tools-for-teachers</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/securing-home-wifi-network</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/social-media-personal-branding</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/data-backup-rule-of-three</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/building-first-ai-agent-for-daily-work</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/comparing-chatgpt-claude-gemini</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-hallucinations-catch-them</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/using-ai-to-analyze-spreadsheets</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/writing-email-drafts-with-ai</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ai-for-research-summarizing-papers</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/building-a-personal-prompt-library</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/public-wifi-risks-and-vpn</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/social-engineering-beyond-phishing</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/securing-your-social-media-accounts</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/check-if-email-in-data-breach</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/ransomware-101-prevention-and-response</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/building-study-schedule-that-works</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/note-taking-methods-compared</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/choosing-an-online-course-and-finishing</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/teaching-coding-to-absolute-beginners</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/group-projects-collaboration-tools</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/critical-thinking-in-age-of-ai</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/how-to-write-a-cv-that-gets-interviews</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/pricing-your-services-as-a-freelancer</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/how-to-write-a-winning-grant-proposal</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/simple-monthly-budget-for-small-business</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/linkedin-outreach-that-gets-responses</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/negotiation-basics-salary-and-contracts</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/email-marketing-for-small-lists</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/building-sops-for-your-team</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/time-blocking-vs-time-boxing</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/inbox-zero-method-explained</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/choosing-a-password-manager-and-migrating-safely</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/note-taking-apps-compared</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/calendar-hygiene-weekly-planning</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/automating-repetitive-tasks-with-simple-tools</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/blog/deep-work-focus-when-everything-demands-attention</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-prompt-starter-pack</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/deepfake-awareness-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/cyber-hygiene-checklist</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-tools-for-students</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-safety-checklist</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/digital-privacy-checklist</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-for-educators-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-productivity-starter-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/mpesa-business-safety</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/remote-work-security</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-presentation-toolkit</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/data-privacy-ngos</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-research-synthesis-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/social-media-scam-protection</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/child-online-safety-guide</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/digital-footprint-cleanup</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/small-business-security-audit</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/phishing-defense-drill</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-literacy-curriculum</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/stem-education-ai-tools</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/corporate-ai-ethics-policy</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/ai-procurement-checklist</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/responsible-ai-principles</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/browser-privacy-hardening</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/identity-theft-recovery</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/digital-entrepreneur-security</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/fintech-privacy-standards</loc></url>
+<url><loc>https://academy.cyberswahili.co.tz/resources/customer-trust-blueprint</loc></url>
 </urlset>
+

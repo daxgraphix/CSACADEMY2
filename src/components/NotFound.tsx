@@ -14,6 +14,8 @@ export const NotFound: React.FC = () => {
     <>
       <Helmet>
         <title>Page Not Found | CS Academy</title>
+        <meta name="robots" content="noindex, follow" />
+        <meta name="description" content="The page you requested could not be found. Browse CS Academy courses, free resources, and technology training." />
         <meta name="description" content="The page you're looking for doesn't exist at CS Academy. Return to our homepage to explore AI, cybersecurity, and digital skills training programs." />
         <meta name="robots" content="noindex, nofollow" />
         <meta property="og:title" content="Page Not Found | CS Academy" />

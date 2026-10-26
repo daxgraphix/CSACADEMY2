@@ -49,6 +49,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   const isDark = theme === 'dark';
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [search, setSearch] = useState<string>('');
+  const [visibleCount, setVisibleCount] = useState(9);
 
   const categories = ['ALL', 'AI Literacy', 'Cybersecurity', 'Education', 'Business', 'Local Language AI'];
 
@@ -69,7 +70,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         <meta name="description" content="Read expert perspectives on AI literacy, cybersecurity, and digital transformation in East Africa. Practical guides, tutorials, and ethical analysis from CS Academy instructors." />
         <meta name="keywords" content="AI blog Tanzania, cybersecurity insights Africa, digital skills Africa, local language AI, tech education East Africa" />
         <meta property="og:title" content="CS Academy Blog | AI, Cybersecurity & Digital Skills" />
+        <meta name="twitter:title" content="CS Academy Blog | AI, Cybersecurity & Digital Skills" />
         <meta property="og:description" content="Expert essays and practical guides on AI, cybersecurity, and digital skills for East African learners, professionals, and organizations." />
+        <meta name="twitter:description" content="Expert essays and practical guides on AI, cybersecurity, and digital skills for East African learners, professionals, and organizations." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />
@@ -107,7 +110,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => { setSearch(e.target.value); setVisibleCount(9); }}
               placeholder={'Search articles, topics...'}
               className={`w-full pl-10 pr-4 py-2.5 rounded-xl text-xs transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] border ${
                 theme === 'dark'
@@ -122,7 +125,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => { setSelectedCategory(cat); setVisibleCount(9); }}
                 className={`px-3 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all duration-200 w-full text-center sm:w-auto ${
                   selectedCategory === cat
                     ? 'bg-[var(--accent-red-hover)] text-white shadow-sm ring-2 ring-[var(--accent-red-hover)]/30'
@@ -149,9 +152,9 @@ export const BlogPage: React.FC<BlogPageProps> = ({
               hasActiveSearch={search.trim() !== ''}
               hasActiveFilter={selectedCategory !== 'ALL'}
               searchQuery={search}
-              onClearSearch={() => setSearch('')}
-              onClearFilter={() => setSelectedCategory('ALL')}
-              onClearAll={() => { setSearch(''); setSelectedCategory('ALL'); }}
+              onClearSearch={() => { setSearch(''); setVisibleCount(9); }}
+              onClearFilter={() => { setSelectedCategory('ALL'); setVisibleCount(9); }}
+              onClearAll={() => { setSearch(''); setSelectedCategory('ALL'); setVisibleCount(9); }}
               onRequestTopic={() => {
                 const text = encodeURIComponent(
                   `Hello CS Academy, I couldn't find an article on "${search || selectedCategory}". Could you write one?`
@@ -159,12 +162,12 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
               }}
               suggestions={['AI safety', 'Phishing', 'M-Pesa', 'Prompting', 'Local language AI']}
-              onSuggestionClick={(term) => setSearch(term)}
+              onSuggestionClick={(term) => { setSearch(term); setVisibleCount(9); }}
               title="No articles match your filters"
               description="Try a different keyword, switch the category, or request a topic we publish new essays every two weeks."
             />
           ) : (
-            filtered.map((post) => (
+            filtered.slice(0, visibleCount).map((post) => (
             <article
               key={post.id}
               className={`border rounded-3xl p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-1 shadow-sm group ${
@@ -239,6 +242,18 @@ export const BlogPage: React.FC<BlogPageProps> = ({
           ))
           )}
         </div>
+        {filtered.length > 0 && (
+          <div className="mt-6 flex flex-col items-center gap-3">
+            <p className={`text-xs ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`} aria-live="polite">
+              Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} articles
+            </p>
+            {filtered.length > visibleCount && (
+              <button type="button" onClick={() => setVisibleCount((count) => count + 9)} className="min-h-11 rounded-xl border border-[var(--border-color)] px-5 py-2.5 text-sm font-bold text-[var(--accent-red-strong)] transition hover:border-[var(--accent-red)]">
+                Load more articles
+              </button>
+            )}
+          </div>
+        )}
         </Suspense>
 
       </div>

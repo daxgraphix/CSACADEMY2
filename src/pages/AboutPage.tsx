@@ -38,7 +38,9 @@ export const AboutPage: React.FC = () => {
         <meta name="description" content="Learn about CS Academy’s mission, practical teaching approach, and learning paths in AI, cybersecurity, and digital skills for East African learners and organizations." />
         <meta name="keywords" content="about CS Academy, AI education East Africa, cybersecurity learning, digital skills Tanzania, practical technology training" />
         <meta property="og:title" content="About CS Academy" />
+        <meta name="twitter:title" content="About CS Academy" />
         <meta property="og:description" content="Our mission and practical approach to technology learning across East Africa." />
+        <meta name="twitter:description" content="Our mission and practical approach to technology learning across East Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

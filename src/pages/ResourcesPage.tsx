@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { resourcesData } from '../data/resources';
@@ -36,6 +36,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
   const { theme } = useApp();
   const [selectedCat, setSelectedCat] = useState<string>('ALL');
   const [search, setSearch] = useState<string>('');
+  const [visibleCount, setVisibleCount] = useState(9);
 
   const categories = ['ALL', ...new Set(resourcesData.map((resource) => resource.category))];
 
@@ -57,7 +58,9 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
         <meta name="description" content="Download free AI prompt templates, cybersecurity checklists, and education guides from CS Academy. Practical, locally contextualized toolkits for African digital workers, students, and organizations." />
         <meta name="keywords" content="free AI guides Tanzania, cybersecurity checklist Africa, education toolkit download, prompt templates, CS Academy free resources" />
         <meta property="og:title" content="Free Resources | CS Academy" />
+        <meta name="twitter:title" content="Free Resources | CS Academy" />
         <meta property="og:description" content="Download free AI, cybersecurity, and education toolkits. No signup required. Practical guides for African digital learners." />
+        <meta name="twitter:description" content="Download free AI, cybersecurity, and education toolkits. No signup required. Practical guides for African digital learners." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />
@@ -96,7 +99,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => { setSearch(e.target.value); setVisibleCount(9); }}
               placeholder={'Search guides, templates, topics...'}
                   className={`w-full min-h-11 pl-10 pr-4 py-2.5 rounded-xl text-sm transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--accent-red)]/30 focus:border-[var(--accent-red)] border ${
                     theme === 'dark'
@@ -112,7 +115,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
                 key={cat}
                 type="button"
                 aria-pressed={selectedCat === cat}
-                onClick={() => setSelectedCat(cat)}
+                onClick={() => { setSelectedCat(cat); setVisibleCount(9); }}
                 className={`min-h-10 shrink-0 rounded-full px-3.5 py-2 text-[11px] font-bold whitespace-nowrap transition-all ${
                   selectedCat === cat 
                     ? 'bg-[var(--accent-red-hover)] text-white shadow-sm' 
@@ -126,9 +129,8 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
             ))}
           </div>
           </div>
-          <p className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`} aria-live="polite">Showing {filtered.length} of {resourcesData.length} guides</p>
+          <p className={`text-xs ${theme === 'dark' ? 'text-neutral-400' : 'text-neutral-600'}`} aria-live="polite">Showing {Math.min(visibleCount, filtered.length)} of {filtered.length} matching guides</p>
         </div>
-
         {/* Resources Grid */}
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filtered.length === 0 ? (
@@ -136,9 +138,9 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
               hasActiveSearch={search.trim() !== ''}
               hasActiveFilter={selectedCat !== 'ALL'}
               searchQuery={search}
-              onClearSearch={() => setSearch('')}
-              onClearFilter={() => setSelectedCat('ALL')}
-              onClearAll={() => { setSearch(''); setSelectedCat('ALL'); }}
+              onClearSearch={() => { setSearch(''); setVisibleCount(9); }}
+              onClearFilter={() => { setSelectedCat('ALL'); setVisibleCount(9); }}
+              onClearAll={() => { setSearch(''); setSelectedCat('ALL'); setVisibleCount(9); }}
               onRequestTopic={() => {
                 const text = encodeURIComponent(
                   `Hello CS Academy, I couldn't find a resource on "${search || selectedCat}". Could you add one?`
@@ -146,12 +148,12 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
                 window.open(`https://wa.me/${siteConfig.whatsapp}?text=${text}`, '_blank');
               }}
               suggestions={['AI prompts', 'Phishing', 'M-Pesa safety', 'Student guides']}
-              onSuggestionClick={(term) => setSearch(term)}
+              onSuggestionClick={(term) => { setSearch(term); setVisibleCount(9); }}
               title="No resources match your filters"
               description="Try another keyword or category, or tell us what guide would help you."
             />
           ) : (
-            filtered.map((resource) => (
+            filtered.slice(0, visibleCount).map((resource) => (
             <article
               key={resource.id}
               className={`group flex min-w-0 flex-col justify-between rounded-2xl border p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg ${
@@ -225,6 +227,13 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({
           ))
           )}
         </div>
+        {filtered.length > visibleCount && (
+          <div className="flex justify-center">
+            <button type="button" onClick={() => setVisibleCount((count) => count + 9)} className="min-h-11 rounded-xl border border-[var(--border-color)] px-5 py-2.5 text-sm font-bold text-[var(--accent-red-strong)] transition hover:border-[var(--accent-red)]">
+              Load more guides
+            </button>
+          </div>
+        )}
 
       </div>
       </main>

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, ChevronDown, Laptop, ShieldCheck, Sparkles, Users } from 'lucide-react';

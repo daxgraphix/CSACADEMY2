@@ -1,10 +1,9 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Download, Clock } from 'lucide-react';
-import { blogPostsData } from '../data/blog';
-import { resourcesData } from '../data/resources';
 import { getAuthor } from '../data/authors';
+import type { BlogPost, ResourceItem } from '../types';
 import { useApp } from '../context/AppContext';
 import { useCanonicalUrl } from '../hooks/useCanonicalUrl';
 import { formatPublishedDate, toIsoDate } from '../utils/dates';
@@ -12,15 +11,13 @@ import { downloadResource } from '../utils/download';
 import { NotFound } from '../components/NotFound';
 
 interface EditorialDetailPageProps {
-  kind: 'blog' | 'resource';
-  slug: string;
+  post?: BlogPost;
+  resource?: ResourceItem;
   openBookingModal: (prefill?: { program?: string }) => void;
 }
 
-export const EditorialDetailPage: React.FC<EditorialDetailPageProps> = ({ kind, slug, openBookingModal }) => {
+export const EditorialDetailPage: React.FC<EditorialDetailPageProps> = ({ post, resource, openBookingModal }) => {
   const { theme } = useApp();
-  const post = kind === 'blog' ? blogPostsData.find((item) => item.slug === slug) : undefined;
-  const resource = kind === 'resource' ? resourcesData.find((item) => item.id === slug) : undefined;
   const canonical = useCanonicalUrl();
   const author = post ? getAuthor(post.author) : null;
   const isDark = theme === 'dark';

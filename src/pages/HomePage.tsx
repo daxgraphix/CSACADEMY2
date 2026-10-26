@@ -163,6 +163,7 @@ export const HomePage: React.FC = () => {
           content="Explore CS Academy's central campus hub: comprehensive academic pillars in AI, cybersecurity, and digital skills, role-based learning tracks, and delivery formats across East Africa."
         />
         <meta property="og:title" content="Campus Hub &amp; Academic Directory | CS Academy" />
+        <meta name="twitter:title" content="Campus Hub &amp; Academic Directory | CS Academy" />
         <meta
           property="og:description"
           content="Central campus hub for technology education across East Africa: explore tracks, delivery formats, and enrollment pathways."

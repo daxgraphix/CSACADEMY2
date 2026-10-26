@@ -43,7 +43,9 @@ export const VibeCodingPage: React.FC = () => {
         <meta name="description" content="Explore CS Academy’s Vibe Coding learning path: define a useful problem, prompt AI coding tools, review generated code, and test prototypes responsibly." />
         <meta name="keywords" content="Vibe Coding course Tanzania, AI-assisted development, prompt-to-code, practical web development East Africa" />
         <meta property="og:title" content="Vibe Coding | CS Academy" />
+        <meta name="twitter:title" content="Vibe Coding | CS Academy" />
         <meta property="og:description" content="Learn to plan, prompt, inspect, and test AI-assisted software prototypes." />
+        <meta name="twitter:description" content="Learn to plan, prompt, inspect, and test AI-assisted software prototypes." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

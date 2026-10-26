@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { PlatformFeaturesSection } from '../components/PlatformFeaturesSection';
 import { useApp } from '../context/AppContext';
@@ -21,7 +21,9 @@ export const FeaturesPage: React.FC<FeaturesPageProps> = ({
         <meta name="description" content="Explore CS Academy's learning formats, course materials, and learner support. Built for learners across East Africa." />
         <meta name="keywords" content="AI learning platform Tanzania, cybersecurity platform Africa, tech courses East Africa, mobile learning East Africa, CS Academy features" />
         <meta property="og:title" content="Platform Features | CS Academy" />
+        <meta name="twitter:title" content="Platform Features | CS Academy" />
         <meta property="og:description" content="Discover CS Academy's practical AI and cybersecurity learning formats, course materials, and learner support." />
+        <meta name="twitter:description" content="Discover CS Academy's practical AI and cybersecurity learning formats, course materials, and learner support." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

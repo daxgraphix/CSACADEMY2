@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ProgramPillar } from '../types';
@@ -97,7 +97,9 @@ export const ProgramsPage: React.FC<ProgramsPageProps> = ({
         <meta name="description" content="Browse CS Academy's full curriculum: AI & Vibe Coding, Cybersecurity & Defense, and Digital Skills & Web Development. Expert-led courses in Tanzania and East Africa." />
         <meta name="keywords" content="AI courses Tanzania, cybersecurity training Kenya, web development course East Africa, vibe coding Africa, CS Academy programs" />
         <meta property="og:title" content="CS Academy Programs | AI, Cybersecurity & Web Development" />
+        <meta name="twitter:title" content="CS Academy Programs | AI, Cybersecurity & Web Development" />
         <meta property="og:description" content="Explore hands-on modules in AI, Cybersecurity, and Digital Skills. Instruction and course materials are in English; contact us for enrollment and payment details." />
+        <meta name="twitter:description" content="Explore hands-on modules in AI, Cybersecurity, and Digital Skills. Instruction and course materials are in English; contact us for enrollment and payment details." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

@@ -44,7 +44,9 @@ export const DevPadPage: React.FC = () => {
         <meta name="description" content="Learn about DevPad, a WhatsApp-based peer community where developers and product builders can share work, request focused feedback, and support one another." />
         <meta name="keywords" content="developer peer community East Africa, product feedback, app testing, DevPad, CS Academy" />
         <meta property="og:title" content="DevPad | A Peer Community for Product Builders" />
+        <meta name="twitter:title" content="DevPad | A Peer Community for Product Builders" />
         <meta property="og:description" content="Share what you are building, request focused peer feedback, and learn with other product builders." />
+        <meta name="twitter:description" content="Share what you are building, request focused peer feedback, and learn with other product builders." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

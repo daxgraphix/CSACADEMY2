@@ -114,7 +114,9 @@ export const IndividualRequestPage: React.FC = () => {
         <title>Individual Training Request | CS Academy</title>
         <meta name="description" content="Make an individual learning request to CS Academy. Tell us what you want to learn and choose whether to contact us through FormSubmit, WhatsApp, or email." />
         <meta property="og:title" content="Individual Training Request | CS Academy" />
+        <meta name="twitter:title" content="Individual Training Request | CS Academy" />
         <meta property="og:description" content="Tell CS Academy what you want to learn and choose how to send your individual training request." />
+        <meta name="twitter:description" content="Tell CS Academy what you want to learn and choose how to send your individual training request." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />

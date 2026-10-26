@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../config/site';
@@ -83,7 +83,9 @@ export const ContactPage: React.FC<ContactPageProps> = ({
         <meta name="description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa. Get in touch for enrollment, corporate training, or partnership inquiries." />
         <meta name="keywords" content="contact CS Academy, AI training inquiry, cybersecurity course enrollment, digital skills training East Africa, booking a training session" />
         <meta property="og:title" content="Contact Us | CS Academy" />
+        <meta name="twitter:title" content="Contact Us | CS Academy" />
         <meta property="og:description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa." />
+        <meta name="twitter:description" content="Contact CS Academy for AI training, cybersecurity courses, and digital skills programs in East Africa." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonical} />
         <link rel="canonical" href={canonical} />
