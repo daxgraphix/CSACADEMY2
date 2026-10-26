@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { buildFaqSchema, FaqSchemaItem } from '../utils/schema';
 
 interface FaqJsonLdProps {

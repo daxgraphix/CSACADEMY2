@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, BookOpenCheck, Languages, MapPin, Smartphone } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 

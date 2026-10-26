@@ -1,4 +1,4 @@
-import { PlatformFeature } from '../types';
+﻿import { PlatformFeature } from '../types';
 
 export const platformFeaturesData: PlatformFeature[] = [
   {

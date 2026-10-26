@@ -1,4 +1,4 @@
-/** Add only learner stories that have been approved for publication. */
+﻿/** Add only learner stories that have been approved for publication. */
 export interface Testimonial {
   name: string;
   role: string;

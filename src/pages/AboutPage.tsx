@@ -13,20 +13,16 @@ const pillarThemes = [
   { icon: ShieldCheck, color: 'emerald' },
   { icon: Laptop, color: 'amber' }
 ];
+const redTone = (isDark: boolean) => ({
+  icon: isDark ? 'bg-red-500/10 text-[var(--accent-red-strong)]' : 'bg-red-50 text-[var(--accent-red-hover)]',
+  badge: isDark ? 'text-[var(--accent-red-strong)] bg-red-950/40 border-red-800/40' : 'text-[var(--accent-red-hover)] bg-red-50 border-red-200'
+});
+
 const colorClasses = (isDark: boolean) => ({
-  violet: {
-    icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700',
-    badge: isDark ? 'text-violet-200 bg-violet-400/10 border-violet-400/20' : 'text-violet-800 bg-violet-50 border-violet-200'
-  },
-  emerald: {
-    icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700',
-    badge: isDark ? 'text-emerald-200 bg-emerald-400/10 border-emerald-400/20' : 'text-emerald-800 bg-emerald-50 border-emerald-200'
-  },
-  amber: {
-    icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700',
-    badge: isDark ? 'text-amber-200 bg-amber-400/10 border-amber-400/20' : 'text-amber-800 bg-amber-50 border-amber-200'
-  }
-} as const);
+  violet: redTone(isDark),
+  emerald: redTone(isDark),
+  amber: redTone(isDark)
+});
 
 export const AboutPage: React.FC = () => {
   const { theme, t } = useApp();
@@ -36,7 +32,7 @@ export const AboutPage: React.FC = () => {
   const bodyText = isDark ? 'text-neutral-300' : 'text-neutral-700';
 
   return (
-    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+    <main className={`min-h-screen px-4 pb-16 pt-28 sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <Helmet>
         <title>About CS Academy | Practical Technology Education in East Africa</title>
         <meta name="description" content="Learn about CS Academy’s mission, practical teaching approach, and learning paths in AI, cybersecurity, and digital skills for East African learners and organizations." />

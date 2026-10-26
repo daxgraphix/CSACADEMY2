@@ -18,11 +18,11 @@ const iconByName = {
   Building2
 } as const;
 
-const formatAccent = (category: string, isDark: boolean) => {
-  if (category === 'mobile') return { icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700', line: 'bg-emerald-500' };
-  if (category === 'self-paced') return { icon: isDark ? 'bg-sky-500/10 text-sky-300' : 'bg-sky-500/10 text-sky-700', line: 'bg-sky-500' };
-  if (category === 'virtual') return { icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700', line: 'bg-violet-500' };
-  return { icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700', line: 'bg-amber-500' };
+const formatAccent = (_category: string, isDark: boolean) => {
+  return {
+    icon: isDark ? 'bg-red-500/10 text-[var(--accent-red-strong)]' : 'bg-red-50 text-[var(--accent-red-hover)]',
+    line: 'bg-[var(--accent-red)]'
+  };
 };
 
 export const LearningFormatsPage: React.FC = () => {
@@ -62,7 +62,7 @@ export const LearningFormatsPage: React.FC = () => {
         <link rel="canonical" href={canonical} />
       </Helmet>
 
-      <main className={`min-h-screen px-4 pb-16 pt-28 transition-colors sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+      <main className={`min-h-screen px-4 pb-16 pt-28 transition-colors sm:pb-20 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
         <div className="mx-auto max-w-7xl space-y-8 sm:space-y-10">
           <PageBreadcrumbs theme={theme} items={[{ label: 'Home', route: '/' }, { label: 'Learning formats' }]} />
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Pricing-page FAQ.
  *
  * Answers the questions buyers actually ask before paying: which plan suits

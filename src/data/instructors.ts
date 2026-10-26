@@ -1,4 +1,4 @@
-import { Instructor } from '../types';
+﻿import { Instructor } from '../types';
 import { siteConfig } from '../config/site';
 
 // Keep this directory limited to people and details that CS Academy has verified.

@@ -1,4 +1,4 @@
-import { PageRoute } from '../types';
+﻿import { PageRoute } from '../types';
 
 /**
  * Shared navigation model.

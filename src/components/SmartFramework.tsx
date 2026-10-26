@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { smartFrameworkSteps } from '../data/smartFramework';
 import { useApp } from '../context/AppContext';
 import { 

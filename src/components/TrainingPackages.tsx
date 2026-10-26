@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { trainingPackagesData } from '../data/training';
 import { useApp } from '../context/AppContext';
 import { useDeviceType } from '../hooks/useWindowSize';

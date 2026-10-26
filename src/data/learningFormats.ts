@@ -1,4 +1,4 @@
-import { LearningFormat } from '../types';
+﻿import { LearningFormat } from '../types';
 import { pricingPlansData } from './pricing';
 
 const planForFormat = (id: string) =>

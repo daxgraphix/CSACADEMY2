@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Share2, Check, MessageSquare, Twitter, Linkedin, Link2 } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 

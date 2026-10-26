@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { getCanonicalUrl, SITE_URL } from './seo';
 
 describe('canonical URLs', () => {

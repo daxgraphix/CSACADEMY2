@@ -105,7 +105,7 @@ const specializationPathways = [
     title: 'Cybersecurity & Defensive Hygiene',
     tag: 'BEC & Phishing Defense',
     modulesCount: '7 Modules',
-    accent: '#10b981',
+    accent: '#ff3b30',
     description: 'Defend your organization against business email compromise, social engineering, credential stuffing, and data breaches.',
     Icon: LockKeyhole
   },
@@ -114,7 +114,7 @@ const specializationPathways = [
     title: 'Modern Full-Stack & Digital Skills',
     tag: 'Web & Digital Assets',
     modulesCount: '9 Modules',
-    accent: '#3b82f6',
+    accent: '#dc2626',
     description: 'Build fast, responsive web systems, structured data workflows, and customer-facing digital applications with modern tools.',
     Icon: Code2
   }
@@ -215,12 +215,12 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       {/* Hero Section */}
       <section
         className={`relative isolate px-4 pb-16 pt-28 sm:px-6 sm:pb-20 sm:pt-36 lg:px-8 lg:min-h-[100svh] lg:flex lg:flex-col lg:justify-center lg:pt-28 lg:pb-12 ${
-          isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'
+          isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-950'
         }`}
       >
         <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -left-40 -top-44 h-[34rem] w-[34rem] rounded-full bg-[var(--accent-red)]/10 blur-[100px] blob-float" />
-          <div className="absolute -right-32 top-20 h-[26rem] w-[26rem] rounded-full bg-orange-300/20 blur-[100px] blob-float-delayed" />
+          <div className="absolute -right-32 top-20 h-[26rem] w-[26rem] rounded-full bg-[var(--accent-red)]/10 blur-[100px] blob-float-delayed" />
           <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[var(--bg-primary)]/10 to-transparent" />
         </div>
 
@@ -239,7 +239,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 isDark ? 'text-neutral-300' : 'text-neutral-800'
               }`}
             >
-              <span className="inline-flex items-center rounded-full bg-[var(--accent-purple)]/10 px-3 py-1.5 text-[var(--accent-purple)]">
+              <span className="inline-flex items-center rounded-full bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[var(--accent-red-strong)]">
                 Beginner friendly
               </span>
               <span
@@ -295,9 +295,12 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
 
             <div className={`mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t pt-5 text-xs font-semibold ${isDark ? 'border-white/10 text-neutral-300' : 'border-neutral-200 text-neutral-700'}`}>
               <span className="inline-flex items-center gap-2">
-                <Check aria-hidden="true" className="h-4 w-4 text-emerald-500" /> No technical background required
+                <Check aria-hidden="true" className="h-4 w-4 text-[var(--accent-red-strong)]" /> No technical background required
               </span>
               <span className="inline-flex items-center gap-2">
+                <Check aria-hidden="true" className="h-4 w-4 text-[var(--accent-red-strong)]" /> 1 to 2 day intensive
+              </span>
+            </div>
                 <Check aria-hidden="true" className="h-4 w-4 text-emerald-500" /> 1 to 2 day intensive
               </span>
             </div>
@@ -348,7 +351,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                   </span>
                   <p className="mt-0.5 text-xs font-bold">Tool: {activeScenario.tool}</p>
                 </div>
-                <span className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-bold text-emerald-500 border border-emerald-500/20">
+                <span className="rounded-full bg-[var(--accent-red-subtle)] px-2.5 py-1 text-[10px] font-bold text-[var(--accent-red-strong)] border border-[var(--accent-red-border)]">
                   Interactive Sandbox
                 </span>
               </div>
@@ -383,7 +386,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                       onClick={() => handleCopyPrompt(activeScenario.engineeredPrompt, activeScenario.id)}
                       className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-all tap-feedback cursor-pointer ${
                         copiedScenarioId === activeScenario.id
-                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                          ? 'bg-red-500/20 text-[var(--accent-red-strong)] border border-red-500/30'
                           : isDark
                           ? 'bg-white/10 text-neutral-300 hover:text-white hover:bg-white/15'
                           : 'bg-white text-neutral-700 hover:text-neutral-900 border border-neutral-300'
@@ -407,7 +410,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 </div>
 
                 <div className={`rounded-xl border p-3.5 ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-white'}`}>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-500">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-red-strong)]">
                     03 · Output &amp; Result
                   </p>
                   <p className={`mt-1.5 text-xs leading-relaxed font-semibold ${secondaryText}`}>
@@ -415,7 +418,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                   </p>
                 </div>
 
-                <div className={`flex items-start gap-2 pt-2 text-[11px] leading-relaxed ${isDark ? 'text-amber-300' : 'text-amber-800'}`}>
+                <div className={`flex items-start gap-2 pt-2 text-[11px] leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
                   <ShieldCheck aria-hidden="true" className="h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" />
                   <span>
                     <strong>Safety protocol:</strong> {activeScenario.safetyCheck}
@@ -438,7 +441,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                   </p>
                 </div>
               </div>
-              <span className="rounded-full bg-[var(--accent-purple)]/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--accent-purple)]">
+              <span className="rounded-full bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--accent-red-strong)]">
                 Live online
               </span>
             </div>
@@ -536,13 +539,11 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
 
           {/* Vibe Coding Banner Highlight */}
           <div className={`mt-8 overflow-hidden rounded-3xl border p-6 sm:p-8 ${
-            isDark ? 'border-violet-500/30 bg-gradient-to-r from-violet-950/40 via-[var(--bg-primary)] to-[var(--bg-primary)]' : 'border-violet-200 bg-gradient-to-r from-violet-50 via-white to-white'
+            isDark ? 'border-[var(--accent-red-border)] bg-gradient-to-r from-red-950/20 via-[var(--bg-primary)] to-[var(--bg-primary)]' : 'border-red-200 bg-gradient-to-r from-red-50/50 via-white to-white'
           }`}>
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="max-w-2xl">
-                <span className={`rounded-full bg-violet-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider border border-violet-500/20 ${
-                  isDark ? 'text-violet-300' : 'text-violet-700'
-                }`}>
+                <span className="rounded-full bg-[var(--accent-red-subtle)] px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[var(--accent-red-strong)] border border-[var(--accent-red-border)]">
                   Featured Innovation Track
                 </span>
                 <h3 className="mt-2 text-2xl font-black tracking-tight">Vibe Coding &amp; Rapid Prototyping</h3>
@@ -562,7 +563,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Social Proof & Testimonials */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-950'}`}>
         <div className="mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
@@ -660,7 +661,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Dual-Audience Conversion Flow */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-950'}`}>
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Corporate / Institutional Card */}
@@ -710,10 +711,10 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 </p>
                 <ul className={`mt-5 space-y-2 text-xs font-semibold ${secondaryText}`}>
                   <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 shrink-0 text-emerald-500" /> Transparent monthly &amp; annual tuition rates
+                    <Check className="h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" /> Transparent monthly &amp; annual tuition rates
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 shrink-0 text-emerald-500" /> Live instructor guidance &amp; peer community access
+                    <Check className="h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" /> Live instructor guidance &amp; peer community access
                   </li>
                 </ul>
               </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { getCohortStartLabel, getEnrollmentDeadlineLabel, getCohortEnrollmentDeadlineTime, getSeatsLeft, formatTimeToDeadline } from '../utils/cohort';
 
 /**

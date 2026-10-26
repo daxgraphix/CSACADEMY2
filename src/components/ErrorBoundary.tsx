@@ -1,4 +1,4 @@
-import { Component, type ErrorInfo as ReactErrorInfo, type ReactNode } from 'react';
+﻿import { Component, type ErrorInfo as ReactErrorInfo, type ReactNode } from 'react';
 
 export class ErrorBoundary extends Component<{ children: ReactNode }, { error: Error | null }> {
   state = { error: null as Error | null };

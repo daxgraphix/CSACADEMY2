@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Structured data helpers.
  *
  * Emits schema.org JSON-LD so search engines can surface pricing and FAQ

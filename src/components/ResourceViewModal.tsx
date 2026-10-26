@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { ResourceItem } from '../types';
 import {

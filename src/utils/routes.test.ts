@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { pathToRoute, resolveRoute, routeToPath } from './routes';
 
 describe('route mapping', () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { siteConfig } from '../config/site';
 import { BOOKING_ENDPOINT, submitForm } from '../utils/booking';

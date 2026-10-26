@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MessageCircle, Wallet, ShieldCheck, ArrowRight, Smartphone, Minimize2, Maximize2, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';

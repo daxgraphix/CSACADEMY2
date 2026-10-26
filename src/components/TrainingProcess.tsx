@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { trainingProcessSteps } from '../data/organizationIndustries';
 import { useApp } from '../context/AppContext';
 import { 

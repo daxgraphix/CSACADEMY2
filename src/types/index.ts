@@ -1,4 +1,4 @@
-export type PageRoute =
+﻿export type PageRoute =
   | 'home'
   | 'academy'
   | 'instructors'

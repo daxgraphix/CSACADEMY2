@@ -1,4 +1,4 @@
-import { siteConfig } from '../config/site';
+﻿import { siteConfig } from '../config/site';
 
 /**
  * Single source of truth for the endpoint that receives form submissions.

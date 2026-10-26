@@ -1,4 +1,4 @@
-import { ResourceItem } from '../types';
+﻿import { ResourceItem } from '../types';
 import { siteConfig } from '../config/site';
 
 const escapeHtml = (str: string): string =>

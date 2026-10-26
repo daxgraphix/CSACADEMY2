@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { featuredTrainingData } from '../data/training';
 import { TrainingProgram } from '../types';
 import { useApp } from '../context/AppContext';

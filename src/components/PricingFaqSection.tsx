@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { pricingFaqData } from '../data/pricingFaq';

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Canonical site URL: the production domain.
  * Every canonical/og:url should be built from this constant so a domain
  * change is a one-line edit.

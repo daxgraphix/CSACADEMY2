@@ -1,4 +1,4 @@
-export interface AuthorProfile {
+﻿export interface AuthorProfile {
   name: string;
   role: string;
   bio: string;

@@ -83,15 +83,15 @@ export const B2BLeadForm: React.FC = () => {
 
   if (status === 'done') {
     return (
-      <div className={`rounded-3xl border p-8 sm:p-10 text-center ${isDark ? 'border-emerald-500/30 bg-emerald-950/20' : 'border-emerald-200 bg-emerald-50'}`}>
-        <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" aria-hidden="true" />
+      <div className={`rounded-3xl border p-8 sm:p-10 text-center ${isDark ? 'border-[var(--accent-red-border)] bg-red-950/20' : 'border-red-200 bg-red-50/50'}`}>
+        <CheckCircle2 className="mx-auto h-12 w-12 text-[var(--accent-red-strong)]" aria-hidden="true" />
         <h3 className={`mt-4 text-xl font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>Request sent to CS Academy</h3>
         <p className={`mt-2 text-sm ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
           Your details were sent to our support email. We’ll review your team’s needs and follow up at {email} with next steps. The estimate is a planning reference, not a team quote.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3 text-xs font-bold">
           <a className="inline-flex items-center gap-2 text-[var(--accent-red-strong)] hover:underline" href={`mailto:${siteConfig.email}`}><Mail className="h-4 w-4" /> Email support</a>
-          <a className="inline-flex items-center gap-2 text-emerald-600 hover:underline" href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" /> WhatsApp</a>
+          <a className="inline-flex items-center gap-2 text-[var(--accent-red-strong)] hover:underline" href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" /> WhatsApp</a>
         </div>
       </div>
     );
@@ -208,7 +208,7 @@ export const B2BLeadForm: React.FC = () => {
           <p className="font-normal">You can also contact us directly:</p>
           <div className="flex flex-wrap gap-4 font-bold">
             <a className="inline-flex items-center gap-1.5 hover:underline" href={`mailto:${siteConfig.email}`}><Mail className="h-3.5 w-3.5" /> Email</a>
-            <a className="inline-flex items-center gap-1.5 text-emerald-600 hover:underline" href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-3.5 w-3.5" /> WhatsApp</a>
+            <a className="inline-flex items-center gap-1.5 text-[var(--accent-red-strong)] hover:underline" href={`https://wa.me/${siteConfig.whatsapp}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-3.5 w-3.5" /> WhatsApp</a>
           </div>
         </div>
       )}

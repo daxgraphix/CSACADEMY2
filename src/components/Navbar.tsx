@@ -189,36 +189,11 @@ const menuEntryClasses = (isDark: boolean) =>
     isDark ? 'hover:bg-neutral-800' : 'hover:bg-neutral-100'
   }`;
 
-const badgeClasses = (tone: MenuEntry['badgeTone'], isDark: boolean) => {
-  const map: Record<string, { dark: string; light: string }> = {
-    red: {
-      dark: 'bg-red-950 text-[var(--accent-red-strong)] border-red-800/60',
-      light: 'bg-red-50 text-[var(--accent-red-hover)] border-red-200'
-    },
-    amber: {
-      dark: 'bg-amber-950 text-amber-300 border-amber-800/60',
-      light: 'bg-amber-50 text-amber-700 border-amber-200'
-    },
-    emerald: {
-      dark: 'bg-emerald-950 text-emerald-300 border-emerald-800/60',
-      light: 'bg-emerald-50 text-emerald-700 border-emerald-200'
-    },
-    blue: {
-      dark: 'bg-blue-950 text-blue-300 border-blue-800/60',
-      light: 'bg-blue-50 text-blue-700 border-blue-200'
-    },
-    purple: {
-      dark: 'bg-purple-950 text-purple-300 border-purple-800/60',
-      light: 'bg-purple-50 text-purple-700 border-purple-200'
-    },
-    pink: {
-      dark: 'bg-pink-950 text-pink-300 border-pink-800/60',
-      light: 'bg-pink-50 text-pink-700 border-pink-200'
-    }
-  };
-  const set = map[tone ?? 'red'];
+const badgeClasses = (_tone: MenuEntry['badgeTone'], isDark: boolean) => {
   return `text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border ${
-    isDark ? set.dark : set.light
+    isDark
+      ? 'bg-red-950/60 text-[var(--accent-red-strong)] border-red-800/60'
+      : 'bg-red-50 text-[var(--accent-red-hover)] border-red-200'
   }`;
 };
 
@@ -741,7 +716,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 isDark ? 'bg-neutral-900 text-neutral-300 border-neutral-800' : 'bg-neutral-100 text-neutral-800 border-neutral-200'
               }`}
             >
-              <MessageCircle className="w-4 h-4 text-emerald-500" />
+              <MessageCircle className="w-4 h-4 text-[var(--accent-red-strong)]" />
               <span>WhatsApp Us: {siteConfig.whatsappDisplay}</span>
             </a>
 

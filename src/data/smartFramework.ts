@@ -1,4 +1,4 @@
-import { SmartFrameworkStep } from '../types';
+﻿import { SmartFrameworkStep } from '../types';
 
 export const smartFrameworkSteps: SmartFrameworkStep[] = [
   {

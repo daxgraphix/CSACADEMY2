@@ -1,4 +1,4 @@
-import { IndustrySolution } from '../types';
+﻿import { IndustrySolution } from '../types';
 
 export interface CorporateOffering {
   badge: string;

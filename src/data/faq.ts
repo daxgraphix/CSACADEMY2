@@ -1,4 +1,4 @@
-import { FAQItem } from '../types';
+﻿import { FAQItem } from '../types';
 
 export const faqData: FAQItem[] = [
   // 1. Course Access

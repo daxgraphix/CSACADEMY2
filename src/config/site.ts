@@ -1,4 +1,4 @@
-export const siteConfig = {
+﻿export const siteConfig = {
   academyName: "CS ACADEMY",
   shortName: "CS Academy",
   parentOrg: "Cyber Academy",

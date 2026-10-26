@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+﻿import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 

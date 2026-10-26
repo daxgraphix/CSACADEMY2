@@ -1,4 +1,4 @@
-import { PageRoute } from '../types';
+﻿import { PageRoute } from '../types';
 
 /**
  * Canonical mapping from a PageRoute identifier to its real URL path.

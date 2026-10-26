@@ -42,7 +42,7 @@ export const PricingSection: React.FC = () => {
     <section
       id="pricing-section"
       aria-labelledby="pricing-title"
-      className={`border-b py-14 sm:py-20 lg:py-24 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-[#f7f4ee]'}`}
+      className={`border-b py-14 sm:py-20 lg:py-24 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-white'}`}
     >
       <div className="mx-auto max-w-7xl space-y-9 px-4 sm:px-6 lg:px-8 sm:space-y-12">
         <header className="mx-auto max-w-3xl space-y-4 text-center">
@@ -154,7 +154,7 @@ export const PricingSection: React.FC = () => {
                   <ul className="space-y-2.5">
                     {plan.features.map((feature) => (
                       <li key={feature} className={`flex items-start gap-2 text-xs leading-relaxed ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
-                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-600" aria-hidden="true" />
+                        <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--accent-red-strong)]" aria-hidden="true" />
                         <span>{feature}</span>
                       </li>
                     ))}
@@ -177,8 +177,8 @@ export const PricingSection: React.FC = () => {
           })}
         </div>
 
-        <div className={`mx-auto flex max-w-4xl items-start gap-3 rounded-2xl border p-4 sm:p-5 ${isDark ? 'border-blue-400/20 bg-blue-950/20 text-blue-100' : 'border-blue-200 bg-blue-50 text-blue-950'}`}>
-          <Info className="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true" />
+        <div className={`mx-auto flex max-w-4xl items-start gap-3 rounded-2xl border p-4 sm:p-5 ${isDark ? 'border-[var(--accent-red-border)] bg-red-950/20 text-neutral-200' : 'border-red-200 bg-red-50 text-neutral-800'}`}>
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[var(--accent-red-strong)]" aria-hidden="true" />
           <p className="text-xs leading-relaxed">
             {audience === 'individual'
               ? 'Individual plan rates are shown for the stated billing period. Ask us to confirm course availability, access dates, and payment instructions before you enroll.'
@@ -187,7 +187,7 @@ export const PricingSection: React.FC = () => {
         </div>
 
         <div className={`flex flex-col items-center justify-center gap-2 text-center text-xs sm:flex-row ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
-          <MessageSquare className="h-4 w-4 text-emerald-600" aria-hidden="true" />
+          <MessageSquare className="h-4 w-4 text-[var(--accent-red-strong)]" aria-hidden="true" />
           Need help comparing options? <Link to="/contact" className="font-bold text-[var(--accent-red-strong)] underline underline-offset-2">Talk to the team</Link>
         </div>
       </div>

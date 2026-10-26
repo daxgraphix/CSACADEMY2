@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, KeyboardEvent } from 'react';
+﻿import React, { useState, useMemo, useRef, KeyboardEvent } from 'react';
 import { faqData } from '../data/faq';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';

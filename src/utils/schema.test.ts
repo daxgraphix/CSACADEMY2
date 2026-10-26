@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+﻿import { describe, expect, it } from 'vitest';
 import { buildFaqSchema, buildOrganizationSchema } from './schema';
 
 describe('buildFaqSchema', () => {

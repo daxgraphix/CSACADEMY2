@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { ArrowRight, CalendarDays, CheckCircle2, MapPin, Smartphone } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { cohortStartIsAdminConfirmed, getNextCohortDate } from '../utils/cohort';

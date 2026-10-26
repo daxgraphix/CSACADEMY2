@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { siteConfig } from '../config/site';
 import { useApp } from '../context/AppContext';
 import { useReveal } from '../hooks/useReveal';

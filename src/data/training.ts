@@ -1,4 +1,4 @@
-import { TrainingProgram, TrainingPackage } from '../types';
+﻿import { TrainingProgram, TrainingPackage } from '../types';
 
 export const featuredTrainingData: TrainingProgram[] = [
   {

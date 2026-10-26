@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { TrainingProgram } from '../types';
 import { useApp } from '../context/AppContext';

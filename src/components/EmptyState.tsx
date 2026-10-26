@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { SearchX, FilterX, ArrowRight, MessageCircle } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 

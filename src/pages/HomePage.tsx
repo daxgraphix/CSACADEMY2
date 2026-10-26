@@ -46,7 +46,7 @@ const academicPillars = [
     id: 'cyber-defense',
     title: 'Cybersecurity & Defensive Hygiene',
     badge: 'Risk & Resilience',
-    accent: '#10b981',
+    accent: '#ff3b30',
     summary: 'Practical digital security to safeguard personal identities, corporate assets, and customer databases against modern threat actors.',
     coreSkills: [
       'Phishing, spoofing & BEC detection forensics',
@@ -61,7 +61,7 @@ const academicPillars = [
     id: 'fullstack-digital',
     title: 'Modern Full-Stack & Digital Skills',
     badge: 'Systems & Engineering',
-    accent: '#3b82f6',
+    accent: '#dc2626',
     summary: 'Hands-on training in contemporary software development, structured data analysis, and scalable web solutions.',
     coreSkills: [
       'Modern HTML5, semantic markup & Tailwind CSS',
@@ -155,7 +155,7 @@ export const HomePage: React.FC = () => {
   const gridRef = useReveal<HTMLDivElement>();
 
   return (
-    <main className={`min-h-screen px-4 pb-20 pt-28 sm:pt-32 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#f7f4ee] text-neutral-900'}`}>
+    <main className={`min-h-screen px-4 pb-20 pt-28 sm:pt-32 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-white text-neutral-900'}`}>
       <Helmet>
         <title>Academy Overview | Campus Hub &amp; Curricula | CS Academy</title>
         <meta
@@ -328,7 +328,7 @@ export const HomePage: React.FC = () => {
             {deliveryFormats.map((fmt) => (
               <div key={fmt.title} className={`flex flex-col justify-between rounded-2xl border p-5 sm:p-6 ${cardBorder}`}>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-emerald-500/20 bg-emerald-500/10 text-emerald-500">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-[var(--accent-red-border)] bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)]">
                     {fmt.badge}
                   </span>
                   <h3 className="mt-3 text-base font-bold">{fmt.title}</h3>

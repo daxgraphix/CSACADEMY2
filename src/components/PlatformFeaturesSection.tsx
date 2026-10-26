@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -44,28 +44,19 @@ const toneFor = (feature: PlatformFeature) => {
   return 'amber';
 };
 
-const getToneClasses = (isDark: boolean) => ({
-  violet: {
-    icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700',
-    badge: isDark ? 'text-violet-300' : 'text-violet-700',
-    border: 'group-hover:border-violet-400/50'
-  },
-  emerald: {
-    icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700',
-    badge: isDark ? 'text-emerald-300' : 'text-emerald-700',
-    border: 'group-hover:border-emerald-400/50'
-  },
-  blue: {
-    icon: isDark ? 'bg-blue-500/10 text-blue-300' : 'bg-blue-500/10 text-blue-700',
-    badge: isDark ? 'text-blue-300' : 'text-blue-700',
-    border: 'group-hover:border-blue-400/50'
-  },
-  amber: {
-    icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700',
-    badge: isDark ? 'text-amber-300' : 'text-amber-700',
-    border: 'group-hover:border-amber-400/50'
-  }
-});
+const getToneClasses = (isDark: boolean) => {
+  const redTone = {
+    icon: isDark ? 'bg-red-500/10 text-[var(--accent-red-strong)]' : 'bg-red-50 text-[var(--accent-red-hover)]',
+    badge: isDark ? 'text-[var(--accent-red-strong)]' : 'text-[var(--accent-red-hover)]',
+    border: 'group-hover:border-red-500/50'
+  };
+  return {
+    violet: redTone,
+    emerald: redTone,
+    blue: redTone,
+    amber: redTone
+  };
+};
 
 export const PlatformFeaturesSection: React.FC<PlatformFeaturesSectionProps> = ({ openBookingModal }) => {
   const { theme } = useApp();
@@ -73,7 +64,7 @@ export const PlatformFeaturesSection: React.FC<PlatformFeaturesSectionProps> = (
   const toneMap = getToneClasses(isDark);
 
   return (
-    <section id="platform-features" className={`border-b py-14 transition-colors sm:py-20 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-[#f7f4ee]'}`}>
+    <section id="platform-features" className={`border-b py-14 transition-colors sm:py-20 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-white'}`}>
       <div className="mx-auto max-w-7xl space-y-9 px-4 sm:px-6 lg:px-8 sm:space-y-12">
         <header className="mx-auto max-w-3xl space-y-4 text-center">
           <span className={`inline-flex rounded-full border px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-[0.16em] ${isDark ? 'border-red-900/50 bg-red-950/40 text-red-300' : 'border-red-200 bg-red-50 text-red-800'}`}>

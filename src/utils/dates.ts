@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Format a publication date in a friendly, locale-aware way.
  * Accepts either a full ISO string (e.g. "2026-03-14") or a year-only
  * value (e.g. "2026"). Year-only inputs are displayed as the year alone

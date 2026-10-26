@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Quote, MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import { testimonials, graduateCities, totalGraduates } from '../data/testimonials';
