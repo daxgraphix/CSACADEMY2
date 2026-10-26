@@ -46,6 +46,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
   openBlogArticleModal
 }) => {
   const { theme } = useApp();
+  const isDark = theme === 'dark';
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [search, setSearch] = useState<string>('');
 
