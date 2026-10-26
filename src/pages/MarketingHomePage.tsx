@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronRight,
   Code2,
+  Copy,
   FileSpreadsheet,
   FileText,
   Languages,
@@ -180,7 +181,18 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
   const cardBg = isDark ? 'border-white/10 bg-white/[0.04]' : 'border-neutral-200 bg-white shadow-xl shadow-neutral-900/5';
 
   const [activeScenarioId, setActiveScenarioId] = useState<string>('synthesis');
+  const [copiedScenarioId, setCopiedScenarioId] = useState<string | null>(null);
   const activeScenario = workflowScenarios.find((s) => s.id === activeScenarioId) ?? workflowScenarios[0];
+
+  const handleCopyPrompt = async (text: string, id: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedScenarioId(id);
+      setTimeout(() => setCopiedScenarioId(null), 2000);
+    } catch {
+      // ignore
+    }
+  };
 
   return (
     <main className="w-full overflow-hidden">
@@ -299,7 +311,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
               <div
                 role="tablist"
                 aria-label="Workflow scenarios"
-                className={`flex border-b overflow-x-auto overscroll-contain scroll-smooth ${
+                className={`flex border-b overflow-x-auto scrollbar-none snap-x snap-mandatory overscroll-contain scroll-smooth ${
                   isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-neutral-50'
                 }`}
               >
@@ -314,7 +326,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                       aria-controls={`panel-${scenario.id}`}
                       type="button"
                       onClick={() => setActiveScenarioId(scenario.id)}
-                      className={`min-h-11 inline-flex items-center px-4 py-2.5 text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors border-b-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-inset ${
+                      className={`snap-start shrink-0 min-h-11 inline-flex items-center px-4 py-2.5 text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors border-b-2 cursor-pointer tap-feedback focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-inset ${
                         active
                           ? 'border-[var(--accent-red)] text-[var(--accent-red-strong)] bg-white/5 font-extrabold'
                           : isDark
@@ -362,9 +374,33 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 </div>
 
                 <div className={`rounded-xl border p-3.5 ${isDark ? 'border-red-400/20 bg-red-500/[0.07]' : 'border-red-200 bg-red-50/70'}`}>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-red-strong)]">
-                    02 · S.M.A.R.T. Engineered Prompt
-                  </p>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent-red-strong)]">
+                      02 · S.M.A.R.T. Engineered Prompt
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyPrompt(activeScenario.engineeredPrompt, activeScenario.id)}
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold transition-all tap-feedback cursor-pointer ${
+                        copiedScenarioId === activeScenario.id
+                          ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                          : isDark
+                          ? 'bg-white/10 text-neutral-300 hover:text-white hover:bg-white/15'
+                          : 'bg-white text-neutral-700 hover:text-neutral-900 border border-neutral-300'
+                      }`}
+                      aria-label="Copy prompt to clipboard"
+                    >
+                      {copiedScenarioId === activeScenario.id ? (
+                        <>
+                          <Check className="h-3 w-3" /> Copied
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="h-3 w-3" /> Copy
+                        </>
+                      )}
+                    </button>
+                  </div>
                   <p className={`mt-1.5 text-xs leading-relaxed ${secondaryText}`}>
                     {activeScenario.engineeredPrompt}
                   </p>
@@ -411,7 +447,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Impact & Trust Statistics */}
-      <section className={`border-y py-12 ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-white'}`}>
+      <section className={`border-y py-12 content-auto ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-white'}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
             {trustStats.map((stat) => (
@@ -432,7 +468,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Core Specialization Pathways */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 ${isDark ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-950'}`}>
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -448,7 +484,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
             </div>
             <Link
               to="/programs"
-              className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent-red-strong)] hover:underline"
+              className="inline-flex min-h-11 items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent-red-strong)] hover:underline tap-feedback"
             >
               Browse all programs <ArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
@@ -488,7 +524,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 <div className="mt-6 pt-5 border-t border-neutral-800/40">
                   <Link
                     to={`/programs/${pathway.slug}`}
-                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors hover:underline"
+                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors hover:underline tap-feedback"
                     style={{ color: pathway.accent }}
                   >
                     View syllabus &amp; modules <ArrowRight aria-hidden="true" className="h-4 w-4" />
@@ -504,7 +540,9 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
           }`}>
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
               <div className="max-w-2xl">
-                <span className="rounded-full bg-violet-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-violet-700 dark:text-violet-300 border border-violet-500/20">
+                <span className={`rounded-full bg-violet-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider border border-violet-500/20 ${
+                  isDark ? 'text-violet-300' : 'text-violet-700'
+                }`}>
                   Featured Innovation Track
                 </span>
                 <h3 className="mt-2 text-2xl font-black tracking-tight">Vibe Coding &amp; Rapid Prototyping</h3>
@@ -514,7 +552,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
               </div>
               <Link
                 to="/vibe-coding"
-                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-6 py-3 text-xs font-black uppercase tracking-wider text-white shadow-md transition hover:-translate-y-0.5"
+                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-6 py-3 text-xs font-black uppercase tracking-wider text-white shadow-md transition hover:-translate-y-0.5 tap-feedback"
               >
                 Explore Vibe Coding <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>
@@ -524,7 +562,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Social Proof & Testimonials */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
         <div className="mx-auto max-w-7xl">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
@@ -586,7 +624,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Interactive FAQ Accordion */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 ${isDark ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-secondary)] text-white' : 'bg-white text-neutral-950'}`}>
         <div className="mx-auto max-w-4xl">
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
@@ -622,7 +660,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       </section>
 
       {/* Dual-Audience Conversion Flow */}
-      <section className={`px-4 py-16 sm:px-6 lg:px-8 ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
+      <section className={`px-4 py-16 sm:px-6 lg:px-8 content-auto ${isDark ? 'bg-[var(--bg-primary)] text-white' : 'bg-[#fffaf8] text-neutral-950'}`}>
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Corporate / Institutional Card */}

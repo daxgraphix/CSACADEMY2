@@ -205,7 +205,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* The Three Academic Pillars */}
-        <section aria-labelledby="pillars-heading" className="space-y-8">
+        <section aria-labelledby="pillars-heading" className="space-y-8 content-auto">
           <div className="max-w-2xl">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
               Core Disciplines
@@ -266,7 +266,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* Role-Based Pathways ("Who We Serve") */}
-        <section aria-labelledby="audience-heading" className="space-y-8">
+        <section aria-labelledby="audience-heading" className="space-y-8 content-auto">
           <div className="max-w-2xl">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
               Tailored Guidance
@@ -303,7 +303,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* Delivery Formats Matrix */}
-        <section aria-labelledby="formats-heading" className="space-y-8">
+        <section aria-labelledby="formats-heading" className="space-y-8 content-auto">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
@@ -318,7 +318,7 @@ export const HomePage: React.FC = () => {
             </div>
             <Link
               to="/learning-formats"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent-red-strong)] hover:underline"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[var(--accent-red-strong)] hover:underline tap-feedback"
             >
               Compare All Formats <ArrowRight className="h-4 w-4" />
             </Link>
@@ -345,7 +345,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* Campus Directory Matrix */}
-        <section aria-labelledby="directory-heading" className="space-y-8">
+        <section aria-labelledby="directory-heading" className="space-y-8 content-auto">
           <div className="max-w-2xl">
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[var(--accent-red-strong)]">
               Navigation Index
@@ -363,7 +363,7 @@ export const HomePage: React.FC = () => {
               <Link
                 key={href}
                 to={href}
-                className={`group flex flex-col justify-between rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-[var(--accent-red)] hover:shadow-xl ${
+                className={`group flex flex-col justify-between rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:border-[var(--accent-red)] hover:shadow-xl tap-feedback focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] ${
                   isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white shadow-sm'
                 }`}
               >
@@ -392,7 +392,7 @@ export const HomePage: React.FC = () => {
         </section>
 
         {/* Admissions & Enrollment Roadmap */}
-        <section aria-labelledby="roadmap-heading" className={`rounded-3xl border p-8 sm:p-12 ${
+        <section aria-labelledby="roadmap-heading" className={`rounded-3xl border p-8 sm:p-12 content-auto ${
           isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-white shadow-md'
         }`}>
           <div className="text-center max-w-2xl mx-auto">
@@ -408,9 +408,21 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {enrollmentSteps.map((s) => (
-              <div key={s.step} className={`p-5 rounded-2xl border ${isDark ? 'border-white/5 bg-white/[0.02]' : 'border-neutral-200/80 bg-neutral-50/70'}`}>
-                <span className="text-2xl font-black text-[var(--accent-red-strong)]">{s.step}</span>
+            {enrollmentSteps.map((s, idx) => (
+              <div
+                key={s.step}
+                className={`p-5 sm:p-6 rounded-2xl border transition-all ${
+                  isDark ? 'border-white/5 bg-white/[0.02]' : 'border-neutral-200/80 bg-neutral-50/70'
+                }`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl sm:text-3xl font-black text-[var(--accent-red-strong)]">{s.step}</span>
+                  <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
+                    isDark ? 'border-white/10 text-neutral-400 bg-white/5' : 'border-neutral-200 text-neutral-600 bg-white'
+                  }`}>
+                    Stage {idx + 1}
+                  </span>
+                </div>
                 <h3 className="mt-2 text-base font-bold">{s.title}</h3>
                 <p className={`mt-1.5 text-xs leading-relaxed ${secondaryText}`}>{s.description}</p>
               </div>
@@ -420,7 +432,7 @@ export const HomePage: React.FC = () => {
           <div className="mt-10 pt-8 border-t border-neutral-800/30 text-center">
             <Link
               to="/contact"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-8 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-red)]"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-8 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:from-[var(--accent-red-hover)] hover:to-[var(--accent-red)] hover:-translate-y-0.5 hover:shadow-[var(--shadow-red)] tap-feedback"
             >
               Start Your Application / Inquiry <ArrowRight className="h-4 w-4" />
             </Link>

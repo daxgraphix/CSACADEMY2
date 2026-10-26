@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 /*
  * Extra "xs" breakpoint (400px).
@@ -1512,3 +1512,28 @@ p, li, blockquote, dd, dt {
     min-height: 44px;
   }
 }
+
+/* Performance: Defer layout and rendering for below-the-fold content blocks */
+.content-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
+/* Scrollbar hiding while keeping native smooth touch scroll */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tactile mobile tap feedback */
+.tap-feedback {
+  touch-action: manipulation;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease-out;
+}
+.tap-feedback:active {
+  transform: scale(0.98);
+}
+

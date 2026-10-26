@@ -74,7 +74,7 @@ export const DevPadPage: React.FC = () => {
                   ['What I am building', 'A short description and who it is for'],
                   ['What to test', 'The exact flow or question to review'],
                   ['What feedback helps', 'Usability notes, bugs, or ideas']
-                ].map(([label, detail]) => <div key={label} className={`rounded-xl border p-3 ${isDark ? 'border-[var(--border-color)] bg-white/[0.03]' : 'border-neutral-200 bg-white'}`}><p className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300">{label}</p><p className={`mt-1 text-xs ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>{detail}</p></div>)}
+                ].map(([label, detail]) => <div key={label} className={`rounded-xl border p-3 ${isDark ? 'border-[var(--border-color)] bg-white/[0.03]' : 'border-neutral-200 bg-white'}`}><p className={`text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-emerald-300' : 'text-emerald-700'}`}>{label}</p><p className={`mt-1 text-xs ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>{detail}</p></div>)}
               </div>
               <p className={`flex items-start gap-2 rounded-xl p-3 text-[10px] leading-relaxed ${isDark ? 'bg-amber-400/10 text-amber-100' : 'bg-amber-50 text-amber-950'}`}><ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden="true" />Share only information you have permission to disclose. Avoid credentials, private user data, and confidential code.</p>
             </div>

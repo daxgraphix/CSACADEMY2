@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -44,32 +44,33 @@ const toneFor = (feature: PlatformFeature) => {
   return 'amber';
 };
 
-const toneClasses = {
+const getToneClasses = (isDark: boolean) => ({
   violet: {
-    icon: 'bg-violet-500/10 text-violet-600 dark:text-violet-300',
-    badge: 'text-violet-700 dark:text-violet-300',
+    icon: isDark ? 'bg-violet-500/10 text-violet-300' : 'bg-violet-500/10 text-violet-700',
+    badge: isDark ? 'text-violet-300' : 'text-violet-700',
     border: 'group-hover:border-violet-400/50'
   },
   emerald: {
-    icon: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300',
-    badge: 'text-emerald-700 dark:text-emerald-300',
+    icon: isDark ? 'bg-emerald-500/10 text-emerald-300' : 'bg-emerald-500/10 text-emerald-700',
+    badge: isDark ? 'text-emerald-300' : 'text-emerald-700',
     border: 'group-hover:border-emerald-400/50'
   },
   blue: {
-    icon: 'bg-blue-500/10 text-blue-700 dark:text-blue-300',
-    badge: 'text-blue-700 dark:text-blue-300',
+    icon: isDark ? 'bg-blue-500/10 text-blue-300' : 'bg-blue-500/10 text-blue-700',
+    badge: isDark ? 'text-blue-300' : 'text-blue-700',
     border: 'group-hover:border-blue-400/50'
   },
   amber: {
-    icon: 'bg-amber-500/10 text-amber-700 dark:text-amber-300',
-    badge: 'text-amber-700 dark:text-amber-300',
+    icon: isDark ? 'bg-amber-500/10 text-amber-300' : 'bg-amber-500/10 text-amber-700',
+    badge: isDark ? 'text-amber-300' : 'text-amber-700',
     border: 'group-hover:border-amber-400/50'
   }
-} as const;
+});
 
 export const PlatformFeaturesSection: React.FC<PlatformFeaturesSectionProps> = ({ openBookingModal }) => {
   const { theme } = useApp();
   const isDark = theme === 'dark';
+  const toneMap = getToneClasses(isDark);
 
   return (
     <section id="platform-features" className={`border-b py-14 transition-colors sm:py-20 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-primary)]' : 'border-neutral-200 bg-[#f7f4ee]'}`}>
@@ -89,7 +90,7 @@ export const PlatformFeaturesSection: React.FC<PlatformFeaturesSectionProps> = (
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {platformFeaturesData.map((feature) => {
             const Icon = icons[feature.icon] ?? Award;
-            const tone = toneClasses[toneFor(feature)];
+            const tone = toneMap[toneFor(feature)];
             return (
               <article key={feature.id} className={`group flex min-w-0 flex-col rounded-2xl border p-4 transition duration-200 hover:-translate-y-0.5 hover:shadow-lg sm:p-5 ${tone.border} ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white shadow-sm'}`}>
                 <div className="flex items-start gap-3">

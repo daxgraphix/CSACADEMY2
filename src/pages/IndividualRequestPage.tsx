@@ -155,7 +155,7 @@ export const IndividualRequestPage: React.FC = () => {
                 FormSubmit sent your request to CS Academy support. We’ll reply to <strong>{details.email}</strong> with information about {details.track.toLowerCase()}. No enrollment or payment has been made.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
-                <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-emerald-600/30 px-4 py-2.5 text-xs font-bold text-emerald-700 hover:bg-emerald-50 dark:text-emerald-300 dark:hover:bg-emerald-950/30"><MessageCircle className="h-4 w-4" aria-hidden="true" /> Ask a follow-up on WhatsApp</a>
+                <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center gap-2 rounded-xl border border-emerald-600/30 px-4 py-2.5 text-xs font-bold ${isDark ? 'text-emerald-300 hover:bg-emerald-950/30' : 'text-emerald-700 hover:bg-emerald-50'}`}><MessageCircle className="h-4 w-4" aria-hidden="true" /> Ask a follow-up on WhatsApp</a>
                 <button type="button" onClick={startAnother} className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--border-color)] px-4 py-2.5 text-xs font-bold">Make another request</button>
               </div>
             </div>

@@ -723,7 +723,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </div>
 
-          <div className="mt-5 mx-4 pt-4 border-t border-neutral-800 space-y-2">
+          <div className={`mt-5 mx-4 pt-4 border-t space-y-2 ${isDark ? 'border-neutral-800' : 'border-neutral-200'}`}>
             <button
               type="button"
               onClick={() => { setMobileMenuOpen(false); openBookingModal(); }}

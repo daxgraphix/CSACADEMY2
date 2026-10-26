@@ -17,23 +17,23 @@ import {
   Tag
 } from 'lucide-react';
 
-const BlogCardSkeleton = () => (
-  <div className="animate-pulse border rounded-3xl p-6 bg-neutral-200 dark:bg-neutral-800 space-y-4">
+const BlogCardSkeleton = ({ isDark }: { isDark: boolean }) => (
+  <div className={`animate-pulse border rounded-3xl p-6 space-y-4 ${isDark ? 'border-neutral-800 bg-neutral-900' : 'border-neutral-200 bg-neutral-100'}`}>
     <div className="flex justify-between">
-      <div className="h-5 w-20 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
-      <div className="h-5 w-16 bg-neutral-300 dark:bg-neutral-700 rounded" />
+      <div className={`h-5 w-20 rounded-full ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
+      <div className={`h-5 w-16 rounded ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
     </div>
     <div className="space-y-2">
-      <div className="h-6 w-3/4 bg-neutral-300 dark:bg-neutral-700 rounded" />
-      <div className="h-4 w-full bg-neutral-300 dark:bg-neutral-700 rounded" />
-      <div className="h-4 w-5/6 bg-neutral-300 dark:bg-neutral-700 rounded" />
+      <div className={`h-6 w-3/4 rounded ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
+      <div className={`h-4 w-full rounded ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
+      <div className={`h-4 w-5/6 rounded ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
     </div>
     <div className="flex gap-2">
-      <div className="h-5 w-12 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
-      <div className="h-5 w-16 bg-neutral-300 dark:bg-neutral-700 rounded-full" />
+      <div className={`h-5 w-12 rounded-full ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
+      <div className={`h-5 w-16 rounded-full ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
     </div>
-    <div className="pt-4 border-t space-y-2">
-      <div className="h-4 w-1/2 bg-neutral-300 dark:bg-neutral-700 rounded" />
+    <div className={`pt-4 border-t space-y-2 ${isDark ? 'border-neutral-800' : 'border-neutral-200'}`}>
+      <div className={`h-4 w-1/2 rounded ${isDark ? 'bg-neutral-800' : 'bg-neutral-300'}`} />
     </div>
   </div>
 );
@@ -139,7 +139,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
         {/* Articles Grid */}
         <Suspense fallback={
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1,2,3,4,5,6].map(i => <BlogCardSkeleton key={i} />)}
+            {[1,2,3,4,5,6].map(i => <BlogCardSkeleton key={i} isDark={isDark} />)}
           </div>
         }>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -226,7 +226,7 @@ export const BlogPage: React.FC<BlogPageProps> = ({
                 <button type="button" onClick={() => openBlogArticleModal(post)} className="text-left text-xs font-semibold text-[var(--accent-red-strong)] underline underline-offset-4">Quick preview</button>
 
                 {/* Social Share Buttons */}
-                <div className="pt-2 border-t border-dashed border-[var(--border-color)]/40 dark:border-[var(--border-color)]/80 flex items-center justify-between">
+                <div className={`pt-2 border-t border-dashed flex items-center justify-between ${isDark ? 'border-[var(--border-color)]' : 'border-neutral-200'}`}>
                   <ShareButtons
                     title={post.title}
                     description={post.excerpt}
