@@ -84,7 +84,7 @@ export const B2BLeadForm: React.FC = () => {
 
   if (status === 'done') {
     return (
-      <div className={`rounded-3xl border p-8 sm:p-10 text-center ${isDark ? 'border-[var(--accent-red-border)] bg-red-950/20' : 'border-red-200 bg-red-50/50'}`}>
+      <div className={`rounded-3xl border p-5 sm:p-10 text-center ${isDark ? 'border-[var(--accent-red-border)] bg-red-950/20' : 'border-red-200 bg-red-50/50'}`}>
         <CheckCircle2 className="mx-auto h-12 w-12 text-[var(--accent-red-strong)]" aria-hidden="true" />
         <h3 className={`mt-4 text-xl font-extrabold ${isDark ? 'text-white' : 'text-neutral-900'}`}>Proposal request received</h3>
         <p className={`mt-2 text-sm ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>

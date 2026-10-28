@@ -195,7 +195,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
   };
 
   return (
-    <main className="w-full overflow-hidden">
+    <main className="w-full min-w-0 overflow-hidden">
       <Helmet>
         <title>Practical AI &amp; Technology Education in East Africa | CS Academy</title>
         <meta
@@ -305,14 +305,14 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
           </div>
 
           {/* Interactive Workflow Sandbox */}
-          <div className={`relative mx-auto w-full max-w-xl rounded-[2rem] border p-4 sm:p-6 ${cardBg}`}>
+          <div className={`relative mx-auto w-full max-w-xl rounded-3xl border p-3 sm:rounded-[2rem] sm:p-6 ${cardBg}`}>
             <div aria-hidden="true" className="absolute -right-5 -top-5 h-24 w-24 rounded-full bg-[var(--accent-red)]/15 blur-2xl" />
             <div className={`relative overflow-hidden rounded-[1.4rem] border ${isDark ? 'border-white/10 bg-[#000000]' : 'border-neutral-200 bg-white'}`}>
               {/* Tab Selector */}
               <div
                 role="tablist"
                 aria-label="Workflow scenarios"
-                className={`flex border-b overflow-x-auto scrollbar-none snap-x snap-mandatory overscroll-contain scroll-smooth ${
+                className={`grid grid-cols-2 gap-1 border-b p-1 sm:flex sm:gap-0 sm:overflow-x-auto sm:p-0 scrollbar-none snap-x snap-mandatory overscroll-contain scroll-smooth ${
                   isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-neutral-50'
                 }`}
               >
@@ -327,7 +327,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                       aria-controls={`panel-${scenario.id}`}
                       type="button"
                       onClick={() => setActiveScenarioId(scenario.id)}
-                      className={`snap-start shrink-0 min-h-11 inline-flex items-center px-4 py-2.5 text-[11px] font-bold tracking-tight whitespace-nowrap transition-colors border-b-2 cursor-pointer tap-feedback focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-inset ${
+                      className={`snap-start min-w-0 min-h-11 inline-flex items-center justify-center px-2 py-2 text-center text-[10px] font-bold leading-tight tracking-tight transition-colors border-b-2 cursor-pointer tap-feedback focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] focus-visible:ring-inset sm:shrink-0 sm:justify-start sm:px-4 sm:py-2.5 sm:text-[11px] sm:text-left sm:whitespace-nowrap ${
                         active
                           ? 'border-[var(--accent-red)] text-[var(--accent-red-strong)] bg-white/5 font-extrabold'
                           : isDark
@@ -342,14 +342,14 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
               </div>
 
               {/* Sandbox Header */}
-              <div className={`flex items-center justify-between border-b px-5 py-3.5 ${isDark ? 'border-white/10' : 'border-neutral-200'}`}>
-                <div>
+              <div className={`flex flex-col items-start gap-2 border-b px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-5 ${isDark ? 'border-white/10' : 'border-neutral-200'}`}>
+                <div className="min-w-0">
                   <span className={`text-[10px] font-black uppercase tracking-[0.16em] text-[var(--accent-red-strong)]`}>
                     {activeScenario.domain}
                   </span>
                   <p className="mt-0.5 text-xs font-bold">Tool: {activeScenario.tool}</p>
                 </div>
-                <span className="rounded-full bg-[var(--accent-red-subtle)] px-2.5 py-1 text-[10px] font-bold text-[var(--accent-red-strong)] border border-[var(--accent-red-border)]">
+                <span className="max-w-full rounded-full bg-[var(--accent-red-subtle)] px-2.5 py-1 text-[10px] font-bold text-[var(--accent-red-strong)] border border-[var(--accent-red-border)]">
                   Interactive Sandbox
                 </span>
               </div>
@@ -359,7 +359,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                 id={`panel-${activeScenario.id}`}
                 role="tabpanel"
                 aria-labelledby={`tab-${activeScenario.id}`}
-                className="space-y-3 p-5 sm:p-6"
+                className="space-y-3 p-3.5 sm:p-6"
               >
                 <div className={`rounded-xl border p-3.5 ${isDark ? 'border-white/10 bg-white/[0.03]' : 'border-neutral-200 bg-neutral-50'}`}>
                   <p className={`text-[10px] font-bold uppercase tracking-wider ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
@@ -425,8 +425,8 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
               </div>
             </div>
 
-            <div className={`relative mt-4 flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 ${isDark ? 'border-white/10 bg-white/[0.03]' : 'border-neutral-200 bg-white'}`}>
-              <div className="flex items-center gap-3">
+            <div className={`relative mt-3 flex flex-col items-start gap-3 rounded-2xl border px-3.5 py-3 sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:px-4 ${isDark ? 'border-white/10 bg-white/[0.03]' : 'border-neutral-200 bg-white'}`}>
+              <div className="flex min-w-0 items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--accent-red-subtle)] text-[var(--accent-red-strong)]">
                   <CalendarDays aria-hidden="true" className="h-5 w-5" />
                 </span>
@@ -439,7 +439,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
                   </p>
                 </div>
               </div>
-              <span className="rounded-full bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--accent-red-strong)]">
+              <span className="self-start rounded-full bg-[var(--accent-red-subtle)] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[var(--accent-red-strong)] sm:self-auto">
                 Live online
               </span>
             </div>
@@ -450,7 +450,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
       {/* Impact & Trust Statistics */}
       <section className={`border-y py-12 content-auto ${isDark ? 'border-white/10 bg-white/[0.02]' : 'border-neutral-200 bg-white'}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 xs:grid-cols-2 sm:gap-6 lg:grid-cols-4">
             {trustStats.map((stat) => (
               <div key={stat.label} className={`p-4 sm:p-6 rounded-2xl border transition-all ${isDark ? 'border-white/5 bg-white/[0.02]' : 'border-neutral-200/80 bg-neutral-50/70'}`}>
                 <p className="text-2xl sm:text-4xl lg:text-5xl font-black text-[var(--accent-red-strong)] tracking-tight">
@@ -495,7 +495,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
             {specializationPathways.map((pathway) => (
               <div
                 key={pathway.slug}
-                className={`flex flex-col justify-between rounded-3xl border p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
+                className={`flex flex-col justify-between rounded-3xl border p-5 sm:p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl ${
                   isDark ? 'border-white/10 bg-[var(--bg-primary)]' : 'border-neutral-200 bg-[var(--bg-primary)]'
                 }`}
                 style={{ borderTopColor: pathway.accent, borderTopWidth: 4 }}
@@ -536,7 +536,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
           </div>
 
           {/* Vibe Coding Banner Highlight */}
-          <div className={`mt-8 overflow-hidden rounded-3xl border p-6 sm:p-8 ${
+          <div className={`mt-8 overflow-hidden rounded-3xl border p-5 sm:p-8 ${
             isDark ? 'border-[var(--accent-red-border)] bg-gradient-to-r from-red-950/20 via-[var(--bg-primary)] to-[var(--bg-primary)]' : 'border-red-200 bg-gradient-to-r from-red-50/50 via-white to-white'
           }`}>
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
@@ -551,7 +551,7 @@ export const MarketingHomePage: React.FC<MarketingHomePageProps> = ({ openBookin
               </div>
               <Link
                 to="/vibe-coding"
-                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-6 py-3 text-xs font-black uppercase tracking-wider text-white shadow-md transition hover:-translate-y-0.5 tap-feedback"
+                className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[var(--accent-red)] to-[var(--accent-red-hover)] px-5 py-3 text-center text-xs font-black uppercase tracking-wider text-white shadow-md transition hover:-translate-y-0.5 tap-feedback sm:w-auto sm:px-6"
               >
                 Explore Vibe Coding <ArrowRight aria-hidden="true" className="h-4 w-4" />
               </Link>

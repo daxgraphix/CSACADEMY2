@@ -6,6 +6,7 @@ import { programsData } from '../data/programs';
 import { useApp } from '../context/AppContext';
 import { primaryNav, programsNav, moreNav, mobileNav } from '../data/navigation';
 import { navHref, isRouteActive } from '../utils/navigation';
+import { prefetchRoute } from '../utils/routePrefetch';
 import {
   Menu,
   X,
@@ -335,6 +336,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       key={entry.id}
       id={entry.id}
       to={entry.href}
+      onMouseEnter={() => prefetchRoute(entry.href)}
+      onFocus={() => prefetchRoute(entry.href)}
+      onTouchStart={() => prefetchRoute(entry.href)}
       className={menuEntryClasses(isDark)}
     >
       {entry.Icon && (
@@ -385,6 +389,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <Link
             id="brand-logo-btn"
             to="/"
+            onMouseEnter={() => prefetchRoute('/')}
+            onFocus={() => prefetchRoute('/')}
+            onTouchStart={() => prefetchRoute('/')}
             aria-label={`${siteConfig.academyName} home`}
             className="flex min-w-0 items-center gap-2 sm:gap-3 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent-red)] rounded-xl p-1"
           >
@@ -415,6 +422,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   id={link.id}
                   to={navHref(link)}
+                  onMouseEnter={() => prefetchRoute(navHref(link))}
+                  onFocus={() => prefetchRoute(navHref(link))}
+                  onTouchStart={() => prefetchRoute(navHref(link))}
                   aria-current={active ? 'page' : undefined}
                   className={`${navLinkBase} ${navLinkTone(isDark, active)}`}
                 >
@@ -587,6 +597,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   id={`${link.id}-link`}
                   to={navHref(link)}
+                  onMouseEnter={() => prefetchRoute(navHref(link))}
+                  onFocus={() => prefetchRoute(navHref(link))}
+                  onTouchStart={() => prefetchRoute(navHref(link))}
                   aria-current={active ? 'page' : undefined}
                   className={`w-full flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-bold text-left transition-colors ${
                     active
@@ -638,6 +651,9 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div id="mobile-programs-group" hidden={!mobileProgramsOpen} className="px-3 pb-3">
                 <Link
                   to={navHref(programsNav[0])}
+                  onMouseEnter={() => prefetchRoute(navHref(programsNav[0]))}
+                  onFocus={() => prefetchRoute(navHref(programsNav[0]))}
+                  onTouchStart={() => prefetchRoute(navHref(programsNav[0]))}
                   className={`w-full flex items-center justify-between px-2.5 py-2.5 rounded-xl text-left text-xs font-extrabold uppercase tracking-wider transition-colors ${
                     isDark ? 'text-neutral-300 hover:text-white hover:bg-neutral-800' : 'text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100'
                   }`}
@@ -659,6 +675,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     <Link
                       key={entry.id}
                       to={entry.href}
+                      onMouseEnter={() => prefetchRoute(entry.href)}
+                      onFocus={() => prefetchRoute(entry.href)}
+                      onTouchStart={() => prefetchRoute(entry.href)}
                       className={`w-full flex items-start gap-3 px-2.5 py-2.5 rounded-xl text-left transition-colors ${
                         isDark ? 'hover:bg-neutral-800' : 'hover:bg-white'
                       }`}

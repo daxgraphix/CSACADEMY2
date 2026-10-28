@@ -576,6 +576,58 @@
   body,
   #root {
     min-height: 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* A long label or a wide child must never expand the viewport. Individual
+     pages can still opt into intentional horizontal scrolling for carousels. */
+  .app-shell,
+  .app-content,
+  .page-enter,
+  main,
+  section,
+  article,
+  header,
+  footer {
+    min-width: 0;
+  }
+
+  main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Grid and flex children need this in order for minmax/flex shrinking to
+     work on narrow screens instead of creating a page-wide scrollbar. */
+  .app-content :where(.grid > *, .flex > *, [class*="grid-cols-"] > *) {
+    min-width: 0;
+  }
+
+  .app-content :where(input, select, textarea, button) {
+    max-width: 100%;
+  }
+
+  .app-content :where(form, fieldset, table, pre) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .app-content :where(table) {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .app-content :where(pre) {
+    overflow-x: auto;
+    white-space: pre;
   }
 
   #main-content {
@@ -1511,6 +1563,32 @@ p, li, blockquote, dd, dt {
 }
 
 @media (max-width: 639px) {
+  .app-content {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+
+  /* Prevent large display headings and wide tracking from becoming the
+     source of accidental overflow before a component's own breakpoint. */
+  .app-content :where(h1) {
+    font-size: clamp(1.875rem, 8vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .app-content :where(h2) {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+    line-height: 1.12;
+  }
+
+  .app-content :where(form, fieldset) {
+    width: 100%;
+  }
+
+  /* Keep full-width actions readable instead of letting long labels compress
+     beside another action on phones. */
+  .app-content :where(form button[type="submit"]) {
+    width: 100%;
+  }
+
   /* Keep compact controls usable without making every pill and card oversized. */
   button,
   [role="button"] {

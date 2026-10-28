@@ -331,7 +331,7 @@ export const ForOrganizationsPage: React.FC<ForOrganizationsPageProps> = ({
         </div>
 
         {/* Bottom CTA Box */}
-        <div className={`p-8 sm:p-12 rounded-3xl border text-center space-y-5 ${cardBg}`}>
+          <div className={`p-5 sm:p-12 rounded-3xl border text-center space-y-5 ${cardBg}`}>
           <h2 className={`text-2xl sm:text-3xl font-extrabold ${heading}`}>
             Ready to Upskill Your Institution?
           </h2>

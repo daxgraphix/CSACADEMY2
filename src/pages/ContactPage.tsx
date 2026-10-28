@@ -230,7 +230,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
           </div>
 
           {/* Right Detailed Form (7 cols) */}
-          <div className={`lg:col-span-7 border rounded-3xl p-8 sm:p-10 shadow-2xl space-y-6 ${
+                <div className={`lg:col-span-7 border rounded-3xl p-5 sm:p-10 shadow-2xl space-y-6 ${
             theme === 'dark' ? 'bg-[var(--bg-secondary)] border-[var(--border-color)]' : 'bg-white border-neutral-300'
           }`}>
             <div>

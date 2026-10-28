@@ -58,6 +58,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         root.classList.add('light');
         root.classList.remove('dark');
       }
+      const surface = theme === 'dark' ? '#090909' : '#ffffff';
+      root.style.backgroundColor = surface;
+      document.body.style.backgroundColor = surface;
       localStorage.setItem('cs_academy_theme', theme);
       const themeColor = document.querySelector('meta[name="theme-color"]');
       if (themeColor) {
@@ -84,6 +87,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const root = document.documentElement;
       root.classList.add('theme-switching');
       root.classList.toggle('light', nextTheme === 'light');
+      root.classList.toggle('dark', nextTheme === 'dark');
+      const surface = nextTheme === 'dark' ? '#090909' : '#ffffff';
+      root.style.backgroundColor = surface;
+      document.body.style.backgroundColor = surface;
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => root.classList.remove('theme-switching'));
       });

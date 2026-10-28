@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en" data-theme="light" class="scroll-smooth notranslate">
+<html lang="en" data-theme="light" class="scroll-smooth notranslate" style="background-color:#ffffff">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#ffffff" />
     <meta name="color-scheme" content="light dark" />
     <meta name="application-name" content="CS Academy" />
@@ -78,8 +78,13 @@
     <link rel="mask-icon" href="/brand-mark.svg" color="#ef2929" />
     <!-- Web App Manifest -->
     <link rel="manifest" href="/site.webmanifest" />
+    <style>
+      html, body { min-height: 100%; margin: 0; background-color: #ffffff; }
+      html.dark, html.dark body { background-color: #090909; }
+      #root { min-height: 100vh; }
+    </style>
   </head>
-  <body class="antialiased scroll-smooth">
+  <body class="antialiased scroll-smooth" style="background-color:#ffffff">
     <div id="root"></div>
     <script src="/theme-init.js"></script>
     <script type="module" src="/src/main.tsx"></script>

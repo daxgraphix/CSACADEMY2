@@ -74,7 +74,7 @@ const AppChrome = React.memo(function AppChrome({ theme, currentRoute, openBooki
   const { pathname } = useLocation();
   const canonical = getCanonicalUrl(pathname);
   return (
-    <div className={`min-h-screen flex flex-col font-sans antialiased scroll-smooth overflow-x-hidden ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white' : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'}`}>
+    <div className={`app-shell min-h-[100svh] flex flex-col font-sans antialiased scroll-smooth overflow-x-clip ${theme === 'dark' ? 'bg-[var(--bg-primary)] text-white selection:bg-[var(--accent-red)] selection:text-white' : 'bg-[var(--bg-primary)] text-neutral-900 selection:bg-[var(--accent-red)] selection:text-white'}`}>
       <Helmet defaultTitle="CS Academy | Practical AI, Cybersecurity & Digital Skills Training">
         <meta name="description" content="Build practical AI, cybersecurity, and digital skills with CS Academy. Explore hands-on courses and team training in Tanzania and across East Africa." />
         <link rel="canonical" href={canonical} />
@@ -95,9 +95,9 @@ const AppChrome = React.memo(function AppChrome({ theme, currentRoute, openBooki
       />
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <Navbar currentRoute={currentRoute} openBookingModal={openBookingModal} />
-      <div id="main-content" tabIndex={-1} className="flex-grow min-w-0 overflow-x-hidden pb-[calc(5rem+env(safe-area-inset-bottom))] outline-none md:pb-0">
+      <div id="main-content" tabIndex={-1} className="app-content flex-grow min-w-0 w-full overflow-x-clip pb-[calc(5rem+env(safe-area-inset-bottom))] outline-none md:pb-0">
         <div key={currentRoute} className="page-enter">
-          <ErrorBoundary key={currentRoute}><Suspense fallback={<div className="min-h-[40vh]" aria-busy="true" aria-label="Loading page" />}>{page}</Suspense></ErrorBoundary>
+          <ErrorBoundary key={currentRoute}><Suspense fallback={null}>{page}</Suspense></ErrorBoundary>
         </div>
       </div>
       <Footer currentRoute={currentRoute} openBookingModal={openBookingModal} />

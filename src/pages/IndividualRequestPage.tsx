@@ -148,7 +148,7 @@ export const IndividualRequestPage: React.FC = () => {
           </p>
         </div>
 
-        <section className={`rounded-2xl border p-4 shadow-lg sm:p-6 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white'}`} aria-labelledby="individual-request-form-title">
+        <section className={`min-w-0 rounded-2xl border p-3 shadow-lg sm:p-6 ${isDark ? 'border-[var(--border-color)] bg-[var(--bg-secondary)]' : 'border-neutral-200 bg-white'}`} aria-labelledby="individual-request-form-title">
           {status === 'received' ? (
             <div className="py-8 text-center" role="status" aria-live="polite">
               <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-500" aria-hidden="true" />
@@ -174,7 +174,7 @@ export const IndividualRequestPage: React.FC = () => {
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3.5">
+            <form onSubmit={handleSubmit} className="min-w-0 space-y-3.5">
               <div>
                 <h2 id="individual-request-form-title" className="text-xl font-black">Your learning request</h2>
                 <p className={`mt-1 text-xs leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>Required fields are marked. We use these details only to respond to this request.</p>
